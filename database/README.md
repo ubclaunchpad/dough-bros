@@ -5,13 +5,12 @@
 ### Setup:
 1. cd into workspace folder
 2. docker-compose up —> (docker ps OR docker images, to check status/images)
-3. New Terminal —>  cd into workspace folder
-4. docker exec -it doughbros_db_1 bash
-5. mysql -uroot -p<password> (OR mysql -uroot -p —> then enter password next line)
+3. New Terminal —> docker exec -it doughBros_db bash
+4. mysql -uroot -p<password> (OR mysql -uroot -p —> then enter password next line)
 
 ### Mount Any .SQL Files:
-6. mysql -uroot -p<password> doughBros_db < /doughBrosDB/usersDB.sql —> (Into “doughBros_db” from the docker volume folder “doughBrosDB”, file usersDB.sql)
-7. See Step 5
+5. mysql -uroot -p<password> <databaseDest> < <SQLFileLoc>
+Ex. mysql -uroot -proot doughBros_db < /dockerInit/init.sql —> (Into “doughBros_db” from the docker volume folder “dockerInit”, file init.sql)
 
 ### Using MySQL:
 1. SHOW DATABASES; —> 4 default created database + our databases (Ex. “doughBros_db”)
