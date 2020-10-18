@@ -1,9 +1,13 @@
-# Mac DS_Store files
-.DS_Store
-
-# iOS projects
-*.xcbkptlist
-*.xcuserstate
-
-# npm projects
+# dependencies
 node_modules/
+
+# Docker
+database/data/
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/.vs
