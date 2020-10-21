@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class HomeView: UIView {
     
     // MARK: - Subviews -
@@ -25,6 +24,14 @@ class HomeView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitle("Open Login", for: .normal)
+        return button
+    }()
+    
+    private(set) var openTableViewButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitle("Open Sample Table View", for: .normal)
         return button
     }()
     
@@ -49,12 +56,15 @@ class HomeView: UIView {
         backgroundColor = .white
         addSubview(middleLabel)
         addSubview(openLoginButton)
+        addSubview(openTableViewButton)
         
         NSLayoutConstraint.activate([
             middleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             middleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             openLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            openLoginButton.topAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 20)
+            openLoginButton.topAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 20),
+            openTableViewButton.topAnchor.constraint(equalTo: openLoginButton.bottomAnchor, constant: 20),
+            openTableViewButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }

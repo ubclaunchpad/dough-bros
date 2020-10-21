@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		256197FF2540FB9B0094174A /* SampleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256197FE2540FB9B0094174A /* SampleTableViewController.swift */; };
 		257495C425311FEA00D386A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257495C325311FEA00D386A2 /* AppDelegate.swift */; };
 		257495C625311FEA00D386A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257495C525311FEA00D386A2 /* SceneDelegate.swift */; };
 		257495CA25311FED00D386A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257495C925311FED00D386A2 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		256197FE2540FB9B0094174A /* SampleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableViewController.swift; sourceTree = "<group>"; };
 		257495C025311FEA00D386A2 /* dough-bros-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dough-bros-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257495C325311FEA00D386A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		257495C525311FEA00D386A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		256197FD2540FB850094174A /* Sample Table View */ = {
+			isa = PBXGroup;
+			children = (
+				256197FE2540FB9B0094174A /* SampleTableViewController.swift */,
+			);
+			path = "Sample Table View";
+			sourceTree = "<group>";
+		};
 		257495B725311FEA00D386A2 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 		257495D825311FF900D386A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				256197FD2540FB850094174A /* Sample Table View */,
 				257495DC2531203F00D386A2 /* HomeView */,
 				257495DB2531202900D386A2 /* LoginView */,
 			);
@@ -208,6 +219,7 @@
 				257DB48B253169EC00D1DABB /* Transfer.swift in Sources */,
 				257495DE2531206600D386A2 /* HomeViewController.swift in Sources */,
 				257DB49525316B7000D1DABB /* LoginViewModel.swift in Sources */,
+				256197FF2540FB9B0094174A /* SampleTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

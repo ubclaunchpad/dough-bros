@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         homeView.openLoginButton.addTarget(self, action: #selector(openLoginVC), for: .touchUpInside)
+        homeView.openTableViewButton.addTarget(self, action: #selector(openSampleTableViewVC), for: .touchUpInside)
     }
     
     
@@ -32,4 +33,9 @@ class HomeViewController: UIViewController {
         present(loginVC, animated: true)
     }
     
+    @objc private func openSampleTableViewVC() {
+        let sampleVC = SampleTableViewController()
+        
+        present(sampleVC, animated: true)
+    }
 }
