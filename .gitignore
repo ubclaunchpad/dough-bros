@@ -11,3 +11,8 @@ database/data/
 .env.test.local
 .env.production.local
 /.vs
+
+# typeScript build files
+server/build/
+
+# other

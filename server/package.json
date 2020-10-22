@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon build/index.js",
-    "build": "tsc --project ./"
+    "build": "tsc --project ./",
+    "dev": "nodemon ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
