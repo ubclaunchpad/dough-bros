@@ -16,3 +16,4 @@ database/data/
 server/build/
 
 # other
+npm-debug.log
