@@ -1,32 +1,24 @@
 //
-//  HomeView.swift
+//  GroupDetailsView.swift
 //  dough-bros-ios
 //
-//  Created by Alan Yan on 2020-10-09.
+//  Created by Alan Yan on 2020-10-25.
 //
 
 import UIKit
 
+class GroupDetailsView: UIView {
 
-class HomeView: UIView {
-    
     // MARK: - Subviews -
-    private var middleLabel: UILabel = {
+    private var sampleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .red
-        label.text = "Pay BACK $$ 🤡"
+        label.textColor = .orange
+        label.text = "Groups Details View"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return label
     }()
-    
-    private(set) var openLoginButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Open Login", for: .normal)
-        return button
-    }()
+
     
     //MARK: - Initializers -
     override init(frame: CGRect) {
@@ -47,14 +39,11 @@ class HomeView: UIView {
     // MARK: - Setup -
     private func setupView() {
         backgroundColor = .white
-        addSubview(middleLabel)
-        addSubview(openLoginButton)
+        addSubview(sampleLabel)
         
         NSLayoutConstraint.activate([
-            middleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            middleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            openLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            openLoginButton.topAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 20)
+            sampleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            sampleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }
