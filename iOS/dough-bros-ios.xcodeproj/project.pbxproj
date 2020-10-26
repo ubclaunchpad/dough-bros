@@ -12,12 +12,18 @@
 		257495CA25311FED00D386A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257495C925311FED00D386A2 /* Assets.xcassets */; };
 		257495CD25311FED00D386A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257495CC25311FED00D386A2 /* Preview Assets.xcassets */; };
 		257495D025311FED00D386A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257495CE25311FED00D386A2 /* LaunchScreen.storyboard */; };
-		257495DE2531206600D386A2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257495DD2531206600D386A2 /* HomeViewController.swift */; };
-		257495E2253120B800D386A2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257495E1253120B800D386A2 /* HomeView.swift */; };
-		257DB48B253169EC00D1DABB /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257DB48A253169EC00D1DABB /* Transfer.swift */; };
+		257495DE2531206600D386A2 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257495DD2531206600D386A2 /* SampleViewController.swift */; };
+		257495E2253120B800D386A2 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257495E1253120B800D386A2 /* SampleView.swift */; };
+		257DB48B253169EC00D1DABB /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257DB48A253169EC00D1DABB /* Group.swift */; };
 		257DB48F25316A0200D1DABB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257DB48E25316A0200D1DABB /* LoginView.swift */; };
 		257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257DB49125316A0B00D1DABB /* LoginViewController.swift */; };
 		257DB49525316B7000D1DABB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257DB49425316B7000D1DABB /* LoginViewModel.swift */; };
+		258247322546614300F2EAAD /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258247312546614300F2EAAD /* GroupsViewController.swift */; };
+		258247352546616700F2EAAD /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258247342546616700F2EAAD /* GroupsView.swift */; };
+		258247382546622400F2EAAD /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258247372546622400F2EAAD /* TutorialViewController.swift */; };
+		2582473B2546623600F2EAAD /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2582473A2546623600F2EAAD /* TutorialView.swift */; };
+		2582473F2546634000F2EAAD /* GroupDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2582473E2546634000F2EAAD /* GroupDetailsViewController.swift */; };
+		258247422546636100F2EAAD /* GroupDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258247412546636100F2EAAD /* GroupDetailsView.swift */; };
 		95CE8771E6C1CA226AF3D14B /* Pods_dough_bros_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,12 +35,18 @@
 		257495CC25311FED00D386A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		257495CF25311FED00D386A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		257495D125311FED00D386A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		257495DD2531206600D386A2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		257495E1253120B800D386A2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		257DB48A253169EC00D1DABB /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
+		257495DD2531206600D386A2 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
+		257495E1253120B800D386A2 /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		257DB48A253169EC00D1DABB /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		257DB48E25316A0200D1DABB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		257DB49125316A0B00D1DABB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		257DB49425316B7000D1DABB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		258247312546614300F2EAAD /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		258247342546616700F2EAAD /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
+		258247372546622400F2EAAD /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		2582473A2546623600F2EAAD /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		2582473E2546634000F2EAAD /* GroupDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailsViewController.swift; sourceTree = "<group>"; };
+		258247412546636100F2EAAD /* GroupDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailsView.swift; sourceTree = "<group>"; };
 		7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54D05920E40D5D0F9A531AB /* Pods-dough-bros-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.debug.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		BFD77542455893CAC01287E9 /* Pods-dough-bros-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.release.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.release.xcconfig"; sourceTree = "<group>"; };
@@ -97,8 +109,11 @@
 		257495D825311FF900D386A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				257495DC2531203F00D386A2 /* HomeView */,
-				257495DB2531202900D386A2 /* LoginView */,
+				2582472D2546607700F2EAAD /* Group Details */,
+				2582472C2546606600F2EAAD /* Groups */,
+				258247292546603E00F2EAAD /* Tutorial */,
+				257495DC2531203F00D386A2 /* SAMPLE */,
+				257495DB2531202900D386A2 /* Login */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -114,27 +129,54 @@
 		257495DA2531201F00D386A2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				257DB48A253169EC00D1DABB /* Transfer.swift */,
+				257DB48A253169EC00D1DABB /* Group.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		257495DB2531202900D386A2 /* LoginView */ = {
+		257495DB2531202900D386A2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				257DB48E25316A0200D1DABB /* LoginView.swift */,
 				257DB49125316A0B00D1DABB /* LoginViewController.swift */,
 			);
-			path = LoginView;
+			path = Login;
 			sourceTree = "<group>";
 		};
-		257495DC2531203F00D386A2 /* HomeView */ = {
+		257495DC2531203F00D386A2 /* SAMPLE */ = {
 			isa = PBXGroup;
 			children = (
-				257495DD2531206600D386A2 /* HomeViewController.swift */,
-				257495E1253120B800D386A2 /* HomeView.swift */,
+				257495DD2531206600D386A2 /* SampleViewController.swift */,
+				257495E1253120B800D386A2 /* SampleView.swift */,
 			);
-			path = HomeView;
+			path = SAMPLE;
+			sourceTree = "<group>";
+		};
+		258247292546603E00F2EAAD /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				258247372546622400F2EAAD /* TutorialViewController.swift */,
+				2582473A2546623600F2EAAD /* TutorialView.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
+		2582472C2546606600F2EAAD /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				258247312546614300F2EAAD /* GroupsViewController.swift */,
+				258247342546616700F2EAAD /* GroupsView.swift */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
+		2582472D2546607700F2EAAD /* Group Details */ = {
+			isa = PBXGroup;
+			children = (
+				2582473E2546634000F2EAAD /* GroupDetailsViewController.swift */,
+				258247412546636100F2EAAD /* GroupDetailsView.swift */,
+			);
+			path = "Group Details";
 			sourceTree = "<group>";
 		};
 		37077A11A6722C928EAD1962 /* Pods */ = {
@@ -272,10 +314,16 @@
 				257DB48F25316A0200D1DABB /* LoginView.swift in Sources */,
 				257495C625311FEA00D386A2 /* SceneDelegate.swift in Sources */,
 				257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */,
-				257495E2253120B800D386A2 /* HomeView.swift in Sources */,
-				257DB48B253169EC00D1DABB /* Transfer.swift in Sources */,
-				257495DE2531206600D386A2 /* HomeViewController.swift in Sources */,
+				258247352546616700F2EAAD /* GroupsView.swift in Sources */,
+				258247422546636100F2EAAD /* GroupDetailsView.swift in Sources */,
+				257495E2253120B800D386A2 /* SampleView.swift in Sources */,
+				257DB48B253169EC00D1DABB /* Group.swift in Sources */,
+				257495DE2531206600D386A2 /* SampleViewController.swift in Sources */,
+				2582473F2546634000F2EAAD /* GroupDetailsViewController.swift in Sources */,
+				2582473B2546623600F2EAAD /* TutorialView.swift in Sources */,
 				257DB49525316B7000D1DABB /* LoginViewModel.swift in Sources */,
+				258247382546622400F2EAAD /* TutorialViewController.swift in Sources */,
+				258247322546614300F2EAAD /* GroupsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +465,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = VXMXZRS8RH;
+				DEVELOPMENT_TEAM = 8VU5ULQ45F;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -439,7 +487,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = VXMXZRS8RH;
+				DEVELOPMENT_TEAM = 8VU5ULQ45F;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

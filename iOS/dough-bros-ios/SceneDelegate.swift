@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = HomeViewController()
+            window.rootViewController = setupTabBarController()
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -56,5 +56,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
+    
+    private func setupTabBarController() -> UITabBarController {
+        let tabController = UITabBarController()
+        
+        let sampleVC = SampleViewController()
+        sampleVC.tabBarItem = UITabBarItem(title: "SAMPLE", image: UIImage(systemName: ""), tag: 0)
+        
+        let tutorialsVC = TutorialViewController()
+        tutorialsVC.tabBarItem = UITabBarItem(title: "Tutorial", image: UIImage(systemName: "book.fill"), tag: 1)
+        
+        let loginVC = LoginViewController()
+        loginVC.tabBarItem = UITabBarItem(title: "Login", image: UIImage(systemName: "person.fill"), tag: 2)
+        
+        let groupsVC = GroupsViewController()
+        groupsVC.tabBarItem = UITabBarItem(title: "Groups", image: UIImage(systemName: "person.3.fill"), tag: 3)
+        
+        let groupDetailsVC = GroupDetailsViewController()
+        groupDetailsVC.tabBarItem = UITabBarItem(title: "Group Details", image: UIImage(systemName: "person.3.fill"), tag: 4)
+        
+        tabController.viewControllers = [sampleVC, tutorialsVC, loginVC, groupsVC, groupDetailsVC]
+        
+        return tabController
+    }
 }
 

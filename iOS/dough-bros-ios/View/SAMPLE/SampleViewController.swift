@@ -7,17 +7,17 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class SampleViewController: UIViewController {
     
-    private var homeView: HomeView {
-        return view as! HomeView
+    private var homeView: SampleView {
+        return view as! SampleView
     }
     
     // MARK: - View Life Cycle -
     override func loadView() {
         super.loadView()
         
-        self.view = HomeView()
+        view = SampleView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
