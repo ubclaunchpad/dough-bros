@@ -1,3 +1,8 @@
+# Docker Compose + MySQL Setup & Instructions:
+
+*Note: In the docker-compose.yml, make sure the volume is pointing at the corresponding workspace paths!!*
+
+
 # Server Setup
 
 * Run `docker-compose up` to pull containers from Docker.
