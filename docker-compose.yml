@@ -1,6 +1,18 @@
 version: "3"
 
 services:
+  server:
+    build: ./server
+    container_name: doughBros_server
+    command: npm start
+    depends_on:
+      - "db"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server/:/usr/app/src
+      - ./config/:/usr/app/config
+
   db:
     container_name: doughBros_db
     image: mysql
@@ -16,3 +28,4 @@ services:
     volumes:
       - ./database/data:/var/lib/mysql
       - ./database/init.sql:/dockerInit/init.sql
+
