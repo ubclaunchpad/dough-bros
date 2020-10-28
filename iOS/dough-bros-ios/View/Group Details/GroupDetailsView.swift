@@ -10,9 +10,21 @@ import UIKit
 class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     // TEMP DEV DATA
     var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
-    var activityStuff = ["Alex paid you $220", "Bob paid you $500"]
+    var activityStuff = ["Alex paid you $220", "Bob paid you $500", "John paid you $220", "Steven paid you $500", "Joe paid you $220", "Charles paid you $500"]
 
     // MARK: - Subviews -
+    private var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+    
+    private var contentView: UIView = {
+        let content = UIView()
+        content.translatesAutoresizingMaskIntoConstraints = false
+        return content
+    }()
+    
     private var backButton: UIButton = {
         let back = UIButton(type: .system)
         back.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +80,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         summary.register(SummaryTableViewCell.self, forCellReuseIdentifier: "summaryCell")
         summary.rowHeight = 50
         summary.estimatedRowHeight = 50
+        summary.isScrollEnabled = false
         return summary
     }()
     
@@ -86,6 +99,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         activity.register(ActivityTableViewCell.self, forCellReuseIdentifier: "activityCell")
         activity.rowHeight = 70
         activity.estimatedRowHeight = 70
+        activity.isScrollEnabled = false
         return activity
     }()
 
@@ -130,70 +144,88 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    
     // MARK: - Setup -
     private func setupView() {
         backgroundColor = .white
         
-        // setupHeaderView()
-        addSubview(backButton)
+        addSubview(scrollView)
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            scrollView.widthAnchor.constraint(equalTo: widthAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: centerXAnchor),
+        ])
+        
+        scrollView.addSubview(contentView)
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+        ])
+        
+        // setupHeaderView()
+        contentView.addSubview(backButton)
+        NSLayoutConstraint.activate([
+            backButton.topAnchor.constraint(equalTo: contentView.topAnchor),
             backButton.widthAnchor.constraint(equalToConstant: 30),
             backButton.heightAnchor.constraint(equalToConstant: 30),
-            backButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 20)
+            backButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20)
         ])
-        addSubview(editButton)
+        contentView.addSubview(editButton)
         NSLayoutConstraint.activate([
-            editButton.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            editButton.topAnchor.constraint(equalTo: contentView.topAnchor),
             editButton.widthAnchor.constraint(equalToConstant: 30),
             editButton.heightAnchor.constraint(equalToConstant: 30),
-            editButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -20)
+            editButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20)
         ])
         
         // setupImage()
-        addSubview(groupImage)
+        contentView.addSubview(groupImage)
         NSLayoutConstraint.activate([
-            groupImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+            groupImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             groupImage.topAnchor.constraint(equalTo: backButton.topAnchor, constant: 50),
             groupImage.widthAnchor.constraint(equalToConstant: 100),
             groupImage.heightAnchor.constraint(equalToConstant: 100)
         ])
 
         // setupName()
-        addSubview(groupName)
+        contentView.addSubview(groupName)
         NSLayoutConstraint.activate([
-            groupName.centerXAnchor.constraint(equalTo: centerXAnchor),
+            groupName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor, constant: 10)
         ])
 
         // setupSummary()
-        addSubview(summaryLabel)
+        contentView.addSubview(summaryLabel)
         NSLayoutConstraint.activate([
             summaryLabel.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 30),
-            summaryLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20)
+            summaryLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20)
         ])
-        addSubview(summaryView)
+        contentView.addSubview(summaryView)
         summaryView.dataSource = self
         NSLayoutConstraint.activate([
-            summaryView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            summaryView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             summaryView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 5),
-            summaryView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
-            summaryView.heightAnchor.constraint(equalToConstant: 150)
+            summaryView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(summaryStuff.count))
         ])
 
         // setupActivity()
-        addSubview(activityLabel)
+        contentView.addSubview(activityLabel)
         NSLayoutConstraint.activate([
             activityLabel.topAnchor.constraint(equalTo: summaryView.bottomAnchor, constant: 30),
-            activityLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20)
+            activityLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20)
         ])
-        addSubview(activityView)
+        contentView.addSubview(activityView)
         activityView.dataSource = self
         NSLayoutConstraint.activate([
-            activityView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             activityView.topAnchor.constraint(equalTo: activityLabel.bottomAnchor, constant: 5),
-            activityView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
-            activityView.heightAnchor.constraint(equalToConstant: 300)
+            activityView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            activityView.heightAnchor.constraint(equalToConstant: activityView.rowHeight * CGFloat(activityStuff.count)),
+            activityView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
     }
