@@ -81,6 +81,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         summary.rowHeight = 50
         summary.estimatedRowHeight = 50
         summary.isScrollEnabled = false
+        summary.separatorColor = .clear
         return summary
     }()
     
@@ -100,6 +101,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         activity.rowHeight = 70
         activity.estimatedRowHeight = 70
         activity.isScrollEnabled = false
+        activity.separatorColor = .clear
         return activity
     }()
 
@@ -201,7 +203,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         contentView.addSubview(summaryLabel)
         NSLayoutConstraint.activate([
             summaryLabel.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 30),
-            summaryLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20)
+            summaryLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40)
         ])
         contentView.addSubview(summaryView)
         summaryView.dataSource = self
@@ -209,14 +211,15 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
             summaryView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             summaryView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 5),
             summaryView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
-            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(summaryStuff.count))
+            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(summaryStuff.count)),
+            summaryView.leftAnchor.constraint(equalTo: summaryLabel.leftAnchor)
         ])
 
         // setupActivity()
         contentView.addSubview(activityLabel)
         NSLayoutConstraint.activate([
             activityLabel.topAnchor.constraint(equalTo: summaryView.bottomAnchor, constant: 30),
-            activityLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20)
+            activityLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40)
         ])
         contentView.addSubview(activityView)
         activityView.dataSource = self
@@ -225,7 +228,8 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
             activityView.topAnchor.constraint(equalTo: activityLabel.bottomAnchor, constant: 5),
             activityView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
             activityView.heightAnchor.constraint(equalToConstant: activityView.rowHeight * CGFloat(activityStuff.count)),
-            activityView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            activityView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            activityView.leftAnchor.constraint(equalTo: activityLabel.leftAnchor)
         ])
         
     }
