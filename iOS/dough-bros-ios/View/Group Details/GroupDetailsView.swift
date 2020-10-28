@@ -17,8 +17,6 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         let image = UIImage(named: "SampleImage.png")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 50
-        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -31,30 +29,10 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return name
     }()
     
-    private var summaryLabel: UILabel = {
-        let summaryName = UILabel()
-        summaryName.translatesAutoresizingMaskIntoConstraints = false
-        summaryName.textColor = .black
-        summaryName.text = "Summary"
-        summaryName.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        return summaryName
-    }()
-    
-    private var activityLabel: UILabel = {
-        let activityName = UILabel()
-        activityName.translatesAutoresizingMaskIntoConstraints = false
-        activityName.textColor = .black
-        activityName.text = "Activity"
-        activityName.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        return activityName
-    }()
-    
-    // make UITableView custom class w/ images when design is confirmed
     private var summaryView: UITableView = {
         let summary = UITableView()
         summary.translatesAutoresizingMaskIntoConstraints = false
         summary.register(UITableViewCell.self, forCellReuseIdentifier: "summaryCell")
-        summary.separatorColor = .clear
         return summary
     }()
     
@@ -62,7 +40,6 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         let activity = UITableView()
         activity.translatesAutoresizingMaskIntoConstraints = false
         activity.register(UITableViewCell.self, forCellReuseIdentifier: "activityCell")
-        activity.separatorColor = .clear
         return activity
     }()
 
@@ -126,7 +103,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         addSubview(groupName)
         NSLayoutConstraint.activate([
             groupName.centerXAnchor.constraint(equalTo: centerXAnchor),
-            groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor, constant: 20)
+            groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor, constant: 10)
         ])
 
         // setupSummary()
@@ -134,7 +111,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         summaryView.dataSource = self
         NSLayoutConstraint.activate([
             summaryView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            summaryView.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 70),
+            summaryView.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 30),
             summaryView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
             summaryView.heightAnchor.constraint(equalToConstant: 150)
         ])
@@ -144,24 +121,9 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         activityView.dataSource = self
         NSLayoutConstraint.activate([
             activityView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityView.topAnchor.constraint(equalTo: summaryView.bottomAnchor, constant: 70),
+            activityView.topAnchor.constraint(equalTo: summaryView.bottomAnchor, constant: 30),
             activityView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
             activityView.heightAnchor.constraint(equalToConstant: 300)
-        ])
-        
-        // setup summary and activity labels
-        addSubview(summaryLabel)
-        NSLayoutConstraint.activate([
-            summaryLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            summaryLabel.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 30),
-            summaryLabel.leftAnchor.constraint(equalTo: summaryView.leftAnchor)
-        ])
-        
-        addSubview(activityLabel)
-        NSLayoutConstraint.activate([
-            activityLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityLabel.topAnchor.constraint(equalTo: summaryView.bottomAnchor, constant: 30),
-            activityLabel.leftAnchor.constraint(equalTo: activityView.leftAnchor)
         ])
         
     }
