@@ -19,7 +19,20 @@ class GroupDetailsViewController: UIViewController {
         
         view = GroupDetailsView()
     }
+     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        groupDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func backButtonTapped() {
+        print("back button presesed")
+        // pop Groups tab later when finalized w/ nav controller
+    }
+    
+    @objc private func editButtonTapped() {
+        print("edit button presesed")
     }
 }

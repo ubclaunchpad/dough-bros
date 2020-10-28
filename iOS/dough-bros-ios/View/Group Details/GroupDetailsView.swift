@@ -25,7 +25,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return content
     }()
     
-    private var backButton: UIButton = {
+    private(set) var backButton: UIButton = {
         let back = UIButton(type: .system)
         back.translatesAutoresizingMaskIntoConstraints = false
         back.contentHorizontalAlignment = .fill
@@ -36,7 +36,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return back
     }()
     
-    private var editButton: UIButton = {
+    private(set) var editButton: UIButton = {
         let edit = UIButton(type: .system)
         edit.translatesAutoresizingMaskIntoConstraints = false
         edit.contentHorizontalAlignment = .fill
