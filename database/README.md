@@ -7,14 +7,15 @@
 ### Setup:
 1. cd into root folder
 2. To start application server and mysql: `docker-compose up -d`
-3. New Bash Terminal: `docker exec -it doughBros_db bash`
+3. Access docker container bash terminal: `docker exec -it doughBros_db bash`
 4. Access mySQL terminal: `mysql -uroot -p doughBros_db`
-5. Enter `exit` to exit terminal
-6. To stop containers: `docker-compose down`
 
 ### Mount Any .SQL Files:
 5. `mysql -uroot -p<password> <databaseDest> < <SQLFileLoc>`
 Ex. `mysql -uroot -proot doughBros_db < /dockerInit/init.sql` —> (Into “doughBros_db” from the docker volume folder “dockerInit”, file init.sql)
+
+6. Enter `exit` to exit terminal
+7. To stop containers: `docker-compose down`
 
 ### Populate Local Database With .SQL
 1. In mysql terminal: `USE doughBros_db`
