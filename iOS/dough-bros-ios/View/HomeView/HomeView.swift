@@ -27,6 +27,14 @@ class HomeView: UIView {
         button.setTitle("Open Login", for: .normal)
         return button
     }()
+    //button for Tutorial page
+    private(set) var openTutorialButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitle("Tutorial", for: .normal)
+        return button
+    }()
     
     //MARK: - Initializers -
     override init(frame: CGRect) {
@@ -49,12 +57,16 @@ class HomeView: UIView {
         backgroundColor = .white
         addSubview(middleLabel)
         addSubview(openLoginButton)
+        addSubview(openTutorialButton)
         
         NSLayoutConstraint.activate([
             middleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             middleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             openLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            openLoginButton.topAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 20)
+            openLoginButton.topAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 20),
+            
+            openTutorialButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            openTutorialButton.centerYAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 80)
         ])
     }
 }

@@ -23,11 +23,18 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         homeView.openLoginButton.addTarget(self, action: #selector(openLoginVC), for: .touchUpInside)
+        
+        homeView.openTutorialButton.addTarget(self, action: #selector(openTutorialVC), for: .touchUpInside)
     }
     
     
     @objc private func openLoginVC() {
         let loginVC = LoginViewController()
+        
+        present(loginVC, animated: true)
+    }
+    @objc private func openTutorialVC() {
+        let loginVC = TutorialViewController()
         
         present(loginVC, animated: true)
     }
