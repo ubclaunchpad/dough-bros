@@ -9,10 +9,15 @@ import UIKit
 
 class TutorialViewController: UIViewController {
     
-override func viewDidLoad() {
+    override func loadView() {
+        super.loadView()
+        
+        self.view = TutorialView()
+    }
+    override func viewDidLoad() {
     view.backgroundColor = UIColor.blue;
     
     }
-   
+    
 }
 
