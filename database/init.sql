@@ -18,6 +18,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+# creating user instances, todelete
 CALL doughBros_db.createUser('Ailn', 'Rathmouth','mailn0@bravesites.com', 'mailn0', 0);
 CALL doughBros_db.createUser('Hounson', 'Port Lolamouth', 'dhounson1@slashdot.org', 'dhouson1,', 1);
 CALL doughBros_db.createUser('Tison', 'Lavernastad', 'ctison2@europa.eu', 'ctison2', 0);

@@ -1,3 +1,7 @@
+#
+# STORED PROCEDURES FOR GROUP
+#
+
 USE `doughBros_db`;
 DROP procedure IF EXISTS `createGroup`;
 DROP procedure IF EXISTS `addUserToGroup`;

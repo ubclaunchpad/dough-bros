@@ -1,18 +1,18 @@
-import { User } from "../models/users";
+// import { User } from "../models/users";
 
-module.exports = class UsersService {
+// module.exports = class UsersService {
 
-    constructor() { }
+//     constructor() { }
 
-    //find all
-    findAllUsers() {
-        return new Promise((resolve, reject) => {
-            User.findAllUsers((err: any, res: any) => {
-                if (err) {
-                    reject(err);
-                }
-                resolve(res);
-            });
-        });
-    }
-}
+//     find all
+//     findAllUsers() {
+//         return new Promise((resolve, reject) => {
+//             User.findAllUsers((err: any, res: any) => {
+//                 if (err) {
+//                     reject(err);
+//                 }
+//                 resolve(res);
+//             });
+//         });
+//     }
+// }
