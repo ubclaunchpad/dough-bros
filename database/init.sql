@@ -1,5 +1,5 @@
 #
-# TABLE STRUCTURE FOR: user
+# CREATE TABLE STRUCTURES
 #
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -18,11 +18,11 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`) VALUES (1, 'Ailn', 'Rathmouth','mailn0@bravesites.com', 'mailn0', 0);
-INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`) VALUES (2, 'Hounson', 'Port Lolamouth', 'dhounson1@slashdot.org', 'dhouson1,', 1);
-INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`) VALUES (3, 'Tison', 'Lavernastad', 'ctison2@europa.eu', 'ctison2', 0);
-INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`) VALUES (4, 'Surmeyers', 'Ethelville', 'msurmeyers3@nytimes.com', 'msurmeyers3', 0);
-INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`) VALUES (5, 'Bob', 'Schulistland', 'scbob@opensource.org', 'scbob', 1);
+CALL doughBros_db.createUser('Ailn', 'Rathmouth','mailn0@bravesites.com', 'mailn0', 0);
+CALL doughBros_db.createUser('Hounson', 'Port Lolamouth', 'dhounson1@slashdot.org', 'dhouson1,', 1);
+CALL doughBros_db.createUser('Tison', 'Lavernastad', 'ctison2@europa.eu', 'ctison2', 0);
+CALL doughBros_db.createUser('Surmeyers', 'Ethelville', 'msurmeyers3@nytimes.com', 'msurmeyers3', 0);
+CALL doughBros_db.createUser('Bob', 'Schulistland', 'scbob@opensource.org', 'scbob', 1);
 
 CREATE TABLE `group` (
   `group_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
