@@ -1,6 +1,6 @@
 "use strict";
 
-import mysql from "mysql";
+var mysql = require("mysql");
 
 const config = {
   host: "localhost",
@@ -11,7 +11,7 @@ const config = {
 };
 
 const connection = mysql.createConnection(config);
-connection.connect(function(err) {
+connection.connect(function(err:any) {
   if (err) console.log(err);
   console.log("Database Connected: " + config.host + ":" + config.port);
 });
