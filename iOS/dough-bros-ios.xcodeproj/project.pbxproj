@@ -25,6 +25,8 @@
 		2582473F2546634000F2EAAD /* GroupDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2582473E2546634000F2EAAD /* GroupDetailsViewController.swift */; };
 		258247422546636100F2EAAD /* GroupDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258247412546636100F2EAAD /* GroupDetailsView.swift */; };
 		95CE8771E6C1CA226AF3D14B /* Pods_dough_bros_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */; };
+		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
+		BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		258247412546636100F2EAAD /* GroupDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailsView.swift; sourceTree = "<group>"; };
 		7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54D05920E40D5D0F9A531AB /* Pods-dough-bros-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.debug.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
+		BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		BFD77542455893CAC01287E9 /* Pods-dough-bros-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.release.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +179,8 @@
 			children = (
 				2582473E2546634000F2EAAD /* GroupDetailsViewController.swift */,
 				258247412546636100F2EAAD /* GroupDetailsView.swift */,
+				BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */,
+				BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */,
 			);
 			path = "Group Details";
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 				257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */,
 				258247352546616700F2EAAD /* GroupsView.swift in Sources */,
 				258247422546636100F2EAAD /* GroupDetailsView.swift in Sources */,
+				BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */,
 				257495E2253120B800D386A2 /* SampleView.swift in Sources */,
 				257DB48B253169EC00D1DABB /* Group.swift in Sources */,
 				257495DE2531206600D386A2 /* SampleViewController.swift in Sources */,
@@ -323,6 +330,7 @@
 				2582473B2546623600F2EAAD /* TutorialView.swift in Sources */,
 				257DB49525316B7000D1DABB /* LoginViewModel.swift in Sources */,
 				258247382546622400F2EAAD /* TutorialViewController.swift in Sources */,
+				BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */,
 				258247322546614300F2EAAD /* GroupsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,7 +473,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = 8VU5ULQ45F;
+				DEVELOPMENT_TEAM = 35ZK849627;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -487,7 +495,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = 8VU5ULQ45F;
+				DEVELOPMENT_TEAM = 35ZK849627;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
