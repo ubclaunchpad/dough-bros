@@ -25,6 +25,7 @@
 		2582473F2546634000F2EAAD /* GroupDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2582473E2546634000F2EAAD /* GroupDetailsViewController.swift */; };
 		258247422546636100F2EAAD /* GroupDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258247412546636100F2EAAD /* GroupDetailsView.swift */; };
 		95CE8771E6C1CA226AF3D14B /* Pods_dough_bros_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */; };
+		BEAA8625254F911400EF1F43 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEAA8624254F911400EF1F43 /* GoogleService-Info.plist */; };
 		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
 		BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		258247412546636100F2EAAD /* GroupDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailsView.swift; sourceTree = "<group>"; };
 		7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54D05920E40D5D0F9A531AB /* Pods-dough-bros-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.debug.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		BEAA8624254F911400EF1F43 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		BFD77542455893CAC01287E9 /* Pods-dough-bros-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.release.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				257495C525311FEA00D386A2 /* SceneDelegate.swift */,
 				257495C925311FED00D386A2 /* Assets.xcassets */,
 				257495CE25311FED00D386A2 /* LaunchScreen.storyboard */,
+				BEAA8624254F911400EF1F43 /* GoogleService-Info.plist */,
 				257495D125311FED00D386A2 /* Info.plist */,
 				257495CB25311FED00D386A2 /* Preview Content */,
 			);
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				257495D025311FED00D386A2 /* LaunchScreen.storyboard in Resources */,
+				BEAA8625254F911400EF1F43 /* GoogleService-Info.plist in Resources */,
 				257495CD25311FED00D386A2 /* Preview Assets.xcassets in Resources */,
 				257495CA25311FED00D386A2 /* Assets.xcassets in Resources */,
 			);

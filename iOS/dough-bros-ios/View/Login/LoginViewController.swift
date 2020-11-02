@@ -7,9 +7,12 @@
 
 import UIKit
 import FBSDKLoginKit
+import Firebase
 
 
 class LoginViewController: UIViewController, LoginButtonDelegate {
+    
+    var handle: AuthStateDidChangeListenerHandle?
     
     private var loginView: LoginView {
         return view as! LoginView
@@ -18,6 +21,17 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
     override func loadView() {
         super.loadView()
         self.view = LoginView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        handle = Auth.auth().addStateDidChangeListener { [self] (auth, user) in
+          print(auth)
+            loginView.UID.text = user?.uid
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
     
     // TODO: Implement Mock Login View Controller
