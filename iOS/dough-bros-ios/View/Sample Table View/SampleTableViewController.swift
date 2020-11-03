@@ -6,9 +6,7 @@
 //
 
 import UIKit
-
 class SampleTableViewController: UIViewController {
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()

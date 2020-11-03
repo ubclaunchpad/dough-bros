@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
         
         homeView.openLoginButton.addTarget(self, action: #selector(openLoginVC), for: .touchUpInside)
         homeView.openTableViewButton.addTarget(self, action: #selector(openSampleTableViewVC), for: .touchUpInside)
+        homeView.openGroupViewButton.addTarget(self, action: #selector(openGroupsViewVC), for: .touchUpInside)
     }
     
     
@@ -37,5 +38,11 @@ class HomeViewController: UIViewController {
         let sampleVC = SampleTableViewController()
         
         present(sampleVC, animated: true)
+    }
+    
+    @objc private func openGroupsViewVC() {
+        let groupVC = GroupsViewController()
+        
+        present(groupVC, animated: true)
     }
 }

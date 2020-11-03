@@ -34,6 +34,14 @@ class HomeView: UIView {
         button.setTitle("Open Sample Table View", for: .normal)
         return button
     }()
+  
+    private(set) var openGroupViewButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitle("Groups View", for: .normal)
+        return button
+    }()
     
     //MARK: - Initializers -
     override init(frame: CGRect) {
@@ -57,14 +65,20 @@ class HomeView: UIView {
         addSubview(middleLabel)
         addSubview(openLoginButton)
         addSubview(openTableViewButton)
+        addSubview(openGroupViewButton)
         
         NSLayoutConstraint.activate([
             middleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             middleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
             openLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             openLoginButton.topAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 20),
+            
             openTableViewButton.topAnchor.constraint(equalTo: openLoginButton.bottomAnchor, constant: 20),
-            openTableViewButton.centerXAnchor.constraint(equalTo: centerXAnchor)
+            openTableViewButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            openGroupViewButton.topAnchor.constraint(equalTo: openTableViewButton.bottomAnchor, constant: 20),
+            openGroupViewButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }
