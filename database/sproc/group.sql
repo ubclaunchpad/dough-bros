@@ -37,7 +37,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllGroupUsers` (IN `group_id` INT(8))
 BEGIN
 
-SELECT  FROM `group_membership` WHERE `fk_group_id` = `group_id`;
+SELECT * FROM `group_membership` WHERE `fk_group_id` = `group_id`;
 
 END$$
 
@@ -48,7 +48,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `removeUserFromGroup` (IN `group_id` INT(8), IN `user_id` INT(8))
 BEGIN
 
-DELETE  FROM `group_membership` WHERE `fk_group_id` = `group_id` AND `fk_user_id` = `user_id`;
+DELETE FROM `group_membership` WHERE `fk_group_id` = `group_id` AND `fk_user_id` = `user_id`;
 
 END$$
 

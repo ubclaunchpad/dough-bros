@@ -22,7 +22,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getUsers` (IN `user_id` INT(8))
 BEGIN
 
-SELECT  FROM `user` WHERE `user_id` = `user_id`;
+SELECT * FROM `user` WHERE `user_id` = `user_id`;
 
 END$$
 
