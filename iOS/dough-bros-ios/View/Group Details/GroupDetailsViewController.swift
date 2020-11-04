@@ -28,8 +28,7 @@ class GroupDetailsViewController: UIViewController {
     }
     
     @objc private func backButtonTapped() {
-        print("back button presesed")
-        // pop Groups tab later when finalized w/ nav controller
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func editButtonTapped() {
