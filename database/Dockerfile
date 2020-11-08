@@ -5,4 +5,5 @@ ENV MYSQL_DATABASE=doughBros_db
 ENV MYSQL_USER=user
 ENV MYSQL_PASSWORD=root
 
-COPY ./sproc /docker-entrypoint-initdb.d/
+COPY ./sproc/* /docker-entrypoint-initdb.d/
+COPY ./tables/* /docker-entrypoint-initdb.d/
