@@ -64,3 +64,64 @@ CREATE TABLE `pending_anon_user` (
 	REFERENCES `user` (`user_id`)
     ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `currency` (
+  `currency_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `currency_name` varchar(255) NOT NULL,
+  `currency_code` int(9) NOT NULL,
+  PRIMARY KEY (`currency_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group_expense` (
+  `expense_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_group_id` int(9) unsigned NOT NULL,
+  `fk_added_by` int(9) unsigned NOT NULL,
+  `fk_currency_id` int(9) unsigned NOT NULL,
+  `expense_name` varchar(255) NOT NULL,
+  `amount` decimal(19, 4) unsigned NOT NULL,
+  PRIMARY KEY (`expense_id`),
+  FOREIGN KEY (`fk_group_id`)
+  REFERENCES `group` (`group_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_added_by`)
+  REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_currency_id`)
+  REFERENCES `currency` (`currency_id`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `pending_payments` (
+  `payment_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_sender_id` int(9) unsigned NOT NULL,
+  `fk_receiver_id` int(9) unsigned NOT NULL,
+  `fk_creator_id` int(9) unsigned NOT NULL,
+  `fk_parent_expense_id` int(9) unsigned NOT NULL,
+  `fk_currency_id` int(9) unsigned NOT NULL,
+  `amount` decimal(19, 4) unsigned NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  PRIMARY KEY (`payment_id`),
+  FOREIGN KEY (`fk_sender_id`)
+  REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_receiver_id`)
+  REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_creator_id`)
+  REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`parent_expense_id`)
+  REFERENCES `group_expense` (`expense_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`currency_id`)
+  REFERENCES `currency` (`currency_id`)
+    ON DELETE CASCADE    
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- CREATE TABLE `paid_payments` (
+
+-- )
+
+-- CREATE TABLE `settled_payments` (
+  
+-- )
