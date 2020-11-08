@@ -22,6 +22,15 @@ class LoginView: UIView {
         return userID
     }()
     
+    public var TokenID: UILabel = {
+        let token = UILabel()
+        token.translatesAutoresizingMaskIntoConstraints = false
+        token.textColor = .black
+        token.text = "???"
+        token.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        return token
+    }()
+    
     private var firstNameInput: UITextField = {
         let firstName = UITextField()
         firstName.translatesAutoresizingMaskIntoConstraints = false
@@ -147,6 +156,7 @@ class LoginView: UIView {
         Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!) { [self] authResult, error in
           print(authResult)
             self.UID.text = authResult?.user.uid
+            self.getToken()
         }
     }
     
@@ -155,6 +165,18 @@ class LoginView: UIView {
           guard let strongSelf = self else { return }
           print(authResult)
             self!.UID.text = authResult?.user.uid
+            self!.getToken()
+        }
+    }
+    
+    private func getToken() {
+        Messaging.messaging().token { token, error in
+          if let error = error {
+            print("Error fetching FCM registration token: \(error)")
+          } else if let token = token {
+            print("FCM registration token: \(token)")
+            self.TokenID.text  = "Remote FCM registration token: \(token)"
+          }
         }
     }
     
@@ -239,9 +261,14 @@ class LoginView: UIView {
             UID.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 50),
             UID.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
+        addSubview(TokenID)
+        NSLayoutConstraint.activate([
+            TokenID.topAnchor.constraint(equalTo: UID.bottomAnchor, constant: 10),
+            TokenID.centerXAnchor.constraint(equalTo: centerXAnchor),
+        ])
         addSubview(logoutButton)
         NSLayoutConstraint.activate([
-            logoutButton.topAnchor.constraint(equalTo: UID.bottomAnchor, constant: 10),
+            logoutButton.topAnchor.constraint(equalTo: TokenID.bottomAnchor, constant: 10),
             logoutButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
             logoutButton.heightAnchor.constraint(equalToConstant: 50),
             logoutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
