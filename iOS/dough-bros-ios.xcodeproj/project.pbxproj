@@ -30,6 +30,8 @@
 		2596C9272551330A00DAA64F /* GroupsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2596C9262551330A00DAA64F /* GroupsCollectionViewCell.swift */; };
 		25DB65E8255134F100F79B58 /* GroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB65E7255134F100F79B58 /* GroupsViewModel.swift */; };
 		25DB65EB2551357400F79B58 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB65EA2551357400F79B58 /* Friend.swift */; };
+		901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D42557B071002D4E5D /* AddExpenseViewController.swift */; };
+		901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D82557B154002D4E5D /* AddExpenseView.swift */; };
 		95CE8771E6C1CA226AF3D14B /* Pods_dough_bros_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */; };
 		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
 		BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */; };
@@ -61,6 +63,8 @@
 		25DB65E7255134F100F79B58 /* GroupsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewModel.swift; sourceTree = "<group>"; };
 		25DB65EA2551357400F79B58 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		901366D42557B071002D4E5D /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
+		901366D82557B154002D4E5D /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		A54D05920E40D5D0F9A531AB /* Pods-dough-bros-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.debug.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 		257495D825311FF900D386A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				901366D32557B04C002D4E5D /* Add Expense */,
 				2582472D2546607700F2EAAD /* Group Details */,
 				2582472C2546606600F2EAAD /* Groups */,
 				258247292546603E00F2EAAD /* Tutorial */,
@@ -233,6 +238,15 @@
 				7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		901366D32557B04C002D4E5D /* Add Expense */ = {
+			isa = PBXGroup;
+			children = (
+				901366D42557B071002D4E5D /* AddExpenseViewController.swift */,
+				901366D82557B154002D4E5D /* AddExpenseView.swift */,
+			);
+			path = "Add Expense";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,7 +372,9 @@
 				257495C425311FEA00D386A2 /* AppDelegate.swift in Sources */,
 				2596C923255132E500DAA64F /* GroupTableViewCell.swift in Sources */,
 				257DB48F25316A0200D1DABB /* LoginView.swift in Sources */,
+				901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */,
 				251CE01C25513453002913DE /* ObjectClassName.swift in Sources */,
+				901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */,
 				257495C625311FEA00D386A2 /* SceneDelegate.swift in Sources */,
 				257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */,
 				258247352546616700F2EAAD /* GroupsView.swift in Sources */,
