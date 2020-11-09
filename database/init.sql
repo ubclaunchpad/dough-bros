@@ -23,3 +23,5 @@ CALL doughBros_db.createPendingAnonUserTable;
 CALL doughBros_db.createCurrencyTable;
 CALL doughBros_db.createGroupExpenseTable;
 CALL doughBros_db.createPendingPaymentTable;
+CALL doughBros_db.createPaidPaymentsTable;
+CALL doughBros_db.createSettledPaymentsTable;
