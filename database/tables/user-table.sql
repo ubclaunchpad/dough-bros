@@ -11,14 +11,15 @@ CREATE PROCEDURE `createUserTable` ()
 BEGIN
 
 CREATE TABLE `user` (
-  `user_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `firebase_uid` varchar(255) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `email_addr` varchar(255) NOT NULL,
   `facebook_id` varchar(255) NOT NULL,
   `is_anon` bool NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  `fcm_token` varchar(255) NOT NULL,
+  PRIMARY KEY (`firebase_uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 END$$
 
