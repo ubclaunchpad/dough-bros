@@ -41,7 +41,7 @@ CREATE TABLE `group_membership` (
   `fk_user_id` int(9) unsigned NOT NULL,
   `fk_added_by` int(9) unsigned NOT NULL,
   `did_accept_invite` bool NOT NULL,
-  FOREIGN KEY (`fK_group_id`)
+  FOREIGN KEY (`fk_group_id`)
 	REFERENCES `group` (`group_id`)
     ON DELETE CASCADE,
   FOREIGN KEY (`fk_user_id`)
@@ -63,4 +63,111 @@ CREATE TABLE `pending_anon_user` (
   FOREIGN KEY (`fk_added_by`)
 	REFERENCES `user` (`user_id`)
     ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `currency` (
+  `currency_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `currency_name` varchar(255) NOT NULL,
+  `currency_code` varchar(3) NOT NULL,
+  PRIMARY KEY (`payment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group_expenses` (
+  `expense_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_group_id` int(9) unsigned NOT NULL,
+  `fk_added_by` int(9) unsigned NOT NULL,
+  `fk_currency_id` int(9) unsigned NOT NULL,
+  `expense_name` varchar(255) NOT NULL,
+  `amount` decimal(10, 2) NOT NULL,
+  PRIMARY KEY (`payment_id`),
+  FOREIGN KEY (`fk_group_id`)
+	REFERENCES `group` (`group_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_added_by`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_currency_id`)
+	REFERENCES `currency` (`currency_id`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `pending_payments` (
+  `payment_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_sender_id` int(9) unsigned NOT NULL,
+  `fk_receiver_id` int(9) unsigned NOT NULL,
+  `fk_creator_id` int(9) unsigned NOT NULL,
+  `fk_parent_expense_id` int(9) unsigned NOT NULL,
+  `fk_currency_id` int(9) unsigned NOT NULL,
+  `amount` decimal(10, 2) NOT NULL,
+  `timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`payment_id`),
+  FOREIGN KEY (`fk_sender_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_receiver_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_creator_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_parent_expense_id`)
+	REFERENCES `group_expense` (`expense_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_currency_id`)
+	REFERENCES `currency` (`currency_id`)
+    ON DELETE CASCADE,
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `paid_payments` (
+  `payment_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_sender_id` int(9) unsigned NOT NULL,
+  `fk_receiver_id` int(9) unsigned NOT NULL,
+  `fk_creator_id` int(9) unsigned NOT NULL,
+  `fk_parent_expense_id` int(9) unsigned NOT NULL,
+  `fk_currency_id` int(9) unsigned NOT NULL,
+  `amount` decimal(10, 2) NOT NULL,
+  `timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`payment_id`),
+  FOREIGN KEY (`fk_sender_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_receiver_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_creator_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_parent_expense_id`)
+	REFERENCES `group_expense` (`expense_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_currency_id`)
+	REFERENCES `currency` (`currency_id`)
+    ON DELETE CASCADE,
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `settled_payments` (
+  `payment_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_sender_id` int(9) unsigned NOT NULL,
+  `fk_receiver_id` int(9) unsigned NOT NULL,
+  `fk_creator_id` int(9) unsigned NOT NULL,
+  `fk_parent_expense_id` int(9) unsigned NOT NULL,
+  `fk_currency_id` int(9) unsigned NOT NULL,
+  `amount` decimal(10, 2) NOT NULL,
+  `timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`payment_id`),
+  FOREIGN KEY (`fk_sender_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_receiver_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_creator_id`)
+	REFERENCES `user` (`user_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_parent_expense_id`)
+	REFERENCES `group_expense` (`expense_id`)
+    ON DELETE CASCADE,
+  FOREIGN KEY (`fk_currency_id`)
+	REFERENCES `currency` (`currency_id`)
+    ON DELETE CASCADE,
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
