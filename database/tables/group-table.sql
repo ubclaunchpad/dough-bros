@@ -12,11 +12,11 @@ BEGIN
 
 CREATE TABLE `group` (
   `group_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
-  `fk_creator_id` int(9) unsigned NOT NULL,
-  `group_name` int(9) unsigned NOT NULL,
+  `fk_creator_id` varchar(255) NOT NULL,
+  `group_name` varchar(255) NOT NULL,
   PRIMARY KEY (`group_id`),
   FOREIGN KEY (`fk_creator_id`)
-	REFERENCES `user` (`user_id`)
+	  REFERENCES `user` (`firebase_uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 END$$
