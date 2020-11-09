@@ -25,14 +25,21 @@ class GroupDetailsViewController: UIViewController {
         
         groupDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)
     }
     
     @objc private func backButtonTapped() {
-        print("back button presesed")
-        // pop Groups tab later when finalized w/ nav controller
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func editButtonTapped() {
         print("edit button presesed")
+    }
+    
+    @objc private func addExpenseTapped() {
+        print("add expense tapped")
+        let addExpenseVC = AddExpenseViewController()
+        
+        present(addExpenseVC, animated: true)
     }
 }

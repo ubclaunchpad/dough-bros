@@ -1,5 +1,5 @@
 # BUILD
-FROM node:12
+FROM node:latest
 
 # Create app directory
 WORKDIR /usr/app/src

@@ -68,14 +68,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let loginVC = LoginViewController()
         loginVC.tabBarItem = UITabBarItem(title: "Login", image: UIImage(systemName: "person.fill"), tag: 2)
-        
+    
         let groupsVC = GroupsViewController()
+        let homeNav = UINavigationController(rootViewController: groupsVC)
+        homeNav.navigationBar.isHidden = true
         groupsVC.tabBarItem = UITabBarItem(title: "Groups", image: UIImage(systemName: "person.3.fill"), tag: 3)
         
-        let groupDetailsVC = GroupDetailsViewController()
-        groupDetailsVC.tabBarItem = UITabBarItem(title: "Group Details", image: UIImage(systemName: "person.3.fill"), tag: 4)
-        
-        tabController.viewControllers = [sampleVC, tutorialsVC, loginVC, groupsVC, groupDetailsVC]
+        tabController.viewControllers = [sampleVC, tutorialsVC, loginVC, homeNav]
         
         return tabController
     }

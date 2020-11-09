@@ -5,4 +5,12 @@
 //  Created by Alan Yan on 2020-10-09.
 //
 
-import Foundation
+import UIKit
+
+struct Group {
+    var name: String
+    //for convenience, will be something else later
+    var image: UIImage?
+    var amount: Int
+    var youOwe: Bool = false
+}
