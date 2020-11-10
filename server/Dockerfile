@@ -1,21 +1,24 @@
 # BUILD
 FROM node:latest
 
-# Create app directory
+# Create work directory for image, and change owner to "node" user
+RUN mkdir -p /usr/app/src/node_modules && chown -R node:node /usr/app/src
+
 WORKDIR /usr/app/src
 
-# Install app dependencies
-COPY package*.json ./
+# Copy package info
+COPY --chown=node:node package*.json ./
+
+# Change to "node" user and run npm install under this user
+USER node
 
 RUN npm install
 
-# Bundle app source
-COPY . .
+COPY --chown=node:node . .
 
-RUN npm run build
+# Transpile Typescript
+RUN npm run-script tsc
 
-# RUN
 EXPOSE 8000
 
-# RUN npm start
-CMD [ "npm", "start" ]
+CMD ["npm", "start"]

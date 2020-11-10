@@ -1,5 +1,8 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import bodyParser from "body-parser";
+
+// @ts-ignore
+const sql = require('./config/databaseHandler');
 
 const app = express();
 const PORT = 8000;
@@ -13,11 +16,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // @ts-ignore: unused parameter
-app.get('/', (req, res) => res.send('Welcome to Dough Bros'));
+app.get('/', (req: Request, res: Response) => res.send('Welcome to Dough Bros'));
 
 app.use('/users', userRoute);
 
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+  console.log(`⚡️[server]: listening on PORT ${PORT}`);
 });
-
