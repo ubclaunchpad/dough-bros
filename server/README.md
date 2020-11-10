@@ -5,6 +5,7 @@
 
 # Server Setup
 
+* Run `docker-compose build` to build containers from Docker.
 * Run `docker-compose up` to pull containers from Docker.
 * An instance of mySQL will be running at *localhost:3306*
 * Server application is running at *localhost:8000*

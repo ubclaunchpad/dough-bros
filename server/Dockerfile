@@ -17,4 +17,5 @@ RUN npm run build
 # RUN
 EXPOSE 8000
 
+# RUN npm start
 CMD [ "npm", "start" ]
