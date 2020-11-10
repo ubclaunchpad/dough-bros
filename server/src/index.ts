@@ -1,11 +1,16 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
+
+// @ts-ignore
+const sql = require('./config/databaseHandler');
 
 const app = express();
 const PORT = 8000;
 
 // @ts-ignore: unused parameter
-app.get('/', (req, res) => res.send('Hello, World!'));
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+app.get('/', (req: Request, res: Response) => {
+  res.send(`Welcome to the Dough Bros Server`);
 });
 
+app.listen(PORT, () => {
+  console.log(`⚡️[server]: listening on PORT ${PORT}`);
+});

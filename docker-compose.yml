@@ -9,9 +9,9 @@ services:
       - "db"
     ports:
       - "8000:8000"
-    volumes:
-      - ./server/:/usr/app/src
-      - ./config/:/usr/app/config
+    # volumes:
+    #   - ./server/:/usr/app/src
+    #   - ./config/:/usr/app/config
 
   db:
     build: ./database
