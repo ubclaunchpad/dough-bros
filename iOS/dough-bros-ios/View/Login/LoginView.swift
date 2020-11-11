@@ -176,6 +176,8 @@ class LoginView: UIView {
           } else if let token = token {
             print("FCM registration token: \(token)")
             self.TokenID.text  = "Remote FCM registration token: \(token)"
+            let user = User(firebase_uid: self.UID.text!, first_name: self.firstNameInput.text!, last_name: self.lastNameInput.text!, email_addr: self.emailInput.text!, facebook_id: "", is_anon: false, fcm_token: token)
+            UserEndpoints.createUser(user: user)
           }
         }
     }

@@ -12,14 +12,14 @@ export const User = function(this: any, user: any){
 };
 
 User.create = (newUser: any, result: any) => {
-    sql.query("INSERT INTO user SET ?", newUser, (err: any, res: any) => {
+    sql.query("INSERT INTO user SET ? ON DUPLICATE KEY UPDATE ?", [newUser, newUser], (err: any, res: any) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
+      } else {
+        console.log("Created User: ", { id: res.insertId, ...newUser });
+        result(null, { id: res.insertId, ...newUser });
       }
-  
-      console.log("Created User: ", { id: res.insertId, ...newUser });
-      result(null, { id: res.insertId, ...newUser });
     });
   };
 
