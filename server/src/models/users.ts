@@ -1,6 +1,6 @@
 const sql = require("../config/databaseHandler");
 
-// //Task object constructor
+// Task object constructor <- I have no idea how to insert this into SQL
 export const User = function(this: any, user: any){
     this.firebase_uid = user.firebase_uid;
     this.first_name = user.first_name;
@@ -12,25 +12,25 @@ export const User = function(this: any, user: any){
 };
 
 User.create = (newUser: any, result: any) => {
-    sql.query("INSERT INTO user SET ?", newUser, (err: any, _: any) => {
+    sql.query("INSERT INTO user SET ?", newUser, (err: any, res: any) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
       }
   
-      console.log("Created User: ", { ...newUser });
-      result(null, { ...newUser });
+      console.log("Created User: ", { id: res.insertId, ...newUser });
+      result(null, { id: res.insertId, ...newUser });
     });
   };
 
-// User.findAllUsers = (result: any) => {
-//     sql.query("SELECT * from user", (err: any, res: any) => {
-//         if (err) {
-//             console.log("error: ", err);
-//             result(err, null);
-//         } else {
-//             console.log(res);
-//             result(null, res);
-//         }
-//     });
-// };
+User.findUsers = (result: any) => {
+    sql.query("SELECT * FROM user", (err: any, res: any) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        } else {
+            console.log(res);
+            result(null, res);
+        }
+    });
+};

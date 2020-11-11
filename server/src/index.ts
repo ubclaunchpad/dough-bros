@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // @ts-ignore: unused parameter
-app.get('/', (req: Request, res: Response) => res.send('Welcome to Dough Bros'));
+app.get('/', (req: Request, res: Response) => res.send('Welcome to Dough Bros!!'));
 
 app.use('/users', userRoute);
 
