@@ -10,10 +10,11 @@ import Foundation
 struct UserEndpoints {
     static func createUser(user: User) {
         print("Creating User!!")
+        let encoder = JSONEncoder()
 
         let semaphore = DispatchSemaphore (value: 0)
 
-        let jsonData = try? JSONSerialization.data(withJSONObject: user.data())
+        let jsonData = try? encoder.encode(user)
 
         var request = URLRequest(url: URL(string: "http://localhost:8000/users/createUser")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

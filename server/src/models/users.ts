@@ -12,7 +12,15 @@ export const User = function(this: any, user: any){
 };
 
 User.create = (newUser: any, result: any) => {
-    sql.query("INSERT INTO user SET ? ON DUPLICATE KEY UPDATE ?", [newUser, newUser], (err: any, res: any) => {
+    sql.query("CALL createUser(?,?,?,?,?,?,?)", [
+      newUser.firebase_uid,
+      newUser.first_name,
+      newUser.last_name,
+      newUser.email_addr,
+      newUser.facebook_id,
+      newUser.is_anon,
+      newUser.fcm_token,
+    ], (err: any, res: any) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
