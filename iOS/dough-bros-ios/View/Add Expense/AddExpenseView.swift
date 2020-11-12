@@ -18,6 +18,15 @@ class AddExpenseView: UIView {
         return label
     }()
     
+    private var selectPeopleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.text = "Or select people:"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        return label
+    }()
+    
     private(set) var expenseAmount: UITextField = {
         let amount = UITextField()
         amount.translatesAutoresizingMaskIntoConstraints = false
@@ -25,8 +34,27 @@ class AddExpenseView: UIView {
         amount.placeholder = "Insert expense!"
         amount.textColor = .black
         amount.font = UIFont.systemFont(ofSize: 16)
-        amount.textAlignment = .center
+        amount.textAlignment = .left
         return amount
+    }()
+    
+    private(set) var weightSlider: UISlider = {
+        let slider = UISlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.minimumValue = 0
+        slider.maximumValue = 100
+        slider.isContinuous = true
+        slider.minimumTrackTintColor = UIColor(hex: 0xf5b461)
+        return slider
+    }()
+    
+    private(set) var weightLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(hex: 0xf5b461)
+        label.text = "50"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        return label
     }()
     
     private(set) var numberPeople: UITextField = {
@@ -45,7 +73,23 @@ class AddExpenseView: UIView {
         amount.translatesAutoresizingMaskIntoConstraints = false
         amount.textColor = .black
         amount.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        amount.numberOfLines = 0
         return amount
+    }()
+    
+    private(set) var addExpenseCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 100, height: 120)
+        layout.minimumInteritemSpacing = 15
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .white
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        collectionView.register(AddExpenseCollectionViewCell.self, forCellWithReuseIdentifier: AddExpenseCollectionViewCell.className)
+        return collectionView
     }()
     
     // UIPickerView for # of people? or another UITextField
@@ -72,26 +116,50 @@ class AddExpenseView: UIView {
         addSubview(addExpenseLabel)
         NSLayoutConstraint.activate([
             addExpenseLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            addExpenseLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            addExpenseLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100)
         ])
         
         addSubview(expenseAmount)
         NSLayoutConstraint.activate([
-            expenseAmount.centerXAnchor.constraint(equalTo: centerXAnchor),
+            expenseAmount.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             expenseAmount.topAnchor.constraint(equalTo: addExpenseLabel.bottomAnchor, constant: 30)
-        ])
-        
-        addSubview(numberPeople)
-        NSLayoutConstraint.activate([
-            numberPeople.centerXAnchor.constraint(equalTo: centerXAnchor),
-            numberPeople.topAnchor.constraint(equalTo: expenseAmount.bottomAnchor, constant: 30)
         ])
         
         addSubview(amountOwed)
         NSLayoutConstraint.activate([
-            amountOwed.centerXAnchor.constraint(equalTo: centerXAnchor),
-            amountOwed.topAnchor.constraint(equalTo: numberPeople.bottomAnchor, constant: 30)
+            amountOwed.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            amountOwed.topAnchor.constraint(equalTo: expenseAmount.bottomAnchor, constant: 30)
         ])
+        
+        addSubview(selectPeopleLabel)
+        NSLayoutConstraint.activate([
+            selectPeopleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            selectPeopleLabel.topAnchor.constraint(equalTo: amountOwed.bottomAnchor, constant: 30)
+        ])
+        
+        addSubview(addExpenseCollectionView)
+        NSLayoutConstraint.activate([
+            addExpenseCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            addExpenseCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            addExpenseCollectionView.topAnchor.constraint(equalTo: selectPeopleLabel.bottomAnchor, constant: 30),
+            addExpenseCollectionView.heightAnchor.constraint(equalToConstant: 150)
+        ])
+        
+//        addSubview(numberPeople)
+//        NSLayoutConstraint.activate([
+//            numberPeople.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            numberPeople.topAnchor.constraint(equalTo: expenseAmount.bottomAnchor, constant: 30)
+//        ])
+        
+        addSubview(weightSlider)
+        NSLayoutConstraint.activate([
+            weightSlider.centerXAnchor.constraint(equalTo: centerXAnchor),
+            weightSlider.topAnchor.constraint(equalTo: addExpenseCollectionView.bottomAnchor, constant: 20),
+            weightSlider.widthAnchor.constraint(equalToConstant: 300),
+            weightSlider.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        addSubview(weightLabel)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(lowerKeyboard))
         tapGesture.cancelsTouchesInView = false
