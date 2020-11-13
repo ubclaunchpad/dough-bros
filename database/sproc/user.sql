@@ -11,7 +11,14 @@ CREATE PROCEDURE `createUser` (IN `firebase_uid` VARCHAR(255), IN `first_name` V
 BEGIN
 
 INSERT INTO `user` (`firebase_uid`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`, `fcm_token`)
-	VALUES (`firebase_uid`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`, `fcm_token`);
+	VALUES (`firebase_uid`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`, `fcm_token`)
+	ON DUPLICATE KEY UPDATE
+		`first_name` = `first_name`,
+		`last_name` = `last_name`,
+		`email_addr` = `email_addr`,
+		`facebook_id` = `facebook_id`,
+		`is_anon` = `is_anon`,
+		`fcm_token` = `fcm_token`;
 
 END$$
 
