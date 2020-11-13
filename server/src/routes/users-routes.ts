@@ -24,7 +24,14 @@ router.post('/createUser', (req, res) => {
     });
 });
 
-module.exports = router
+// Get User by ID
+router.get('/getUser/:userID', (req, res) => {
+  usersServer.findUserByID(req.params.userID).then((users: any) => {
+      res.json(users);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
 
 // Get All Users
 router.get('/listUsers', (_, res) => {
@@ -34,3 +41,5 @@ router.get('/listUsers', (_, res) => {
         res.json(err);
     });
 });
+
+module.exports = router

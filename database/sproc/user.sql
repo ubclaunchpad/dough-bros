@@ -26,10 +26,10 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getUsers` (IN `user_id` INT(8))
+CREATE PROCEDURE `getUser` (IN `firebase_uid` VARCHAR(255))
 BEGIN
 
-SELECT * FROM `user` WHERE `user_id` = `user_id`;
+SELECT * FROM `user` WHERE `firebase_uid` = `firebase_uid`;
 
 END$$
 

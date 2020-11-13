@@ -25,6 +25,18 @@ module.exports = class UsersService {
     });
   }
 
+  // Find User by ID
+  findUserByID(userID: string) {
+    return new Promise((resolve, reject) => {
+      User.findUsersByID(userID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
   // List Users
   findUsers() {
     return new Promise((resolve, reject) => {
