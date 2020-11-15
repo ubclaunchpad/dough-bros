@@ -8,6 +8,7 @@ DROP procedure IF EXISTS `getAllPaymentsToUserInGroup`;
 DROP procedure IF EXISTS `getAllPaymentsFromUserInGroup`;
 DROP procedure IF EXISTS `payPayment`;
 DROP procedure IF EXISTS `settlePayment`;
+DROP procedure IF EXISTS `getAllGroupExpenses`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -77,6 +78,16 @@ WHERE `payment_id` = `payment_id`;
 
 COMMIT;
 
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllGroupExpenses` (IN `id` VARCHAR(255))
+BEGIN
+
+SELECT * FROM `group_expense` where `group_id` = `id`;
 END$$
 
 DELIMITER ;
