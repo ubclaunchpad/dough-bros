@@ -11,7 +11,7 @@
 
 ### Mount Any .SQL Files:
 5. `mysql -uroot -p<password> <databaseDest> < <SQLFileLoc>`
-Ex. `mysql -uroot -proot doughBros_db < /dockerInit/init.sql` —> (Into container “doughBros_db” from the docker volume folder “dockerInit”, file init.sql)
+Ex. `mysql -uroot -proot doughBros_db < /docker-entrypoint-initdb.d/'~init.sql'` —> (Into container “doughBros_db” from the docker volume folder “dockerInit”, file init.sql)
 
 6. Enter `exit` to exit terminal
 7. To stop containers: `docker-compose down`
@@ -20,7 +20,7 @@ Ex. `mysql -uroot -proot doughBros_db < /dockerInit/init.sql` —> (Into contain
 1. From docker container, access mySQL terminal: `mysql -uroot -p doughBros_db`
 2. In mysql terminal: `USE doughBros_db`
 3. Source the .sql file location: `SOURCE <SQLFileLoc>`
-Ex. `SOURCE /dockerInit/init.sql` —> (Into container “doughBros_db” from the docker volume folder “dockerInit”, file init.sql)
+Ex. `SOURCE /docker-entrypoint-initdb.d/'~init.sql'` —> (Into container “doughBros_db” from the docker volume folder “dockerInit”, file init.sql)
 
 ### Using MySQL:
 1. SHOW DATABASES; —> 4 default created database + our databases (Ex. “doughBros_db”)

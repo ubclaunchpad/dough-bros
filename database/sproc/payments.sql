@@ -23,7 +23,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getAllPaymentsToUserInGroup` (IN `user_id` INT(8), IN `group_id` INT(8))
+CREATE PROCEDURE `getAllPaymentsToUserInGroup` (IN `user_id` INT(9), IN `group_id` INT(9))
 BEGIN
 
 SELECT * FROM `pending_payments` WHERE `user_id` = `fk_receiver_id`;
@@ -34,7 +34,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getAllPaymentsFromUserInGroup` (IN `user_id` INT(8), IN `group_id` INT(8))
+CREATE PROCEDURE `getAllPaymentsFromUserInGroup` (IN `user_id` INT(9), IN `group_id` INT(9))
 BEGIN
 
 SELECT * FROM `pending_payments` WHERE `user_id` = `fk_sender_id`;
@@ -45,7 +45,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `payPayment` (IN `payment_id` INT(8))
+CREATE PROCEDURE `payPayment` (IN `payment_id` INT(9))
 BEGIN
 
 BEGIN TRANSACTION;

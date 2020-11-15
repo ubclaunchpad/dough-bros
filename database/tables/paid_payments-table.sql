@@ -34,7 +34,7 @@ CREATE TABLE `paid_payments` (
     ON DELETE CASCADE,
   FOREIGN KEY (`fk_currency_id`)
 	REFERENCES `currency` (`currency_id`)
-    ON DELETE CASCADE,
+    ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 END$$
