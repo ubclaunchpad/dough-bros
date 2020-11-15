@@ -12,14 +12,14 @@ BEGIN
 
 CREATE TABLE `pending_anon_user` (
   `request_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
-  `fk_added_by` int(9) unsigned NOT NULL,
+  `fk_added_by` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email_addr` varchar(255) NOT NULL,
   `facebook_id` varchar(255) NOT NULL,
   PRIMARY KEY (`request_id`),
   FOREIGN KEY (`fk_added_by`)
-	REFERENCES `user` (`user_id`)
+	  REFERENCES `user` (`firebase_uid`)
     ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

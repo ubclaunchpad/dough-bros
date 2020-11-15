@@ -30,9 +30,11 @@
 		2596C9272551330A00DAA64F /* GroupsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2596C9262551330A00DAA64F /* GroupsCollectionViewCell.swift */; };
 		25DB65E8255134F100F79B58 /* GroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB65E7255134F100F79B58 /* GroupsViewModel.swift */; };
 		25DB65EB2551357400F79B58 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB65EA2551357400F79B58 /* Friend.swift */; };
-		95CE8771E6C1CA226AF3D14B /* Pods_dough_bros_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */; };
+		901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D42557B071002D4E5D /* AddExpenseViewController.swift */; };
+		901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D82557B154002D4E5D /* AddExpenseView.swift */; };
 		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
 		BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */; };
+		BEE9D76025589E9D0078BCB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,11 +62,15 @@
 		2596C9262551330A00DAA64F /* GroupsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsCollectionViewCell.swift; sourceTree = "<group>"; };
 		25DB65E7255134F100F79B58 /* GroupsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewModel.swift; sourceTree = "<group>"; };
 		25DB65EA2551357400F79B58 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A54D05920E40D5D0F9A531AB /* Pods-dough-bros-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.debug.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		901366D42557B071002D4E5D /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
+		901366D82557B154002D4E5D /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
+		9D519817CACD7096E26383F4 /* Pods-dough-bros-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.release.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.release.xcconfig"; sourceTree = "<group>"; };
+		A436D5B363B9EA5DBADEE251 /* Pods-dough-bros-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.debug.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		BE1F06BF255147A30067C137 /* dough-bros-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "dough-bros-ios.entitlements"; sourceTree = "<group>"; };
 		BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
-		BFD77542455893CAC01287E9 /* Pods-dough-bros-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.release.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.release.xcconfig"; sourceTree = "<group>"; };
+		BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D041CF3D012636ECA0535383 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +78,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95CE8771E6C1CA226AF3D14B /* Pods_dough_bros_ios.framework in Frameworks */,
 				2596C91C25512CB900DAA64F /* AlanYanHelpers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,7 +99,7 @@
 				257495C225311FEA00D386A2 /* dough-bros-ios */,
 				257495C125311FEA00D386A2 /* Products */,
 				37077A11A6722C928EAD1962 /* Pods */,
-				750BD8DA707190A61FF4C89C /* Frameworks */,
+				633F91CBE72B5EA026A4C3F8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +114,8 @@
 		257495C225311FEA00D386A2 /* dough-bros-ios */ = {
 			isa = PBXGroup;
 			children = (
+				BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */,
+				BE1F06BF255147A30067C137 /* dough-bros-ios.entitlements */,
 				251CE01A25513448002913DE /* Shared */,
 				257495DA2531201F00D386A2 /* Model */,
 				257495D825311FF900D386A2 /* View */,
@@ -134,6 +141,7 @@
 		257495D825311FF900D386A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				901366D32557B04C002D4E5D /* Add Expense */,
 				2582472D2546607700F2EAAD /* Group Details */,
 				2582472C2546606600F2EAAD /* Groups */,
 				258247292546603E00F2EAAD /* Tutorial */,
@@ -221,18 +229,27 @@
 		37077A11A6722C928EAD1962 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A54D05920E40D5D0F9A531AB /* Pods-dough-bros-ios.debug.xcconfig */,
-				BFD77542455893CAC01287E9 /* Pods-dough-bros-ios.release.xcconfig */,
+				A436D5B363B9EA5DBADEE251 /* Pods-dough-bros-ios.debug.xcconfig */,
+				9D519817CACD7096E26383F4 /* Pods-dough-bros-ios.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		750BD8DA707190A61FF4C89C /* Frameworks */ = {
+		633F91CBE72B5EA026A4C3F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7C8B2316870454E82911C424 /* Pods_dough_bros_ios.framework */,
+				D041CF3D012636ECA0535383 /* Pods_dough_bros_ios.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		901366D32557B04C002D4E5D /* Add Expense */ = {
+			isa = PBXGroup;
+			children = (
+				901366D42557B071002D4E5D /* AddExpenseViewController.swift */,
+				901366D82557B154002D4E5D /* AddExpenseView.swift */,
+			);
+			path = "Add Expense";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,11 +259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 257495D425311FED00D386A2 /* Build configuration list for PBXNativeTarget "dough-bros-ios" */;
 			buildPhases = (
-				BA847776F12A87939446028D /* [CP] Check Pods Manifest.lock */,
+				EA34134056AE2C5206ABD26E /* [CP] Check Pods Manifest.lock */,
 				257495BC25311FEA00D386A2 /* Sources */,
 				257495BD25311FEA00D386A2 /* Frameworks */,
 				257495BE25311FEA00D386A2 /* Resources */,
-				23DFA4E25CCB9E668FA41B3A /* [CP] Embed Pods Frameworks */,
+				7C63A0CB4E43C93048DB6DEB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -301,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				257495D025311FED00D386A2 /* LaunchScreen.storyboard in Resources */,
+				BEE9D76025589E9D0078BCB9 /* GoogleService-Info.plist in Resources */,
 				257495CD25311FED00D386A2 /* Preview Assets.xcassets in Resources */,
 				257495CA25311FED00D386A2 /* Assets.xcassets in Resources */,
 			);
@@ -309,7 +327,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		23DFA4E25CCB9E668FA41B3A /* [CP] Embed Pods Frameworks */ = {
+		7C63A0CB4E43C93048DB6DEB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -326,7 +344,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BA847776F12A87939446028D /* [CP] Check Pods Manifest.lock */ = {
+		EA34134056AE2C5206ABD26E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -358,7 +376,9 @@
 				257495C425311FEA00D386A2 /* AppDelegate.swift in Sources */,
 				2596C923255132E500DAA64F /* GroupTableViewCell.swift in Sources */,
 				257DB48F25316A0200D1DABB /* LoginView.swift in Sources */,
+				901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */,
 				251CE01C25513453002913DE /* ObjectClassName.swift in Sources */,
+				901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */,
 				257495C625311FEA00D386A2 /* SceneDelegate.swift in Sources */,
 				257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */,
 				258247352546616700F2EAAD /* GroupsView.swift in Sources */,
@@ -426,6 +446,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: Hao Wu (Z4J27VJ43Z)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -487,6 +508,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: Hao Wu (Z4J27VJ43Z)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -511,10 +533,12 @@
 		};
 		257495D525311FED00D386A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A54D05920E40D5D0F9A531AB /* Pods-dough-bros-ios.debug.xcconfig */;
+			baseConfigurationReference = A436D5B363B9EA5DBADEE251 /* Pods-dough-bros-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "dough-bros-ios/dough-bros-ios.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
 				DEVELOPMENT_TEAM = 8VU5ULQ45F;
@@ -524,8 +548,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ubclaunchpad.dough-bros-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ubclaunchpad.doughbros;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -533,10 +558,12 @@
 		};
 		257495D625311FED00D386A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFD77542455893CAC01287E9 /* Pods-dough-bros-ios.release.xcconfig */;
+			baseConfigurationReference = 9D519817CACD7096E26383F4 /* Pods-dough-bros-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "dough-bros-ios/dough-bros-ios.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
 				DEVELOPMENT_TEAM = 8VU5ULQ45F;
@@ -546,8 +573,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ubclaunchpad.dough-bros-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ubclaunchpad.doughbros;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
