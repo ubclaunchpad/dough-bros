@@ -35,6 +35,8 @@
 		785F99F4E04AE6A19543D326 /* Pods_dough_bros_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D041CF3D012636ECA0535383 /* Pods_dough_bros_ios.framework */; };
 		901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D42557B071002D4E5D /* AddExpenseViewController.swift */; };
 		901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D82557B154002D4E5D /* AddExpenseView.swift */; };
+		BE180ED4255B6B3500F9D2B4 /* UserPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */; };
+		BE180EDB255B6FC800F9D2B4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE180EDA255B6FC800F9D2B4 /* User.swift */; };
 		90F3C74A255D10800043BA34 /* AddExpenseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F3C749255D10800043BA34 /* AddExpenseCollectionViewCell.swift */; };
 		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
 		BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */; };
@@ -71,6 +73,8 @@
 		90F3C749255D10800043BA34 /* AddExpenseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseCollectionViewCell.swift; sourceTree = "<group>"; };
 		9D519817CACD7096E26383F4 /* Pods-dough-bros-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.release.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.release.xcconfig"; sourceTree = "<group>"; };
 		A436D5B363B9EA5DBADEE251 /* Pods-dough-bros-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.debug.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPoints.swift; sourceTree = "<group>"; };
+		BE180EDA255B6FC800F9D2B4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BE1F06BF255147A30067C137 /* dough-bros-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "dough-bros-ios.entitlements"; sourceTree = "<group>"; };
 		BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				257495D825311FF900D386A2 /* View */,
 				257495D92531201200D386A2 /* ViewModel */,
 				257495C325311FEA00D386A2 /* AppDelegate.swift */,
+				BE180ED2255B6B1300F9D2B4 /* Endpoints */,
 				257495C525311FEA00D386A2 /* SceneDelegate.swift */,
 				257495C925311FED00D386A2 /* Assets.xcassets */,
 				257495CE25311FED00D386A2 /* LaunchScreen.storyboard */,
@@ -174,6 +179,7 @@
 			children = (
 				257DB48A253169EC00D1DABB /* Group.swift */,
 				25DB65EA2551357400F79B58 /* Friend.swift */,
+				BE180EDA255B6FC800F9D2B4 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,6 +267,14 @@
 			);
 			path = "Add Expense";
 			sourceTree = "<group>";
+		};
+		BE180ED2255B6B1300F9D2B4 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */,
+			);
+			path = Endpoints;
+      sourceTree = "<group>";
 		};
 		90F3C748255D104A0043BA34 /* Cells */ = {
 			isa = PBXGroup;
@@ -394,6 +408,7 @@
 				257495C425311FEA00D386A2 /* AppDelegate.swift in Sources */,
 				2596C923255132E500DAA64F /* GroupTableViewCell.swift in Sources */,
 				257DB48F25316A0200D1DABB /* LoginView.swift in Sources */,
+				BE180EDB255B6FC800F9D2B4 /* User.swift in Sources */,
 				901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */,
 				251CE01C25513453002913DE /* ObjectClassName.swift in Sources */,
 				901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */,
@@ -412,6 +427,7 @@
 				25DB65EB2551357400F79B58 /* Friend.swift in Sources */,
 				257DB49525316B7000D1DABB /* LoginViewModel.swift in Sources */,
 				25DB65E8255134F100F79B58 /* GroupsViewModel.swift in Sources */,
+				BE180ED4255B6B3500F9D2B4 /* UserPoints.swift in Sources */,
 				258247382546622400F2EAAD /* TutorialViewController.swift in Sources */,
 				BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */,
 				258247322546614300F2EAAD /* GroupsViewController.swift in Sources */,
@@ -560,7 +576,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = 8VU5ULQ45F;
+				DEVELOPMENT_TEAM = 35ZK849627;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -585,7 +601,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = 8VU5ULQ45F;
+				DEVELOPMENT_TEAM = 35ZK849627;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

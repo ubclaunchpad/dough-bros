@@ -11,7 +11,14 @@ CREATE PROCEDURE `createUser` (IN `firebase_uid` VARCHAR(255), IN `first_name` V
 BEGIN
 
 INSERT INTO `user` (`firebase_uid`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`, `fcm_token`)
-	VALUES (`firebase_uid`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`, `fcm_token`);
+	VALUES (`firebase_uid`, `first_name`, `last_name`, `email_addr`, `facebook_id`, `is_anon`, `fcm_token`)
+	ON DUPLICATE KEY UPDATE
+		`first_name` = `first_name`,
+		`last_name` = `last_name`,
+		`email_addr` = `email_addr`,
+		`facebook_id` = `facebook_id`,
+		`is_anon` = `is_anon`,
+		`fcm_token` = `fcm_token`;
 
 END$$
 
@@ -19,10 +26,10 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getUsers` (IN `user_id` INT(8))
+CREATE PROCEDURE `getUser` (IN `firebase_uid` VARCHAR(255))
 BEGIN
 
-SELECT * FROM `user` WHERE `user_id` = `user_id`;
+SELECT * FROM `user` WHERE `firebase_uid` = `firebase_uid`;
 
 END$$
 
