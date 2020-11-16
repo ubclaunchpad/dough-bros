@@ -25,15 +25,19 @@
 		2582473B2546623600F2EAAD /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2582473A2546623600F2EAAD /* TutorialView.swift */; };
 		2582473F2546634000F2EAAD /* GroupDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2582473E2546634000F2EAAD /* GroupDetailsViewController.swift */; };
 		258247422546636100F2EAAD /* GroupDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258247412546636100F2EAAD /* GroupDetailsView.swift */; };
-		2596C91C25512CB900DAA64F /* AlanYanHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 2596C91B25512CB900DAA64F /* AlanYanHelpers */; };
+		2596C91C25512CB900DAA64F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2596C91B25512CB900DAA64F /* SwiftPackageProductDependency */; };
 		2596C923255132E500DAA64F /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2596C922255132E500DAA64F /* GroupTableViewCell.swift */; };
 		2596C9272551330A00DAA64F /* GroupsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2596C9262551330A00DAA64F /* GroupsCollectionViewCell.swift */; };
 		25DB65E8255134F100F79B58 /* GroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB65E7255134F100F79B58 /* GroupsViewModel.swift */; };
 		25DB65EB2551357400F79B58 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB65EA2551357400F79B58 /* Friend.swift */; };
+		4B0F9D7B74690590F676EF4F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		56173242D5DA2F8E204E6E10 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		785F99F4E04AE6A19543D326 /* Pods_dough_bros_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D041CF3D012636ECA0535383 /* Pods_dough_bros_ios.framework */; };
 		901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D42557B071002D4E5D /* AddExpenseViewController.swift */; };
 		901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D82557B154002D4E5D /* AddExpenseView.swift */; };
 		BE180ED4255B6B3500F9D2B4 /* UserPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */; };
 		BE180EDB255B6FC800F9D2B4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE180EDA255B6FC800F9D2B4 /* User.swift */; };
+		90F3C74A255D10800043BA34 /* AddExpenseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F3C749255D10800043BA34 /* AddExpenseCollectionViewCell.swift */; };
 		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
 		BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */; };
 		BEE9D76025589E9D0078BCB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */; };
@@ -66,6 +70,7 @@
 		25DB65EA2551357400F79B58 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		901366D42557B071002D4E5D /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		901366D82557B154002D4E5D /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
+		90F3C749255D10800043BA34 /* AddExpenseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseCollectionViewCell.swift; sourceTree = "<group>"; };
 		9D519817CACD7096E26383F4 /* Pods-dough-bros-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.release.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.release.xcconfig"; sourceTree = "<group>"; };
 		A436D5B363B9EA5DBADEE251 /* Pods-dough-bros-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dough-bros-ios.debug.xcconfig"; path = "Target Support Files/Pods-dough-bros-ios/Pods-dough-bros-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPoints.swift; sourceTree = "<group>"; };
@@ -82,7 +87,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2596C91C25512CB900DAA64F /* AlanYanHelpers in Frameworks */,
+				2596C91C25512CB900DAA64F /* BuildFile in Frameworks */,
+				4B0F9D7B74690590F676EF4F /* BuildFile in Frameworks */,
+				56173242D5DA2F8E204E6E10 /* BuildFile in Frameworks */,
+				2596C91C25512CB900DAA64F /* BuildFile in Frameworks */,
+				785F99F4E04AE6A19543D326 /* Pods_dough_bros_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +261,7 @@
 		901366D32557B04C002D4E5D /* Add Expense */ = {
 			isa = PBXGroup;
 			children = (
+				90F3C748255D104A0043BA34 /* Cells */,
 				901366D42557B071002D4E5D /* AddExpenseViewController.swift */,
 				901366D82557B154002D4E5D /* AddExpenseView.swift */,
 			);
@@ -264,6 +274,14 @@
 				BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */,
 			);
 			path = Endpoints;
+      sourceTree = "<group>";
+		};
+		90F3C748255D104A0043BA34 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				90F3C749255D10800043BA34 /* AddExpenseCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,7 +303,7 @@
 			);
 			name = "dough-bros-ios";
 			packageProductDependencies = (
-				2596C91B25512CB900DAA64F /* AlanYanHelpers */,
+				2596C91B25512CB900DAA64F /* SwiftPackageProductDependency */,
 			);
 			productName = "dough-bros-ios";
 			productReference = 257495C025311FEA00D386A2 /* dough-bros-ios.app */;
@@ -315,7 +333,7 @@
 			);
 			mainGroup = 257495B725311FEA00D386A2;
 			packageReferences = (
-				2596C91A25512CB900DAA64F /* XCRemoteSwiftPackageReference "UIKit-Toolbox" */,
+				2596C91A25512CB900DAA64F /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 257495C125311FEA00D386A2 /* Products */;
 			projectDirPath = "";
@@ -397,6 +415,7 @@
 				257495C625311FEA00D386A2 /* SceneDelegate.swift in Sources */,
 				257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */,
 				258247352546616700F2EAAD /* GroupsView.swift in Sources */,
+				90F3C74A255D10800043BA34 /* AddExpenseCollectionViewCell.swift in Sources */,
 				258247422546636100F2EAAD /* GroupDetailsView.swift in Sources */,
 				BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */,
 				257495E2253120B800D386A2 /* SampleView.swift in Sources */,
@@ -621,7 +640,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2596C91A25512CB900DAA64F /* XCRemoteSwiftPackageReference "UIKit-Toolbox" */ = {
+		2596C91A25512CB900DAA64F /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yan-alan/UIKit-Toolbox.git";
 			requirement = {
@@ -632,9 +651,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2596C91B25512CB900DAA64F /* AlanYanHelpers */ = {
+		2596C91B25512CB900DAA64F /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2596C91A25512CB900DAA64F /* XCRemoteSwiftPackageReference "UIKit-Toolbox" */;
+			package = 2596C91A25512CB900DAA64F /* RemoteSwiftPackageReference */;
 			productName = AlanYanHelpers;
 		};
 /* End XCSwiftPackageProductDependency section */
