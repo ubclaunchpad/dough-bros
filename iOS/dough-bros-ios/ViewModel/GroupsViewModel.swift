@@ -27,7 +27,7 @@ class GroupsViewModel {
         
         //simulates a long network call
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-            allGroups = [Group(name: "Awesome Group", image: nil, amount: 20, youOwe: true), Group(name: "Launchpad Friends", amount: 20), Group(name: "group chat awesome sauce", amount: 30, youOwe: true)]
+            allGroups = [Group(name: "Awesome Group", members: [], image: nil, amount: 20, youOwe: true), Group(name: "Launchpad Friends", members: [], amount: 20), Group(name: "group chat awesome sauce", members: [], amount: 30, youOwe: true)]
             searchFor(substring: searchText)
             friends = [Friend(name: "Bob"), Friend(name: "Alan"), Friend(name: "Wren"), Friend(name: "Avery"), Friend(name: "Stephanie"), Friend(name: "Harin"), Friend(name: "Carlos")]
             

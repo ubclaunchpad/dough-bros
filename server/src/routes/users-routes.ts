@@ -1,15 +1,45 @@
-// import { Router } from "express";
+import { Router } from "express";
 
-// const router = Router();
+const router = Router();
 
-// const UsersService = require('../services/users-service');
-// const usersServer = new UsersService();
+const UsersService = require("../controllers/users-service");
+const usersServer = new UsersService();
 
-// get all
-// router.get('/users', (req,res) => {
-//     usersServer.findUsers().then((users: any) => {
-//         res.json(users);
-//     }).catch((err: any) => {
-//         res.json(err);
-//     });
-// });
+// Create a new User
+router.post('/createUser', (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  usersServer
+    .createUser(req)
+    .then((users: any) => {
+      res.json(users);
+    })
+    .catch((err: any) => {
+      res.json(err);
+    });
+});
+
+// Get User by ID
+router.get('/getUser/:userID', (req, res) => {
+  usersServer.findUserByID(req.params.userID).then((users: any) => {
+      res.json(users);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
+// Get All Users
+router.get('/listUsers', (_, res) => {
+    usersServer.findUsers().then((users: any) => {
+        res.json(users);
+    }).catch((err: any) => {
+        res.json(err);
+    });
+});
+
+module.exports = router
