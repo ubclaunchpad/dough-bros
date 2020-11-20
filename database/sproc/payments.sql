@@ -14,11 +14,11 @@ DROP procedure IF EXISTS `settlePayment`;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `createPayment` (IN `sender_id` INT(8), IN `receiver_id` INT(8), IN `creator_id` INT(8), IN `parent_expense_id` INT(8), IN `currency_id` INT(8), IN `amount` decimal(10, 2))
+CREATE PROCEDURE `createPayment` (IN `sender_id` INT(8), IN `receiver_id` INT(8), IN `creator_id` INT(8), IN `parent_expense_id` INT(8), IN `currency_id` INT(8), IN `is_paid` INT(1), IN `is_settled` INT(1),  IN `amount` decimal(10, 2))
 BEGIN
 
-INSERT INTO `pending_payments` (`fk_sender_id`, `fk_receiver_id`, `fk_creator_id`, `fk_parent_expense_id`, `fk_currency_id`, `amount`)
-	VALUES (`sender_id`, `receiver_id`, `creator_id`, `parent_expense_id`, `currency_id`, `amount`);
+INSERT INTO `payments` (`fk_sender_id`, `fk_receiver_id`, `fk_creator_id`, `fk_parent_expense_id`, `fk_currency_id`, `is_paid`, `is_settled`, `amount`)
+	VALUES (`sender_id`, `receiver_id`, `creator_id`, `parent_expense_id`, `currency_id`, `is_paid`, `is_settled`, `amount`);
 
 END$$
 
@@ -40,7 +40,19 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllPendingPaymentsByGroupExpense` (IN `parent_expense_id`, INT(8))
 BEGIN
 
-SELECT * FROM `pending_payments` WHERE `fk_parent_expense_id` = `parent_expense_id`;
+--TODO filter by paid and settled bool
+SELECT * FROM `payments` WHERE (`fk_parent_expense_id` = `parent_expense_id` AND `is_paid` = 0 AND `is_settled` = 0);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllPaidPaymentsByGroupExpense` (IN `parent_expense_id`, INT(8))
+BEGIN
+
+SELECT * FROM `payments` WHERE (`fk_parent_expense_id` = `parent_expense_id` AND `is_paid` = 1 AND `is_settled` = 0);
 
 END$$
 
@@ -51,7 +63,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllSettledPaymentsByGroupExpense` (IN `parent_expense_id`, INT(8))
 BEGIN
 
-SELECT * FROM `settled_payments` WHERE `fk_parent_expense_id` = `parent_expense_id`;
+SELECT * FROM `payments` WHERE (`fk_parent_expense_id` = `parent_expense_id` AND `is_settled` = 1);
 
 END$$
 
@@ -59,10 +71,10 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getAllPaymentsByGroupUser` (IN `user_id` INT(8), IN `group_id` INT(8))
+CREATE PROCEDURE `getAllPaymentsToUserInGroup` (IN `user_id` INT(8), IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `pending_payments` WHERE `user_id` = `fk_receiver_id`;
+SELECT * FROM `payments` WHERE `user_id` = `fk_receiver_id`;
 
 END$$
 
@@ -73,7 +85,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllPaymentsFromUserInGroup` (IN `user_id` INT(8), IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `pending_payments` WHERE `user_id` = `fk_sender_id`;
+SELECT * FROM `payments` WHERE `user_id` = `fk_sender_id`;
 
 END$$
 
@@ -85,12 +97,10 @@ CREATE PROCEDURE `payPayment` (IN `payment_id` INT(8))
 BEGIN
 
 BEGIN TRANSACTION;
-INSERT INTO `paid_payments`
-SELECT * FROM `pending_payments`
-WHERE `payment_id` = `payment_id`;
 
-DELETE FROM `pending_payments`
-WHERE `payment_id` = `payment_id`;
+UPDATE `payments`
+SET `is_paid` = 1 WHERE `payment_id` = `payment_id`;
+
 
 COMMIT;
 
@@ -104,12 +114,9 @@ CREATE PROCEDURE `settlePayment` (IN `payment_id` INT(8))
 BEGIN
 
 BEGIN TRANSACTION;
-INSERT INTO `settled_payments`
-SELECT * FROM `paid_payments`
-WHERE `payment_id` = `payment_id`;
 
-DELETE FROM `paid_payments`
-WHERE `payment_id` = `payment_id`;
+UPDATE `payments`
+SET `is_settled` = 1 WHERE `payment_id` = `payment_id`;
 
 COMMIT;
 

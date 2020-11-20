@@ -16,6 +16,7 @@ CREATE TABLE `group_expense` (
    `fk_added_by` int(9) unsigned NOT NULL,
    `fk_currency_id` int(9) unsigned NOT NULL,
    `expense_name` varchar(255) NOT NULL,
+   `is_archived` int(1) DEFAULT 0 NOT NULL,
    `amount` decimal(19, 4) unsigned NOT NULL,
    PRIMARY KEY (`expense_id`),
    FOREIGN KEY (`fk_group_id`)
