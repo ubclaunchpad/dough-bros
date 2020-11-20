@@ -16,7 +16,7 @@ CREATE TABLE `user` (
   `last_name` varchar(100) NOT NULL,
   `email_addr` varchar(255) NOT NULL,
   `facebook_id` varchar(255) NOT NULL,
-  `is_anon` bool NOT NULL,
+  `is_anon` BOOLEAN NOT NULL,
   `fcm_token` varchar(255) NOT NULL,
   PRIMARY KEY (`firebase_uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
