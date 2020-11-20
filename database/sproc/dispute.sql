@@ -5,6 +5,7 @@
 USE `doughBros_db`;
 DROP procedure IF EXISTS `createDispute`;
 DROP procedure IF EXISTS `resolveDispute`;
+
 DELIMITER $$
 USE `doughBros_db`$$
 CREATE PROCEDURE `createDispute` (IN `dispute_id` INT(8), IN `initiator_id` INT(8), IN `recipient_id` INT(8), IN `payment_id` INT(8), IN `type` VARCHAR(255), IN `description` VARCHAR(255))
