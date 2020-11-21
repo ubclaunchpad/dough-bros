@@ -13,7 +13,7 @@ BEGIN
 CREATE TABLE `group_expense` (
    `expense_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
    `fk_group_id` int(9) unsigned NOT NULL,
-   `fk_added_by` VARCHAR(255) NOT NULL,
+   `fk_added_by_id` VARCHAR(255) NOT NULL,
    `fk_currency_id` int(9) unsigned NOT NULL,
    `expense_name` varchar(255) NOT NULL,
    `is_archived` BOOLEAN DEFAULT 0 NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE `group_expense` (
    FOREIGN KEY (`fk_group_id`)
    REFERENCES `group` (`group_id`)
      ON DELETE CASCADE,
-   FOREIGN KEY (`fk_added_by`)
+   FOREIGN KEY (`fk_added_by_id`)
    REFERENCES `user` (`firebase_uid`)
      ON DELETE CASCADE,
    FOREIGN KEY (`fk_currency_id`)

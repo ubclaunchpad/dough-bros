@@ -2,8 +2,8 @@ import { Router } from "express";
 
 const router = Router();
 
-const UsersService = require("../controllers/users-service");
-const usersServer = new UsersService();
+const UserService = require("../controllers/user-service");
+const userServer = new UserService();
 
 // Create a new User
 router.post('/createUser', (req, res) => {
@@ -14,10 +14,8 @@ router.post('/createUser', (req, res) => {
     });
   }
 
-  usersServer
-    .createUser(req)
-    .then((users: any) => {
-      res.json(users);
+  userServer.createUser(req).then((user: any) => {
+      res.json(user);
     })
     .catch((err: any) => {
       res.json(err);
@@ -25,17 +23,17 @@ router.post('/createUser', (req, res) => {
 });
 
 // Get User by ID
-router.get('/getUser/:userID', (req, res) => {
-  usersServer.findUserByID(req.params.userID).then((users: any) => {
-      res.json(users);
+router.get('/getUserByID/:userID', (req, res) => {
+  userServer.findUserByID(req.params.userID).then((user: any) => {
+      res.json(user);
   }).catch((err: any) => {
       res.json(err);
   });
 });
 
 // Get All Users
-router.get('/listUsers', (_, res) => {
-    usersServer.findUsers().then((users: any) => {
+router.get('/getAllUsers', (_, res) => {
+    userServer.findAllUsers().then((users: any) => {
         res.json(users);
     }).catch((err: any) => {
         res.json(err);

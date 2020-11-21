@@ -22,11 +22,11 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `addUserToGroup` (IN `group_id` INT(8), IN `user_id` VARCHAR(255), IN `added_by` VARCHAR(255), IN `did_accept_invite` BOOLEAN)
+CREATE PROCEDURE `addUserToGroup` (IN `group_id` INT(8), IN `user_id` VARCHAR(255), IN `added_by_id` VARCHAR(255), IN `did_accept_invite` BOOLEAN)
 BEGIN
 
-INSERT INTO `group_membership` (`fk_group_id`, `fk_user_id`, `fk_added_by`, `did_accept_invite`)
-	VALUES (`group_id`, `user_id`, `added_by`, `did_accept_invite`);
+INSERT INTO `group_membership` (`fk_group_id`, `fk_user_id`, `fk_added_by_id`, `did_accept_invite`)
+	VALUES (`group_id`, `user_id`, `added_by_id`, `did_accept_invite`);
 
 END$$
 
@@ -53,4 +53,17 @@ DELETE FROM `group_membership` WHERE `fk_group_id` = `group_id` AND `fk_user_id`
 END$$
 
 DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `acceptGroupMembership` (IN `group_id` INT(8), IN `user_id` VARCHAR(255))
+BEGIN
+
+UPDATE `group_membership`
+SET `did_accept_invite` = 1 WHERE (`fk_group_id` = `group_id` AND `fk_user_id` = `user_id`);
+
+END$$
+
+DELIMITER ;
+
 

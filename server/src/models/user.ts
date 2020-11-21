@@ -11,7 +11,7 @@ export const User = function (this: any, user: any) {
   this.fcm_token = user.fcm_token;
 };
 
-User.create = (newUser: any, result: any) => {
+User.createUser = (newUser: any, result: any) => {
   sql.query(
     "CALL createUser(?,?,?,?,?,?,?)",
     [
@@ -35,7 +35,7 @@ User.create = (newUser: any, result: any) => {
   );
 };
 
-User.findUsersByID = (userID: string, result: any) => {
+User.findUserByID = (userID: string, result: any) => {
   sql.query(
     "CALL getUserByUid(?)",
     userID,
@@ -50,7 +50,7 @@ User.findUsersByID = (userID: string, result: any) => {
   );
 };
 
-User.findUsers = (result: any) => {
+User.findAllUsers = (result: any) => {
   sql.query("SELECT * FROM user", (err: any, res: any) => {
     if (err) {
       console.log("error: ", err);
