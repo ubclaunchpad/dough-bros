@@ -66,4 +66,14 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllAcceptedGroupUsers` (IN `group_id` INT(8))
+BEGIN
+
+SELECT * FROM `group_membership` WHERE (`fk_group_id` = `group_id` AND `did_accept_invite` = 1);
+
+END$$
+
+DELIMITER ;
 
