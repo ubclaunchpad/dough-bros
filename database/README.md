@@ -27,7 +27,7 @@ Ex. `SOURCE /dockerInit/init.sql` —> (Into container “doughBros_db” from t
 2. USE doughBros_db;
 3. SHOW TABLES; 
 4. DESC <TABLE>;
-4. <INSERT SQL QUERY> (EX. SELECT * FROM users;)
+4. <INSERT SQL QUERY> (EX. SELECT * FROM user;)
 
 ### Note
 - Remember to delete the /data folder if changes have been made to any SQL file in order to rebuild the image with updated changes at entrypoint

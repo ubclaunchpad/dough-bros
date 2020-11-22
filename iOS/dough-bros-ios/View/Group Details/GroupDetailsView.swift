@@ -105,6 +105,15 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return activity
     }()
 
+    private(set) var addExpenseButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Add Expense", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        return button
+    }()
     
     //MARK: - Initializers -
     override init(frame: CGRect) {
@@ -199,10 +208,19 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
             groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor, constant: 10)
         ])
 
+        // setupAddExpenses()
+        contentView.addSubview(addExpenseButton)
+        NSLayoutConstraint.activate([
+            addExpenseButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40),
+            addExpenseButton.widthAnchor.constraint(equalToConstant: 150),
+            addExpenseButton.heightAnchor.constraint(equalToConstant: 35),
+            addExpenseButton.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
+        ])
+        
         // setupSummary()
         contentView.addSubview(summaryLabel)
         NSLayoutConstraint.activate([
-            summaryLabel.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 30),
+            summaryLabel.topAnchor.constraint(equalTo: addExpenseButton.bottomAnchor, constant: 30),
             summaryLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40)
         ])
         contentView.addSubview(summaryView)

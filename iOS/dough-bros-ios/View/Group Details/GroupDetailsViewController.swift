@@ -25,6 +25,7 @@ class GroupDetailsViewController: UIViewController {
         
         groupDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)
     }
     
     @objc private func backButtonTapped() {
@@ -33,5 +34,12 @@ class GroupDetailsViewController: UIViewController {
     
     @objc private func editButtonTapped() {
         print("edit button presesed")
+    }
+    
+    @objc private func addExpenseTapped() {
+        print("add expense tapped")
+        let addExpenseVC = AddExpenseViewController()
+        
+        present(addExpenseVC, animated: true)
     }
 }
