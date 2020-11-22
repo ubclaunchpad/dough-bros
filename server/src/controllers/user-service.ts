@@ -1,6 +1,6 @@
-import { User } from "../models/users";
+import { User } from "../models/user";
 
-module.exports = class UsersService {
+module.exports = class UserService {
   constructor() {}
 
   // Create User
@@ -16,7 +16,7 @@ module.exports = class UsersService {
       }
 
     return new Promise((resolve, reject) => {
-      User.create(user, (err: any, result: any) => {
+      User.createUser(user, (err: any, result: any) => {
         if (err) {
           reject(err);
         }
@@ -28,7 +28,7 @@ module.exports = class UsersService {
   // Find User by ID
   findUserByID(userID: string) {
     return new Promise((resolve, reject) => {
-      User.findUsersByID(userID, (err: any, res: any) => {
+      User.findUserByID(userID, (err: any, res: any) => {
         if (err) {
           reject(err);
         }
@@ -50,9 +50,9 @@ module.exports = class UsersService {
   }
 
   // List Users
-  findUsers() {
+  findAllUsers() {
     return new Promise((resolve, reject) => {
-      User.findUsers((err: any, res: any) => {
+      User.findAllUsers((err: any, res: any) => {
         if (err) {
           reject(err);
         }
