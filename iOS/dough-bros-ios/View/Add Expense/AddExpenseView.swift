@@ -5,7 +5,16 @@
 //  Created by Stephanie Chen on 2020-11-07.
 //
 
+//MARK: SwiftUI Preview
+import SwiftUI
 import UIKit
+
+class SwiftUIPreviewController: UIViewController {
+    override func viewDidLoad() {
+        //TODO: REPLACE THIS WITH YOUR VIEW
+        self.view = AddExpenseView()
+    }
+}
 
 class AddExpenseView: UIView {
 
@@ -14,6 +23,7 @@ class AddExpenseView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Add Expense"
+        label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return label
     }()
@@ -22,7 +32,7 @@ class AddExpenseView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.text = "Or select people:"
+        label.text = "Paid by me"
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return label
     }()
@@ -31,31 +41,44 @@ class AddExpenseView: UIView {
         let amount = UITextField()
         amount.translatesAutoresizingMaskIntoConstraints = false
         amount.keyboardType = .decimalPad
-        amount.placeholder = "Insert expense!"
+        amount.placeholder = "$0"
         amount.textColor = .black
-        amount.font = UIFont.systemFont(ofSize: 16)
-        amount.textAlignment = .left
+        amount.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        amount.textAlignment = .center
+        amount.backgroundColor = UIColor(hex: 0xF2F2F2)
+        amount.addCorners(10)
         return amount
     }()
     
-    private(set) var weightSlider: UISlider = {
-        let slider = UISlider()
-        slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.minimumValue = 0
-        slider.maximumValue = 100
-        slider.isContinuous = true
-        slider.minimumTrackTintColor = UIColor(hex: 0xf5b461)
-        return slider
-    }()
-    
-    private(set) var weightLabel: UILabel = {
-        let label = UILabel()
+    private(set) var expenseDescription: UITextField = {
+        let label = UITextField()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor(hex: 0xf5b461)
-        label.text = "50"
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.placeholder = " Enter a description"
+        label.backgroundColor = UIColor(hex: 0xF2F2F2)
+        label.addCorners(10)
         return label
     }()
+    
+//    private(set) var weightSlider: UISlider = {
+//        let slider = UISlider()
+//        slider.translatesAutoresizingMaskIntoConstraints = false
+//        slider.minimumValue = 0
+//        slider.maximumValue = 100
+//        slider.isContinuous = true
+//        slider.minimumTrackTintColor = UIColor(hex: 0xf5b461)
+//        return slider
+//    }()
+//
+//    private(set) var weightLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.textColor = UIColor(hex: 0xf5b461)
+//        label.text = "50"
+//        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+//        return label
+//    }()
     
     private(set) var numberPeople: UITextField = {
         let people = UITextField()
@@ -79,8 +102,8 @@ class AddExpenseView: UIView {
     
     private(set) var addExpenseCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 100, height: 120)
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: 350, height: 80)
         layout.minimumInteritemSpacing = 15
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -115,14 +138,24 @@ class AddExpenseView: UIView {
         
         addSubview(addExpenseLabel)
         NSLayoutConstraint.activate([
-            addExpenseLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            addExpenseLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100)
+            addExpenseLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            addExpenseLabel.topAnchor.constraint(equalTo: topAnchor, constant: 70)
         ])
         
         addSubview(expenseAmount)
         NSLayoutConstraint.activate([
             expenseAmount.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            expenseAmount.topAnchor.constraint(equalTo: addExpenseLabel.bottomAnchor, constant: 30)
+            expenseAmount.topAnchor.constraint(equalTo: addExpenseLabel.bottomAnchor, constant: 30),
+            expenseAmount.heightAnchor.constraint(equalToConstant: 60),
+            expenseAmount.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
+        ])
+        
+        addSubview(expenseDescription)
+        NSLayoutConstraint.activate([
+            expenseDescription.topAnchor.constraint(equalTo: expenseAmount.bottomAnchor, constant: 20),
+            expenseDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            expenseDescription.heightAnchor.constraint(equalToConstant: 40),
+            expenseDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
         
         addSubview(amountOwed)
@@ -133,8 +166,8 @@ class AddExpenseView: UIView {
         
         addSubview(selectPeopleLabel)
         NSLayoutConstraint.activate([
-            selectPeopleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            selectPeopleLabel.topAnchor.constraint(equalTo: amountOwed.bottomAnchor, constant: 30)
+            selectPeopleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            selectPeopleLabel.topAnchor.constraint(equalTo: expenseDescription.bottomAnchor, constant: 30)
         ])
         
         addSubview(addExpenseCollectionView)
@@ -142,7 +175,7 @@ class AddExpenseView: UIView {
             addExpenseCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             addExpenseCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             addExpenseCollectionView.topAnchor.constraint(equalTo: selectPeopleLabel.bottomAnchor, constant: 30),
-            addExpenseCollectionView.heightAnchor.constraint(equalToConstant: 150)
+            addExpenseCollectionView.heightAnchor.constraint(equalToConstant: 400)
         ])
         
 //        addSubview(numberPeople)
@@ -151,15 +184,15 @@ class AddExpenseView: UIView {
 //            numberPeople.topAnchor.constraint(equalTo: expenseAmount.bottomAnchor, constant: 30)
 //        ])
         
-        addSubview(weightSlider)
-        NSLayoutConstraint.activate([
-            weightSlider.centerXAnchor.constraint(equalTo: centerXAnchor),
-            weightSlider.topAnchor.constraint(equalTo: addExpenseCollectionView.bottomAnchor, constant: 20),
-            weightSlider.widthAnchor.constraint(equalToConstant: 300),
-            weightSlider.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        
-        addSubview(weightLabel)
+//        addSubview(weightSlider)
+//        NSLayoutConstraint.activate([
+//            weightSlider.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            weightSlider.topAnchor.constraint(equalTo: addExpenseCollectionView.bottomAnchor, constant: 20),
+//            weightSlider.widthAnchor.constraint(equalToConstant: 300),
+//            weightSlider.heightAnchor.constraint(equalToConstant: 20)
+//        ])
+//        
+//        addSubview(weightLabel)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(lowerKeyboard))
         tapGesture.cancelsTouchesInView = false
@@ -170,4 +203,23 @@ class AddExpenseView: UIView {
         endEditing(true)
     }
     
+}
+
+@available(iOS 13.0, *)
+struct ControllerPreview: PreviewProvider {
+    static var previews: some View {
+        ContainerView().edgesIgnoringSafeArea(.all)
+    }
+    
+    struct ContainerView: UIViewControllerRepresentable {
+        typealias UIViewControllerType = UIViewController
+        
+        func makeUIViewController(context: UIViewControllerRepresentableContext<ControllerPreview.ContainerView>) -> ControllerPreview.ContainerView.UIViewControllerType {
+            return AddExpenseViewController()
+        }
+        
+        func updateUIViewController(_ uiViewController: ControllerPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ControllerPreview.ContainerView>) {
+            
+        }
+    }
 }

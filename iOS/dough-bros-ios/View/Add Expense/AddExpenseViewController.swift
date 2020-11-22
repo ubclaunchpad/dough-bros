@@ -13,17 +13,25 @@ class AddExpenseViewController: UIViewController {
     
     var selectedPeople: Set<Friend> = []
     
+    lazy var owedAmounts = Array(repeating: 0, count: group.members.count)
+    
+    var totalSum = 0 {
+        didSet {
+            addExpenseView.expenseAmount.text = "$\(totalSum)"
+        }
+    }
+    
     private var addExpenseView: AddExpenseView {
         return view as! AddExpenseView
     }
     
-    private var weightSlider: UISlider {
-        return addExpenseView.weightSlider as UISlider
-    }
+//    private var weightSlider: UISlider {
+//        return addExpenseView.weightSlider as UISlider
+//    }
     
-    private var weightLabel: UILabel {
-        return addExpenseView.weightLabel as UILabel
-    }
+//    private var weightLabel: UILabel {
+//        return addExpenseView.weightLabel as UILabel
+//    }
     
     override func loadView() {
         super.loadView()
@@ -31,14 +39,14 @@ class AddExpenseViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        weightLabel.center = alignLabelWithSlider(slider: weightSlider)
+//        weightLabel.center = alignLabelWithSlider(slider: weightSlider)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupCollectionView()
-        setupSlider()
+//        setupSlider()
         setupExpenseAmountLabels()
     }
     
@@ -49,12 +57,12 @@ class AddExpenseViewController: UIViewController {
         addExpenseView.addExpenseCollectionView.delegate = self
     }
     
-    private func setupSlider() {
-        UIView.animate(withDuration: 0.7) {
-            self.weightSlider.setValue(50, animated: true)
-        }
-        weightSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
-    }
+//    private func setupSlider() {
+//        UIView.animate(withDuration: 0.7) {
+//            self.weightSlider.setValue(50, animated: true)
+//        }
+//        weightSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+//    }
     
     private func setupExpenseAmountLabels() {
         addExpenseView.expenseAmount.addTarget(self, action: #selector(calculateExpense), for: .editingChanged)
@@ -71,18 +79,30 @@ class AddExpenseViewController: UIViewController {
         
     }
     
-    @objc func sliderValueChanged(_ sender: UISlider!) {
-        let discreteWeightValue = round(sender.value / 10) * 10
-        sender.value = discreteWeightValue
-        weightLabel.text = String(discreteWeightValue)
-        weightLabel.center = alignLabelWithSlider(slider: sender)
+    @objc func updateTotalExpense(_ sender: UITextField) {
+        guard let text = sender.text, let intValue = Int(text) else {
+            owedAmounts[sender.tag] = 0
+            totalSum = owedAmounts.reduce(0, +)
+            return
+        }
+        
+        owedAmounts[sender.tag] = intValue
+        
+        totalSum = owedAmounts.reduce(0, +)
     }
     
-    func alignLabelWithSlider(slider: UISlider) -> CGPoint {
-        let sliderTrack: CGRect = slider.trackRect(forBounds: slider.bounds)
-        let sliderFrame: CGRect = slider.thumbRect(forBounds: slider.bounds, trackRect: sliderTrack, value: slider.value)
-        return CGPoint(x: sliderFrame.origin.x + slider.frame.origin.x + 10, y: slider.frame.origin.y + 40)
-    }
+//    @objc func sliderValueChanged(_ sender: UISlider!) {
+//        let discreteWeightValue = round(sender.value / 10) * 10
+//        sender.value = discreteWeightValue
+//        weightLabel.text = String(discreteWeightValue)
+//        weightLabel.center = alignLabelWithSlider(slider: sender)
+//    }
+    
+//    func alignLabelWithSlider(slider: UISlider) -> CGPoint {
+//        let sliderTrack: CGRect = slider.trackRect(forBounds: slider.bounds)
+//        let sliderFrame: CGRect = slider.thumbRect(forBounds: slider.bounds, trackRect: sliderTrack, value: slider.value)
+//        return CGPoint(x: sliderFrame.origin.x + slider.frame.origin.x + 10, y: slider.frame.origin.y + 40)
+//    }
 
 }
 
@@ -91,10 +111,13 @@ extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedPeople.contains(group.members[indexPath.item]) {
             selectedPeople.remove(group.members[indexPath.item])
-            (collectionView.cellForItem(at: indexPath)!).contentView.backgroundColor = UIColor(hex: 0xD8D8D8)
+            (collectionView.cellForItem(at: indexPath)!).contentView.backgroundColor = UIColor(hex: 0xF2F2F2)
+            (collectionView.cellForItem(at: indexPath) as! AddExpenseCollectionViewCell).checkbox.image = UIImage(systemName: "checkmark.circle")
+
         } else {
             selectedPeople.insert(group.members[indexPath.item])
             (collectionView.cellForItem(at: indexPath)!).contentView.backgroundColor = UIColor(hex: 0xf3eac2)
+            (collectionView.cellForItem(at: indexPath) as! AddExpenseCollectionViewCell).checkbox.image = UIImage(systemName: "checkmark.circle.fill")
         }
     }
     
@@ -105,13 +128,17 @@ extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
         let friendsCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddExpenseCollectionViewCell.className, for: indexPath) as! AddExpenseCollectionViewCell
+                
+        friendsCell.amountOwed.tag = indexPath.item
+        
+        friendsCell.amountOwed.addTarget(self, action: #selector(updateTotalExpense), for: .editingDidEnd)
         
         friendsCell.friend = group.members[indexPath.item]
         
         if selectedPeople.contains(group.members[indexPath.item]) {
             friendsCell.contentView.backgroundColor = UIColor(hex: 0xf3eac2)
         } else {
-            friendsCell.contentView.backgroundColor = UIColor(hex: 0xD8D8D8)
+            friendsCell.contentView.backgroundColor = UIColor(hex: 0xF2F2F2)
         }
         
         return friendsCell
