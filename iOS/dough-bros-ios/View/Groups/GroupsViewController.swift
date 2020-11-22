@@ -72,7 +72,9 @@ final class GroupsViewController: UIViewController {
     
     //MARK: - Actions -
     @objc private func tappedAddGroupButton() {
-        
+        print("add group tapped")
+        let addGroupVC = AddGroupViewController()
+        navigationController?.pushViewController(addGroupVC, animated: true)
     }
 }
 

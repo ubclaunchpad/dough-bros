@@ -37,6 +37,18 @@ module.exports = class UsersService {
     });
   }
 
+  // Find User by Email
+  findUserByEmail(email: string) {
+    return new Promise((resolve, reject) => {
+      User.findUsersByEmail(email, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
   // List Users
   findUsers() {
     return new Promise((resolve, reject) => {

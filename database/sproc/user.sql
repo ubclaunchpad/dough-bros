@@ -4,6 +4,8 @@
 
 USE `doughBros_db`;
 DROP procedure IF EXISTS `createUser`;
+DROP procedure IF EXISTS `getUser`;
+DROP procedure IF EXISTS `getUserByEmail`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -24,12 +26,25 @@ END$$
 
 DELIMITER ;
 
+
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getUser` (IN `firebase_uid` VARCHAR(255))
+CREATE PROCEDURE `getUser` (IN `uid` VARCHAR(255))
 BEGIN
 
-SELECT * FROM `user` WHERE `firebase_uid` = `firebase_uid`;
+SELECT * FROM `user` WHERE `firebase_uid` = `uid`;
+
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getUserByEmail` (IN `email` VARCHAR(255))
+BEGIN
+
+SELECT * FROM `user` WHERE `email_addr` = `email`;
 
 END$$
 
