@@ -4,7 +4,7 @@
 
 USE `doughBros_db`;
 DROP procedure IF EXISTS `createUser`;
-DROP procedure IF EXISTS `getGroupsByUser`;
+DROP procedure IF EXISTS `getUserByUid`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -27,7 +27,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getUser` (IN `firebase_uid` VARCHAR(255))
+CREATE PROCEDURE `getUserByUid` (IN `firebase_uid` VARCHAR(255))
 BEGIN
 
 SELECT * FROM `user` WHERE `firebase_uid` = `firebase_uid`;

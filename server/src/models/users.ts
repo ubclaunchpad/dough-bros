@@ -37,7 +37,7 @@ User.create = (newUser: any, result: any) => {
 
 User.findUsersByID = (userID: string, result: any) => {
   sql.query(
-    "CALL getUser(?)",
+    "CALL getUserByUid(?)",
     userID,
     (err: any, res: any) => {
       if (err) {

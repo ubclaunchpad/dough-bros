@@ -10,7 +10,7 @@ DROP procedure IF EXISTS `removeUserFromGroup`;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `createGroup` (IN `creator_id` INT(8), IN `group_name` VARCHAR(255))
+CREATE PROCEDURE `createGroup` (IN `creator_id` VARCHAR(255), IN `group_name` VARCHAR(255))
 BEGIN
 
 INSERT INTO `group` (`fk_creator_id`, `group_name`)
@@ -22,7 +22,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `addUserToGroup` (IN `group_id` INT(8), IN `user_id` INT(8), IN `added_by` INT(8), IN `did_accept_invite` BOOLEAN)
+CREATE PROCEDURE `addUserToGroup` (IN `group_id` INT(8), IN `user_id` VARCHAR(255), IN `added_by` VARCHAR(255), IN `did_accept_invite` BOOLEAN)
 BEGIN
 
 INSERT INTO `group_membership` (`fk_group_id`, `fk_user_id`, `fk_added_by`, `did_accept_invite`)
@@ -45,7 +45,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `removeUserFromGroup` (IN `group_id` INT(8), IN `user_id` INT(8))
+CREATE PROCEDURE `removeUserFromGroup` (IN `group_id` INT(8), IN `user_id` VARCHAR(255))
 BEGIN
 
 DELETE FROM `group_membership` WHERE `fk_group_id` = `group_id` AND `fk_user_id` = `user_id`;
