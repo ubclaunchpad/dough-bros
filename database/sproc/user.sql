@@ -4,6 +4,7 @@
 
 USE `doughBros_db`;
 DROP procedure IF EXISTS `createUser`;
+DROP procedure IF EXISTS `getGroupsByUser`;
 
 DELIMITER $$
 USE `doughBros_db`$$
