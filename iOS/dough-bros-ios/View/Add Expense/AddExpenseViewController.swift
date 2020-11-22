@@ -47,7 +47,7 @@ class AddExpenseViewController: UIViewController {
 
         setupCollectionView()
 //        setupSlider()
-        setupExpenseAmountLabels()
+//        setupExpenseAmountLabels()
     }
     
     // setup
@@ -64,20 +64,20 @@ class AddExpenseViewController: UIViewController {
 //        weightSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
 //    }
     
-    private func setupExpenseAmountLabels() {
-        addExpenseView.expenseAmount.addTarget(self, action: #selector(calculateExpense), for: .editingChanged)
-        addExpenseView.numberPeople.addTarget(self, action: #selector(calculateExpense), for: .editingChanged)
-    }
+//    private func setupExpenseAmountLabels() {
+//        addExpenseView.expenseAmount.addTarget(self, action: #selector(calculateExpense), for: .editingChanged)
+//        addExpenseView.numberPeople.addTarget(self, action: #selector(calculateExpense), for: .editingChanged)
+//    }
     
-    @objc func calculateExpense() {
-        guard let expense = addExpenseView.expenseAmount.text, !expense.isEmpty else {
-            addExpenseView.amountOwed.text = ""
-            return
-        }
-        
-        addExpenseView.amountOwed.text = "Each person owes $\((Double(expense)! * 100 / Double(group.members.count)).rounded(.up) / 100)"
-        
-    }
+//    @objc func calculateExpense() {
+//        guard let expense = addExpenseView.expenseAmount.text, !expense.isEmpty else {
+//            addExpenseView.amountOwed.text = ""
+//            return
+//        }
+//
+//        addExpenseView.amountOwed.text = "Each person owes $\((Double(expense)! * 100 / Double(group.members.count)).rounded(.up) / 100)"
+//
+//    }
     
     @objc func updateTotalExpense(_ sender: UITextField) {
         guard let text = sender.text, let intValue = Int(text) else {

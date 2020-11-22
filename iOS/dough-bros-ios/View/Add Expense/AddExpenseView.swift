@@ -42,6 +42,7 @@ class AddExpenseView: UIView {
         amount.translatesAutoresizingMaskIntoConstraints = false
         amount.keyboardType = .decimalPad
         amount.placeholder = "$0"
+        amount.isUserInteractionEnabled = false
         amount.textColor = .black
         amount.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         amount.textAlignment = .center
@@ -91,14 +92,14 @@ class AddExpenseView: UIView {
         return people
     }()
     
-    private(set) var amountOwed: UILabel = {
-        let amount = UILabel()
-        amount.translatesAutoresizingMaskIntoConstraints = false
-        amount.textColor = .black
-        amount.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        amount.numberOfLines = 0
-        return amount
-    }()
+//    private(set) var amountOwed: UILabel = {
+//        let amount = UILabel()
+//        amount.translatesAutoresizingMaskIntoConstraints = false
+//        amount.textColor = .black
+//        amount.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+//        amount.numberOfLines = 0
+//        return amount
+//    }()
     
     private(set) var addExpenseCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -158,11 +159,11 @@ class AddExpenseView: UIView {
             expenseDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
         
-        addSubview(amountOwed)
-        NSLayoutConstraint.activate([
-            amountOwed.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            amountOwed.topAnchor.constraint(equalTo: expenseAmount.bottomAnchor, constant: 30)
-        ])
+//        addSubview(amountOwed)
+//        NSLayoutConstraint.activate([
+//            amountOwed.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+//            amountOwed.topAnchor.constraint(equalTo: expenseAmount.bottomAnchor, constant: 30)
+//        ])
         
         addSubview(selectPeopleLabel)
         NSLayoutConstraint.activate([
