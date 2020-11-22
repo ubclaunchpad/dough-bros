@@ -36,7 +36,7 @@ router.post('/addUserToGroup', (req,res) => {
 
 // Get Group by UID
 router.get('/getGroupByUID/:userID', (req, res) => {
-  groupServer.findUserByID(req.params.userID).then((user: any) => {
+  groupServer.getGroupByUID(req.params.userID).then((user: any) => {
       res.json(user);
   }).catch((err: any) => {
       res.json(err);

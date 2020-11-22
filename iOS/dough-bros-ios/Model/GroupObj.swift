@@ -11,6 +11,6 @@ struct GroupObj: Codable {
     var group_id: Int
     var group_name: String
     var creator_id: String
-    var imageURI: String
+    var image_uri: String
     var amount: Double
 }

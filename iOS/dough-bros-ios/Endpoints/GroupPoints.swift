@@ -73,5 +73,36 @@ struct GroupEndpoints {
         task.resume()
         semaphore.wait()
     }
+    
+    static func getGroups(userID: String) -> [GroupObj] {
+        print("Getting Users Groups!!")
+        var groupList = [GroupObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+
+        var request = URLRequest(url: URL(string: "http://localhost:8000/groups/getGroupByUID/" + userID)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+          // print(String(data: data, encoding: .utf8)!)
+            do {
+                groupList = try JSONDecoder().decode([GroupObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return groupList
+    }
+
 }
 

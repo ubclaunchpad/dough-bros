@@ -75,7 +75,7 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
         print("next tapped")
         
-        let groupObj = GroupObj(group_id: 0, group_name: "", creator_id: (Auth.auth().currentUser?.uid)!, imageURI: "", amount: 0.0)
+        let groupObj = GroupObj(group_id: 0, group_name: "", creator_id: (Auth.auth().currentUser?.uid)!, image_uri: "", amount: 0.0)
         let newGroupID = GroupEndpoints.createGroup(group: groupObj)
         
         for user in group {

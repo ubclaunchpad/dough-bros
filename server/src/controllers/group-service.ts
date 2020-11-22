@@ -7,6 +7,8 @@ module.exports = class GroupService {
     const group = {
         fk_creator_id: req.body.creator_id,
         group_name: req.body.group_name,
+        image_uri: req.body.image_uri,
+        amount: req.body.amount,
       }
 
     return new Promise((resolve, reject) => {

@@ -4,6 +4,8 @@ export const Group = function (this: any, group: any) {
   this.group_id = group.group_id;
   this.fk_creator_id = group.firebase_uid;
   this.group_name = group.group_name;
+  this.image_uri = group.image_uri;
+  this.amount = group.amount;
 };
 
 Group.createGroup = (newGroup: any, result: any) => {
@@ -43,6 +45,7 @@ Group.addUserToGroup = (newGroupMembership: any, result: any) => {
     );
   };
 
+  // Todo Convert Image, Amount & Other Fields Later!!
   Group.findGroupByUID = (userID: string, result: any) => {
     sql.query(
       "CALL getGroupByUID(?)",
