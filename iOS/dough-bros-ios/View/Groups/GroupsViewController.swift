@@ -96,6 +96,13 @@ extension GroupsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailedGroupsVC = GroupDetailsViewController()
+        //TODO: Pass the group through so group details can create the correct views
+        detailedGroupsVC.groupObj = groupsViewModel.groups[indexPath.row]
+        navigationController?.pushViewController(detailedGroupsVC, animated: true)
+    }
 }
 
 extension GroupsViewController: UICollectionViewDataSource {
@@ -109,13 +116,6 @@ extension GroupsViewController: UICollectionViewDataSource {
         friendsCell.friend = groupsViewModel.friends[indexPath.item]
         
         return friendsCell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailedGroupsVC = GroupDetailsViewController()
-        //TODO: Pass the group through so group details can create the correct views
-        
-        navigationController?.pushViewController(detailedGroupsVC, animated: true)
     }
 }
 

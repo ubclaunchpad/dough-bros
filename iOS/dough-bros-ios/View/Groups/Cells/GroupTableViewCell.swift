@@ -77,6 +77,7 @@ class GroupTableViewCell: UITableViewCell {
             groupProfilePictureView.image = UIImage(data: data!)
         }
         groupProfilePictureView.tintColor = .white
+        groupProfilePictureView.contentMode = .center
         nameLabel.text = group.group_name == "" ? "Untitled Group" : group.group_name
         amountLabel.text = "$\(group.amount)"
         oweLabel.text = Auth.auth().currentUser?.uid != group.creator_id ? "You Owe" : ""
