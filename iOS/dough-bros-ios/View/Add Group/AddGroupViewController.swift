@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AddGroupViewController: UIViewController, UITextFieldDelegate {
     
@@ -73,6 +74,14 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
     @objc private func tappedNext() {
         dismiss(animated: true, completion: nil)
         print("next tapped")
+        
+        let groupObj = GroupObj(group_id: 0, group_name: "", creator_id: (Auth.auth().currentUser?.uid)!, imageURI: "", amount: 0.0)
+        let newGroupID = GroupEndpoints.createGroup(group: groupObj)
+        
+        for user in group {
+            GroupEndpoints.addUserToGroup(user: user, groupID: newGroupID, addedBy: (Auth.auth().currentUser?.uid)!)
+        }
+        
         let detailedGroupsVC = GroupDetailsViewController()
         navigationController?.popViewController(animated: true)
         navigationController?.pushViewController(detailedGroupsVC, animated: true)

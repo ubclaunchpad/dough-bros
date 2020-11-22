@@ -82,7 +82,7 @@ class LoginView: UIView {
         pass.autocorrectionType = UITextAutocorrectionType.no
         pass.keyboardType = UIKeyboardType.default
         pass.returnKeyType = UIReturnKeyType.next
-        pass.isSecureTextEntry = true
+//        pass.isSecureTextEntry = true
         pass.clearButtonMode = UITextField.ViewMode.whileEditing
         pass.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return pass
@@ -97,7 +97,7 @@ class LoginView: UIView {
         confirm.autocorrectionType = UITextAutocorrectionType.no
         confirm.keyboardType = UIKeyboardType.default
         confirm.returnKeyType = UIReturnKeyType.done
-        confirm.isSecureTextEntry = true
+//        confirm.isSecureTextEntry = true
         confirm.clearButtonMode = UITextField.ViewMode.whileEditing
         confirm.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return confirm

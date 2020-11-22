@@ -40,6 +40,8 @@
 		BE03B3E625699D3000B9A4D0 /* AddGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE03B3E525699D3000B9A4D0 /* AddGroupView.swift */; };
 		BE03B3E925699D8400B9A4D0 /* AddGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE03B3E825699D8400B9A4D0 /* AddGroupCollectionViewCell.swift */; };
 		BE03B3EC2569B7CE00B9A4D0 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE03B3EB2569B7CE00B9A4D0 /* AddGroupTableViewCell.swift */; };
+		BE03B3F1256A1D2200B9A4D0 /* GroupPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE03B3F0256A1D2200B9A4D0 /* GroupPoints.swift */; };
+		BE03B3F4256A21EA00B9A4D0 /* GroupObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE03B3F3256A21EA00B9A4D0 /* GroupObj.swift */; };
 		BE180ED4255B6B3500F9D2B4 /* UserPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */; };
 		BE180EDB255B6FC800F9D2B4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE180EDA255B6FC800F9D2B4 /* User.swift */; };
 		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
@@ -81,6 +83,8 @@
 		BE03B3E525699D3000B9A4D0 /* AddGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupView.swift; sourceTree = "<group>"; };
 		BE03B3E825699D8400B9A4D0 /* AddGroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE03B3EB2569B7CE00B9A4D0 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
+		BE03B3F0256A1D2200B9A4D0 /* GroupPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPoints.swift; sourceTree = "<group>"; };
+		BE03B3F3256A21EA00B9A4D0 /* GroupObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupObj.swift; sourceTree = "<group>"; };
 		BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPoints.swift; sourceTree = "<group>"; };
 		BE180EDA255B6FC800F9D2B4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BE1F06BF255147A30067C137 /* dough-bros-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "dough-bros-ios.entitlements"; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 				257DB48A253169EC00D1DABB /* Group.swift */,
 				25DB65EA2551357400F79B58 /* Friend.swift */,
 				BE180EDA255B6FC800F9D2B4 /* User.swift */,
+				BE03B3F3256A21EA00B9A4D0 /* GroupObj.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */,
+				BE03B3F0256A1D2200B9A4D0 /* GroupPoints.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -442,10 +448,12 @@
 				BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */,
 				257495E2253120B800D386A2 /* SampleView.swift in Sources */,
 				257DB48B253169EC00D1DABB /* Group.swift in Sources */,
+				BE03B3F4256A21EA00B9A4D0 /* GroupObj.swift in Sources */,
 				257495DE2531206600D386A2 /* SampleViewController.swift in Sources */,
 				2582473F2546634000F2EAAD /* GroupDetailsViewController.swift in Sources */,
 				BE03B3E625699D3000B9A4D0 /* AddGroupView.swift in Sources */,
 				BE03B3E925699D8400B9A4D0 /* AddGroupCollectionViewCell.swift in Sources */,
+				BE03B3F1256A1D2200B9A4D0 /* GroupPoints.swift in Sources */,
 				2596C9272551330A00DAA64F /* GroupsCollectionViewCell.swift in Sources */,
 				2582473B2546623600F2EAAD /* TutorialView.swift in Sources */,
 				25DB65EB2551357400F79B58 /* Friend.swift in Sources */,

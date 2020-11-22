@@ -5,7 +5,7 @@ module.exports = class GroupService {
 
   createGroup(req: any) {
     const group = {
-        fk_creator_id: req.body.gk_creator_id,
+        fk_creator_id: req.body.creator_id,
         group_name: req.body.group_name,
       }
 
@@ -19,9 +19,14 @@ module.exports = class GroupService {
     });
   }
 
-  addUserToGroup(groupMembership: any) {
+  addUserToGroup(req: any) {
+    const addInfo = {
+      fk_group_id: req.body.group_id,
+      fk_user_id: req.body.user_id,
+      fk_added_by_id: req.body.addedBy
+    }
     return new Promise((resolve, reject) => {
-      Group.addUserToGroup(groupMembership, (err: any, res: any) => {
+      Group.addUserToGroup(addInfo, (err: any, res: any) => {
         if (err) {
           reject(err);
         }
@@ -29,6 +34,18 @@ module.exports = class GroupService {
       });
     });
   }
+
+  getGroupByUID(userID: string) {
+    return new Promise((resolve, reject) => {
+      Group.findGroupByUID(userID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
 
   getAllGroupUsers(groupID: number) {
     return new Promise((resolve, reject) => {

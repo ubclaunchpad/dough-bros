@@ -52,7 +52,7 @@ module.exports = class UserService {
   // List Users
   findAllUsers() {
     return new Promise((resolve, reject) => {
-      User.findAllUsers((err: any, res: any) => {
+      User.findUsers((err: any, res: any) => {
         if (err) {
           reject(err);
         }

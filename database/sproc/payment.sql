@@ -80,8 +80,6 @@ SELECT * FROM `payment` WHERE (`fk_receiver_id` = `receiver_id`
 
 END$$
 
-END$$
-
 DELIMITER ;
 
 DELIMITER $$
@@ -93,8 +91,6 @@ SELECT * FROM `payment` WHERE (`fk_sender_id` = `sender_id`
 	AND `fk_parent_expense_id` = (
 		SELECT `expense_id` FROM `group_expense` WHERE `fk_group_id` = `group_id`)
 	);
-
-END$$
 
 END$$
 

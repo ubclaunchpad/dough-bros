@@ -33,7 +33,7 @@ router.get('/getUserByID/:userID', (req, res) => {
 
 // Get User by Email
 router.get('/getUserByEmail/:email', (req, res) => {
-  usersServer.findUserByEmail(req.params.email).then((users: any) => {
+  userServer.findUserByEmail(req.params.email).then((users: any) => {
       res.json(users);
   }).catch((err: any) => {
       res.json(err);

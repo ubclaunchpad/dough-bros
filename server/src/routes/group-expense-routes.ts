@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
-const GroupExpenseService = require("../controllers/group_expense-service");
+const GroupExpenseService = require("../controllers/group-expense-service");
 const groupExpenseServer = new GroupExpenseService();
 
 router.post('/createGroupExpense', (req, res) => {

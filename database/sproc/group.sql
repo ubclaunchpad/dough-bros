@@ -34,6 +34,17 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
+CREATE PROCEDURE `getGroupByUID` (IN `user_id` INT(8))
+BEGIN
+
+SELECT * FROM `group` WHERE `fk_creator_id` = `user_id`;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
 CREATE PROCEDURE `getAllGroupUsers` (IN `group_id` INT(8))
 BEGIN
 

@@ -8,6 +8,7 @@ const app = express();
 const PORT = 8000;
 
 let userRoute = require('./routes/users-routes')
+let groupRoute = require('./routes/group-routes')
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req: Request, res: Response) => res.send('Welcome to Dough Bros!!'));
 
 app.use('/users', userRoute);
+app.use('/groups', groupRoute);
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: listening on PORT ${PORT}`);

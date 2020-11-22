@@ -15,7 +15,7 @@ CREATE TABLE `group_membership` (
   `fk_user_id` varchar(255) NOT NULL,
   `fk_added_by_id` varchar(255) NOT NULL,
   `did_accept_invite` BOOLEAN DEFAULT 0 NOT NULL,
-  FOREIGN KEY (`fK_group_id`)
+  FOREIGN KEY (`fk_group_id`)
 	  REFERENCES `group` (`group_id`)
     ON DELETE CASCADE,
   FOREIGN KEY (`fk_user_id`)
