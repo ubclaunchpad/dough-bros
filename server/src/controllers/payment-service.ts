@@ -25,6 +25,72 @@ module.exports = class PaymentService {
     });
   }
 
+  getAllPaymentsByGroupExpense(parentExpenseID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllPaymentsByGroupExpense(parentExpenseID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
+  getAllPendingPaymentsByGroupExpense(parentExpenseID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllPendingPaymentsByGroupExpense(parentExpenseID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
+  getAllPaidPaymentsByGroupExpense(parentExpenseID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllPaidPaymentsByGroupExpense(parentExpenseID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
+  getAllSettledPaymentsByGroupExpense(parentExpenseID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllPaymentsByGroupExpense(parentExpenseID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
+  getAllPaymentsToUserInGroup(receiverID: string, groupID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllPaymentsToUserInGroup(receiverID, groupID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
+  getAllPaymentsFromUserInGroup(senderID: string, groupID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllPaymentsFromUserInGroup(senderID, groupID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
   payPayment(paymentID: number) {
     return new Promise((resolve, reject) => {
       Payment.payPayment(paymentID, (err: any, res: any) => {
