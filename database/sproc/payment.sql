@@ -70,10 +70,15 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getAllPaymentsToUserInGroup` (IN `user_id` VARCHAR(255), IN `group_id` INT(8))
+CREATE PROCEDURE `getAllPaymentsToUserInGroup` (IN `receiver_id` VARCHAR(255), IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE `fk_user_id` = `fk_receiver_id`;
+SELECT * FROM `payment` WHERE (`fk_receiver_id` = `receiver_id`
+	AND `fk_parent_expense_id` = (
+		SELECT `expense_id` FROM `group_expense` WHERE `fk_group_id` = `group_id`)
+	);
+
+END$$
 
 END$$
 
@@ -81,10 +86,15 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getAllPaymentsFromUserInGroup` (IN `user_id` VARCHAR(255), IN `group_id` INT(8))
+CREATE PROCEDURE `getAllPaymentsFromUserInGroup` (IN `sender_id` VARCHAR(255), IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE `fk_user_id` = `fk_sender_id`;
+SELECT * FROM `payment` WHERE (`fk_sender_id` = `sender_id`
+	AND `fk_parent_expense_id` = (
+		SELECT `expense_id` FROM `group_expense` WHERE `fk_group_id` = `group_id`)
+	);
+
+END$$
 
 END$$
 
