@@ -36,6 +36,104 @@ Payment.createPayment = (newPayment: any, result: any) => {
   );
 };
 
+Payment.getAllPaymentsByGroupExpense = (parentExpenseID: number, result: any) => {
+  sql.query(
+    "CALL getAllPaymentsByGroupExpense(?)", parentExpenseID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+Payment.getAllPendingPaymentsByGroupExpense = (parentExpenseID: number, result: any) => {
+  sql.query(
+    "CALL getAllPendingPaymentsByGroupExpense(?)", parentExpenseID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+Payment.getAllPaidPaymentsByGroupExpense = (parentExpenseID: number, result: any) => {
+  sql.query(
+    "CALL getAllPaidPaymentsByGroupExpense(?)", parentExpenseID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+Payment.getAllSettledPaymentsByGroupExpense = (parentExpenseID: number, result: any) => {
+  sql.query(
+    "CALL getAllSettledPaymentsByGroupExpense(?)", parentExpenseID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+Payment.getAllPaymentsToUserInGroup = (receiverID: string, groupID: number, result: any) => {
+  sql.query(
+    "CALL getAllPaymentsToUserInGroup(?, ?)",
+    [
+      receiverID,
+      groupID
+    ],
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+Payment.getAllPaymentsFromUserInGroup = (senderID: string, groupID: number, result: any) => {
+  sql.query(
+    "CALL getAllPaymentsFromUserInGroup(?, ?)",
+    [
+      senderID,
+      groupID
+    ],
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
 Payment.payPayment = (paymentID: number, result: any) => {
     sql.query(
       "CALL payPayment(?)", paymentID,
@@ -51,17 +149,17 @@ Payment.payPayment = (paymentID: number, result: any) => {
     );
   };
 
-  Payment.settlePayment = (paymentID: number, result: any) => {
-    sql.query(
-      "CALL settlePayment(?)", paymentID,
-      (err: any, res: any) => {
-        if (err) {
-          console.log("error: ", err);
-          result(err, null);
-        } else {
-          console.log(res);
-          result(null, res);
-        }
+Payment.settlePayment = (paymentID: number, result: any) => {
+  sql.query(
+    "CALL settlePayment(?)", paymentID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
       }
-    );
-  };
+    }
+  );
+};
