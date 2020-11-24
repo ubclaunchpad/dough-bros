@@ -1,4 +1,4 @@
-const sql = require("../config/databaseHandler");
+const sql = require('../config/databaseHandler');
 
 // Task object constructor <- I have no idea how to insert this into SQL
 export const User = function (this: any, user: any) {
@@ -13,7 +13,7 @@ export const User = function (this: any, user: any) {
 
 User.createUser = (newUser: any, result: any) => {
   sql.query(
-    "CALL createUser(?,?,?,?,?,?,?)",
+    'CALL createUser(?,?,?,?,?,?,?)',
     [
       newUser.firebase_uid,
       newUser.first_name,
@@ -25,10 +25,10 @@ User.createUser = (newUser: any, result: any) => {
     ],
     (err: any, res: any) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
       } else {
-        console.log("Created User: ", { id: res.insertId, ...newUser });
+        console.log('Created User: ', { id: res.insertId, ...newUser });
         result(null, { id: res.insertId, ...newUser });
       }
     }
@@ -36,24 +36,20 @@ User.createUser = (newUser: any, result: any) => {
 };
 
 User.findUserByID = (userID: string, result: any) => {
-  sql.query(
-    "CALL getUserByUid(?)",
-    userID,
-    (err: any, res: any) => {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        result(null, res[0]);
-      }
+  sql.query('CALL getUserByUid(?)', userID, (err: any, res: any) => {
+    if (err) {
+      console.log('error: ', err);
+      result(err, null);
+    } else {
+      result(null, res[0]);
     }
-  );
+  });
 };
 
 User.findAllUsers = (result: any) => {
-  sql.query("SELECT * FROM user", (err: any, res: any) => {
+  sql.query('SELECT * FROM user', (err: any, res: any) => {
     if (err) {
-      console.log("error: ", err);
+      console.log('error: ', err);
       result(err, null);
     } else {
       console.log(res);

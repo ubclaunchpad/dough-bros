@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
-const mysql = require("mysql");
-const util = require("util");
+const mysql = require('mysql');
+const util = require('util');
 
 const config = {
-  host: "doughBros_db",
+  host: 'doughBros_db',
   port: 3306,
-  user: "root",
-  password: "root",
-  database: "doughBros_db"
+  user: 'root',
+  password: 'root',
+  database: 'doughBros_db',
 };
 
 const connectionPool = mysql.createPool(config);
@@ -18,10 +18,12 @@ async function attemptConnection() {
     const connection: any = await new Promise((resolve, reject) => {
       connectionPool.getConnection((err: any, connection: any) => {
         if (err) {
-            console.error(err);
-            reject(err);
+          console.error(err);
+          reject(err);
         } else {
-            console.log(`[MySQL] Successful connection: ${config.host}:${config.port}`);
+          console.log(
+            `[MySQL] Successful connection: ${config.host}:${config.port}`
+          );
         }
         resolve(connection);
       });
@@ -43,7 +45,7 @@ function delay(t: number, val: any) {
 }
 
 async function connectToMySQL(numTries: number, waitTime: number) {
-  for (var i = 0; i < numTries; i++) {
+  for (let i = 0; i < numTries; i++) {
     const exitCode = await attemptConnection();
 
     if (exitCode == -1) {
@@ -53,7 +55,9 @@ async function connectToMySQL(numTries: number, waitTime: number) {
     }
   }
 
-  console.log(`[MySQL] ERROR: Could not connect after ${numTries} tries with ${waitTime} ms delay`);
+  console.log(
+    `[MySQL] ERROR: Could not connect after ${numTries} tries with ${waitTime} ms delay`
+  );
 }
 
 connectToMySQL(3, 2000);

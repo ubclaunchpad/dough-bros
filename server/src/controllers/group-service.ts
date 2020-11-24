@@ -1,13 +1,13 @@
-import { Group } from "../models/group";
+import { Group } from '../models/group';
 
 module.exports = class GroupService {
   constructor() {}
 
   createGroup(req: any) {
     const group = {
-        fk_creator_id: req.body.gk_creator_id,
-        group_name: req.body.group_name,
-      }
+      fk_creator_id: req.body.gk_creator_id,
+      group_name: req.body.group_name,
+    };
 
     return new Promise((resolve, reject) => {
       Group.createGroup(group, (err: any, res: any) => {
@@ -41,7 +41,7 @@ module.exports = class GroupService {
     });
   }
 
-  acceptGroupMembership(groupID: number, userID: string,) {
+  acceptGroupMembership(groupID: number, userID: string) {
     return new Promise((resolve, reject) => {
       Group.acceptGroupMembership(groupID, userID, (err: any, res: any) => {
         if (err) {

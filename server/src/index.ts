@@ -1,5 +1,5 @@
-import express, {Request, Response} from 'express';
-import bodyParser from "body-parser";
+import express, { Request, Response } from 'express';
+import bodyParser from 'body-parser';
 
 // @ts-ignore
 const sql = require('./config/databaseHandler');
@@ -7,10 +7,10 @@ const sql = require('./config/databaseHandler');
 const app = express();
 const PORT = 8000;
 
-let userRoute = require('./routes/user-routes')
-let groupRoute = require('./routes/group-routes')
-let paymentRoute = require('./routes/payment-routes')
-let groupExpenseRoute = require('./routes/group_expense-routes')
+let userRoute = require('./routes/user-routes');
+let groupRoute = require('./routes/group-routes');
+let paymentRoute = require('./routes/payment-routes');
+let groupExpenseRoute = require('./routes/group_expense-routes');
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
@@ -19,7 +19,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // @ts-ignore: unused parameter
-app.get('/', (req: Request, res: Response) => res.send('Welcome to Dough Bros!!'));
+app.get('/', (req: Request, res: Response) =>
+  res.send('Welcome to Dough Bros!!')
+);
 
 app.use('/users', userRoute);
 app.use('/group', groupRoute);

@@ -1,4 +1,4 @@
-const sql = require("../config/databaseHandler");
+const sql = require('../config/databaseHandler');
 
 export const GroupExpense = function (this: any, groupExpense: any) {
   this.expense_id = groupExpense.expense_id;
@@ -12,20 +12,20 @@ export const GroupExpense = function (this: any, groupExpense: any) {
 
 GroupExpense.createGroupExpense = (newGroupExpense: any, result: any) => {
   sql.query(
-    "CALL createGroupExpense(?,?,?,,?,?)",
+    'CALL createGroupExpense(?,?,?,,?,?)',
     [
-        newGroupExpense.fk_group_id,
-        newGroupExpense.fk_added_by_id,
-        newGroupExpense.fk_currency_id,
-        newGroupExpense.expense_name,
-        newGroupExpense.amount,
+      newGroupExpense.fk_group_id,
+      newGroupExpense.fk_added_by_id,
+      newGroupExpense.fk_currency_id,
+      newGroupExpense.expense_name,
+      newGroupExpense.amount,
     ],
     (err: any, res: any) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
       } else {
-        console.log("Created Group Expense: ", res);
+        console.log('Created Group Expense: ', res);
         result(null, res);
       }
     }
@@ -33,31 +33,33 @@ GroupExpense.createGroupExpense = (newGroupExpense: any, result: any) => {
 };
 
 GroupExpense.getGroupExpenseById = (groupExpenseID: number, result: any) => {
-    sql.query(
-      "CALL getGroupExpenseById(?)", groupExpenseID,
-      (err: any, res: any) => {
-        if (err) {
-          console.log("error: ", err);
-          result(err, null);
-        } else {
-          console.log(res);
-          result(null, res);
-        }
+  sql.query(
+    'CALL getGroupExpenseById(?)',
+    groupExpenseID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
       }
-    );
-  };
+    }
+  );
+};
 
-  GroupExpense.archiveGroupExpense = (groupExpenseID: number, result: any) => {
-    sql.query(
-      "CALL archiveGroupExpense(?)", groupExpenseID,
-      (err: any, res: any) => {
-        if (err) {
-          console.log("error: ", err);
-          result(err, null);
-        } else {
-          console.log(res);
-          result(null, res);
-        }
+GroupExpense.archiveGroupExpense = (groupExpenseID: number, result: any) => {
+  sql.query(
+    'CALL archiveGroupExpense(?)',
+    groupExpenseID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
       }
-    );
-  };
+    }
+  );
+};

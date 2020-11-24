@@ -1,4 +1,4 @@
-const sql = require("../config/databaseHandler");
+const sql = require('../config/databaseHandler');
 
 export const Payment = function (this: any, payment: any) {
   this.payment_id = payment.payment_id;
@@ -15,48 +15,37 @@ export const Payment = function (this: any, payment: any) {
 
 Payment.createPayment = (newPayment: any, result: any) => {
   sql.query(
-    "CALL createPayment(?,?,?,?,?,,,?)",
+    'CALL createPayment(?,?,?,?,?,,,?)',
     [
-        newPayment.fk_sender_id,
-        newPayment.fk_receiver_id,
-        newPayment.fk_creator_id,
-        newPayment.fk_parent_expense_id,
-        newPayment.fk_currency_id,
-        newPayment.amount,
+      newPayment.fk_sender_id,
+      newPayment.fk_receiver_id,
+      newPayment.fk_creator_id,
+      newPayment.fk_parent_expense_id,
+      newPayment.fk_currency_id,
+      newPayment.amount,
     ],
     (err: any, res: any) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
       } else {
-        console.log("Created Payment: ", res);
+        console.log('Created Payment: ', res);
         result(null, res);
       }
     }
   );
 };
 
-Payment.getAllPaymentsByGroupExpense = (parentExpenseID: number, result: any) => {
+Payment.getAllPaymentsByGroupExpense = (
+  parentExpenseID: number,
+  result: any
+) => {
   sql.query(
-    "CALL getAllPaymentsByGroupExpense(?)", parentExpenseID,
+    'CALL getAllPaymentsByGroupExpense(?)',
+    parentExpenseID,
     (err: any, res: any) => {
       if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        console.log(res);
-        result(null, res);
-      }
-    }
-  );
-};
-
-Payment.getAllPendingPaymentsByGroupExpense = (parentExpenseID: number, result: any) => {
-  sql.query(
-    "CALL getAllPendingPaymentsByGroupExpense(?)", parentExpenseID,
-    (err: any, res: any) => {
-      if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
       } else {
         console.log(res);
@@ -66,12 +55,16 @@ Payment.getAllPendingPaymentsByGroupExpense = (parentExpenseID: number, result: 
   );
 };
 
-Payment.getAllPaidPaymentsByGroupExpense = (parentExpenseID: number, result: any) => {
+Payment.getAllPendingPaymentsByGroupExpense = (
+  parentExpenseID: number,
+  result: any
+) => {
   sql.query(
-    "CALL getAllPaidPaymentsByGroupExpense(?)", parentExpenseID,
+    'CALL getAllPendingPaymentsByGroupExpense(?)',
+    parentExpenseID,
     (err: any, res: any) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
       } else {
         console.log(res);
@@ -81,12 +74,16 @@ Payment.getAllPaidPaymentsByGroupExpense = (parentExpenseID: number, result: any
   );
 };
 
-Payment.getAllSettledPaymentsByGroupExpense = (parentExpenseID: number, result: any) => {
+Payment.getAllPaidPaymentsByGroupExpense = (
+  parentExpenseID: number,
+  result: any
+) => {
   sql.query(
-    "CALL getAllSettledPaymentsByGroupExpense(?)", parentExpenseID,
+    'CALL getAllPaidPaymentsByGroupExpense(?)',
+    parentExpenseID,
     (err: any, res: any) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
       } else {
         console.log(res);
@@ -96,16 +93,16 @@ Payment.getAllSettledPaymentsByGroupExpense = (parentExpenseID: number, result: 
   );
 };
 
-Payment.getAllPaymentsToUserInGroup = (receiverID: string, groupID: number, result: any) => {
+Payment.getAllSettledPaymentsByGroupExpense = (
+  parentExpenseID: number,
+  result: any
+) => {
   sql.query(
-    "CALL getAllPaymentsToUserInGroup(?, ?)",
-    [
-      receiverID,
-      groupID
-    ],
+    'CALL getAllSettledPaymentsByGroupExpense(?)',
+    parentExpenseID,
     (err: any, res: any) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
       } else {
         console.log(res);
@@ -115,16 +112,37 @@ Payment.getAllPaymentsToUserInGroup = (receiverID: string, groupID: number, resu
   );
 };
 
-Payment.getAllPaymentsFromUserInGroup = (senderID: string, groupID: number, result: any) => {
+Payment.getAllPaymentsToUserInGroup = (
+  receiverID: string,
+  groupID: number,
+  result: any
+) => {
   sql.query(
-    "CALL getAllPaymentsFromUserInGroup(?, ?)",
-    [
-      senderID,
-      groupID
-    ],
+    'CALL getAllPaymentsToUserInGroup(?, ?)',
+    [receiverID, groupID],
     (err: any, res: any) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+Payment.getAllPaymentsFromUserInGroup = (
+  senderID: string,
+  groupID: number,
+  result: any
+) => {
+  sql.query(
+    'CALL getAllPaymentsFromUserInGroup(?, ?)',
+    [senderID, groupID],
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
         result(err, null);
       } else {
         console.log(res);
@@ -135,31 +153,25 @@ Payment.getAllPaymentsFromUserInGroup = (senderID: string, groupID: number, resu
 };
 
 Payment.payPayment = (paymentID: number, result: any) => {
-    sql.query(
-      "CALL payPayment(?)", paymentID,
-      (err: any, res: any) => {
-        if (err) {
-          console.log("error: ", err);
-          result(err, null);
-        } else {
-          console.log(res);
-          result(null, res);
-        }
-      }
-    );
-  };
+  sql.query('CALL payPayment(?)', paymentID, (err: any, res: any) => {
+    if (err) {
+      console.log('error: ', err);
+      result(err, null);
+    } else {
+      console.log(res);
+      result(null, res);
+    }
+  });
+};
 
 Payment.settlePayment = (paymentID: number, result: any) => {
-  sql.query(
-    "CALL settlePayment(?)", paymentID,
-    (err: any, res: any) => {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        console.log(res);
-        result(null, res);
-      }
+  sql.query('CALL settlePayment(?)', paymentID, (err: any, res: any) => {
+    if (err) {
+      console.log('error: ', err);
+      result(err, null);
+    } else {
+      console.log(res);
+      result(null, res);
     }
-  );
+  });
 };
