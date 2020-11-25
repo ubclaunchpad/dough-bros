@@ -14,6 +14,8 @@ CREATE TABLE `group` (
   `group_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
   `fk_creator_id` varchar(255) NOT NULL,
   `group_name` varchar(255) NOT NULL,
+  `image_uri` varchar(255) NOT NULL,
+  `amount` float(8) NOT NULL,
   PRIMARY KEY (`group_id`),
   FOREIGN KEY (`fk_creator_id`)
 	  REFERENCES `user` (`firebase_uid`)

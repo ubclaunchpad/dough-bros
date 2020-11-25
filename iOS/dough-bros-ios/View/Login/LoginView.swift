@@ -82,7 +82,7 @@ class LoginView: UIView {
         pass.autocorrectionType = UITextAutocorrectionType.no
         pass.keyboardType = UIKeyboardType.default
         pass.returnKeyType = UIReturnKeyType.next
-        pass.isSecureTextEntry = true
+//        pass.isSecureTextEntry = true
         pass.clearButtonMode = UITextField.ViewMode.whileEditing
         pass.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return pass
@@ -97,7 +97,7 @@ class LoginView: UIView {
         confirm.autocorrectionType = UITextAutocorrectionType.no
         confirm.keyboardType = UIKeyboardType.default
         confirm.returnKeyType = UIReturnKeyType.done
-        confirm.isSecureTextEntry = true
+//        confirm.isSecureTextEntry = true
         confirm.clearButtonMode = UITextField.ViewMode.whileEditing
         confirm.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return confirm
@@ -176,7 +176,7 @@ class LoginView: UIView {
           } else if let token = token {
             print("FCM registration token: \(token)")
             self.TokenID.text  = "Remote FCM registration token: \(token)"
-            let user = User(firebase_uid: self.UID.text!, first_name: self.firstNameInput.text!, last_name: self.lastNameInput.text!, email_addr: self.emailInput.text!, facebook_id: "", is_anon: false, fcm_token: token)
+            let user = User(firebase_uid: self.UID.text!, first_name: self.firstNameInput.text!, last_name: self.lastNameInput.text!, email_addr: self.emailInput.text!, facebook_id: "", is_anon: 0, fcm_token: token)
             UserEndpoints.createUser(user: user)
           }
         }

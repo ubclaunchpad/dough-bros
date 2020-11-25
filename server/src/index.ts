@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req: Request, res: Response) => res.send('Welcome to Dough Bros!!'));
 
 app.use('/users', userRoute);
-app.use('/group', groupRoute);
+app.use('/groups', groupRoute);
 app.use('/payments', paymentRoute);
 app.use('/group_expense', groupExpenseRoute);
 

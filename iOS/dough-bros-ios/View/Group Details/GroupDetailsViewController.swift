@@ -8,6 +8,8 @@
 import UIKit
 
 class GroupDetailsViewController: UIViewController {
+    
+    var groupObj:GroupObj?
 
     private var groupDetailsView: GroupDetailsView {
         return view as! GroupDetailsView
@@ -16,13 +18,17 @@ class GroupDetailsViewController: UIViewController {
     // MARK: - View Life Cycle -
     override func loadView() {
         super.loadView()
-        
         view = GroupDetailsView()
     }
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if (groupObj != nil && groupObj?.image_uri != "") {
+            let url = URL(string: groupObj!.image_uri)
+            let data = try? Data(contentsOf: url!)
+            groupDetailsView.groupImage.image = UIImage(data: data!)
+        }
+        groupDetailsView.groupName.text = groupObj?.group_name == "" ? "Untitled Group" : groupObj?.group_name
         groupDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)

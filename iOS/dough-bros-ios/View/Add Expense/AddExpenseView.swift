@@ -148,7 +148,7 @@ class AddExpenseView: UIView {
 //        addSubview(numberPeople)
 //        NSLayoutConstraint.activate([
 //            numberPeople.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            numberPeople.topAnchor.constraint(equalTo: expenseAmount.bottomAnchor, constant: 30)
+//            numberPeople.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 30)
 //        ])
         
         addSubview(weightSlider)

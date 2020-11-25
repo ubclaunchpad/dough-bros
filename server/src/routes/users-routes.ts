@@ -31,6 +31,15 @@ router.get('/getUserByID/:userID', (req, res) => {
   });
 });
 
+// Get User by Email
+router.get('/getUserByEmail/:email', (req, res) => {
+  userServer.findUserByEmail(req.params.email).then((users: any) => {
+      res.json(users);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
 // Get All Users
 router.get('/getAllUsers', (_, res) => {
     userServer.findAllUsers().then((users: any) => {

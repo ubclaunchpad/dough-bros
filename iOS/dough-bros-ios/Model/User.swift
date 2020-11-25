@@ -13,6 +13,6 @@ struct User: Codable {
     var last_name: String
     var email_addr: String
     var facebook_id: String
-    var is_anon: Bool
+    var is_anon: Int
     var fcm_token: String
 }

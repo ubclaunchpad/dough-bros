@@ -7,10 +7,11 @@
 
 import UIKit
 import AlanYanHelpers
+import Firebase
 
 class GroupTableViewCell: UITableViewCell {
     
-    var group: Group? {
+    var group: GroupObj? {
         didSet {
             setupModel()
         }
@@ -68,10 +69,17 @@ class GroupTableViewCell: UITableViewCell {
             return
         }
         
-        groupProfilePictureView.image = group.image ?? UIImage(systemName: "person.crop.circle.fill")
+        if (group.image_uri == "") {
+            groupProfilePictureView.image = UIImage(systemName: "person.crop.circle.fill")
+        } else {
+            let url = URL(string: group.image_uri)
+            let data = try? Data(contentsOf: url!)
+            groupProfilePictureView.image = UIImage(data: data!)
+        }
         groupProfilePictureView.tintColor = .white
-        nameLabel.text = group.name
+        groupProfilePictureView.contentMode = .center
+        nameLabel.text = group.group_name == "" ? "Untitled Group" : group.group_name
         amountLabel.text = "$\(group.amount)"
-        oweLabel.text = group.youOwe ? "You Owe" : ""
+        oweLabel.text = Auth.auth().currentUser?.uid != group.creator_id ? "You Owe" : ""
     }
 }
