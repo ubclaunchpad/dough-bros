@@ -1,4 +1,4 @@
-const sql = require('../config/databaseHandler');
+const sql = require('../config/database-handler');
 
 // Task object constructor <- I have no idea how to insert this into SQL
 export const User = function (this: any, user: any) {

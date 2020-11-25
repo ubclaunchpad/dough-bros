@@ -1,4 +1,4 @@
-const sql = require('../config/databaseHandler');
+const sql = require('../config/database-handler');
 
 export const GroupExpense = function (this: any, groupExpense: any) {
   this.expense_id = groupExpense.expense_id;

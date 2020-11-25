@@ -1,4 +1,4 @@
-import { GroupExpense } from '../models/group_expense';
+import { GroupExpense } from '../models/group-expense';
 
 module.exports = class GroupExpenseService {
   constructor() {}

@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 
 // @ts-ignore
-const sql = require('./config/databaseHandler');
+const sql = require('./config/database-handler');
 
 const app = express();
 const PORT = 8000;
@@ -10,7 +10,7 @@ const PORT = 8000;
 let userRoute = require('./routes/user-routes');
 let groupRoute = require('./routes/group-routes');
 let paymentRoute = require('./routes/payment-routes');
-let groupExpenseRoute = require('./routes/group_expense-routes');
+let groupExpenseRoute = require('./routes/group-expense-routes');
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
