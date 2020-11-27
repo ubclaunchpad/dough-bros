@@ -27,9 +27,13 @@ class SampleViewController: UIViewController {
     
     
     @objc private func openLoginVC() {
-        let loginVC = LoginViewController()
+//        let loginVC = LoginViewController()
+//
+//        present(loginVC, animated: true)
         
-        present(loginVC, animated: true)
+        let welcomeVC = WelcomeViewController()
+
+        present(welcomeVC, animated: true)
     }
     
 }
