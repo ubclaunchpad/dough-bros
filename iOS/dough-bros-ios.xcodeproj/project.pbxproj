@@ -20,6 +20,7 @@
 		257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257DB49125316A0B00D1DABB /* LoginViewController.swift */; };
 		257DB49525316B7000D1DABB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257DB49425316B7000D1DABB /* LoginViewModel.swift */; };
 		BE8D5A65254F720E00ADC751 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8D5A64254F720E00ADC751 /* GroupsViewController.swift */; };
+		BECD2D182571021F0098F9CD /* GroupsSetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD2D172571021F0098F9CD /* GroupsSetUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		257DB49125316A0B00D1DABB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		257DB49425316B7000D1DABB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BE8D5A64254F720E00ADC751 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		BECD2D172571021F0098F9CD /* GroupsSetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsSetUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		257495D825311FF900D386A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BECD2D0E257101A70098F9CD /* GroupsSetUpViewController */,
 				BE8D5A5F254F5B6C00ADC751 /* GroupsViewController */,
 				256197FD2540FB850094174A /* Sample Table View */,
 				257495DC2531203F00D386A2 /* HomeView */,
@@ -150,6 +153,14 @@
 				BE8D5A64254F720E00ADC751 /* GroupsViewController.swift */,
 			);
 			path = GroupsViewController;
+			sourceTree = "<group>";
+		};
+		BECD2D0E257101A70098F9CD /* GroupsSetUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BECD2D172571021F0098F9CD /* GroupsSetUpViewController.swift */,
+			);
+			path = GroupsSetUpViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +235,7 @@
 			files = (
 				257495C425311FEA00D386A2 /* AppDelegate.swift in Sources */,
 				257DB48F25316A0200D1DABB /* LoginView.swift in Sources */,
+				BECD2D182571021F0098F9CD /* GroupsSetUpViewController.swift in Sources */,
 				257495C625311FEA00D386A2 /* SceneDelegate.swift in Sources */,
 				257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */,
 				257495E2253120B800D386A2 /* HomeView.swift in Sources */,

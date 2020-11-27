@@ -23,8 +23,8 @@ class GroupsViewController: UIViewController {
       
       let tableView = UITableView()
       tableView.translatesAutoresizingMaskIntoConstraints = false
-        
         tableView.addSubview(openGroupViewButton)
+        openGroupViewButton.addTarget(self, action: #selector(openGroupsViewVC), for: .touchUpInside)
       
       self.view.addSubview(tableView)
       
@@ -35,7 +35,15 @@ class GroupsViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       ])
       
+
+        
       tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+    }
+    
+    @objc private func openGroupsViewVC() {
+        let groupVC = GroupsSetUpViewController()
+        
+        present(groupVC, animated: true)
     }
       
     
