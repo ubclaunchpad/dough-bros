@@ -10,11 +10,11 @@ DROP procedure IF EXISTS `removeUserFromGroup`;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `createGroup` (IN `creator_id` VARCHAR(255), IN `group_name` VARCHAR(255))
+CREATE PROCEDURE `createGroup` (IN `creator_id` VARCHAR(255), IN `group_name` VARCHAR(255), IN `image_uri` VARCHAR(255), IN `amount` FLOAT(8))
 BEGIN
 
-INSERT INTO `group` (`fk_creator_id`, `group_name`)
-	VALUES (`creator_id`, `group_name`);
+INSERT INTO `group` (`fk_creator_id`, `group_name`, `image_uri`, `amount`)
+	VALUES (`creator_id`, `group_name`, `image_uri`, `amount`);
 
 END$$
 
@@ -27,6 +27,23 @@ BEGIN
 
 INSERT INTO `group_membership` (`fk_group_id`, `fk_user_id`, `fk_added_by_id`, `did_accept_invite`)
 	VALUES (`group_id`, `user_id`, `added_by_id`, `did_accept_invite`);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getGroupByUID` (IN `user_id` VARCHAR(255))
+BEGIN
+
+SELECT `group_id`, `fk_creator_id` as `creator_id`, `group_name`, `image_uri`, `amount`
+FROM `group`
+WHERE `fk_creator_id` = `user_id`
+UNION
+SELECT `group_id`, `fk_creator_id` as `creator_id`, `group_name`, `image_uri`, `amount` FROM `group` as g
+JOIN (SELECT `fk_group_id` FROM `group_membership` WHERE `fk_user_id` = `user_id`) as mb
+ON mb.fk_group_id=g.group_id;
 
 END$$
 

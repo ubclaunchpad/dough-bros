@@ -47,16 +47,17 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return edit
     }()
     
-    private var groupImage: UIImageView = {
+    private(set) var groupImage: UIImageView = {
         let image = UIImage(named: "SampleImage.png")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .center
         return imageView
     }()
     
-    private var groupName: UILabel = {
+    private(set) var groupName: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textColor = .black

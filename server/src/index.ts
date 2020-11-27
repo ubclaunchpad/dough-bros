@@ -24,7 +24,7 @@ app.get('/', (req: Request, res: Response) =>
 );
 
 app.use('/users', userRoute);
-app.use('/group', groupRoute);
+app.use('/groups', groupRoute);
 app.use('/payments', paymentRoute);
 app.use('/group_expense', groupExpenseRoute);
 

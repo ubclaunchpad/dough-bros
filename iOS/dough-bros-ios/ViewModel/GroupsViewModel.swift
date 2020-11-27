@@ -7,15 +7,16 @@
 
 import Foundation
 import Combine
+import Firebase
 
 class GroupsViewModel {
-    private var allGroups: [Group] = []
+    private var allGroups: [GroupObj] = []
     private var searchText: String = "" {
         didSet {
             searchFor(substring: searchText)
         }
     }
-    @Published private(set) var groups: [Group] = []
+    @Published private(set) var groups: [GroupObj] = []
     @Published private(set) var friends: [Friend] = []
     private(set) var previousState: State?
     @Published private(set) var state: State = .idle
@@ -25,9 +26,11 @@ class GroupsViewModel {
         // SOME NETWORK call
         setState(to: .loading)
         
+        allGroups = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
+        
         //simulates a long network call
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-            allGroups = [Group(name: "Awesome Group", members: [], image: nil, amount: 20, youOwe: true), Group(name: "Launchpad Friends", members: [], amount: 20), Group(name: "group chat awesome sauce", members: [], amount: 30, youOwe: true)]
+//            allGroups = [Group(name: "Awesome Group", members: [], image: nil, amount: 20, youOwe: true), Group(name: "Launchpad Friends", members: [], amount: 20), Group(name: "group chat awesome sauce", members: [], amount: 30, youOwe: true)]
             searchFor(substring: searchText)
             friends = [Friend(name: "Bob"), Friend(name: "Alan"), Friend(name: "Wren"), Friend(name: "Avery"), Friend(name: "Stephanie"), Friend(name: "Harin"), Friend(name: "Carlos")]
             
@@ -42,7 +45,7 @@ class GroupsViewModel {
     
     func searchFor(substring: String) {
         guard !substring.isEmpty else { groups = allGroups; return }
-        groups = groups.filter({$0.name.uppercased().contains(substring.uppercased())})
+        groups = groups.filter({$0.group_name.uppercased().contains(substring.uppercased())})
     }
     
     enum State {
