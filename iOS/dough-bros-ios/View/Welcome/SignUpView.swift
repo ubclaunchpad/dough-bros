@@ -52,6 +52,7 @@ class SignUpView: UIView, UITextFieldDelegate {
     private var passwordTextField: DBTextField = {
         let password = DBTextField(placeholderText: "Password", textStyle: .body)
         password.styleBottomBorder(color: .black)
+        password.isSecureTextEntry = true
         return password
     }()
     

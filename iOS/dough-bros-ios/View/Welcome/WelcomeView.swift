@@ -12,6 +12,24 @@ import Firebase
 
 class WelcomeView: UIView, UITextFieldDelegate {
 
+    private(set) var UID: UILabel = {
+        let userID = UILabel()
+        userID.translatesAutoresizingMaskIntoConstraints = false
+        userID.textColor = .black
+        userID.text = "???"
+        userID.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        return userID
+    }()
+    
+    private(set) var TokenID: UILabel = {
+        let token = UILabel()
+        token.translatesAutoresizingMaskIntoConstraints = false
+        token.textColor = .black
+        token.text = "???"
+        token.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        return token
+    }()
+    
     // MARK: - Subviews -
     private var welcomeLabel: UILabel = {
         let label = UILabel()
@@ -41,15 +59,25 @@ class WelcomeView: UIView, UITextFieldDelegate {
         return stack
     }()
     
-    private var emailTextField: DBTextField = {
+    private(set) var emailTextField: DBTextField = {
         let email = DBTextField(placeholderText: "Email", textStyle: .body)
         email.styleBottomBorder(color: .black)
+        email.keyboardType = UIKeyboardType.emailAddress
+        email.returnKeyType = UIReturnKeyType.next
+        email.clearButtonMode = UITextField.ViewMode.whileEditing
+        email.autocorrectionType = .no
+        email.autocapitalizationType = .none
         return email
     }()
     
-    private var passwordTextField: DBTextField = {
+    private(set) var passwordTextField: DBTextField = {
         let password = DBTextField(placeholderText: "Password", textStyle: .body)
         password.styleBottomBorder(color: .black)
+        password.isSecureTextEntry = true
+        password.keyboardType = UIKeyboardType.default
+        password.returnKeyType = UIReturnKeyType.next
+        password.clearButtonMode = UITextField.ViewMode.whileEditing
+        password.autocorrectionType = .no
         return password
     }()
     
@@ -61,11 +89,41 @@ class WelcomeView: UIView, UITextFieldDelegate {
         return button
     }()
     
+    private(set) var signInButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        button.setImage(UIImage(systemName: "arrow.right.circle.fill"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        button.tintColor = UIColor(hex: 0xF8A096)
+        return button
+    }()
+    
     private(set) var facebookLoginButton: FBLoginButton = {
         let fb = FBLoginButton()
         fb.translatesAutoresizingMaskIntoConstraints = false
         fb.permissions = ["public_profile", "email"]
         return fb
+    }()
+    
+    private(set) var resetPasswordButton: UIButton = {
+        let resetButton = UIButton()
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.setTitleColor(.systemBlue, for: .normal)
+        resetButton.setTitle("Reset Password", for: .normal)
+        resetButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        resetButton.setTitleColor(.gray, for: .normal)
+        return resetButton
+    }()
+    
+    private(set) var registerButton: UIButton = {
+        let register = UIButton()
+        register.translatesAutoresizingMaskIntoConstraints = false
+        register.setTitleColor(.systemBlue, for: .normal)
+        register.setTitle("Register", for: .normal)
+        register.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        register.setTitleColor(.gray, for: .normal)
+        return register
     }()
     
     //MARK: - Initializers -
@@ -122,11 +180,39 @@ class WelcomeView: UIView, UITextFieldDelegate {
             signInLabel.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 50)
         ])
         
+        addSubview(signInButton)
+        NSLayoutConstraint.activate([
+            signInButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -100),
+            signInButton.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 50)
+        ])
+        
         addSubview(facebookLoginButton)
         NSLayoutConstraint.activate([
             facebookLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             facebookLoginButton.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 50)
         ])
+        
+        addSubview(resetPasswordButton)
+        NSLayoutConstraint.activate([
+            resetPasswordButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            resetPasswordButton.topAnchor.constraint(equalTo: facebookLoginButton.bottomAnchor, constant: 50)
+        ])
+        
+        addSubview(registerButton)
+        NSLayoutConstraint.activate([
+            registerButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            registerButton.topAnchor.constraint(equalTo: facebookLoginButton.bottomAnchor, constant: 50)
+        ])
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (textField === emailTextField) {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            emailTextField.becomeFirstResponder()
+        }
+        
+        return true
     }
 
 }

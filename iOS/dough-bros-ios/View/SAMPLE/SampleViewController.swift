@@ -22,6 +22,7 @@ class SampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(hex: 0xDEE8F4)
         homeView.openLoginButton.addTarget(self, action: #selector(openLoginVC), for: .touchUpInside)
     }
     
