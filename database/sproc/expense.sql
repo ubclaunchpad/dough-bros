@@ -15,7 +15,7 @@ CREATE PROCEDURE `createGroupExpense` (IN `group_id` INT(8), IN `added_by_id` VA
 BEGIN
 
 INSERT INTO `group_expense` (`fk_group_id`, `fk_added_by_id`, `fk_currency_id`, `expense_name`, `is_archived`, `amount`)
-	VALUES (`group_id`, `added_by_id`, `currency_id`, `expense_name`, `amount`);
+	VALUES (`group_id`, `added_by_id`, `currency_id`, `expense_name`, `is_archived`, `amount`);
 
 END$$
 

@@ -31,7 +31,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         back.contentHorizontalAlignment = .fill
         back.contentVerticalAlignment = .fill
         back.imageView?.contentMode = .scaleAspectFit
-        back.setImage(UIImage(systemName: "chevron.left.square.fill"), for: .normal)
+        back.setImage(UIImage(named: "BackButton"), for: .normal)
         back.tintColor = .black
         return back
     }()
@@ -42,7 +42,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         edit.contentHorizontalAlignment = .fill
         edit.contentVerticalAlignment = .fill
         edit.imageView?.contentMode = .scaleAspectFit
-        edit.setImage(UIImage(systemName: "pencil.circle.fill"), for: .normal)
+        edit.setImage(UIImage(named: "EditButton"), for: .normal)
         edit.tintColor = .black
         return edit
     }()
@@ -79,10 +79,11 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         let summary = UITableView()
         summary.translatesAutoresizingMaskIntoConstraints = false
         summary.register(SummaryTableViewCell.self, forCellReuseIdentifier: "summaryCell")
-        summary.rowHeight = 50
-        summary.estimatedRowHeight = 50
+        summary.rowHeight = 70
+        summary.estimatedRowHeight = 70
         summary.isScrollEnabled = false
         summary.separatorColor = .clear
+        summary.allowsSelection = false
         return summary
     }()
     
@@ -103,6 +104,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         activity.estimatedRowHeight = 70
         activity.isScrollEnabled = false
         activity.separatorColor = .clear
+        activity.allowsSelection = false
         return activity
     }()
 
@@ -110,6 +112,16 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Add Expense", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        return button
+    }()
+    
+    private(set) var settleDebtButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Settle Debt", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -181,15 +193,15 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         contentView.addSubview(backButton)
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            backButton.widthAnchor.constraint(equalToConstant: 30),
-            backButton.heightAnchor.constraint(equalToConstant: 30),
+            backButton.widthAnchor.constraint(equalToConstant: 20),
+            backButton.heightAnchor.constraint(equalToConstant: 20),
             backButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20)
         ])
         contentView.addSubview(editButton)
         NSLayoutConstraint.activate([
             editButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            editButton.widthAnchor.constraint(equalToConstant: 30),
-            editButton.heightAnchor.constraint(equalToConstant: 30),
+            editButton.widthAnchor.constraint(equalToConstant: 20),
+            editButton.heightAnchor.constraint(equalToConstant: 20),
             editButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20)
         ])
         
@@ -216,6 +228,15 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
             addExpenseButton.widthAnchor.constraint(equalToConstant: 150),
             addExpenseButton.heightAnchor.constraint(equalToConstant: 35),
             addExpenseButton.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
+        ])
+        
+        // setupSettleDebt()
+        contentView.addSubview(settleDebtButton)
+        NSLayoutConstraint.activate([
+            settleDebtButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -40),
+            settleDebtButton.widthAnchor.constraint(equalToConstant: 150),
+            settleDebtButton.heightAnchor.constraint(equalToConstant: 35),
+            settleDebtButton.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
         ])
         
         // setupSummary()

@@ -13,7 +13,7 @@ class SummaryTableViewCell: UITableViewCell {
         let image = UIImage(named: "SampleImage.png")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 12.5
+        imageView.layer.cornerRadius = 25
         imageView.layer.masksToBounds = true
         return imageView
     }()
@@ -22,7 +22,7 @@ class SummaryTableViewCell: UITableViewCell {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textColor = .black
-        name.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        name.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         return name
     }()
     
@@ -38,8 +38,8 @@ class SummaryTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             userImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 5),
             userImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            userImage.heightAnchor.constraint(equalToConstant: 25),
-            userImage.widthAnchor.constraint(equalToConstant: 25)
+            userImage.heightAnchor.constraint(equalToConstant: 50),
+            userImage.widthAnchor.constraint(equalToConstant: 50)
         ])
         
         // setupCellDetail
@@ -47,7 +47,7 @@ class SummaryTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             userName.leftAnchor.constraint(equalTo: userImage.rightAnchor, constant: 10),
             userName.centerYAnchor.constraint(equalTo: centerYAnchor),
-            userName.heightAnchor.constraint(equalToConstant: 25),
+            userName.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 

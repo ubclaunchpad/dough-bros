@@ -23,6 +23,8 @@ class GroupDetailsViewController: UIViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TODO: Fetch Summary and Activity (Name, UID, ProfilePic, Amount Owned)
+        
         if (groupObj != nil && groupObj?.image_uri != "") {
             let url = URL(string: groupObj!.image_uri)
             let data = try? Data(contentsOf: url!)
@@ -32,6 +34,8 @@ class GroupDetailsViewController: UIViewController {
         groupDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)
+        groupDetailsView.settleDebtButton.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
+
     }
     
     @objc private func backButtonTapped() {
@@ -47,5 +51,12 @@ class GroupDetailsViewController: UIViewController {
         let addExpenseVC = AddExpenseViewController()
         
         present(addExpenseVC, animated: true)
+    }
+    
+    @objc private func settleDebtTapped() {
+        let settleDebtVC = SettleDebtViewController()
+        
+        settleDebtVC.groupObj = groupObj
+        navigationController?.pushViewController(settleDebtVC, animated: true)
     }
 }
