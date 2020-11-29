@@ -92,10 +92,13 @@ class WelcomeView: UIView, UITextFieldDelegate {
     private(set) var signInButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
-        button.setImage(UIImage(systemName: "arrow.right.circle.fill"), for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
+        button.setImage(UIImage(systemName: "arrow.right", withConfiguration: config), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        button.tintColor = UIColor(hex: 0xF8A096)
+        button.tintColor = .white
+        button.isEnabled = false
+        button.backgroundColor = UIColor(hex: 0xD8D8D8)
+        button.addCorners(32)
         return button
     }()
     
@@ -174,22 +177,24 @@ class WelcomeView: UIView, UITextFieldDelegate {
             passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
         
-        addSubview(signInLabel)
-        NSLayoutConstraint.activate([
-            signInLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            signInLabel.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 50)
-        ])
-        
         addSubview(signInButton)
         NSLayoutConstraint.activate([
             signInButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -100),
-            signInButton.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 50)
+            signInButton.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 50),
+            signInButton.heightAnchor.constraint(equalToConstant: 64),
+            signInButton.widthAnchor.constraint(equalToConstant: 64)
+        ])
+        
+        addSubview(signInLabel)
+        NSLayoutConstraint.activate([
+            signInLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            signInLabel.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor)
         ])
         
         addSubview(facebookLoginButton)
         NSLayoutConstraint.activate([
             facebookLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            facebookLoginButton.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 50)
+            facebookLoginButton.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 70)
         ])
         
         addSubview(resetPasswordButton)
@@ -209,7 +214,7 @@ class WelcomeView: UIView, UITextFieldDelegate {
         if (textField === emailTextField) {
             passwordTextField.becomeFirstResponder()
         } else {
-            emailTextField.becomeFirstResponder()
+            passwordTextField.resignFirstResponder()
         }
         
         return true

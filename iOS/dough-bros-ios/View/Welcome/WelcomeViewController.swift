@@ -44,6 +44,7 @@ class WelcomeViewController: UIViewController, LoginButtonDelegate {
         self.view.backgroundColor = UIColor(hex: 0xE1EEEE)
         
         setUpButtons()
+        setUpEmptyTextFieldValidation()
     }
     
     private func setUpButtons() {
@@ -51,6 +52,22 @@ class WelcomeViewController: UIViewController, LoginButtonDelegate {
         welcomeView.resetPasswordButton.addTarget(self, action: #selector(resetPassword), for: .touchUpInside)
         welcomeView.registerButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         welcomeView.facebookLoginButton.delegate = self
+    }
+    
+    private func setUpEmptyTextFieldValidation() {
+        emailInput.addTarget(self, action: #selector(textFieldsNotEmpty), for: .editingChanged)
+        passwordInput.addTarget(self, action: #selector(textFieldsNotEmpty), for: .editingChanged)
+    }
+    
+    @objc func textFieldsNotEmpty(sender: UITextField) {
+        if let email = emailInput.text, !email.isEmpty,
+           let password = passwordInput.text, !password.isEmpty {
+            welcomeView.signInButton.backgroundColor = UIColor(hex: 0xF8A096)
+            welcomeView.signInButton.isEnabled = true
+        } else {
+            welcomeView.signInButton.backgroundColor = UIColor(hex: 0xD8D8D8)
+            welcomeView.signInButton.isEnabled = false
+        }
     }
     
     @objc func loginAction(sender : UIButton) {

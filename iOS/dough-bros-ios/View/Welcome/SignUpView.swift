@@ -37,22 +37,32 @@ class SignUpView: UIView, UITextFieldDelegate {
         return stack
     }()
     
-    private var nameTextField: DBTextField = {
-        let name = DBTextField(placeholderText: "Name", textStyle: .body)
+    private(set) var firstNameTextField: DBTextField = {
+        let name = DBTextField(placeholderText: "First Name", textStyle: .body)
         name.styleBottomBorder(color: .black)
+        name.returnKeyType = UIReturnKeyType.next
         return name
     }()
     
-    private var emailTextField: DBTextField = {
+    private(set) var lastNameTextField: DBTextField = {
+        let name = DBTextField(placeholderText: "Last Name", textStyle: .body)
+        name.styleBottomBorder(color: .black)
+        name.returnKeyType = UIReturnKeyType.next
+        return name
+    }()
+    
+    private(set) var emailTextField: DBTextField = {
         let email = DBTextField(placeholderText: "Email", textStyle: .body)
         email.styleBottomBorder(color: .black)
+        email.returnKeyType = UIReturnKeyType.next
         return email
     }()
     
-    private var passwordTextField: DBTextField = {
+    private(set) var passwordTextField: DBTextField = {
         let password = DBTextField(placeholderText: "Password", textStyle: .body)
         password.styleBottomBorder(color: .black)
         password.isSecureTextEntry = true
+        password.returnKeyType = UIReturnKeyType.next
         return password
     }()
     
@@ -61,6 +71,18 @@ class SignUpView: UIView, UITextFieldDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitle("Open Login", for: .normal)
+        return button
+    }()
+    
+    private(set) var signUpButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
+        button.setImage(UIImage(systemName: "arrow.right", withConfiguration: config), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(hex: 0xD8D8D8)
+        button.addCorners(32)
         return button
     }()
     
@@ -89,15 +111,18 @@ class SignUpView: UIView, UITextFieldDelegate {
     }
     
     private func setupStackView() {
-        nameTextField.delegate = self
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
         
-        nameTextField.autocorrectionType = .no
+        firstNameTextField.autocorrectionType = .no
+        lastNameTextField.autocorrectionType = .no
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
         
-        loginStack.addArrangedSubview(nameTextField)
+        loginStack.addArrangedSubview(firstNameTextField)
+        loginStack.addArrangedSubview(lastNameTextField)
         loginStack.addArrangedSubview(emailTextField)
         loginStack.addArrangedSubview(passwordTextField)
     }
@@ -116,25 +141,48 @@ class SignUpView: UIView, UITextFieldDelegate {
         NSLayoutConstraint.activate([
             loginStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             loginStack.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 100),
-            nameTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            nameTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            firstNameTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            firstNameTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            lastNameTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            lastNameTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
         
+        addSubview(signUpButton)
+        NSLayoutConstraint.activate([
+            signUpButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -100),
+            signUpButton.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 50),
+            signUpButton.heightAnchor.constraint(equalToConstant: 64),
+            signUpButton.widthAnchor.constraint(equalToConstant: 64)
+        ])
+        
         addSubview(signInLabel)
         NSLayoutConstraint.activate([
             signInLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            signInLabel.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 50)
+            signInLabel.centerYAnchor.constraint(equalTo: signUpButton.centerYAnchor)
         ])
         
         addSubview(facebookLoginButton)
         NSLayoutConstraint.activate([
             facebookLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            facebookLoginButton.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 50)
+            facebookLoginButton.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 70)
         ])
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (textField === firstNameTextField) {
+            lastNameTextField.becomeFirstResponder()
+        } else if (textField === lastNameTextField) {
+            emailTextField.becomeFirstResponder()
+        } else if (textField === emailTextField) {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            passwordTextField.resignFirstResponder()
+        }
+        return true
     }
 
 }

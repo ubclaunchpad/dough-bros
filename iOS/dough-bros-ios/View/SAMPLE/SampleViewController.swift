@@ -34,7 +34,9 @@ class SampleViewController: UIViewController {
         
         let welcomeVC = WelcomeViewController()
 
-        present(welcomeVC, animated: true)
+        let nav = UINavigationController(rootViewController: welcomeVC)
+        nav.navigationBar.isHidden = true
+        present(nav, animated: true)
     }
     
 }
