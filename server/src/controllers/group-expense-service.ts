@@ -1,17 +1,17 @@
-import { GroupExpense } from "../models/group_expense";
+import { GroupExpense } from '../models/group-expense';
 
 module.exports = class GroupExpenseService {
   constructor() {}
 
   createGroupExpense(req: any) {
     const group_expense = {
-        fk_group_id: req.body.fk_group_id,
-        fk_added_by_id: req.body.fk_added_by_id,
-        fk_currency_id: req.body.fk_currency_id,
-        is_settled: req.body.is_settled,
-        expense_name: req.body.expense_name,
-        amount: req.body.amount,
-      }
+      fk_group_id: req.body.fk_group_id,
+      fk_added_by_id: req.body.fk_added_by_id,
+      fk_currency_id: req.body.fk_currency_id,
+      is_settled: req.body.is_settled,
+      expense_name: req.body.expense_name,
+      amount: req.body.amount,
+    };
 
     return new Promise((resolve, reject) => {
       GroupExpense.createGroupExpense(group_expense, (err: any, res: any) => {

@@ -1,4 +1,4 @@
-import { Group } from "../models/group";
+import { Group } from '../models/group';
 
 module.exports = class GroupService {
   constructor() {}
@@ -60,7 +60,7 @@ module.exports = class GroupService {
     });
   }
 
-  acceptGroupMembership(groupID: number, userID: string,) {
+  acceptGroupMembership(groupID: number, userID: string) {
     return new Promise((resolve, reject) => {
       Group.acceptGroupMembership(groupID, userID, (err: any, res: any) => {
         if (err) {

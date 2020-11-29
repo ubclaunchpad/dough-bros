@@ -10,3 +10,8 @@
 * An instance of mySQL will be running at *localhost:3306*
 * Server application is running at *localhost:8000*
 * Run `docker-compose down` or `Ctrl+C` to gracefully stop containers.
+
+# Code Maintenance
+
+* Run `npm run lint` to make sure your code follows code standard rules 
+is formatted before creating a pull request on GitHub.
