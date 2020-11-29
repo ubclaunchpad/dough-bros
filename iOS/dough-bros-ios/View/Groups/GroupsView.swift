@@ -22,7 +22,7 @@ class GroupsView: UIView {
         let label = UILabel()
         label.text = "Recent"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return label
     }()
     
@@ -30,7 +30,7 @@ class GroupsView: UIView {
         let label = UILabel()
         label.text = "Groups"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return label
     }()
     

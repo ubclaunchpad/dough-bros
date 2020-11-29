@@ -13,11 +13,11 @@ class AddExpenseViewController: UIViewController {
     
     var selectedPeople: Set<Friend> = []
     
-    lazy var owedAmounts = Array(repeating: 0, count: group.members.count)
+    lazy var owedAmounts: [Double] = Array(repeating: 0, count: group.members.count)
     
-    var totalSum = 0 {
+    var totalSum: Double = 0 {
         didSet {
-            addExpenseView.expenseAmount.text = "$\(totalSum)"
+            addExpenseView.expenseAmount.text = "$\((totalSum * 100).rounded()/100)"
         }
     }
     
@@ -25,100 +25,120 @@ class AddExpenseViewController: UIViewController {
         return view as! AddExpenseView
     }
     
-//    private var weightSlider: UISlider {
-//        return addExpenseView.weightSlider as UISlider
-//    }
-    
-//    private var weightLabel: UILabel {
-//        return addExpenseView.weightLabel as UILabel
-//    }
-    
     override func loadView() {
         super.loadView()
         self.view = AddExpenseView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-//        weightLabel.center = alignLabelWithSlider(slider: weightSlider)
+        addExpenseView.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupTextFields()
         setupCollectionView()
-//        setupSlider()
-//        setupExpenseAmountLabels()
+        setupDoneButton()
     }
     
-    // setup
+    //MARK: - Setup -
     
     private func setupCollectionView() {
         addExpenseView.addExpenseCollectionView.dataSource = self
         addExpenseView.addExpenseCollectionView.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+
     }
     
-//    private func setupSlider() {
-//        UIView.animate(withDuration: 0.7) {
-//            self.weightSlider.setValue(50, animated: true)
-//        }
-//        weightSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
-//    }
+    private func setupDoneButton() {
+        addExpenseView.finishedButton.addTarget(self, action: #selector(completedExpense), for: .touchUpInside)
+    }
     
-//    private func setupExpenseAmountLabels() {
-//        addExpenseView.expenseAmount.addTarget(self, action: #selector(calculateExpense), for: .editingChanged)
-//        addExpenseView.numberPeople.addTarget(self, action: #selector(calculateExpense), for: .editingChanged)
-//    }
+
+    private func setupTextFields() {
+        addExpenseView.expenseAmount.addTarget(self, action: #selector(textFieldDidEdit), for: .editingChanged)
+        addExpenseView.expenseAmount.addTarget(self, action: #selector(expenseSet), for: .editingDidEnd)
+    }
     
-//    @objc func calculateExpense() {
-//        guard let expense = addExpenseView.expenseAmount.text, !expense.isEmpty else {
-//            addExpenseView.amountOwed.text = ""
-//            return
-//        }
-//
-//        addExpenseView.amountOwed.text = "Each person owes $\((Double(expense)! * 100 / Double(group.members.count)).rounded(.up) / 100)"
-//
-//    }
+    @objc func completedExpense() {
+        //TODO: API Call
+        
+        dismiss(animated: true, completion: nil)
+    }
+    @objc func handleKeyboardWillShow(notification: Notification) {
+        addExpenseView.addExpenseCollectionView.contentInset.bottom = 300
+    }
+    @objc func keyboardWillHide() {
+        addExpenseView.addExpenseCollectionView.contentInset.bottom = 80
+    }
     
-    @objc func updateTotalExpense(_ sender: UITextField) {
-        guard let text = sender.text, let intValue = Int(text) else {
-            owedAmounts[sender.tag] = 0
-            totalSum = owedAmounts.reduce(0, +)
+    @objc func expenseSet(sender: UITextField) {
+        var textFieldText = sender.text
+        textFieldText?.removeFirst()
+        guard let text = textFieldText, let intValue = Double(text), intValue > 0 else {
+            totalSum = 0
+            owedAmounts = Array(repeating: 0, count: group.members.count)
+            addExpenseView.addExpenseCollectionView.reloadData()
             return
         }
         
-        owedAmounts[sender.tag] = intValue
-        
-        totalSum = owedAmounts.reduce(0, +)
+        totalSum = intValue
+        if selectedPeople.count > 0 {
+            let eachMemberCost = Double(totalSum)/Double(selectedPeople.count)
+            for friend in selectedPeople {
+                guard let index = group.members.firstIndex(of: friend) else { continue }
+                owedAmounts[index] = eachMemberCost
+            }
+            addExpenseView.addExpenseCollectionView.reloadData()
+        }
     }
     
-//    @objc func sliderValueChanged(_ sender: UISlider!) {
-//        let discreteWeightValue = round(sender.value / 10) * 10
-//        sender.value = discreteWeightValue
-//        weightLabel.text = String(discreteWeightValue)
-//        weightLabel.center = alignLabelWithSlider(slider: sender)
-//    }
-    
-//    func alignLabelWithSlider(slider: UISlider) -> CGPoint {
-//        let sliderTrack: CGRect = slider.trackRect(forBounds: slider.bounds)
-//        let sliderFrame: CGRect = slider.thumbRect(forBounds: slider.bounds, trackRect: sliderTrack, value: slider.value)
-//        return CGPoint(x: sliderFrame.origin.x + slider.frame.origin.x + 10, y: slider.frame.origin.y + 40)
-//    }
+    @objc func updateTotalExpense(_ sender: UITextField) {
+        var textFieldText = sender.text
+        textFieldText?.removeFirst()
+        guard let text = textFieldText, let intValue = Double(text), intValue > 0 else {
+            owedAmounts[sender.tag] = 0
+            sender.text = "$0.0"
+            selectedPeople.remove(group.members[sender.tag])
+            addExpenseView.addExpenseCollectionView.cellForItem(at: IndexPath(item: sender.tag, section: 0))?.contentView.backgroundColor = UIColor(hex: 0xF2F2F2)
 
+            totalSum = owedAmounts.reduce(0.0, +)
+            return
+        }
+        
+        selectedPeople.insert(group.members[sender.tag])
+        addExpenseView.addExpenseCollectionView.cellForItem(at: IndexPath(item: sender.tag, section: 0))?.contentView.backgroundColor = UIColor(hex: 0xf3eac2)
+
+        owedAmounts[sender.tag] = intValue
+        
+        totalSum = owedAmounts.reduce(0.0, +)
+    }
+    
+    @objc func textFieldDidEdit(sender: UITextField) {
+        if let text = sender.text, text.first != "$" {
+            sender.text = "$\(text)"
+        }
+    }
 }
 
 extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard addExpenseView.selectedState == .splitEqually else { return }
         if selectedPeople.contains(group.members[indexPath.item]) {
             selectedPeople.remove(group.members[indexPath.item])
             (collectionView.cellForItem(at: indexPath)!).contentView.backgroundColor = UIColor(hex: 0xF2F2F2)
             (collectionView.cellForItem(at: indexPath) as! AddExpenseCollectionViewCell).checkbox.image = UIImage(systemName: "checkmark.circle")
+            owedAmounts[indexPath.item] = 0
+            (collectionView.cellForItem(at: indexPath) as! AddExpenseCollectionViewCell).amountOwed.text = "$0.0"
 
         } else {
             selectedPeople.insert(group.members[indexPath.item])
             (collectionView.cellForItem(at: indexPath)!).contentView.backgroundColor = UIColor(hex: 0xf3eac2)
             (collectionView.cellForItem(at: indexPath) as! AddExpenseCollectionViewCell).checkbox.image = UIImage(systemName: "checkmark.circle.fill")
         }
+        expenseSet(sender: addExpenseView.expenseAmount)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -130,18 +150,34 @@ extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDa
         let friendsCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddExpenseCollectionViewCell.className, for: indexPath) as! AddExpenseCollectionViewCell
                 
         friendsCell.amountOwed.tag = indexPath.item
-        
+        friendsCell.amountOwed.text = "$\((owedAmounts[indexPath.item] * 100).rounded()/100)"
         friendsCell.amountOwed.addTarget(self, action: #selector(updateTotalExpense), for: .editingDidEnd)
         
         friendsCell.friend = group.members[indexPath.item]
         
+        friendsCell.updateCell(for: addExpenseView.selectedState)
+        
+        friendsCell.amountOwed.addTarget(self, action: #selector(textFieldDidEdit), for: .editingChanged)
         if selectedPeople.contains(group.members[indexPath.item]) {
             friendsCell.contentView.backgroundColor = UIColor(hex: 0xf3eac2)
+            friendsCell.checkbox.image = UIImage(systemName: "checkmark.circle.fill")
         } else {
             friendsCell.contentView.backgroundColor = UIColor(hex: 0xF2F2F2)
+            friendsCell.checkbox.image = UIImage(systemName: "checkmark.circle")
         }
         
         return friendsCell
     }
+    
+}
+
+extension AddExpenseViewController: AddExpenseViewDelegate {
+    func didUpdateSelectedState(to: AddExpenseView.SelectedState) {
+        selectedPeople.removeAll()
+        owedAmounts = Array(repeating: 0, count: group.members.count)
+        totalSum = 0
+        addExpenseView.addExpenseCollectionView.reloadData()
+    }
+    
     
 }

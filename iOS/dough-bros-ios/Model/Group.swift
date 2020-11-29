@@ -14,4 +14,5 @@ struct Group {
     var image: UIImage?
     var amount: Int
     var youOwe: Bool = false
+    
 }

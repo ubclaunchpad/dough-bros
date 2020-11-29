@@ -22,7 +22,7 @@ class SummaryTableViewCell: UITableViewCell {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textColor = .black
-        name.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        name.font = UIFont.customFont(ofSize: 12, weight: .bold)
         return name
     }()
     

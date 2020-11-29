@@ -23,20 +23,20 @@ class GroupTableViewCell: UITableViewCell {
     private var amountLabel: UILabel = {
         let label = UILabel()
         label.text = "10$"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return label
     }()
     
     private var oweLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 10, weight: .medium)
+        label.font = UIFont.customFont(ofSize: 10, weight: .medium)
         return label
     }()
     
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return label
     }()
 

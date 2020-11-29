@@ -16,7 +16,7 @@ class SampleView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .blue
         label.text = " SAMPLE VC: Pay BACK $$ u 🤡"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 20, weight: .bold)
         return label
     }()
     
