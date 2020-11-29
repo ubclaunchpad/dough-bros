@@ -20,6 +20,15 @@ router.post('/createGroupExpense', (req, res) => {
     });
 });
 
+router.post('/splitGroupExpense/', (req, res) => {
+  groupExpenseServer.splitGroupExpense(req).then((expense: any) => {
+      res.json(expense);
+    })
+    .catch((err: any) => {
+      res.json(err);
+    });
+});
+
 router.get('/getGroupExpenseById/:groupExpenseID', (req, res) => {
     groupExpenseServer.getGroupExpenseById(req.params.groupExpenseID).then((expense: any) => {
         res.json(expense);
