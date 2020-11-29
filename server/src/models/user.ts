@@ -11,7 +11,7 @@ export const User = function (this: any, user: any) {
   this.fcm_token = user.fcm_token;
 };
 
-User.create = (newUser: any, result: any) => {
+User.createUser = (newUser: any, result: any) => {
   sql.query(
     "CALL createUser(?,?,?,?,?,?,?)",
     [
@@ -35,10 +35,25 @@ User.create = (newUser: any, result: any) => {
   );
 };
 
-User.findUsersByID = (userID: string, result: any) => {
+User.findUserByID = (userID: string, result: any) => {
   sql.query(
     "CALL getUserByUid(?)",
     userID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res[0]);
+      }
+    }
+  );
+};
+
+User.findUsersByEmail = (email: string, result: any) => {
+  sql.query(
+    "CALL getUserByEmail(?)",
+    email,
     (err: any, res: any) => {
       if (err) {
         console.log("error: ", err);

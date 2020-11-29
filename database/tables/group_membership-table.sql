@@ -13,15 +13,15 @@ BEGIN
 CREATE TABLE `group_membership` (
   `fk_group_id` int(9) unsigned NOT NULL,
   `fk_user_id` varchar(255) NOT NULL,
-  `fk_added_by` varchar(255) NOT NULL,
-  `did_accept_invite` BOOLEAN NOT NULL,
-  FOREIGN KEY (`fK_group_id`)
+  `fk_added_by_id` varchar(255) NOT NULL,
+  `did_accept_invite` BOOLEAN DEFAULT 0 NOT NULL,
+  FOREIGN KEY (`fk_group_id`)
 	  REFERENCES `group` (`group_id`)
     ON DELETE CASCADE,
   FOREIGN KEY (`fk_user_id`)
 	  REFERENCES `user` (`firebase_uid`)
     ON DELETE CASCADE,
-  FOREIGN KEY (`fk_added_by`)
+  FOREIGN KEY (`fk_added_by_id`)
 	  REFERENCES `user` (`firebase_uid`)
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
