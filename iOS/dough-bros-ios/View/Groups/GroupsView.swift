@@ -20,17 +20,19 @@ class GroupsView: UIView {
     
     private var collectionViewLabel: UILabel = {
         let label = UILabel()
-        label.text = "Recent"
+        label.text = "Friends"
+        label.textColor = UIColor(hex: 0x2C365A)
         label.textAlignment = .left
-        label.font = UIFont.customFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 24, weight: .bold)
         return label
     }()
     
     private var tableViewLabel: UILabel = {
         let label = UILabel()
         label.text = "Groups"
+        label.textColor = UIColor(hex: 0x2C365A)
         label.textAlignment = .left
-        label.font = UIFont.customFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 24, weight: .bold)
         return label
     }()
     
@@ -57,7 +59,10 @@ class GroupsView: UIView {
     
     private(set) var createGroupButton: UIButton = {
         let button = UIButton()
-        button.setTitle("ADD GROUP", for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(hex: 0x3873AF)
+        button.setImage(UIImage(systemName: "plus", withConfiguration: config), for: .normal)
         return button
     }()
     
@@ -81,7 +86,7 @@ class GroupsView: UIView {
     private func setupView() {
         backgroundColor = .white
 
-        searchField.setSuperview(self).addLeading().addTrailing().addTopSafe(constant: 20)
+        searchField.setSuperview(self).addLeading(constant: 10).addTrailing(constant: -10).addTopSafe(constant: 20)
         
         collectionViewLabel.setSuperview(self).addLeading(constant: 20).addTop(anchor: searchField.bottomAnchor, constant: 10)
         
@@ -91,7 +96,7 @@ class GroupsView: UIView {
 
         groupsTableView.setSuperview(self).addTop(anchor: tableViewLabel.bottomAnchor, constant: 10).addLeading(constant: 20).addTrailing(constant: -20).addBottomSafe()
         
-        createGroupButton.setSuperview(self).addBottomSafe(constant: -20).addCenterX().addWidth(withConstant: 120).addHeight(withConstant: 40).setColor(.gray).addCorners(10)
+        createGroupButton.setSuperview(self).addBottomSafe(constant: -20).addTrailing(constant: -20).addWidth(withConstant: 64).addHeight(withConstant: 64).addCorners(32)
         
         let tapGesture = UITapGestureRecognizer()
         tapGesture.cancelsTouchesInView = false

@@ -26,11 +26,12 @@ class GroupsViewModel {
         // SOME NETWORK call
         setState(to: .loading)
         
-//        allGroups = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
+        allGroups = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
         
         //simulates a long network call
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-            allGroups = GroupObj.createMockGroups()
+            //mock groups
+//            allGroups = GroupObj.createMockGroups()
             searchFor(substring: searchText)
             friends = [Friend(name: "Bob"), Friend(name: "Alan"), Friend(name: "Wren"), Friend(name: "Avery"), Friend(name: "Stephanie"), Friend(name: "Harin"), Friend(name: "Carlos")]
             
