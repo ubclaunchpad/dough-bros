@@ -14,7 +14,7 @@ CREATE TABLE `group_expense` (
    `expense_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
    `fk_group_id` int(9) unsigned NOT NULL,
    `fk_added_by_id` VARCHAR(255) NOT NULL,
-   `fk_currency_id` int(9) unsigned NOT NULL,
+   `fk_currency_id` int(9) unsigned,
    `expense_name` varchar(255) NOT NULL,
    `is_archived` BOOLEAN DEFAULT 0 NOT NULL,
    `amount` decimal(19, 4) unsigned NOT NULL,

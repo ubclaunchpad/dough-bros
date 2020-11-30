@@ -7,3 +7,4 @@ ENV MYSQL_PASSWORD=root
 
 COPY ./sproc/* /docker-entrypoint-initdb.d/
 COPY ./tables/* /docker-entrypoint-initdb.d/
+COPY mockData.sql /docker-entrypoint-initdb.d/~mockData.sql

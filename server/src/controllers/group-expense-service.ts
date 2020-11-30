@@ -51,12 +51,12 @@ module.exports = class GroupExpenseService {
       for (var user_amount of user_amounts) {
         const user_payment = {
           fk_group_id: req.body.fk_group_id,
-          fk_sender_id: user_amount[0],        // list of user ids
+          fk_sender_id: user_amount[0],              // list of user ids
           fk_receiver_id: req.body.fk_added_by_id,    // currently: receiver_id = creator_id
           fk_creator_id: req.body.fk_added_by_id,
           fk_parent_expense_id: group_expense_id,     // get created group_expense_id from res
           fk_currency_id: req.body.fk_currency_id,
-          amount: user_amount[1],               // list of amounts 
+          amount: user_amount[1],                   // list of amounts 
         };
 
         Payment.createPayment(user_payment, (err: any, res: any) => {

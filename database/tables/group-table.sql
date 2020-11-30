@@ -15,10 +15,10 @@ CREATE TABLE `group` (
   `fk_creator_id` varchar(255) NOT NULL,
   `group_name` varchar(255) NOT NULL,
   `image_uri` varchar(255) NOT NULL,
-  `amount` float(8) NOT NULL,
+  `amount` float(8) DEFAULT 0 NOT NULL,
   PRIMARY KEY (`group_id`),
   FOREIGN KEY (`fk_creator_id`)
-	  REFERENCES `user` (`firebase_uid`)
+	REFERENCES `user` (`firebase_uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 END$$
