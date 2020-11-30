@@ -4,11 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>CFBundleDisplayName</key>
 	<string>Dough Bros</string>
 	<key>CFBundleExecutable</key>
@@ -58,6 +53,19 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AirbnbCerealBlack.ttf</string>
+		<string>AirbnbCerealBold.ttf</string>
+		<string>AirbnbCerealExtraBold.ttf</string>
+		<string>AirbnbCerealLight.ttf</string>
+		<string>AirbnbCerealMedium.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

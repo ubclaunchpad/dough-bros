@@ -15,7 +15,7 @@ class TutorialView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .green
         label.text = "Tutorial View"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 20, weight: .bold)
         return label
     }()
 

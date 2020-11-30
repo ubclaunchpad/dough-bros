@@ -23,20 +23,23 @@ class GroupTableViewCell: UITableViewCell {
     private var amountLabel: UILabel = {
         let label = UILabel()
         label.text = "10$"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = UIColor(hex: 0x2C365A)
+        label.font = UIFont.customFont(ofSize: 11, weight: .medium)
         return label
     }()
     
     private var oweLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 10, weight: .medium)
+        label.textColor = UIColor(hex: 0x2C365A)
+        label.font = UIFont.customFont(ofSize: 10, weight: .light)
         return label
     }()
     
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = UIColor(hex: 0x2C365A)
+        label.font = UIFont.customFont(ofSize: 14, weight: .medium)
         return label
     }()
 
@@ -52,13 +55,13 @@ class GroupTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
-        wrapperView.setSuperview(contentView).addTop(constant: 5).addBottom(constant: -5).addWidth(anchor: contentView.widthAnchor).setColor(UIColor(hex: 0xD8D8D8)).addCorners(10)
+        wrapperView.setSuperview(contentView).addTop(constant: 5).addBottom(constant: -5).addWidth(anchor: contentView.widthAnchor).setColor(UIColor(hex: 0xE1EEEE)).addCorners(32)
         
-        groupProfilePictureView.setSuperview(wrapperView).addLeading(constant: 10).addCenterY().addWidth(withConstant: 40).addHeight(withConstant: 40).addCorners(20).setColor(.lightGray)
+        groupProfilePictureView.setSuperview(wrapperView).addLeading(constant: 15).addCenterY().addWidth(withConstant: 56).addHeight(withConstant: 56).addCorners(28).setColor(.lightGray)
         
-        amountLabel.setSuperview(wrapperView).addTrailing(constant: -10).addCenterY()
+        amountLabel.setSuperview(wrapperView).addTrailing(constant: -15).addCenterY()
         
-        nameLabel.setSuperview(wrapperView).addLeading(anchor: groupProfilePictureView.trailingAnchor, constant: 10).addCenterY()
+        nameLabel.setSuperview(wrapperView).addLeading(anchor: groupProfilePictureView.trailingAnchor, constant: 15).addCenterY()
         nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountLabel.leadingAnchor, constant: -5).isActive = true
         
         oweLabel.setSuperview(wrapperView).addBottom(anchor: amountLabel.topAnchor).addTrailing(anchor: amountLabel.trailingAnchor)
