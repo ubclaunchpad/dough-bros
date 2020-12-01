@@ -62,7 +62,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textColor = .black
         name.text = "West Coast Trip 2021"
-        name.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        name.font = UIFont.customFont(ofSize: 20, weight: .bold)
         return name
     }()
     
@@ -71,7 +71,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         summaryLabel.translatesAutoresizingMaskIntoConstraints = false
         summaryLabel.textColor = .black
         summaryLabel.text = "Summary"
-        summaryLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        summaryLabel.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return summaryLabel
     }()
     
@@ -92,7 +92,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         activityLabel.translatesAutoresizingMaskIntoConstraints = false
         activityLabel.textColor = .black
         activityLabel.text = "Activity"
-        activityLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        activityLabel.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return activityLabel
     }()
     
@@ -114,7 +114,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         button.setTitle("Add Expense", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font = UIFont.customFont(ofSize: 16)
         return button
     }()
     

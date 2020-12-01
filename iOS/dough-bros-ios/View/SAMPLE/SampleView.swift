@@ -14,9 +14,9 @@ class SampleView: UIView {
     private var middleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .blue
+        label.textColor = .black
         label.text = " SAMPLE VC: Pay BACK $$ u 🤡"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 20, weight: .bold)
         return label
     }()
     

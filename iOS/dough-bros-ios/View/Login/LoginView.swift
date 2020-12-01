@@ -18,7 +18,7 @@ class LoginView: UIView {
         userID.translatesAutoresizingMaskIntoConstraints = false
         userID.textColor = .black
         userID.text = "???"
-        userID.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        userID.font = UIFont.customFont(ofSize: 20, weight: .bold)
         return userID
     }()
     
@@ -27,7 +27,7 @@ class LoginView: UIView {
         token.translatesAutoresizingMaskIntoConstraints = false
         token.textColor = .black
         token.text = "???"
-        token.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        token.font = UIFont.customFont(ofSize: 20, weight: .bold)
         return token
     }()
     
@@ -35,7 +35,7 @@ class LoginView: UIView {
         let firstName = UITextField()
         firstName.translatesAutoresizingMaskIntoConstraints = false
         firstName.placeholder = "First Name"
-        firstName.font = UIFont.systemFont(ofSize: 15)
+        firstName.font = UIFont.customFont(ofSize: 15)
         firstName.borderStyle = UITextField.BorderStyle.roundedRect
         firstName.autocorrectionType = UITextAutocorrectionType.no
         firstName.keyboardType = UIKeyboardType.default
@@ -49,7 +49,7 @@ class LoginView: UIView {
         let lastName = UITextField()
         lastName.translatesAutoresizingMaskIntoConstraints = false
         lastName.placeholder = "Last Name"
-        lastName.font = UIFont.systemFont(ofSize: 15)
+        lastName.font = UIFont.customFont(ofSize: 15)
         lastName.borderStyle = UITextField.BorderStyle.roundedRect
         lastName.autocorrectionType = UITextAutocorrectionType.no
         lastName.keyboardType = UIKeyboardType.default
@@ -63,7 +63,7 @@ class LoginView: UIView {
         let email = UITextField()
         email.translatesAutoresizingMaskIntoConstraints = false
         email.placeholder = "Email"
-        email.font = UIFont.systemFont(ofSize: 15)
+        email.font = UIFont.customFont(ofSize: 15)
         email.borderStyle = UITextField.BorderStyle.roundedRect
         email.autocorrectionType = UITextAutocorrectionType.no
         email.keyboardType = UIKeyboardType.emailAddress
@@ -77,7 +77,7 @@ class LoginView: UIView {
         let pass = UITextField()
         pass.translatesAutoresizingMaskIntoConstraints = false
         pass.placeholder = "Password"
-        pass.font = UIFont.systemFont(ofSize: 15)
+        pass.font = UIFont.customFont(ofSize: 15)
         pass.borderStyle = UITextField.BorderStyle.roundedRect
         pass.autocorrectionType = UITextAutocorrectionType.no
         pass.keyboardType = UIKeyboardType.default
@@ -92,7 +92,7 @@ class LoginView: UIView {
         let confirm = UITextField()
         confirm.translatesAutoresizingMaskIntoConstraints = false
         confirm.placeholder = "Confirm Password"
-        confirm.font = UIFont.systemFont(ofSize: 15)
+        confirm.font = UIFont.customFont(ofSize: 15)
         confirm.borderStyle = UITextField.BorderStyle.roundedRect
         confirm.autocorrectionType = UITextAutocorrectionType.no
         confirm.keyboardType = UIKeyboardType.default

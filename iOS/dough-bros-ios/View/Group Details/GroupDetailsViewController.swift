@@ -49,7 +49,7 @@ class GroupDetailsViewController: UIViewController {
     @objc private func addExpenseTapped() {
         print("add expense tapped")
         let addExpenseVC = AddExpenseViewController()
-        
+        //TODO: Pass group members through
         present(addExpenseVC, animated: true)
     }
     

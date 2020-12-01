@@ -22,7 +22,7 @@ class ActivityTableViewCell: UITableViewCell {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textColor = .black
-        name.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        name.font = UIFont.customFont(ofSize: 14, weight: .bold)
         return name
     }()
     

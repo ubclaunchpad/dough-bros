@@ -22,14 +22,21 @@ class SampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(hex: 0xDEE8F4)
         homeView.openLoginButton.addTarget(self, action: #selector(openLoginVC), for: .touchUpInside)
     }
     
     
     @objc private func openLoginVC() {
-        let loginVC = LoginViewController()
+//        let loginVC = LoginViewController()
+//
+//        present(loginVC, animated: true)
         
-        present(loginVC, animated: true)
+        let welcomeVC = WelcomeViewController()
+
+        let nav = UINavigationController(rootViewController: welcomeVC)
+        nav.navigationBar.isHidden = true
+        present(nav, animated: true)
     }
     
 }
