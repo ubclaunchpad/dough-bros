@@ -32,8 +32,9 @@ class PayConfirmationView: UIView {
     }()
     
     private(set) var userImageFrom: UIImageView = {
-        let image = UIImage(named: "SampleImage.png")
-        let imageView = UIImageView(image: image)
+        // let image = UIImage(named: "SampleImage.png")
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
@@ -51,8 +52,9 @@ class PayConfirmationView: UIView {
     }()
     
     private(set) var userImageTo: UIImageView = {
-        let image = UIImage(named: "SampleImage.png")
-        let imageView = UIImageView(image: image)
+        // let image = UIImage(named: "SampleImage.png")
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
@@ -60,7 +62,7 @@ class PayConfirmationView: UIView {
         return imageView
     }()
 
-    private var descriptionLabel: UILabel = {
+    private(set) var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
@@ -69,11 +71,10 @@ class PayConfirmationView: UIView {
         return label
     }()
     
-    private(set) var debtAmount: UITextField = {
-        let amount = UITextField()
+    private(set) var debtAmount: UILabel = {
+        let amount = UILabel()
         amount.translatesAutoresizingMaskIntoConstraints = false
-        amount.keyboardType = .decimalPad
-        amount.placeholder = "$10"
+        amount.text = "$10"
         amount.textColor = .black
         amount.font = UIFont.systemFont(ofSize: 30)
         amount.textAlignment = .center
@@ -140,13 +141,7 @@ class PayConfirmationView: UIView {
             debtAmount.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30)
         ])
         
-        addSubview(nextButton)
-        NSLayoutConstraint.activate([
-            nextButton.topAnchor.constraint(equalTo: debtAmount.bottomAnchor, constant: 100),
-            nextButton.widthAnchor.constraint(equalToConstant: 50),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -20)
-        ])
+        nextButton.setSuperview(self).addBottomSafe(constant: -20).addTrailing(constant: -20).addWidth(withConstant: 50).addHeight(withConstant: 50)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(lowerKeyboard))
         tapGesture.cancelsTouchesInView = false

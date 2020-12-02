@@ -112,9 +112,10 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Add Expense", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(hex: 0x6BAED8)
         button.titleLabel?.font = UIFont.customFont(ofSize: 16)
+        button.addCorners(20)
         return button
     }()
     
@@ -122,9 +123,10 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Settle Debt", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(hex: 0xF8A096)
+        button.titleLabel?.font = UIFont.customFont(ofSize: 16)
+        button.addCorners(20)
         return button
     }()
     
@@ -226,7 +228,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         NSLayoutConstraint.activate([
             addExpenseButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40),
             addExpenseButton.widthAnchor.constraint(equalToConstant: 150),
-            addExpenseButton.heightAnchor.constraint(equalToConstant: 35),
+            addExpenseButton.heightAnchor.constraint(equalToConstant: 40),
             addExpenseButton.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
         ])
         
@@ -235,7 +237,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         NSLayoutConstraint.activate([
             settleDebtButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -40),
             settleDebtButton.widthAnchor.constraint(equalToConstant: 150),
-            settleDebtButton.heightAnchor.constraint(equalToConstant: 35),
+            settleDebtButton.heightAnchor.constraint(equalToConstant: 40),
             settleDebtButton.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
         ])
         

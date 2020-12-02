@@ -10,8 +10,9 @@ import UIKit
 class SummaryTableViewCell: UITableViewCell {
     
     let userImage: UIImageView = {
-        let image = UIImage(named: "SampleImage.png")
-        let imageView = UIImageView(image: image)
+        // let image = UIImage(named: "SampleImage.png")
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 25
         imageView.layer.masksToBounds = true

@@ -65,6 +65,7 @@
 		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
 		BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */; };
 		BEE9D76025589E9D0078BCB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */; };
+		BEF13921257706840083F92D /* AppColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF13920257706840083F92D /* AppColour.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +128,7 @@
 		BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BEF13920257706840083F92D /* AppColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColour.swift; sourceTree = "<group>"; };
 		D041CF3D012636ECA0535383 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -178,7 +180,7 @@
 				90E51A6F2570CDAF0029DF5E /* CustomViews */,
 				BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */,
 				BE1F06BF255147A30067C137 /* dough-bros-ios.entitlements */,
-				25B0531D25737BA900173E94 /* Fonts */,
+				25B0531D25737BA900173E94 /* Branding */,
 				251CE01A25513448002913DE /* Shared */,
 				257495DA2531201F00D386A2 /* Model */,
 				257495D825311FF900D386A2 /* View */,
@@ -296,7 +298,7 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		25B0531D25737BA900173E94 /* Fonts */ = {
+		25B0531D25737BA900173E94 /* Branding */ = {
 			isa = PBXGroup;
 			children = (
 				25B0531F25737BC000173E94 /* AirbnbCerealBlack.ttf */,
@@ -305,8 +307,9 @@
 				25B0532325737BC000173E94 /* AirbnbCerealLight.ttf */,
 				25B0532225737BC000173E94 /* AirbnbCerealMedium.ttf */,
 				25B0532B25737BCE00173E94 /* AppFont.swift */,
+				BEF13920257706840083F92D /* AppColour.swift */,
 			);
-			path = Fonts;
+			path = Branding;
 			sourceTree = "<group>";
 		};
 		37077A11A6722C928EAD1962 /* Pods */ = {
@@ -567,6 +570,7 @@
 				25B0532C25737BCE00173E94 /* AppFont.swift in Sources */,
 				BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */,
 				258247322546614300F2EAAD /* GroupsViewController.swift in Sources */,
+				BEF13921257706840083F92D /* AppColour.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

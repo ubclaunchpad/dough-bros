@@ -27,6 +27,8 @@ class PayConfirmationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: Put Debt List Into List
+        payConfirmationView.descriptionLabel.text = (name ?? "A Friend") + " paid you"
+        payConfirmationView.debtAmount.text = "$" + (amount ?? "0")
         payConfirmationView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         payConfirmationView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
@@ -36,6 +38,7 @@ class PayConfirmationViewController: UIViewController {
     }
     
     @objc private func nextButtonTapped() {
+        // TODO send payment confirmation to database
         navigationController?.popToRootViewController(animated: true)
     }
     

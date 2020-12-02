@@ -27,11 +27,11 @@ class SettleDebtViewController: UIViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (groupObj != nil && groupObj?.image_uri != "") {
-            let url = URL(string: groupObj!.image_uri)
-            let data = try? Data(contentsOf: url!)
-            settleDebtView.groupImage.image = UIImage(data: data!)
-        }
+//        if (groupObj != nil && groupObj?.image_uri != "") {
+//            let url = URL(string: groupObj!.image_uri)
+//            let data = try? Data(contentsOf: url!)
+//            settleDebtView.groupImage.image = UIImage(data: data!)
+//        }
         settleDebtView.groupName.text = groupObj?.group_name == "" ? "Untitled Group" : groupObj?.group_name
         settleDebtView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }

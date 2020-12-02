@@ -34,8 +34,8 @@ class SettleDebtView: UIView {
     }()
     
     private(set) var groupImage: UIImageView = {
-        let image = UIImage(named: "SampleImage.png")
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
