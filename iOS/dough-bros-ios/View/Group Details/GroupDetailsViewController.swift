@@ -81,6 +81,7 @@ class GroupDetailsViewController: UIViewController {
         let settleDebtVC = SettleDebtViewController()
         
         settleDebtVC.groupObj = groupObj
+        settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0})
         navigationController?.pushViewController(settleDebtVC, animated: true)
     }
 }
@@ -99,7 +100,12 @@ extension GroupDetailsViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (tableView == groupDetailsView.summaryView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
-            cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " owes you $" + String(paymentViewModel.payments[indexPath.row].amount)
+            if (paymentViewModel.payments[indexPath.row].is_settled == 1) {
+                cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " is all settled"
+                cell.userName.textColor = UIColor.gray
+            } else {
+                cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " owes you $" + String(paymentViewModel.payments[indexPath.row].amount)
+            }
             
             return cell
         } else {

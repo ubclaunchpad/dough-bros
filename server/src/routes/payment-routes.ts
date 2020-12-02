@@ -152,7 +152,7 @@ router.put('/payPayment/:paymentID', (req, res) => {
     });
 });
 
-router.put('/payPayment/:paymentID', (req, res) => {
+router.put('/settlePayment/:paymentID', (req, res) => {
   paymentServer
     .settlePayment(req.params.paymentID)
     .then((payment: any) => {

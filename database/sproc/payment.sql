@@ -116,8 +116,8 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `payPayment` (IN `payment_id` INT(8))
 BEGIN
 
-UPDATE `payment`
-SET `is_paid` = 1 WHERE `payment_id` = `payment_id`;
+UPDATE payment as p
+SET p.is_paid = 1 WHERE p.payment_id = `payment_id`;
 
 END$$
 
@@ -128,8 +128,8 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `settlePayment` (IN `payment_id` INT(8))
 BEGIN
 
-UPDATE `payment`
-SET `is_settled` = 1 WHERE `payment_id` = `payment_id`;
+UPDATE `payment` as p
+SET p.is_settled = 1 WHERE p.payment_id = `payment_id`;
 
 END$$
 

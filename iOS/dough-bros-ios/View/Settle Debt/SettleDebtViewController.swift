@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 public var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
 
 class SettleDebtViewController: UIViewController {
 
     var groupObj:GroupObj?
+    var debtList:[PaymentObj]?
 
     private var settleDebtView: SettleDebtView {
         return view as! SettleDebtView
@@ -45,13 +47,13 @@ class SettleDebtViewController: UIViewController {
 extension SettleDebtViewController: UITableViewDelegate, UITableViewDataSource {
     // Setup Tableview for Either Summary or Activity
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return summaryStuff.count
+        return debtList?.count ?? 0
     }
     
     // Setup Tableview cells for either summary or activity
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
-        cell.userName.text = summaryStuff[indexPath.row]
+        cell.userName.text = (debtList?[indexPath.row].first_name ?? "") + " owes you $" + String(debtList?[indexPath.row].amount ?? 0)
         
         return cell
     }
@@ -59,8 +61,7 @@ extension SettleDebtViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let payConfirmVC = PayConfirmationViewController()
         //TODO: Pass the group through so group details can create the correct views
-        payConfirmVC.name = "Alex"
-        payConfirmVC.amount = "10"
+        payConfirmVC.paymentObj = debtList?[indexPath.row]
         
         navigationController?.pushViewController(payConfirmVC, animated: true)
     }
