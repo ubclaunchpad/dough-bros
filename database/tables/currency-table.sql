@@ -12,8 +12,8 @@ BEGIN
 
 CREATE TABLE `currency` (
   `currency_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
-  `currency_name` varchar(255) NOT NULL,
-  `currency_code` varchar(10) NOT NULL,
+  `currency_name` varchar(255),
+  `currency_code` varchar(10),
   PRIMARY KEY (`currency_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

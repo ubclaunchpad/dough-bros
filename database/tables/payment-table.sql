@@ -16,7 +16,7 @@ CREATE TABLE `payment` (
   `fk_receiver_id` VARCHAR(255) NOT NULL,
   `fk_creator_id` VARCHAR(255) NOT NULL,
   `fk_parent_expense_id` int(9) unsigned NOT NULL,
-  `fk_currency_id` int(9) unsigned NOT NULL,
+  `fk_currency_id` int(9) unsigned,
   `is_paid` BOOLEAN DEFAULT 0 NOT NULL,
   `is_settled` BOOLEAN DEFAULT 0 NOT NULL,
   `amount` decimal(19, 4) unsigned NOT NULL,
