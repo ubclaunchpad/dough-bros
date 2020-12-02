@@ -72,13 +72,14 @@ class GroupTableViewCell: UITableViewCell {
             return
         }
         
-        if (group.image_uri == "") {
-            groupProfilePictureView.image = UIImage(systemName: "person.crop.circle.fill")
-        } else {
-            let url = URL(string: group.image_uri)
-            let data = try? Data(contentsOf: url!)
-            groupProfilePictureView.image = UIImage(data: data!)
-        }
+//        if (group.image_uri == "") {
+//            groupProfilePictureView.image = UIImage(systemName: "person.crop.circle.fill")
+//        } else {
+//            let url = URL(string: group.image_uri)
+//            let data = try? Data(contentsOf: url!)
+//            groupProfilePictureView.image = UIImage(data: data!)
+//        }
+        groupProfilePictureView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         groupProfilePictureView.tintColor = .white
         groupProfilePictureView.contentMode = .center
         nameLabel.text = group.group_name == "" ? "Untitled Group" : group.group_name

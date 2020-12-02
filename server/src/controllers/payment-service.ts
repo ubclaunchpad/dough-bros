@@ -96,6 +96,21 @@ module.exports = class PaymentService {
     });
   }
 
+  getAllSettledPaymentsToUserInGroup(receiverID: string, groupID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllSettledPaymentsToUserInGroup(
+        receiverID,
+        groupID,
+        (err: any, res: any) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        }
+      );
+    });
+  }
+
   getAllPaymentsFromUserInGroup(senderID: string, groupID: number) {
     return new Promise((resolve, reject) => {
       Payment.getAllPaymentsFromUserInGroup(

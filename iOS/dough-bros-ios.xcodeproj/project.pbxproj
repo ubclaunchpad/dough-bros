@@ -64,6 +64,9 @@
 		BE25AD8C25722BF30069DF5F /* DebtObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25AD8B25722BF30069DF5F /* DebtObj.swift */; };
 		BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */; };
 		BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */; };
+		BEE0096A25773215003F46CB /* PaymentPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0096925773215003F46CB /* PaymentPoints.swift */; };
+		BEE0096D25773309003F46CB /* PaymentObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0096C25773309003F46CB /* PaymentObj.swift */; };
+		BEE009702577357F003F46CB /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0096F2577357F003F46CB /* PaymentViewModel.swift */; };
 		BEE9D76025589E9D0078BCB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */; };
 		BEF13921257706840083F92D /* AppColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF13920257706840083F92D /* AppColour.swift */; };
 /* End PBXBuildFile section */
@@ -127,6 +130,9 @@
 		BE25AD8B25722BF30069DF5F /* DebtObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtObj.swift; sourceTree = "<group>"; };
 		BEBEB84225493E460029BAB3 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		BEBEB84525493E510029BAB3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		BEE0096925773215003F46CB /* PaymentPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPoints.swift; sourceTree = "<group>"; };
+		BEE0096C25773309003F46CB /* PaymentObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentObj.swift; sourceTree = "<group>"; };
+		BEE0096F2577357F003F46CB /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEF13920257706840083F92D /* AppColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColour.swift; sourceTree = "<group>"; };
 		D041CF3D012636ECA0535383 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +231,7 @@
 			children = (
 				257DB49425316B7000D1DABB /* LoginViewModel.swift */,
 				25DB65E7255134F100F79B58 /* GroupsViewModel.swift */,
+				BEE0096F2577357F003F46CB /* PaymentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -236,6 +243,7 @@
 				25DB65EA2551357400F79B58 /* Friend.swift */,
 				BE180EDA255B6FC800F9D2B4 /* User.swift */,
 				BE03B3F3256A21EA00B9A4D0 /* GroupObj.swift */,
+				BEE0096C25773309003F46CB /* PaymentObj.swift */,
 				BE25AD8B25722BF30069DF5F /* DebtObj.swift */,
 			);
 			path = Model;
@@ -383,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				90B940012570DF8200DC5F27 /* GroupPoints.swift */,
+				BEE0096925773215003F46CB /* PaymentPoints.swift */,
 				BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */,
 			);
 			path = Endpoints;
@@ -526,8 +535,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				257495C425311FEA00D386A2 /* AppDelegate.swift in Sources */,
+				BEE0096A25773215003F46CB /* PaymentPoints.swift in Sources */,
 				2596C923255132E500DAA64F /* GroupTableViewCell.swift in Sources */,
 				257DB48F25316A0200D1DABB /* LoginView.swift in Sources */,
+				BEE0096D25773309003F46CB /* PaymentObj.swift in Sources */,
 				BE25AD8625720A270069DF5F /* PayConfirmationView.swift in Sources */,
 				BE180EDB255B6FC800F9D2B4 /* User.swift in Sources */,
 				90E51A682570C8A50029DF5E /* WelcomeView.swift in Sources */,
@@ -535,6 +546,7 @@
 				251CE01C25513453002913DE /* ObjectClassName.swift in Sources */,
 				90E51A742570D0250029DF5E /* DBStackView.swift in Sources */,
 				901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */,
+				BEE009702577357F003F46CB /* PaymentViewModel.swift in Sources */,
 				BE03B3E325699CF100B9A4D0 /* AddGroupViewController.swift in Sources */,
 				257495C625311FEA00D386A2 /* SceneDelegate.swift in Sources */,
 				90E51A7A2570D53C0029DF5E /* SignUpViewController.swift in Sources */,

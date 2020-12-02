@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
+class GroupDetailsView: UIView {
     // TEMP DEV DATA
     var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
     var activityStuff = ["Alex paid you $220", "Bob paid you $500", "John paid you $220", "Steven paid you $500", "Joe paid you $220", "Charles paid you $500"]
@@ -48,8 +48,9 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     }()
     
     private(set) var groupImage: UIImageView = {
-        let image = UIImage(named: "SampleImage.png")
-        let imageView = UIImageView(image: image)
+        // let image = UIImage(named: "SampleImage.png")
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
@@ -75,7 +76,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return summaryLabel
     }()
     
-    private var summaryView: UITableView = {
+    private(set) var summaryView: UITableView = {
         let summary = UITableView()
         summary.translatesAutoresizingMaskIntoConstraints = false
         summary.register(SummaryTableViewCell.self, forCellReuseIdentifier: "summaryCell")
@@ -96,7 +97,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return activityLabel
     }()
     
-    private var activityView: UITableView = {
+    private(set) var activityView: UITableView = {
         let activity = UITableView()
         activity.translatesAutoresizingMaskIntoConstraints = false
         activity.register(ActivityTableViewCell.self, forCellReuseIdentifier: "activityCell")
@@ -144,30 +145,6 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     override class var requiresConstraintBasedLayout: Bool {
         return true
-    }
-    
-    // Setup Tableview for Either Summary or Activity
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView == summaryView) {
-            return summaryStuff.count
-        } else {
-            return activityStuff.count
-        }
-    }
-    
-    // Setup Tableview cells for either summary or activity
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (tableView == summaryView) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
-            cell.userName.text = summaryStuff[indexPath.row]
-            
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
-            cell.userName.text = activityStuff[indexPath.row]
-            
-            return cell
-        }
     }
     
     
@@ -248,7 +225,6 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
             summaryLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40)
         ])
         contentView.addSubview(summaryView)
-        summaryView.dataSource = self
         NSLayoutConstraint.activate([
             summaryView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             summaryView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 5),
@@ -264,7 +240,6 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
             activityLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40)
         ])
         contentView.addSubview(activityView)
-        activityView.dataSource = self
         NSLayoutConstraint.activate([
             activityView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             activityView.topAnchor.constraint(equalTo: activityLabel.bottomAnchor, constant: 5),

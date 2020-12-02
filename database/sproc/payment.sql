@@ -70,8 +70,26 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllPaymentsToUserInGroup` (IN `receiver_id` VARCHAR(255), IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE (`fk_receiver_id` = `receiver_id`
-	AND `fk_parent_expense_id` = (
+SELECT p.*, u.first_name, u.last_name
+FROM `payment` as p 
+JOIN `user` as u ON u.firebase_uid = p.fk_sender_id
+WHERE (p.fk_receiver_id = `receiver_id` AND p.fk_parent_expense_id = (
+		SELECT `expense_id` FROM `group_expense` WHERE `fk_group_id` = `group_id`)
+	);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllSettledPaymentsToUserInGroup` (IN `receiver_id` VARCHAR(255), IN `group_id` INT(8))
+BEGIN
+
+SELECT p.*, u.first_name, u.last_name
+FROM `payment` as p 
+JOIN `user` as u ON u.firebase_uid = p.fk_sender_id
+WHERE (p.fk_receiver_id = `receiver_id` AND p.is_settled = 1 AND p.fk_parent_expense_id = (
 		SELECT `expense_id` FROM `group_expense` WHERE `fk_group_id` = `group_id`)
 	);
 
