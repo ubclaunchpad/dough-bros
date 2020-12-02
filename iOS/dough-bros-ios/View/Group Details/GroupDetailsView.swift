@@ -8,9 +8,6 @@
 import UIKit
 
 class GroupDetailsView: UIView {
-    // TEMP DEV DATA
-    var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
-    var activityStuff = ["Alex paid you $220", "Bob paid you $500", "John paid you $220", "Steven paid you $500", "Joe paid you $220", "Charles paid you $500"]
 
     // MARK: - Subviews -
     private var scrollView: UIScrollView = {
@@ -131,6 +128,17 @@ class GroupDetailsView: UIView {
         return button
     }()
     
+    private(set) var settleDebtButtonMiddle: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Settle Debt", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(hex: 0xF8A096)
+        button.titleLabel?.font = UIFont.customFont(ofSize: 16)
+        button.addCorners(20)
+        return button
+    }()
+    
     //MARK: - Initializers -
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -218,6 +226,15 @@ class GroupDetailsView: UIView {
             settleDebtButton.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
         ])
         
+        // This is really hacky I know but its late and I cant think anymore
+        contentView.addSubview(settleDebtButtonMiddle)
+        NSLayoutConstraint.activate([
+            settleDebtButtonMiddle.centerXAnchor.constraint(equalTo: centerXAnchor),
+            settleDebtButtonMiddle.widthAnchor.constraint(equalToConstant: 150),
+            settleDebtButtonMiddle.heightAnchor.constraint(equalToConstant: 40),
+            settleDebtButtonMiddle.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
+        ])
+        
         // setupSummary()
         contentView.addSubview(summaryLabel)
         NSLayoutConstraint.activate([
@@ -229,7 +246,7 @@ class GroupDetailsView: UIView {
             summaryView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             summaryView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 5),
             summaryView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
-            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(summaryStuff.count)),
+            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(5)), // 5 cells high
             summaryView.leftAnchor.constraint(equalTo: summaryLabel.leftAnchor)
         ])
 
@@ -244,7 +261,7 @@ class GroupDetailsView: UIView {
             activityView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             activityView.topAnchor.constraint(equalTo: activityLabel.bottomAnchor, constant: 5),
             activityView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
-            activityView.heightAnchor.constraint(equalToConstant: activityView.rowHeight * CGFloat(activityStuff.count)),
+            activityView.heightAnchor.constraint(equalToConstant: activityView.rowHeight * CGFloat(5)), // 5 cells high
             activityView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             activityView.leftAnchor.constraint(equalTo: activityLabel.leftAnchor)
         ])

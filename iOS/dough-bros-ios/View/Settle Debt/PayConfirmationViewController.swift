@@ -11,6 +11,7 @@ class PayConfirmationViewController: UIViewController {
     
     var debtList: [Any]?
     var paymentObj: PaymentObj?
+    var isOwner: Bool?
     
     var selectedPeople: Set<Friend> = []
     
@@ -26,8 +27,13 @@ class PayConfirmationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: Put Debt List Into List
-        payConfirmationView.descriptionLabel.text = (paymentObj?.first_name ?? "A Friend") + " paid you"
-        payConfirmationView.debtAmount.text = "$" + (String(paymentObj?.amount ?? 0))
+        if (isOwner!) {
+            payConfirmationView.descriptionLabel.text = (paymentObj?.first_name ?? "A Friend") + " paid you"
+            payConfirmationView.debtAmount.text = "$" + (String(paymentObj?.amount ?? 0))
+        } else {
+            payConfirmationView.descriptionLabel.text = "You paid"
+            payConfirmationView.debtAmount.text = "$" + (String(paymentObj?.amount ?? 0))
+        }
         payConfirmationView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         payConfirmationView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }

@@ -14,6 +14,7 @@ class SettleDebtViewController: UIViewController {
 
     var groupObj:GroupObj?
     var debtList:[PaymentObj]?
+    var isOwner:Bool?
 
     private var settleDebtView: SettleDebtView {
         return view as! SettleDebtView
@@ -53,7 +54,11 @@ extension SettleDebtViewController: UITableViewDelegate, UITableViewDataSource {
     // Setup Tableview cells for either summary or activity
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
-        cell.userName.text = (debtList?[indexPath.row].first_name ?? "") + " owes you $" + String(debtList?[indexPath.row].amount ?? 0)
+        if (isOwner!) {
+            cell.userName.text = (debtList?[indexPath.row].first_name ?? "") + " owes you $" + String(debtList?[indexPath.row].amount ?? 0)
+        } else {
+            cell.userName.text = "You owe $" + String(debtList?[indexPath.row].amount ?? 0)
+        }
         
         return cell
     }
@@ -62,6 +67,7 @@ extension SettleDebtViewController: UITableViewDelegate, UITableViewDataSource {
         let payConfirmVC = PayConfirmationViewController()
         //TODO: Pass the group through so group details can create the correct views
         payConfirmVC.paymentObj = debtList?[indexPath.row]
+        payConfirmVC.isOwner = isOwner
         
         navigationController?.pushViewController(payConfirmVC, animated: true)
     }

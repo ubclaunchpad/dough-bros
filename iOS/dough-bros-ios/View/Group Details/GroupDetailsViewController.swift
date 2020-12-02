@@ -14,6 +14,7 @@ class GroupDetailsViewController: UIViewController {
     var groupObj:GroupObj?
     private var paymentViewModel = PaymentViewModel()
     private var cancellableSet: Set<AnyCancellable> = []
+    private var isOwner = false
 
     private var groupDetailsView: GroupDetailsView {
         return view as! GroupDetailsView
@@ -34,6 +35,17 @@ class GroupDetailsViewController: UIViewController {
         groupDetailsView.summaryView.dataSource = self
         groupDetailsView.activityView.delegate = self
         groupDetailsView.activityView.dataSource = self
+        
+        if (Auth.auth().currentUser?.uid == groupObj?.creator_id) {
+            // Owner
+            groupDetailsView.settleDebtButtonMiddle.isHidden = true
+            isOwner = true
+        } else {
+            // User
+            groupDetailsView.settleDebtButton.isHidden = true
+            groupDetailsView.addExpenseButton.isHidden = true
+        }
+        
         setupViewModel()
         
 //        if (groupObj != nil && groupObj?.image_uri != "") {
@@ -46,6 +58,7 @@ class GroupDetailsViewController: UIViewController {
         groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)
         groupDetailsView.settleDebtButton.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
+        groupDetailsView.settleDebtButtonMiddle.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
 
     }
     
@@ -79,9 +92,14 @@ class GroupDetailsViewController: UIViewController {
     
     @objc private func settleDebtTapped() {
         let settleDebtVC = SettleDebtViewController()
-        
         settleDebtVC.groupObj = groupObj
-        settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0})
+        settleDebtVC.isOwner = isOwner
+        
+        if (isOwner) {
+            settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0})
+        } else {
+            settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0 && $0.fk_sender_id == Auth.auth().currentUser?.uid})
+        }
         navigationController?.pushViewController(settleDebtVC, animated: true)
     }
 }
@@ -101,16 +119,34 @@ extension GroupDetailsViewController: UITableViewDataSource, UITableViewDelegate
         if (tableView == groupDetailsView.summaryView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
             if (paymentViewModel.payments[indexPath.row].is_settled == 1) {
-                cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " is all settled"
                 cell.userName.textColor = UIColor.gray
+                if (isOwner || paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
+                    cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " is all settled"
+                } else {
+                    cell.userName.text = "You're all settled!"
+                }
             } else {
-                cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " owes you $" + String(paymentViewModel.payments[indexPath.row].amount)
+                if (isOwner) {
+                    cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " owes you $" + String(paymentViewModel.payments[indexPath.row].amount)
+                } else if (paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
+                    // TODO Replace with creator name
+                    cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " owes $" + String(paymentViewModel.payments[indexPath.row].amount)
+                } else {
+                    cell.userName.text = "You owe $" + String(paymentViewModel.payments[indexPath.row].amount)
+                }
             }
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
-            cell.userName.text = paymentViewModel.activity[indexPath.row].first_name + " paid you $" + String(paymentViewModel.activity[indexPath.row].amount)
+            if (isOwner) {
+                cell.userName.text = paymentViewModel.activity[indexPath.row].first_name + " paid you $" + String(paymentViewModel.activity[indexPath.row].amount)
+            } else if (paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
+                // TODO Replace with creator name
+                cell.userName.text = paymentViewModel.activity[indexPath.row].first_name + " paid $" + String(paymentViewModel.activity[indexPath.row].amount)
+            } else {
+                cell.userName.text = "You paid $" + String(paymentViewModel.payments[indexPath.row].amount)
+            }
             
             return cell
         }
