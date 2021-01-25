@@ -26,9 +26,9 @@ module.exports = class UserService {
   }
 
   // Find User by ID
-  findUserByID(userID: string) {
+  findUserByUID(userID: string) {
     return new Promise((resolve, reject) => {
-      User.findUserByID(userID, (err: any, res: any) => {
+      User.findUserByUID(userID, (err: any, res: any) => {
         if (err) {
           reject(err);
         }

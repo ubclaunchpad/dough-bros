@@ -29,7 +29,7 @@ CALL doughBros_db.createGroupExpense(2, 'csnuih23u2e', 1, 'Tison group expense',
 
 -- create mock payments
 CALL doughBros_db.createPayment('cewui3287rhd', 'zhxcuiashui2442', 'zhxcuiashui2442', 1, 1, 0, 0, 100);
-CALL doughBros_db.createPayment('r3j24qurhfsjdf', 'csnuih23u2e', 'csnuih23u2e', 1, 1, 0, 0,  150);
-CALL doughBros_db.createPayment('r3289qhfwui', 'csnuih23u2e', 'csnuih23u2e', 1, 1, 0, 0,  150);
+CALL doughBros_db.createPayment('r3j24qurhfsjdf', 'csnuih23u2e', 'csnuih23u2e', 2, 1, 0, 0,  150);
+CALL doughBros_db.createPayment('r3289qhfwui', 'csnuih23u2e', 'csnuih23u2e', 2, 1, 0, 0,  150);
 
 -- -------------------------------------------

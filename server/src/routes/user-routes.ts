@@ -25,9 +25,9 @@ router.post('/createUser', (req, res) => {
 });
 
 // Get User by ID
-router.get('/getUserByID/:userID', (req, res) => {
+router.get('/getUserByUID/:userID', (req, res) => {
   userServer
-    .findUserByID(req.params.userID)
+    .findUserByUID(req.params.userID)
     .then((user: any) => {
       res.json(user);
     })
