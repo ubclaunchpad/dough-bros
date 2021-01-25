@@ -19,9 +19,6 @@ COPY --chown=node:node . .
 # Transpile Typescript
 RUN npm run-script tsc
 
-# build into outDir
-# RUN npm run build
-
 EXPOSE 8000
 
 CMD ["npm", "start"]

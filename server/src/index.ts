@@ -7,10 +7,10 @@ const sql = require('./config/database-handler');
 const app = express();
 const PORT = 8000;
 
-const userRoute = require('./routes/user-routes');
-const groupRoute = require('./routes/group-routes');
-const paymentRoute = require('./routes/payment-routes');
-const groupExpenseRoute = require('./routes/group-expense-routes');
+let userRoute = require('./routes/user-routes');
+let groupRoute = require('./routes/group-routes');
+let paymentRoute = require('./routes/payment-routes');
+let groupExpenseRoute = require('./routes/group-expense-routes');
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
