@@ -37,6 +37,14 @@ router.get('/getGroupExpenseById/:groupExpenseID', (req, res) => {
     });
 });
 
+router.get('/getGroupExpenseByGroupId/:groupID', (req, res) => {
+  groupExpenseServer.getGroupExpenseByGroupId(req.params.groupID).then((expense: any) => {
+      res.json(expense);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
 router.put('/archiveGroupExpense/:groupExpenseID', (req,res) => {
   groupExpenseServer.archiveGroupExpense(req.params.groupExpenseID).then((expense: any) => {
       res.json(expense);

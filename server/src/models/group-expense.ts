@@ -12,12 +12,13 @@ export const GroupExpense = function (this: any, groupExpense: any) {
 
 GroupExpense.createGroupExpense = (newGroupExpense: any, result: any) => {
   sql.query(
-    'CALL createGroupExpense(?,?,?,,?,?)',
+    'CALL createGroupExpense(?,?,?,?,?,?)',
     [
       newGroupExpense.fk_group_id,
       newGroupExpense.fk_added_by_id,
       newGroupExpense.fk_currency_id,
       newGroupExpense.expense_name,
+      newGroupExpense.is_settled,
       newGroupExpense.amount,
     ],
     (err: any, res: any) => {
@@ -47,6 +48,22 @@ GroupExpense.getGroupExpenseById = (groupExpenseID: number, result: any) => {
     }
   );
 };
+
+GroupExpense.getGroupExpenseByGroupId = (groupID: number, result: any) => {
+  sql.query(
+    'CALL getAllGroupExpenses(?)',
+    groupID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res[0]);
+      }
+    }
+  );
+}
 
 GroupExpense.archiveGroupExpense = (groupExpenseID: number, result: any) => {
   sql.query(

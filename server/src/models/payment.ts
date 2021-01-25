@@ -126,7 +126,27 @@ Payment.getAllPaymentsToUserInGroup = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
+      }
+    }
+  );
+};
+
+Payment.getAllSettledPaymentsToUserInGroup = (
+  receiverID: string,
+  groupID: number,
+  result: any
+) => {
+  sql.query(
+    'CALL getAllSettledPaymentsToUserInGroup(?, ?)',
+    [receiverID, groupID],
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res[0]);
       }
     }
   );

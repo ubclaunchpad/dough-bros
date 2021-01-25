@@ -98,7 +98,24 @@ router.get('/:groupID/received/:receiverID', (req, res) => {
   }
 
   paymentServer
-    .getAllPaymentsToUserInGroup(req.params.groupID, req.params.receiverID)
+    .getAllPaymentsToUserInGroup(req.params.receiverID, req.params.groupID)
+    .then((payment: any) => {
+      res.json(payment);
+    })
+    .catch((err: any) => {
+      res.json(err);
+    });
+});
+
+router.get('/:groupID/settled/:receiverID', (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: 'Content can not be empty!',
+    });
+  }
+
+  paymentServer
+    .getAllSettledPaymentsToUserInGroup(req.params.receiverID, req.params.groupID)
     .then((payment: any) => {
       res.json(payment);
     })
@@ -135,7 +152,7 @@ router.put('/payPayment/:paymentID', (req, res) => {
     });
 });
 
-router.put('/payPayment/:paymentID', (req, res) => {
+router.put('/settlePayment/:paymentID', (req, res) => {
   paymentServer
     .settlePayment(req.params.paymentID)
     .then((payment: any) => {
