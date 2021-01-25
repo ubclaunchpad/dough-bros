@@ -21,7 +21,7 @@ class AddGroupCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "user"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return label
     }()
     

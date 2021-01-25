@@ -7,10 +7,7 @@
 
 import UIKit
 
-class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
-    // TEMP DEV DATA
-    var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
-    var activityStuff = ["Alex paid you $220", "Bob paid you $500", "John paid you $220", "Steven paid you $500", "Joe paid you $220", "Charles paid you $500"]
+class GroupDetailsView: UIView {
 
     // MARK: - Subviews -
     private var scrollView: UIScrollView = {
@@ -31,7 +28,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         back.contentHorizontalAlignment = .fill
         back.contentVerticalAlignment = .fill
         back.imageView?.contentMode = .scaleAspectFit
-        back.setImage(UIImage(systemName: "chevron.left.square.fill"), for: .normal)
+        back.setImage(UIImage(named: "BackButton"), for: .normal)
         back.tintColor = .black
         return back
     }()
@@ -42,14 +39,15 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         edit.contentHorizontalAlignment = .fill
         edit.contentVerticalAlignment = .fill
         edit.imageView?.contentMode = .scaleAspectFit
-        edit.setImage(UIImage(systemName: "pencil.circle.fill"), for: .normal)
+        edit.setImage(UIImage(named: "EditButton"), for: .normal)
         edit.tintColor = .black
         return edit
     }()
     
     private(set) var groupImage: UIImageView = {
-        let image = UIImage(named: "SampleImage.png")
-        let imageView = UIImageView(image: image)
+        // let image = UIImage(named: "SampleImage.png")
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
@@ -62,7 +60,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textColor = .black
         name.text = "West Coast Trip 2021"
-        name.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        name.font = UIFont.customFont(ofSize: 20, weight: .bold)
         return name
     }()
     
@@ -71,18 +69,19 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         summaryLabel.translatesAutoresizingMaskIntoConstraints = false
         summaryLabel.textColor = .black
         summaryLabel.text = "Summary"
-        summaryLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        summaryLabel.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return summaryLabel
     }()
     
-    private var summaryView: UITableView = {
+    private(set) var summaryView: UITableView = {
         let summary = UITableView()
         summary.translatesAutoresizingMaskIntoConstraints = false
         summary.register(SummaryTableViewCell.self, forCellReuseIdentifier: "summaryCell")
-        summary.rowHeight = 50
-        summary.estimatedRowHeight = 50
+        summary.rowHeight = 70
+        summary.estimatedRowHeight = 70
         summary.isScrollEnabled = false
         summary.separatorColor = .clear
+        summary.allowsSelection = false
         return summary
     }()
     
@@ -91,11 +90,11 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         activityLabel.translatesAutoresizingMaskIntoConstraints = false
         activityLabel.textColor = .black
         activityLabel.text = "Activity"
-        activityLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        activityLabel.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return activityLabel
     }()
     
-    private var activityView: UITableView = {
+    private(set) var activityView: UITableView = {
         let activity = UITableView()
         activity.translatesAutoresizingMaskIntoConstraints = false
         activity.register(ActivityTableViewCell.self, forCellReuseIdentifier: "activityCell")
@@ -103,6 +102,7 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         activity.estimatedRowHeight = 70
         activity.isScrollEnabled = false
         activity.separatorColor = .clear
+        activity.allowsSelection = false
         return activity
     }()
 
@@ -110,9 +110,32 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Add Expense", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(hex: 0x6BAED8)
+        button.titleLabel?.font = UIFont.customFont(ofSize: 16)
+        button.addCorners(20)
+        return button
+    }()
+    
+    private(set) var settleDebtButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Settle Debt", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(hex: 0xF8A096)
+        button.titleLabel?.font = UIFont.customFont(ofSize: 16)
+        button.addCorners(20)
+        return button
+    }()
+    
+    private(set) var settleDebtButtonMiddle: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Settle Debt", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(hex: 0xF8A096)
+        button.titleLabel?.font = UIFont.customFont(ofSize: 16)
+        button.addCorners(20)
         return button
     }()
     
@@ -130,30 +153,6 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     override class var requiresConstraintBasedLayout: Bool {
         return true
-    }
-    
-    // Setup Tableview for Either Summary or Activity
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView == summaryView) {
-            return summaryStuff.count
-        } else {
-            return activityStuff.count
-        }
-    }
-    
-    // Setup Tableview cells for either summary or activity
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (tableView == summaryView) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
-            cell.userName.text = summaryStuff[indexPath.row]
-            
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
-            cell.userName.text = activityStuff[indexPath.row]
-            
-            return cell
-        }
     }
     
     
@@ -181,15 +180,15 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         contentView.addSubview(backButton)
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            backButton.widthAnchor.constraint(equalToConstant: 30),
-            backButton.heightAnchor.constraint(equalToConstant: 30),
+            backButton.widthAnchor.constraint(equalToConstant: 20),
+            backButton.heightAnchor.constraint(equalToConstant: 20),
             backButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20)
         ])
         contentView.addSubview(editButton)
         NSLayoutConstraint.activate([
             editButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            editButton.widthAnchor.constraint(equalToConstant: 30),
-            editButton.heightAnchor.constraint(equalToConstant: 30),
+            editButton.widthAnchor.constraint(equalToConstant: 20),
+            editButton.heightAnchor.constraint(equalToConstant: 20),
             editButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20)
         ])
         
@@ -214,8 +213,26 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         NSLayoutConstraint.activate([
             addExpenseButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40),
             addExpenseButton.widthAnchor.constraint(equalToConstant: 150),
-            addExpenseButton.heightAnchor.constraint(equalToConstant: 35),
+            addExpenseButton.heightAnchor.constraint(equalToConstant: 40),
             addExpenseButton.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
+        ])
+        
+        // setupSettleDebt()
+        contentView.addSubview(settleDebtButton)
+        NSLayoutConstraint.activate([
+            settleDebtButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -40),
+            settleDebtButton.widthAnchor.constraint(equalToConstant: 150),
+            settleDebtButton.heightAnchor.constraint(equalToConstant: 40),
+            settleDebtButton.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
+        ])
+        
+        // This is really hacky I know but its late and I cant think anymore
+        contentView.addSubview(settleDebtButtonMiddle)
+        NSLayoutConstraint.activate([
+            settleDebtButtonMiddle.centerXAnchor.constraint(equalTo: centerXAnchor),
+            settleDebtButtonMiddle.widthAnchor.constraint(equalToConstant: 150),
+            settleDebtButtonMiddle.heightAnchor.constraint(equalToConstant: 40),
+            settleDebtButtonMiddle.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 20)
         ])
         
         // setupSummary()
@@ -225,12 +242,11 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
             summaryLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40)
         ])
         contentView.addSubview(summaryView)
-        summaryView.dataSource = self
         NSLayoutConstraint.activate([
             summaryView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             summaryView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 5),
             summaryView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
-            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(summaryStuff.count)),
+            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(5)), // 5 cells high
             summaryView.leftAnchor.constraint(equalTo: summaryLabel.leftAnchor)
         ])
 
@@ -241,12 +257,11 @@ class GroupDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
             activityLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40)
         ])
         contentView.addSubview(activityView)
-        activityView.dataSource = self
         NSLayoutConstraint.activate([
             activityView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             activityView.topAnchor.constraint(equalTo: activityLabel.bottomAnchor, constant: 5),
             activityView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
-            activityView.heightAnchor.constraint(equalToConstant: activityView.rowHeight * CGFloat(activityStuff.count)),
+            activityView.heightAnchor.constraint(equalToConstant: activityView.rowHeight * CGFloat(5)), // 5 cells high
             activityView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             activityView.leftAnchor.constraint(equalTo: activityLabel.leftAnchor)
         ])

@@ -25,7 +25,7 @@ class AddGroupView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Who do you want to share this expense with?"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.customFont(ofSize: 16, weight: .bold)
         return label
     }()
     
@@ -34,7 +34,7 @@ class AddGroupView: UIView {
         amount.translatesAutoresizingMaskIntoConstraints = false
         amount.placeholder = "Search email, or phone number!"
         amount.textColor = .black
-        amount.font = UIFont.systemFont(ofSize: 16)
+        amount.font = UIFont.customFont(ofSize: 16)
         amount.textAlignment = .left
         return amount
     }()
@@ -59,7 +59,7 @@ class AddGroupView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Suggested"
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.customFont(ofSize: 12, weight: .medium)
         return label
     }()
     

@@ -4,6 +4,9 @@ node_modules/
 # Docker
 database/data/
 
+# Jest
+coverage/
+
 # misc
 .DS_Store
 .env.local
