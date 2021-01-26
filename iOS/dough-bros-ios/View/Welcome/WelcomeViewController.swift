@@ -74,8 +74,12 @@ class WelcomeViewController: UIViewController, LoginButtonDelegate {
         print(emailInput.text!, passwordInput.text!)
         Auth.auth().signIn(withEmail: emailInput.text!, password: passwordInput.text!) { [weak self] authResult, error in
           guard let strongSelf = self else { return }
-          print(authResult)
-            self!.welcomeView.UID.text = authResult?.user.uid
+            if let err = error {
+                print("error is \(err.localizedDescription)")
+                strongSelf.welcomeView.errorLabel.text = err.localizedDescription
+            }
+          print("authResult: \(authResult)")
+        strongSelf.welcomeView.UID.text = authResult?.user.uid
         }
     }
     
