@@ -56,7 +56,10 @@ class SignUpViewController: UIViewController, LoginButtonDelegate {
         firstNameInput.addTarget(self, action: #selector(textFieldsNotEmpty), for: .editingChanged)
         lastNameInput.addTarget(self, action: #selector(textFieldsNotEmpty), for: .editingChanged)
         emailInput.addTarget(self, action: #selector(textFieldsNotEmpty), for: .editingChanged)
+        emailInput.addTarget(self, action: #selector(emailInputDidChange(_:)), for: .editingChanged)
         passwordInput.addTarget(self, action: #selector(textFieldsNotEmpty), for: .editingChanged)
+        passwordInput.addTarget(self, action: #selector(passwordInputDidChange(_:)), for: .editingChanged)
+
     }
     
     @objc func textFieldsNotEmpty(sender: UITextField) {
@@ -64,11 +67,54 @@ class SignUpViewController: UIViewController, LoginButtonDelegate {
            let lastName = lastNameInput.text, !lastName.isEmpty,
            let email = emailInput.text, !email.isEmpty,
            let password = passwordInput.text, !password.isEmpty {
-            signupView.signUpButton.backgroundColor = UIColor(hex: 0xF8A096)
-            signupView.signUpButton.isEnabled = true
+            let validPassword = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[$@$#!%*?&]).{8,}$")
+            if (validPassword.evaluate(with: password)) {
+                signupView.signUpButton.backgroundColor = UIColor(hex: 0xF8A096)
+                signupView.signUpButton.isEnabled = true
+            }
         } else {
             signupView.signUpButton.backgroundColor = UIColor(hex: 0xD8D8D8)
             signupView.signUpButton.isEnabled = false
+        }
+    }
+    
+    func isValidEmailAddress(emailAddressString: String) -> Bool {
+       
+       var returnValue = true
+       let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
+       
+       do {
+           let regex = try NSRegularExpression(pattern: emailRegEx)
+           let nsString = emailAddressString as NSString
+           let results = regex.matches(in: emailAddressString, range: NSRange(location: 0, length: nsString.length))
+           
+           if results.count == 0
+           {
+               returnValue = false
+           }
+           
+       } catch let error as NSError {
+           print("invalid regex: \(error.localizedDescription)")
+           returnValue = false
+       }
+       
+       return  returnValue
+    }
+    
+    @objc func emailInputDidChange(_ textField: DBTextField) {
+        if (!isValidEmailAddress(emailAddressString: textField.text!)) {
+            textField.styleBottomBorder(color: .red)
+        } else {
+            textField.styleBottomBorder(color: .black)
+        }
+    }
+    
+    @objc func passwordInputDidChange(_ textField: DBTextField) {
+        let validPassword = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[$@$#!%*?&]).{8,}$")
+        if (!validPassword.evaluate(with: textField.text)) {
+            textField.styleBottomBorder(color: .red)
+        } else {
+            textField.styleBottomBorder(color: .black)
         }
     }
     
