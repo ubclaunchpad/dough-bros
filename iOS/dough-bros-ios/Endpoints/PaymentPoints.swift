@@ -17,7 +17,7 @@ struct PaymentEndpoints {
         
         let jsonData = try? encoder.encode(payment)
         
-        var request = URLRequest(url: URL(string: endpointURL + "payments/createPayment")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/createPayment")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -42,7 +42,7 @@ struct PaymentEndpoints {
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "payments/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -73,7 +73,7 @@ struct PaymentEndpoints {
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "payments/pending/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/pending/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -104,7 +104,7 @@ struct PaymentEndpoints {
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "payments/paid/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/paid/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -135,7 +135,7 @@ struct PaymentEndpoints {
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "payments/settled/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/settled/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -166,7 +166,7 @@ struct PaymentEndpoints {
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "payments/" + String(groupID) + "/received/" + userID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/" + String(groupID) + "/received/" + userID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -197,7 +197,7 @@ struct PaymentEndpoints {
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "payments/" + String(groupID) + "/settled/" + userID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/" + String(groupID) + "/settled/" + userID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -228,7 +228,7 @@ struct PaymentEndpoints {
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "payments/" + String(groupID) + "/sent/" + senderID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/" + String(groupID) + "/sent/" + senderID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -258,7 +258,7 @@ struct PaymentEndpoints {
         print("Paying Payment!!")
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: endpointURL + "payments/payPayment/" + String(paymentID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/payPayment/" + String(paymentID))!,timeoutInterval: Double.infinity)
         request.httpMethod = "PUT"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -279,7 +279,7 @@ struct PaymentEndpoints {
         print("Settling Payment!!")
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: endpointURL + "payments/settlePayment/" + String(paymentID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/settlePayment/" + String(paymentID))!,timeoutInterval: Double.infinity)
         request.httpMethod = "PUT"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in

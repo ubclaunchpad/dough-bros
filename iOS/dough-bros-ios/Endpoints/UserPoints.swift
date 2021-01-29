@@ -16,7 +16,7 @@ struct UserEndpoints {
         
         let jsonData = try? encoder.encode(user)
         
-        var request = URLRequest(url: URL(string: endpointURL + "users/createUser")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "user/createUser")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -40,7 +40,7 @@ struct UserEndpoints {
         print("Getting User!!")
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "users/getUserByEmail/" + email)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "user/getUserByEmail/" + email)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
         
         var user = [User]()
@@ -69,7 +69,7 @@ struct UserEndpoints {
         print("Getting User!!")
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "users/getUserByID/" + ID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "user/getUserByUID/" + ID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
         
         var user = [User]()

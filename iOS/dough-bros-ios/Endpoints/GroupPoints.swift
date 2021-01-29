@@ -19,7 +19,7 @@ struct GroupEndpoints {
         
         let jsonData = try? encoder.encode(group)
         
-        var request = URLRequest(url: URL(string: endpointURL + "groups/createGroup")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "group/createGroup")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -57,7 +57,7 @@ struct GroupEndpoints {
         let parameters = "{\n    \"group_id\": \"" + String(groupID) + "\",\n    \"user_id\": \"" + user.firebase_uid + "\",\n    \"addedBy\": \"" + addedBy + "\"\n}"
         let postData = parameters.data(using: .utf8)
         
-        var request = URLRequest(url: URL(string: endpointURL + "groups/addUserToGroup")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "group/addUserToGroup")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -82,7 +82,7 @@ struct GroupEndpoints {
         var groupList = [GroupObj]()
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: endpointURL + "groups/getGroupByUID/" + userID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "group/getGroupByUID/" + userID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -111,7 +111,7 @@ struct GroupEndpoints {
         print("Getting Users!!")
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: endpointURL + "groups/getAllGroupUsers/" + String(groupID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "group/getAllGroupUsers/" + String(groupID))!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
         
         var user = [User]()
@@ -140,7 +140,7 @@ struct GroupEndpoints {
         print("Accepting Membership!!")
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: endpointURL + "groups/acceptGroupMembership/" + String(groupID) + "/" + userID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "group/acceptGroupMembership/" + String(groupID) + "/" + userID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "PUT"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
