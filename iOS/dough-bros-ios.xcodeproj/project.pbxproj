@@ -67,6 +67,8 @@
 		BEE0096A25773215003F46CB /* PaymentPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0096925773215003F46CB /* PaymentPoints.swift */; };
 		BEE0096D25773309003F46CB /* PaymentObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0096C25773309003F46CB /* PaymentObj.swift */; };
 		BEE009702577357F003F46CB /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE0096F2577357F003F46CB /* PaymentViewModel.swift */; };
+		BEE938A225C4C0C9002BD9DD /* GroupExpensePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE938A125C4C0C9002BD9DD /* GroupExpensePoints.swift */; };
+		BEE938A525C4CE56002BD9DD /* GroupExpenseObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE938A425C4CE56002BD9DD /* GroupExpenseObj.swift */; };
 		BEE9D76025589E9D0078BCB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */; };
 		BEF13921257706840083F92D /* AppColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF13920257706840083F92D /* AppColour.swift */; };
 /* End PBXBuildFile section */
@@ -133,6 +135,8 @@
 		BEE0096925773215003F46CB /* PaymentPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPoints.swift; sourceTree = "<group>"; };
 		BEE0096C25773309003F46CB /* PaymentObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentObj.swift; sourceTree = "<group>"; };
 		BEE0096F2577357F003F46CB /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
+		BEE938A125C4C0C9002BD9DD /* GroupExpensePoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupExpensePoints.swift; sourceTree = "<group>"; };
+		BEE938A425C4CE56002BD9DD /* GroupExpenseObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupExpenseObj.swift; sourceTree = "<group>"; };
 		BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEF13920257706840083F92D /* AppColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColour.swift; sourceTree = "<group>"; };
 		D041CF3D012636ECA0535383 /* Pods_dough_bros_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dough_bros_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +248,7 @@
 				BE180EDA255B6FC800F9D2B4 /* User.swift */,
 				BE03B3F3256A21EA00B9A4D0 /* GroupObj.swift */,
 				BEE0096C25773309003F46CB /* PaymentObj.swift */,
+				BEE938A425C4CE56002BD9DD /* GroupExpenseObj.swift */,
 				BE25AD8B25722BF30069DF5F /* DebtObj.swift */,
 			);
 			path = Model;
@@ -391,6 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				90B940012570DF8200DC5F27 /* GroupPoints.swift */,
+				BEE938A125C4C0C9002BD9DD /* GroupExpensePoints.swift */,
 				BEE0096925773215003F46CB /* PaymentPoints.swift */,
 				BE180ED3255B6B3500F9D2B4 /* UserPoints.swift */,
 			);
@@ -553,6 +559,7 @@
 				257DB49225316A0B00D1DABB /* LoginViewController.swift in Sources */,
 				25B053342573858900173E94 /* AddExpenseDropDownView.swift in Sources */,
 				258247352546616700F2EAAD /* GroupsView.swift in Sources */,
+				BEE938A225C4C0C9002BD9DD /* GroupExpensePoints.swift in Sources */,
 				BE25AD8925720A350069DF5F /* PayConfirmationViewController.swift in Sources */,
 				90F3C74A255D10800043BA34 /* AddExpenseCollectionViewCell.swift in Sources */,
 				90E51A712570CDCD0029DF5E /* DBTextField.swift in Sources */,
@@ -563,6 +570,7 @@
 				90B940022570DF8200DC5F27 /* GroupPoints.swift in Sources */,
 				BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */,
 				257495E2253120B800D386A2 /* SampleView.swift in Sources */,
+				BEE938A525C4CE56002BD9DD /* GroupExpenseObj.swift in Sources */,
 				BE25AD8C25722BF30069DF5F /* DebtObj.swift in Sources */,
 				BE25AD83257207EA0069DF5F /* SettleDebtView.swift in Sources */,
 				257DB48B253169EC00D1DABB /* Group.swift in Sources */,

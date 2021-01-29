@@ -7,7 +7,10 @@
 
 import Foundation
 
+public var endpointURL = "http://localhost:8000/"
+
 struct GroupEndpoints {
+    
     static func createGroup(group: GroupObj) -> Int  {
         print("Creating Group!!")
         let encoder = JSONEncoder()
@@ -16,7 +19,7 @@ struct GroupEndpoints {
         
         let jsonData = try? encoder.encode(group)
         
-        var request = URLRequest(url: URL(string: "http://localhost:8000/groups/createGroup")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "groups/createGroup")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -54,7 +57,7 @@ struct GroupEndpoints {
         let parameters = "{\n    \"group_id\": \"" + String(groupID) + "\",\n    \"user_id\": \"" + user.firebase_uid + "\",\n    \"addedBy\": \"" + addedBy + "\"\n}"
         let postData = parameters.data(using: .utf8)
         
-        var request = URLRequest(url: URL(string: "http://localhost:8000/groups/addUserToGroup")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "groups/addUserToGroup")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -79,7 +82,7 @@ struct GroupEndpoints {
         var groupList = [GroupObj]()
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: "http://localhost:8000/groups/getGroupByUID/" + userID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "groups/getGroupByUID/" + userID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -102,6 +105,56 @@ struct GroupEndpoints {
         semaphore.wait()
         
         return groupList
+    }
+    
+    static func getUsersInGroup(groupID: Int) -> [User] {
+        print("Getting Users!!")
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "groups/getAllGroupUsers/" + String(groupID))!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+        
+        var user = [User]()
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print(String(describing: error))
+                semaphore.signal()
+                return
+            }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                user = try JSONDecoder().decode([User].self, from: data)
+                print(user)
+            } catch let error {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        semaphore.wait()
+        return user
+    }
+    
+    static func acceptGroupMembership(groupID: Int, userID: String) {
+        print("Accepting Membership!!")
+        let semaphore = DispatchSemaphore (value: 0)
+
+        var request = URLRequest(url: URL(string: endpointURL + "groups/acceptGroupMembership/" + String(groupID) + "/" + userID)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "PUT"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
     }
 
 }

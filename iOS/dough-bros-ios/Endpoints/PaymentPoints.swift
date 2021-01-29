@@ -8,12 +8,165 @@
 import Foundation
 
 struct PaymentEndpoints {
+    
+    static func createPayment(payment: PaymentObj) {
+        print("Creating Payment!!")
+        let encoder = JSONEncoder()
+        
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        let jsonData = try? encoder.encode(payment)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payments/createPayment")!,timeoutInterval: Double.infinity)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print(String(describing: error))
+                semaphore.signal()
+                return
+            }
+            print(String(data: data, encoding: .utf8)!)
+            semaphore.signal()
+        }
+        
+        task.resume()
+        semaphore.wait()
+    }
+    
+    static func getPayment(parentExpenseID: Int) -> [PaymentObj] {
+        print("Getting Payment!!")
+        var paymentList = [PaymentObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payments/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                paymentList = try JSONDecoder().decode([PaymentObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return paymentList
+    }
+    
+    static func getPendingPayments(parentExpenseID: Int) -> [PaymentObj] {
+        print("Getting Pending Payments!!")
+        var paymentList = [PaymentObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payments/pending/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                paymentList = try JSONDecoder().decode([PaymentObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return paymentList
+    }
+    
+    static func getPaidPayments(parentExpenseID: Int) -> [PaymentObj] {
+        print("Getting Paid Payments!!")
+        var paymentList = [PaymentObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payments/paid/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                paymentList = try JSONDecoder().decode([PaymentObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return paymentList
+    }
+    
+    static func getSettledPayments(parentExpenseID: Int) -> [PaymentObj] {
+        print("Getting Settled Payments!!")
+        var paymentList = [PaymentObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payments/settled/" + String(parentExpenseID))!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                paymentList = try JSONDecoder().decode([PaymentObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return paymentList
+    }
+    
     static func getPaymentsToUserFromGroup(userID: String, groupID: Int) -> [PaymentObj] {
         print("Getting Payments to User from Group!!")
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: "http://localhost:8000/payments/" + String(1) + "/received/" + userID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payments/" + String(groupID) + "/received/" + userID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -44,7 +197,7 @@ struct PaymentEndpoints {
         var paymentList = [PaymentObj]()
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: "http://localhost:8000/payments/" + String(1) + "/settled/" + userID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payments/" + String(groupID) + "/settled/" + userID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -70,11 +223,63 @@ struct PaymentEndpoints {
         return paymentList
     }
     
+    static func getSentPaymentsFromUserFromGroup(senderID: String, groupID: Int) -> [PaymentObj] {
+        print("Getting Sent Payments from Sender!!")
+        var paymentList = [PaymentObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payments/" + String(groupID) + "/sent/" + senderID)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                paymentList = try JSONDecoder().decode([PaymentObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return paymentList
+    }
+    
+    static func payPayment(paymentID: Int) {
+        print("Paying Payment!!")
+        let semaphore = DispatchSemaphore (value: 0)
+
+        var request = URLRequest(url: URL(string: endpointURL + "payments/payPayment/" + String(paymentID))!,timeoutInterval: Double.infinity)
+        request.httpMethod = "PUT"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+    }
+    
     static func settlePayment(paymentID: Int) {
         print("Settling Payment!!")
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: "http://localhost:8000/payments/settlePayment/" + String(paymentID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payments/settlePayment/" + String(paymentID))!,timeoutInterval: Double.infinity)
         request.httpMethod = "PUT"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
