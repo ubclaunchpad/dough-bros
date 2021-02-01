@@ -16,7 +16,7 @@ struct UserEndpoints {
         
         let jsonData = try? encoder.encode(user)
         
-        var request = URLRequest(url: URL(string: "http://localhost:8000/users/createUser")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "user/createUser")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.httpMethod = "POST"
@@ -40,7 +40,36 @@ struct UserEndpoints {
         print("Getting User!!")
         let semaphore = DispatchSemaphore (value: 0)
         
-        var request = URLRequest(url: URL(string: "http://localhost:8000/users/getUserByEmail/" + email)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "user/getUserByEmail/" + email)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+        
+        var user = [User]()
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print(String(describing: error))
+                semaphore.signal()
+                return
+            }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                user = try JSONDecoder().decode([User].self, from: data)
+                print(user)
+            } catch let error {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        semaphore.wait()
+        return user
+    }
+    
+    static func getUserByID(ID: String) -> [User] {
+        print("Getting User!!")
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "user/getUserByUID/" + ID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
         
         var user = [User]()
