@@ -54,6 +54,17 @@ class WelcomeView: UIView, UITextFieldDelegate {
         return label
     }()
     
+    private(set) var errorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .red
+        label.text = ""
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private var loginStack: DBStackView = {
         let stack = DBStackView(axis: .vertical, alignment: .fill, spacing: 50)
         return stack
@@ -189,6 +200,13 @@ class WelcomeView: UIView, UITextFieldDelegate {
         NSLayoutConstraint.activate([
             signInLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             signInLabel.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor)
+        ])
+        
+        addSubview(errorLabel)
+        NSLayoutConstraint.activate([
+            errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            errorLabel.bottomAnchor.constraint(equalTo: loginStack.topAnchor, constant: -30),
+            errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
         
         addSubview(facebookLoginButton)
