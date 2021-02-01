@@ -35,8 +35,8 @@ User.createUser = (newUser: any, result: any) => {
   );
 };
 
-User.findUserByID = (userID: string, result: any) => {
-  sql.query('CALL getUserByUid(?)', userID, (err: any, res: any) => {
+User.findUserByUID = (userID: string, result: any) => {
+  sql.query('CALL getUserByUID(?)', userID, (err: any, res: any) => {
     if (err) {
       console.log('error: ', err);
       result(err, null);

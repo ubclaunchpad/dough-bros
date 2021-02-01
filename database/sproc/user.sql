@@ -29,7 +29,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getUser` (IN `uid` VARCHAR(255))
+CREATE PROCEDURE `getUserByUID` (IN `uid` VARCHAR(255))
 BEGIN
 
 SELECT * FROM `user` WHERE `firebase_uid` = `uid`;
@@ -37,7 +37,6 @@ SELECT * FROM `user` WHERE `firebase_uid` = `uid`;
 END$$
 
 DELIMITER ;
-
 
 DELIMITER $$
 USE `doughBros_db`$$
