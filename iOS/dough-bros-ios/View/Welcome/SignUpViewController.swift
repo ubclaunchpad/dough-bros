@@ -67,7 +67,7 @@ class SignUpViewController: UIViewController, LoginButtonDelegate {
            let lastName = lastNameInput.text, !lastName.isEmpty,
            let email = emailInput.text, !email.isEmpty,
            let password = passwordInput.text, !password.isEmpty {
-            let validPassword = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[$@$#!%*?&]).{8,}$")
+            let validPassword = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[A-Z])(?=.*[a-z])(?=.*[$@$#!%*?&.]).{8,}$")
             if (validPassword.evaluate(with: password)) {
                 signupView.signUpButton.backgroundColor = UIColor(hex: 0xF8A096)
                 signupView.signUpButton.isEnabled = true
@@ -110,7 +110,7 @@ class SignUpViewController: UIViewController, LoginButtonDelegate {
     }
     
     @objc func passwordInputDidChange(_ textField: DBTextField) {
-        let validPassword = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[$@$#!%*?&]).{8,}$")
+        let validPassword = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[A-Z])(?=.*[a-z])(?=.*[$@$#!%*?&.]).{8,}$")
         if (!validPassword.evaluate(with: textField.text)) {
             textField.styleBottomBorder(color: .red)
         } else {
@@ -121,6 +121,9 @@ class SignUpViewController: UIViewController, LoginButtonDelegate {
     @objc func signUpAction(sender : UIButton) {
         print("creating new user in Firebase :)")
         Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!) { [self] authResult, error in
+            if error == nil {
+                self.navigationController?.pushViewController(GroupsViewController(), animated: true)
+            }
           print(authResult)
             self.getToken(uid: authResult?.user.uid)
         }
@@ -159,6 +162,8 @@ class SignUpViewController: UIViewController, LoginButtonDelegate {
                   if let error = error {
                     let authError = error as NSError
                     return
+                  } else {
+                    self.navigationController?.pushViewController(GroupsViewController(), animated: true)
                   }
                   // User is signed in
                     print(authResult)
