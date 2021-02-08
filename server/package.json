@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --inspect=0.0.0.0 build/index.js",
+    "start": "tsc --project ./ && node --inspect=0.0.0.0 build/index.js",
     "build": "tsc --project ./",
     "tsc": "tsc",
     "dev": "nodemon --inspect=0.0.0.0 .",
