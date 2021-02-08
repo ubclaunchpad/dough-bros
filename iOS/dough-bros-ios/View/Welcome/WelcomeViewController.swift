@@ -77,6 +77,8 @@ class WelcomeViewController: UIViewController, LoginButtonDelegate {
             if let err = error {
                 print("error is \(err.localizedDescription)")
                 strongSelf.welcomeView.errorLabel.text = err.localizedDescription
+            } else {
+                self?.navigationController?.pushViewController(GroupsViewController(), animated: true)
             }
           print("authResult: \(authResult)")
         strongSelf.welcomeView.UID.text = authResult?.user.uid
@@ -112,6 +114,8 @@ class WelcomeViewController: UIViewController, LoginButtonDelegate {
                   if let error = error {
                     let authError = error as NSError
                     return
+                  } else {
+                    self.navigationController?.pushViewController(GroupsViewController(), animated: true)
                   }
                   // User is signed in
                     print(authResult)

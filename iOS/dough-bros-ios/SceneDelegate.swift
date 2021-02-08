@@ -21,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = setupTabBarController()
+            let loginNav = UINavigationController(rootViewController: WelcomeViewController())
+            loginNav.isNavigationBarHidden = true
+            window.rootViewController = loginNav
             self.window = window
             window.makeKeyAndVisible()
         }
