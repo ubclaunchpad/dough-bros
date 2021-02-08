@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "tsc --project ./ && node build/index.js",
+    "start": "node --inspect=0.0.0.0 build/index.js",
     "build": "tsc --project ./",
     "tsc": "tsc",
-    "dev": "nodemon .",
+    "dev": "nodemon --inspect=0.0.0.0 .",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "jest",
     "coverage": "jest --collect-coverage"

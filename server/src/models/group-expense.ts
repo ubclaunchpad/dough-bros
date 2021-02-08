@@ -5,20 +5,21 @@ export const GroupExpense = function (this: any, groupExpense: any) {
   this.fk_group_id = groupExpense.fk_group_id;
   this.fk_added_by_id = groupExpense.fk_added_by_id;
   this.fk_currency_id = groupExpense.fk_currency_id;
-  this.is_settled = groupExpense.is_settled;
+  this.is_archived = groupExpense.is_archived;
   this.expense_name = groupExpense.expense_name;
   this.amount = groupExpense.amount;
 };
 
 GroupExpense.createGroupExpense = (newGroupExpense: any, result: any) => {
   sql.query(
-    'CALL createGroupExpense(?,?,?,?,?,?)',
+    //'CALL createGroupExpense(?,?,?,?,?,?)',
+    'INSERT INTO group_expense (`fk_group_id`, `fk_added_by_id`, `fk_currency_id`, `expense_name`, `is_archived`, `amount`) VALUES (?,?,?,?,?,?)',
     [
       newGroupExpense.fk_group_id,
       newGroupExpense.fk_added_by_id,
       newGroupExpense.fk_currency_id,
       newGroupExpense.expense_name,
-      newGroupExpense.is_settled,
+      0,
       newGroupExpense.amount,
     ],
     (err: any, res: any) => {
@@ -26,8 +27,9 @@ GroupExpense.createGroupExpense = (newGroupExpense: any, result: any) => {
         console.log('error: ', err);
         result(err, null);
       } else {
-        console.log('Created Group Expense: ', res);
-        result(null, res);
+        //SELECT id FROM tableName ORDER BY id DESC LIMIT 1
+        console.log('Created Group Expense: ', { expense_id: res.insertId, ...newGroupExpense });
+        result(null, { expense_id: res.insertId, ...newGroupExpense });
       }
     }
   );
