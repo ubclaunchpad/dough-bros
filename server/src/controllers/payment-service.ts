@@ -69,7 +69,7 @@ module.exports = class PaymentService {
 
   getAllSettledPaymentsByGroupExpense(parentExpenseID: number) {
     return new Promise((resolve, reject) => {
-      Payment.getAllPaymentsByGroupExpense(
+      Payment.getAllSettledPaymentsByGroupExpense(
         parentExpenseID,
         (err: any, res: any) => {
           if (err) {

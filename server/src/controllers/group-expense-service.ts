@@ -26,7 +26,6 @@ module.exports = class GroupExpenseService {
 
   splitGroupExpense(req: any) {
     let user_amounts = req.body.user_amounts;
-    var group_expense_id: number;
 
     const group_expense = {
       fk_group_id: req.body.fk_group_id,
@@ -44,29 +43,30 @@ module.exports = class GroupExpenseService {
           reject(err);
         }
         resolve(res);
-        group_expense_id = res.body.group_expense_id;
       });
+    }).then((result: any) => {
+      return new Promise((resolve, reject) => {
 
-      // create payment for each user
-      for (var user_amount of user_amounts) {
-        const user_payment = {
-          fk_group_id: req.body.fk_group_id,
-          fk_sender_id: user_amount[0],              // list of user ids
-          fk_receiver_id: req.body.fk_added_by_id,    // currently: receiver_id = creator_id
-          fk_creator_id: req.body.fk_added_by_id,
-          fk_parent_expense_id: group_expense_id,     // get created group_expense_id from res
-          fk_currency_id: req.body.fk_currency_id,
-          amount: user_amount[1],                   // list of amounts 
-        };
-
-        Payment.createPayment(user_payment, (err: any, res: any) => {
-          if (err) {
-            reject(err);
-          }
-          resolve(res);
-        });
-      }
-
+        //create payment for each user
+        for (var user_amount of user_amounts) {
+          const user_payment = {
+            fk_group_id: req.body.fk_group_id,
+            fk_sender_id: user_amount.fk_sender_id,              // list of user ids
+            fk_receiver_id: req.body.fk_added_by_id,    // currently: receiver_id = creator_id
+            fk_creator_id: req.body.fk_added_by_id,
+            fk_parent_expense_id: result.expense_id,           // get created group_expense_id from res
+            fk_currency_id: req.body.fk_currency_id,
+            amount: user_amount.amount,                   // list of amounts 
+          };
+          
+          Payment.createPayment(user_payment, (err: any, res: any) => {
+            if (err) {
+              reject(err);
+            }
+            resolve(res);
+          });
+        }
+      });
     });
   }
 
