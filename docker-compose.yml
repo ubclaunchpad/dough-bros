@@ -4,11 +4,12 @@ services:
   server:
     build: ./server
     container_name: doughBros_server
-    command: npm start
+    command: npm start --debug=9229
     depends_on:
       - "db"
     ports:
       - "8000:8000"
+      - "9229:9229"
     # volumes:
     #   - ./server/:/usr/app/src
     #   - ./config/:/usr/app/config

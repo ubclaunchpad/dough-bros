@@ -15,13 +15,15 @@ export const Payment = function (this: any, payment: any) {
 
 Payment.createPayment = (newPayment: any, result: any) => {
   sql.query(
-    'CALL createPayment(?,?,?,?,?,,,?)',
+    'CALL createPayment(?,?,?,?,?,?,?,?)',
     [
       newPayment.fk_sender_id,
       newPayment.fk_receiver_id,
       newPayment.fk_creator_id,
       newPayment.fk_parent_expense_id,
       newPayment.fk_currency_id,
+      0,
+      0,
       newPayment.amount,
     ],
     (err: any, res: any) => {

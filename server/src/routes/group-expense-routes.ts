@@ -13,6 +13,7 @@ router.post('/createGroupExpense', (req, res) => {
   }
 
   groupExpenseServer.createGroupExpense(req).then((expense: any) => {
+    debugger;
       res.json(expense);
     })
     .catch((err: any) => {
@@ -21,6 +22,7 @@ router.post('/createGroupExpense', (req, res) => {
 });
 
 router.post('/splitGroupExpense/', (req, res) => {
+  debugger;
   groupExpenseServer.splitGroupExpense(req).then((expense: any) => {
       res.json(expense);
     })
