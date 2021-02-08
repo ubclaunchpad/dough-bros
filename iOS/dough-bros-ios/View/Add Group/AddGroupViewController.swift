@@ -83,6 +83,8 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
         }
         
         let detailedGroupsVC = GroupDetailsViewController()
+        /// TODO: fetch GroupObj by newGroupID, and set detailedGroupsVC.groupObc
+        
         navigationController?.popViewController(animated: true)
         navigationController?.pushViewController(detailedGroupsVC, animated: true)
     }
