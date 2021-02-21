@@ -111,11 +111,11 @@ module.exports = class PaymentService {
     });
   }
 
-  getAllPaymentsFromUserInGroup(senderID: string, groupID: number) {
+  getAllPaymentsFromUserInGroup(groupID: number, senderID: string) {
     return new Promise((resolve, reject) => {
       Payment.getAllPaymentsFromUserInGroup(
-        senderID,
         groupID,
+        senderID,
         (err: any, res: any) => {
           if (err) {
             reject(err);

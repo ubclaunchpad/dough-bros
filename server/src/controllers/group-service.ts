@@ -23,9 +23,9 @@ module.exports = class GroupService {
 
   addUserToGroup(req: any) {
     const addInfo = {
-      fk_group_id: req.body.group_id,
-      fk_user_id: req.body.user_id,
-      fk_added_by_id: req.body.addedBy
+      group_id: req.body.group_id,
+      user_id: req.body.user_id,
+      added_by_id: req.body.added_by_id
     }
     return new Promise((resolve, reject) => {
       Group.addUserToGroup(addInfo, (err: any, res: any) => {

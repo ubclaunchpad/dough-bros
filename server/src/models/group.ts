@@ -28,9 +28,9 @@ Group.addUserToGroup = (newGroupMembership: any, result: any) => {
   sql.query(
     "CALL addUserToGroup(?,?,?,?)",
     [
-      newGroupMembership.fk_group_id,
-      newGroupMembership.fk_user_id,
-      newGroupMembership.fk_added_by_id,
+      newGroupMembership.group_id,
+      newGroupMembership.user_id,
+      newGroupMembership.added_by_id,
       1
     ],
     (err: any, res: any) => {
