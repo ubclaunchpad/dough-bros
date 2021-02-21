@@ -79,9 +79,8 @@ Group.acceptGroupMembership = (
   result: any
 ) => {
   sql.query(
-    'CALL archiveGroupExpense(?,?)',
-    groupID,
-    userID,
+    'CALL acceptGroupMembership(?, ?)',
+    [groupID, userID],
     (err: any, res: any) => {
       if (err) {
         console.log('error: ', err);

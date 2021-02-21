@@ -59,5 +59,4 @@ router.put('/acceptGroupMembership/:groupID/:userID', (req, res) => {
     });
 });
 
-
 module.exports = router
