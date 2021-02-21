@@ -13,6 +13,8 @@ final class GroupsViewController: UIViewController {
     private var groupsViewModel = GroupsViewModel()
     private var cancellableSet: Set<AnyCancellable> = []
     
+    var selectedGroup: GroupObj = GroupObj(group_id: 1, group_name: "", creator_id: "", image_uri: "", amount: 0.0)
+    
     private var groupsView: GroupsView {
         return view as! GroupsView
     }
@@ -99,9 +101,18 @@ extension GroupsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailedGroupsVC = GroupDetailsViewController()
+        
         //TODO: Pass the group through so group details can create the correct views
-        detailedGroupsVC.groupObj = groupsViewModel.groups[indexPath.row]
+        self.selectedGroup = groupsViewModel.groups[indexPath.row]
+        performSegue(withIdentifier: "selectedGroup", sender: self)
+        
+//        detailedGroupsVC.groupObj = groupsViewModel.groups[indexPath.row]
         navigationController?.pushViewController(detailedGroupsVC, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! GroupDetailsViewController
+        vc.groupObj = self.selectedGroup
     }
 }
 
