@@ -60,4 +60,16 @@ module.exports = class UserService {
       });
     });
   }
+
+    // List Users Matching Regex Search
+  findUserByPatternMatching(search: string) {
+    return new Promise((resolve, reject) => {
+      User.findUserByPatternMatching(search, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
 };

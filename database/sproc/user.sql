@@ -6,6 +6,7 @@ USE `doughBros_db`;
 DROP procedure IF EXISTS `createUser`;
 DROP procedure IF EXISTS `getUser`;
 DROP procedure IF EXISTS `getUserByEmail`;
+DROP procedure IF EXISTS `getUserByPatternMatching`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -26,6 +27,19 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getUserByPatternMatching` (IN `search` VARCHAR(255))
+BEGIN
+
+SELECT * FROM `user`
+WHERE ((`email_addr` REGEXP `search`)
+OR (`first_name` REGEXP `search`)
+OR (`last_name` REGEXP `search`));
+
+END$$
+
+DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
