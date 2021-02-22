@@ -72,3 +72,18 @@ User.findUsers = (result: any) => {
     }
   });
 };
+
+User.findUserByPatternMatching = (search: string, result: any) => {
+  sql.query(
+    "CALL getUserByPatternMatching(?)",
+    search,
+    (err: any, res: any) => {
+    if (err) {
+      console.log('error: ', err);
+      result(err, null);
+    } else {
+      console.log(res);
+      result(null, res);
+    }
+  });
+};

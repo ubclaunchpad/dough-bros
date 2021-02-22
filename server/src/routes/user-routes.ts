@@ -57,4 +57,13 @@ router.get('/getAllUsers', (_, res) => {
     });
 });
 
+// Get User List by Regex Matching
+router.get('/findUserByPatternMatching/:search', (req, res) => {
+  userServer.findUserByPatternMatching(req.params.search).then((users: any) => {
+      res.json(users);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
 module.exports = router;
