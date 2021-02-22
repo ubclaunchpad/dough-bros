@@ -99,7 +99,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getAllPaymentsFromUserInGroup` (IN `sender_id` VARCHAR(255), IN `group_id` INT(8))
+CREATE PROCEDURE `getAllPaymentsFromUserInGroup` (IN `group_id` INT(8), IN `sender_id` VARCHAR(255))
 BEGIN
 
 SELECT * FROM `payment` WHERE (`fk_sender_id` = `sender_id`

@@ -155,13 +155,13 @@ Payment.getAllSettledPaymentsToUserInGroup = (
 };
 
 Payment.getAllPaymentsFromUserInGroup = (
-  senderID: string,
   groupID: number,
+  senderID: string,
   result: any
 ) => {
   sql.query(
     'CALL getAllPaymentsFromUserInGroup(?, ?)',
-    [senderID, groupID],
+    [groupID, senderID],
     (err: any, res: any) => {
       if (err) {
         console.log('error: ', err);
