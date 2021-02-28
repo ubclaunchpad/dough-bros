@@ -121,11 +121,18 @@ class SignUpViewController: UIViewController, LoginButtonDelegate {
     @objc func signUpAction(sender : UIButton) {
         print("creating new user in Firebase :)")
         Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!) { [self] authResult, error in
-            if error == nil {
-                self.navigationController?.pushViewController(GroupsViewController(), animated: true)
+            if let err = error {
+                print("ERROR: \(err)")
+                return
             }
-          print(authResult)
-            self.getToken(uid: authResult?.user.uid)
+            
+            guard let result = authResult else {
+                print("authResult is null")
+                return
+            }
+            
+            self.getToken(uid: result.user.uid)
+            self.navigationController?.pushViewController(GroupsViewController(), animated: true)
         }
     }
     

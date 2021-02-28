@@ -11,7 +11,7 @@ import Combine
 
 class GroupDetailsViewController: UIViewController {
     
-    var groupObj:GroupObj?
+    var groupObj: GroupObj?
     private var paymentViewModel = PaymentViewModel()
     private var cancellableSet: Set<AnyCancellable> = []
     private var isOwner = false

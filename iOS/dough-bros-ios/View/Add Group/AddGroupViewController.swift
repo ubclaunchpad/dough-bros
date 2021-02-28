@@ -75,6 +75,7 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
         print("next tapped")
         
+        // group_id is not actually used by createGroup, so dummy value of 0 used here
         let groupObj = GroupObj(group_id: 0, group_name: "", creator_id: (Auth.auth().currentUser?.uid)!, image_uri: "", amount: 0.0)
         let newGroupID = GroupEndpoints.createGroup(group: groupObj)
         
@@ -82,11 +83,11 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
             GroupEndpoints.addUserToGroup(user: user, groupID: newGroupID, addedBy: (Auth.auth().currentUser?.uid)!)
         }
         
-        let detailedGroupsVC = GroupDetailsViewController()
-        /// TODO: fetch GroupObj by newGroupID, and set detailedGroupsVC.groupObc
+//        let detailedGroupsVC = GroupDetailsViewController()
+//        /// TODO: fetch GroupObj by newGroupID, and set detailedGroupsVC.groupObc
         
         navigationController?.popViewController(animated: true)
-        navigationController?.pushViewController(detailedGroupsVC, animated: true)
+//        navigationController?.pushViewController(detailedGroupsVC, animated: true)
     }
 
 
