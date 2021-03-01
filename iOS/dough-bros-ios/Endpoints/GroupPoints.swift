@@ -55,7 +55,7 @@ struct GroupEndpoints {
         print("Adding User To Group!!")
         let semaphore = DispatchSemaphore (value: 0)
         
-        let parameters = "{\n    \"group_id\": \"" + String(groupID) + "\",\n    \"user_id\": \"" + user.firebase_uid + "\",\n    \"addedBy\": \"" + addedBy + "\"\n}"
+        let parameters = "{\n    \"group_id\": \"" + String(groupID) + "\",\n    \"user_id\": \"" + user.firebase_uid + "\",\n    \"added_by_id\": \"" + addedBy + "\"\n}"
         let postData = parameters.data(using: .utf8)
         
         var request = URLRequest(url: URL(string: endpointURL + "group/addUserToGroup")!,timeoutInterval: Double.infinity)
@@ -122,7 +122,7 @@ struct GroupEndpoints {
                 semaphore.signal()
                 return
             }
-            // print(String(data: data, encoding: .utf8)!)
+            print(String(data: data, encoding: .utf8)!)
             do {
                 user = try JSONDecoder().decode([User].self, from: data)
                 print(user)

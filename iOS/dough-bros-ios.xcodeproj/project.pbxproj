@@ -786,7 +786,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 35ZK849627;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -811,7 +811,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 35ZK849627;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
