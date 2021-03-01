@@ -36,6 +36,10 @@ final class GroupsViewController: UIViewController {
         setupViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        groupsViewModel.fetchData()
+    }
+    
     // MARK: - Setup -
     private func setupTableView() {
         groupsView.groupsTableView.dataSource = self

@@ -7,7 +7,8 @@
 
 import Foundation
 
-public var endpointURL = "http://localhost:8000/"
+//public var endpointURL = "http://localhost:8000/"
+public var endpointURL = "http://ec2-34-214-245-195.us-west-2.compute.amazonaws.com:8000/"
 
 struct GroupEndpoints {
     
