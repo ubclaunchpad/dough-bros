@@ -20,7 +20,7 @@ class GroupsView: UIView {
     
     private var collectionViewLabel: UILabel = {
         let label = UILabel()
-        label.text = "Friends"
+        label.text = "Incoming Groups"
         label.textColor = UIColor(hex: 0x2C365A)
         label.textAlignment = .left
         label.font = UIFont.customFont(ofSize: 24, weight: .bold)

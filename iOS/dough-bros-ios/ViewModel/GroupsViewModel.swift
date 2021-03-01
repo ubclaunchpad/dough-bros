@@ -17,7 +17,8 @@ class GroupsViewModel {
         }
     }
     @Published private(set) var groups: [GroupObj] = []
-    @Published private(set) var friends: [Friend] = []
+    // This changed from Friend into GroubObj
+    @Published private(set) var friends: [GroupObj] = []
     private(set) var previousState: State?
     @Published private(set) var state: State = .idle
     
@@ -27,13 +28,15 @@ class GroupsViewModel {
         setState(to: .loading)
         
         allGroups = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
+//        friends = GroupEndpoints.getPendingGroups(userID: Auth.auth().currentUser!.uid)
+        friends = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
         
         //simulates a long network call
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
             //mock groups
 //            allGroups = GroupObj.createMockGroups()
             searchFor(substring: searchText)
-            friends = [Friend(name: "Bob"), Friend(name: "Alan"), Friend(name: "Wren"), Friend(name: "Avery"), Friend(name: "Stephanie"), Friend(name: "Harin"), Friend(name: "Carlos")]
+//            friends = [Friend(name: "Bob"), Friend(name: "Alan"), Friend(name: "Wren"), Friend(name: "Avery"), Friend(name: "Stephanie"), Friend(name: "Harin"), Friend(name: "Carlos")]
             
             setState(to: .idle)
         }

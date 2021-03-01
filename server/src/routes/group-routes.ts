@@ -43,6 +43,15 @@ router.get('/getGroupByUID/:userID', (req, res) => {
   });
 });
 
+// Get Pending Group by UID
+router.get('/getPendingGroupByUID/:userID', (req, res) => {
+  groupServer.getPendingGroupByUID(req.params.userID).then((user: any) => {
+      res.json(user);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
 router.get('/getAllGroupUsers/:groupID', (req, res) => {
     groupServer.getAllGroupUsers(req.params.groupID).then((users: any) => {
         res.json(users);

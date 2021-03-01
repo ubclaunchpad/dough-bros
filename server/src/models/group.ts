@@ -23,7 +23,6 @@ Group.createGroup = (newGroup: any, result: any) => {
   );
 };
 
-// Auto accepting invite rn!!
 Group.addUserToGroup = (newGroupMembership: any, result: any) => {
   sql.query(
     "CALL addUserToGroup(?,?,?,?)",
@@ -31,7 +30,7 @@ Group.addUserToGroup = (newGroupMembership: any, result: any) => {
       newGroupMembership.group_id,
       newGroupMembership.user_id,
       newGroupMembership.added_by_id,
-      1
+      0
     ],
     (err: any, res: any) => {
       if (err) {
@@ -61,6 +60,22 @@ Group.findGroupByUID = (userID: string, result: any) => {
   );
 };
 
+Group.findPendingGroupByUID = (userID: string, result: any) => {
+  sql.query(
+    "CALL getPendingGroupByUID(?)",
+    userID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res[0]);
+      }
+    }
+  );
+};
+
+
 Group.getAllGroupUsers = (groupID: number, result: any) => {
   sql.query('CALL getAllGroupUsers(?)', groupID, (err: any, res: any) => {
     if (err) {
@@ -68,7 +83,7 @@ Group.getAllGroupUsers = (groupID: number, result: any) => {
       result(err, null);
     } else {
       console.log(res);
-      result(null, res);
+      result(null, res[0]);
     }
   });
 };
