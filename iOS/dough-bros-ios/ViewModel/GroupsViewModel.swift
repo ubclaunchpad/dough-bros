@@ -28,8 +28,7 @@ class GroupsViewModel {
         setState(to: .loading)
         
         allGroups = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
-//        friends = GroupEndpoints.getPendingGroups(userID: Auth.auth().currentUser!.uid)
-        friends = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
+        friends = GroupEndpoints.getPendingGroups(userID: Auth.auth().currentUser!.uid)
         
         //simulates a long network call
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
