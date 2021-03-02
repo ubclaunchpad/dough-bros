@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Codable, Hashable {
     var firebase_uid: String
     var first_name: String
     var last_name: String

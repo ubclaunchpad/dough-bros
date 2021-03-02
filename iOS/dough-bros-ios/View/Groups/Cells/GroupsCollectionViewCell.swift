@@ -9,7 +9,7 @@ import UIKit
 import AlanYanHelpers
 class GroupsCollectionViewCell: UICollectionViewCell {
     
-    var friend: Friend? {
+    var friend: GroupObj? {
         didSet {
             setupModel()
         }
@@ -32,7 +32,7 @@ class GroupsCollectionViewCell: UICollectionViewCell {
     private func setupModel() {
         guard let friend = friend else { return }
         
-        profilePictureView.image = UIImage(named: friend.name) ?? UIImage(systemName: "person.crop.circle.fill")
+        profilePictureView.image = UIImage(named: friend.group_name) ?? UIImage(systemName: "person.crop.circle.fill")
         profilePictureView.tintColor = .white
     }
 }

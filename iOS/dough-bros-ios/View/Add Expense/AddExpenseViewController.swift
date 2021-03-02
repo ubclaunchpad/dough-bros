@@ -9,11 +9,11 @@ import UIKit
 
 class AddExpenseViewController: UIViewController {
     
-    var group = Group(name: "snowballs", members: [Friend(name: "Alan"), Friend(name: "Stephanie"), Friend(name: "Charles"), Friend(name: "Serena"), Friend(name: "Daniel"), Friend(name: "Megan"), Friend(name: "Ian"), Friend(name: "Nando"), Friend(name: "Ethan")], image: nil, amount: 5, youOwe: true)
+    var groupMembers: [User]?
     
-    var selectedPeople: Set<Friend> = []
+    var selectedPeople: Set<User> = []
     
-    lazy var owedAmounts: [Double] = Array(repeating: 0, count: group.members.count)
+    lazy var owedAmounts: [Double] = Array(repeating: 0, count: groupMembers!.count)
     
     var totalSum: Double = 0 {
         didSet {
@@ -78,7 +78,7 @@ class AddExpenseViewController: UIViewController {
         textFieldText?.removeFirst()
         guard let text = textFieldText, let intValue = Double(text), intValue > 0 else {
             totalSum = 0
-            owedAmounts = Array(repeating: 0, count: group.members.count)
+            owedAmounts = Array(repeating: 0, count: groupMembers!.count)
             addExpenseView.addExpenseCollectionView.reloadData()
             return
         }
@@ -87,7 +87,7 @@ class AddExpenseViewController: UIViewController {
         if selectedPeople.count > 0 {
             let eachMemberCost = Double(totalSum)/Double(selectedPeople.count)
             for friend in selectedPeople {
-                guard let index = group.members.firstIndex(of: friend) else { continue }
+                guard let index = groupMembers!.firstIndex(of: friend) else { continue }
                 owedAmounts[index] = eachMemberCost
             }
             addExpenseView.addExpenseCollectionView.reloadData()
@@ -100,14 +100,14 @@ class AddExpenseViewController: UIViewController {
         guard let text = textFieldText, let intValue = Double(text), intValue > 0 else {
             owedAmounts[sender.tag] = 0
             sender.text = "$0.0"
-            selectedPeople.remove(group.members[sender.tag])
+            selectedPeople.remove(groupMembers![sender.tag])
             addExpenseView.addExpenseCollectionView.cellForItem(at: IndexPath(item: sender.tag, section: 0))?.contentView.backgroundColor = UIColor(hex: 0xF2F2F2)
 
             totalSum = owedAmounts.reduce(0.0, +)
             return
         }
         
-        selectedPeople.insert(group.members[sender.tag])
+        selectedPeople.insert(groupMembers![sender.tag])
         addExpenseView.addExpenseCollectionView.cellForItem(at: IndexPath(item: sender.tag, section: 0))?.contentView.backgroundColor = UIColor(hex: 0xf3eac2)
 
         owedAmounts[sender.tag] = intValue
@@ -126,15 +126,15 @@ extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard addExpenseView.selectedState == .splitEqually else { return }
-        if selectedPeople.contains(group.members[indexPath.item]) {
-            selectedPeople.remove(group.members[indexPath.item])
+        if selectedPeople.contains(groupMembers![indexPath.item]) {
+            selectedPeople.remove(groupMembers![indexPath.item])
             (collectionView.cellForItem(at: indexPath)!).contentView.backgroundColor = UIColor(hex: 0xF2F2F2)
             (collectionView.cellForItem(at: indexPath) as! AddExpenseCollectionViewCell).checkbox.image = UIImage(systemName: "checkmark.circle")
             owedAmounts[indexPath.item] = 0
             (collectionView.cellForItem(at: indexPath) as! AddExpenseCollectionViewCell).amountOwed.text = "$0.0"
 
         } else {
-            selectedPeople.insert(group.members[indexPath.item])
+            selectedPeople.insert(groupMembers![indexPath.item])
             (collectionView.cellForItem(at: indexPath)!).contentView.backgroundColor = UIColor(hex: 0xf3eac2)
             (collectionView.cellForItem(at: indexPath) as! AddExpenseCollectionViewCell).checkbox.image = UIImage(systemName: "checkmark.circle.fill")
         }
@@ -142,7 +142,7 @@ extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return group.members.count
+        return groupMembers!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -153,12 +153,12 @@ extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDa
         friendsCell.amountOwed.text = "$\((owedAmounts[indexPath.item] * 100).rounded()/100)"
         friendsCell.amountOwed.addTarget(self, action: #selector(updateTotalExpense), for: .editingDidEnd)
         
-        friendsCell.friend = group.members[indexPath.item]
+        friendsCell.friend = groupMembers![indexPath.item]
         
         friendsCell.updateCell(for: addExpenseView.selectedState)
         
         friendsCell.amountOwed.addTarget(self, action: #selector(textFieldDidEdit), for: .editingChanged)
-        if selectedPeople.contains(group.members[indexPath.item]) {
+        if selectedPeople.contains(groupMembers![indexPath.item]) {
             friendsCell.contentView.backgroundColor = UIColor(hex: 0xf3eac2)
             friendsCell.checkbox.image = UIImage(systemName: "checkmark.circle.fill")
         } else {
@@ -174,7 +174,7 @@ extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDa
 extension AddExpenseViewController: AddExpenseViewDelegate {
     func didUpdateSelectedState(to: AddExpenseView.SelectedState) {
         selectedPeople.removeAll()
-        owedAmounts = Array(repeating: 0, count: group.members.count)
+        owedAmounts = Array(repeating: 0, count: groupMembers!.count)
         totalSum = 0
         addExpenseView.addExpenseCollectionView.reloadData()
     }
