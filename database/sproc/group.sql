@@ -7,6 +7,9 @@ DROP procedure IF EXISTS `createGroup`;
 DROP procedure IF EXISTS `addUserToGroup`;
 DROP procedure IF EXISTS `getAllGroupUsers`;
 DROP procedure IF EXISTS `removeUserFromGroup`;
+DROP procedure IF EXISTS `acceptGroupMembership`;
+DROP procedure IF EXISTS `getAllAcceptedGroupUsers`;
+DROP procedure IF EXISTS `setGroupName`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -102,6 +105,18 @@ CREATE PROCEDURE `getAllAcceptedGroupUsers` (IN `group_id` INT(8))
 BEGIN
 
 SELECT * FROM `group_membership` WHERE (`fk_group_id` = `group_id` AND `did_accept_invite` = 1);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `setGroupName` (IN `group_id` INT(8), IN `group_name` VARCHAR(255))
+BEGIN
+
+UPDATE `group`
+SET `group_name` = `group_name` WHERE (`fk_group_id` = `group_id`);
 
 END$$
 
