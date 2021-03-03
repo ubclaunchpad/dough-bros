@@ -112,11 +112,11 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `setGroupName` (IN `group_id` INT(8), IN `group_name` VARCHAR(255))
+CREATE PROCEDURE `setGroupName` (IN `group_details_id` INT(8), IN `group_name` VARCHAR(255))
 BEGIN
 
 UPDATE `group`
-SET `group_name` = `group_name` WHERE (`fk_group_id` = `group_id`);
+SET `group_name` = `group_name` WHERE (`group_id` = `group_details_id`);
 
 END$$
 
