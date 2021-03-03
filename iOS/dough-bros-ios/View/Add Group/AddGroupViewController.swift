@@ -62,7 +62,7 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        userResults = UserEndpoints.getUser(email: query)
+        userResults = UserEndpoints.findUserByPatternMatching(search: query)
         addGroupView.addGroupTableView.reloadData()
     }
     
