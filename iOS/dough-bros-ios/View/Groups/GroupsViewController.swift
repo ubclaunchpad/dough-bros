@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Firebase
 
 final class GroupsViewController: UIViewController {
     
@@ -36,6 +37,10 @@ final class GroupsViewController: UIViewController {
         setupViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        groupsViewModel.fetchData()
+    }
+    
     // MARK: - Setup -
     private func setupTableView() {
         groupsView.groupsTableView.dataSource = self
@@ -44,6 +49,7 @@ final class GroupsViewController: UIViewController {
     
     private func setupCollectionView() {
         groupsView.friendsCollectionView.dataSource = self
+        groupsView.friendsCollectionView.delegate = self
     }
     
     private func setupSearchBar() {
@@ -105,7 +111,7 @@ extension GroupsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension GroupsViewController: UICollectionViewDataSource {
+extension GroupsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return groupsViewModel.friends.count
     }
@@ -116,6 +122,24 @@ extension GroupsViewController: UICollectionViewDataSource {
         friendsCell.friend = groupsViewModel.friends[indexPath.item]
         
         return friendsCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let groupObj = groupsViewModel.groups[indexPath.row]
+        
+        let myAlert = UIAlertController(title: "Accept Group Invite?", message: "", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Decline", style: .destructive, handler: { _ in
+            print("cancel")
+        })
+        let accept = UIAlertAction(title: "Accept", style: .default, handler: { [self] _ in
+            GroupEndpoints.acceptGroupMembership(groupID: groupsViewModel.groups[indexPath.row].group_id, userID: Auth.auth().currentUser!.uid)
+            groupsViewModel.fetchData()
+        })
+        
+        myAlert.addAction(cancel)
+        myAlert.addAction(accept)
+        
+        self.present(myAlert, animated: true, completion: nil)
     }
 }
 

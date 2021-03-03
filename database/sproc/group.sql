@@ -42,7 +42,20 @@ FROM `group`
 WHERE `fk_creator_id` = `user_id`
 UNION
 SELECT `group_id`, `fk_creator_id` as `creator_id`, `group_name`, `image_uri`, `amount` FROM `group` as g
-JOIN (SELECT `fk_group_id` FROM `group_membership` WHERE `fk_user_id` = `user_id`) as mb
+JOIN (SELECT `fk_group_id` FROM `group_membership` WHERE `fk_user_id` = `user_id` AND `did_accept_invite` = 1) as mb
+ON mb.fk_group_id=g.group_id;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getPendingGroupByUID` (IN `user_id` VARCHAR(255))
+BEGIN
+
+SELECT `group_id`, `fk_creator_id` as `creator_id`, `group_name`, `image_uri`, `amount` FROM `group` as g
+JOIN (SELECT `fk_group_id` FROM `group_membership` WHERE `fk_user_id` = `user_id` AND `did_accept_invite` = 0) as mb
 ON mb.fk_group_id=g.group_id;
 
 END$$

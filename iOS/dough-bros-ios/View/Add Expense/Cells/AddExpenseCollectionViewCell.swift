@@ -9,7 +9,7 @@ import UIKit
 import AlanYanHelpers
 class AddExpenseCollectionViewCell: UICollectionViewCell {
     
-    var friend: Friend? {
+    var friend: User? {
         didSet {
             setupModel()
         }
@@ -80,9 +80,9 @@ class AddExpenseCollectionViewCell: UICollectionViewCell {
     private func setupModel() {
         guard let friend = friend else { return }
         
-        profilePictureView.image = UIImage(named: friend.name) ?? UIImage(named: "duck")
+        profilePictureView.image = UIImage(named: friend.first_name) ?? UIImage(named: "duck")
         profilePictureView.tintColor = .white
-        userlabel.text = friend.name
+        userlabel.text = friend.first_name
         
     }
     

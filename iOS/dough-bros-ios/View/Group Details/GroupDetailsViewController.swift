@@ -11,10 +11,11 @@ import Combine
 
 class GroupDetailsViewController: UIViewController {
     
-    var groupObj:GroupObj?
+    var groupObj: GroupObj?
     private var paymentViewModel = PaymentViewModel()
     private var cancellableSet: Set<AnyCancellable> = []
     private var isOwner = false
+    private var groupMembers = [User]()
 
     private var groupDetailsView: GroupDetailsView {
         return view as! GroupDetailsView
@@ -59,6 +60,8 @@ class GroupDetailsViewController: UIViewController {
         groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)
         groupDetailsView.settleDebtButton.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
         groupDetailsView.settleDebtButtonMiddle.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
+        
+        self.groupMembers = GroupEndpoints.getUsersInGroup(groupID: groupObj!.group_id)
 
     }
     
@@ -86,7 +89,7 @@ class GroupDetailsViewController: UIViewController {
     @objc private func addExpenseTapped() {
         print("add expense tapped")
         let addExpenseVC = AddExpenseViewController()
-        //TODO: Pass group members through
+        addExpenseVC.groupMembers = self.groupMembers
         present(addExpenseVC, animated: true)
     }
     

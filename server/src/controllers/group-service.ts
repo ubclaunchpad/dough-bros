@@ -48,6 +48,16 @@ module.exports = class GroupService {
     });
   }
 
+  getPendingGroupByUID(userID: string) {
+    return new Promise((resolve, reject) => {
+      Group.findPendingGroupByUID(userID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
 
   getAllGroupUsers(groupID: number) {
     return new Promise((resolve, reject) => {

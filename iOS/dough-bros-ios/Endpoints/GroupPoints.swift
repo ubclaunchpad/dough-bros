@@ -7,7 +7,8 @@
 
 import Foundation
 
-public var endpointURL = "http://localhost:8000/"
+//public var endpointURL = "http://localhost:8000/"
+public var endpointURL = "http://ec2-34-214-245-195.us-west-2.compute.amazonaws.com:8000/"
 
 struct GroupEndpoints {
     
@@ -54,7 +55,7 @@ struct GroupEndpoints {
         print("Adding User To Group!!")
         let semaphore = DispatchSemaphore (value: 0)
         
-        let parameters = "{\n    \"group_id\": \"" + String(groupID) + "\",\n    \"user_id\": \"" + user.firebase_uid + "\",\n    \"addedBy\": \"" + addedBy + "\"\n}"
+        let parameters = "{\n    \"group_id\": \"" + String(groupID) + "\",\n    \"user_id\": \"" + user.firebase_uid + "\",\n    \"added_by_id\": \"" + addedBy + "\"\n}"
         let postData = parameters.data(using: .utf8)
         
         var request = URLRequest(url: URL(string: endpointURL + "group/addUserToGroup")!,timeoutInterval: Double.infinity)
@@ -107,6 +108,36 @@ struct GroupEndpoints {
         return groupList
     }
     
+    static func getPendingGroups(userID: String) -> [GroupObj] {
+        print("Getting Users Pending Groups!!")
+        var groupList = [GroupObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+
+        var request = URLRequest(url: URL(string: endpointURL + "group/getPendingGroupByUID/" + userID)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+          // print(String(data: data, encoding: .utf8)!)
+            do {
+                groupList = try JSONDecoder().decode([GroupObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return groupList
+    }
+    
     static func getUsersInGroup(groupID: Int) -> [User] {
         print("Getting Users!!")
         let semaphore = DispatchSemaphore (value: 0)
@@ -121,7 +152,7 @@ struct GroupEndpoints {
                 semaphore.signal()
                 return
             }
-            // print(String(data: data, encoding: .utf8)!)
+//            print(String(data: data, encoding: .utf8)!)
             do {
                 user = try JSONDecoder().decode([User].self, from: data)
                 print(user)

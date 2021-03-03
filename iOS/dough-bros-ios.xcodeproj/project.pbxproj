@@ -39,6 +39,15 @@
 		25DB65EB2551357400F79B58 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB65EA2551357400F79B58 /* Friend.swift */; };
 		4B0F9D7B74690590F676EF4F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		56173242D5DA2F8E204E6E10 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		6C6C294525E619D70016355F /* DoughTutorialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C294425E619D70016355F /* DoughTutorialModel.swift */; };
+		6C6C295E25E620290016355F /* DoughWalkthroughViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C6C295925E620280016355F /* DoughWalkthroughViewController.xib */; };
+		6C6C295F25E620290016355F /* CarlosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C295A25E620280016355F /* CarlosViewController.swift */; };
+		6C6C296025E620290016355F /* DoughMainWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C295B25E620280016355F /* DoughMainWalkthroughViewController.swift */; };
+		6C6C296125E620290016355F /* DoughClassicWalkthroughViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C6C295C25E620280016355F /* DoughClassicWalkthroughViewController.xib */; };
+		6C6C296225E620290016355F /* DoughWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C295D25E620290016355F /* DoughWalkthroughViewController.swift */; };
+		6C6C296925E6248F0016355F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C296625E6248F0016355F /* UIViewController.swift */; };
+		6C6C296F25E624BC0016355F /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C296E25E624BC0016355F /* UIImage.swift */; };
+		6C6C297225E624C10016355F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C297125E624C10016355F /* UIColor.swift */; };
 		785F99F4E04AE6A19543D326 /* Pods_dough_bros_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D041CF3D012636ECA0535383 /* Pods_dough_bros_ios.framework */; };
 		901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D42557B071002D4E5D /* AddExpenseViewController.swift */; };
 		901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901366D82557B154002D4E5D /* AddExpenseView.swift */; };
@@ -105,6 +114,15 @@
 		25B053332573858900173E94 /* AddExpenseDropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseDropDownView.swift; sourceTree = "<group>"; };
 		25DB65E7255134F100F79B58 /* GroupsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewModel.swift; sourceTree = "<group>"; };
 		25DB65EA2551357400F79B58 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		6C6C294425E619D70016355F /* DoughTutorialModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoughTutorialModel.swift; sourceTree = "<group>"; };
+		6C6C295925E620280016355F /* DoughWalkthroughViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoughWalkthroughViewController.xib; sourceTree = "<group>"; };
+		6C6C295A25E620280016355F /* CarlosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarlosViewController.swift; sourceTree = "<group>"; };
+		6C6C295B25E620280016355F /* DoughMainWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoughMainWalkthroughViewController.swift; sourceTree = "<group>"; };
+		6C6C295C25E620280016355F /* DoughClassicWalkthroughViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoughClassicWalkthroughViewController.xib; sourceTree = "<group>"; };
+		6C6C295D25E620290016355F /* DoughWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoughWalkthroughViewController.swift; sourceTree = "<group>"; };
+		6C6C296625E6248F0016355F /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		6C6C296E25E624BC0016355F /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		6C6C297125E624C10016355F /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		901366D42557B071002D4E5D /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		901366D82557B154002D4E5D /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		90B940012570DF8200DC5F27 /* GroupPoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupPoints.swift; sourceTree = "<group>"; };
@@ -150,7 +168,6 @@
 				2596C91C25512CB900DAA64F /* AlanYanHelpers in Frameworks */,
 				4B0F9D7B74690590F676EF4F /* (null) in Frameworks */,
 				56173242D5DA2F8E204E6E10 /* (null) in Frameworks */,
-				2596C91C25512CB900DAA64F /* AlanYanHelpers in Frameworks */,
 				785F99F4E04AE6A19543D326 /* Pods_dough_bros_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,6 +204,7 @@
 		257495C225311FEA00D386A2 /* dough-bros-ios */ = {
 			isa = PBXGroup;
 			children = (
+				6C6C296525E6247E0016355F /* Carlos Utils */,
 				90E51A6F2570CDAF0029DF5E /* CustomViews */,
 				BEE9D75F25589E9D0078BCB9 /* GoogleService-Info.plist */,
 				BE1F06BF255147A30067C137 /* dough-bros-ios.entitlements */,
@@ -217,6 +235,7 @@
 		257495D825311FF900D386A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C6C294725E61EEC0016355F /* Carlos Tutorial */,
 				BE25AD7E2572078E0069DF5F /* Settle Debt */,
 				BE03B3E125699C1500B9A4D0 /* Add Group */,
 				901366D32557B04C002D4E5D /* Add Expense */,
@@ -243,6 +262,7 @@
 		257495DA2531201F00D386A2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6C6C294425E619D70016355F /* DoughTutorialModel.swift */,
 				257DB48A253169EC00D1DABB /* Group.swift */,
 				25DB65EA2551357400F79B58 /* Friend.swift */,
 				BE180EDA255B6FC800F9D2B4 /* User.swift */,
@@ -342,6 +362,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6C6C294725E61EEC0016355F /* Carlos Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				6C6C295A25E620280016355F /* CarlosViewController.swift */,
+				6C6C295C25E620280016355F /* DoughClassicWalkthroughViewController.xib */,
+				6C6C295B25E620280016355F /* DoughMainWalkthroughViewController.swift */,
+				6C6C295D25E620290016355F /* DoughWalkthroughViewController.swift */,
+				6C6C295925E620280016355F /* DoughWalkthroughViewController.xib */,
+			);
+			path = "Carlos Tutorial";
+			sourceTree = "<group>";
+		};
+		6C6C296525E6247E0016355F /* Carlos Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6C6C296625E6248F0016355F /* UIViewController.swift */,
+				6C6C296E25E624BC0016355F /* UIImage.swift */,
+				6C6C297125E624C10016355F /* UIColor.swift */,
+			);
+			path = "Carlos Utils";
+			sourceTree = "<group>";
+		};
 		901366D32557B04C002D4E5D /* Add Expense */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,7 +475,6 @@
 			);
 			name = "dough-bros-ios";
 			packageProductDependencies = (
-				2596C91B25512CB900DAA64F /* AlanYanHelpers */,
 			);
 			productName = "dough-bros-ios";
 			productReference = 257495C025311FEA00D386A2 /* dough-bros-ios.app */;
@@ -446,7 +487,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					257495BF25311FEA00D386A2 = {
 						CreatedOnToolsVersion = 12.0.1;
@@ -481,7 +522,9 @@
 			files = (
 				257495D025311FED00D386A2 /* LaunchScreen.storyboard in Resources */,
 				BEE9D76025589E9D0078BCB9 /* GoogleService-Info.plist in Resources */,
+				6C6C296125E620290016355F /* DoughClassicWalkthroughViewController.xib in Resources */,
 				25B0532825737BC100173E94 /* AirbnbCerealMedium.ttf in Resources */,
+				6C6C295E25E620290016355F /* DoughWalkthroughViewController.xib in Resources */,
 				25B0532525737BC000173E94 /* AirbnbCerealBlack.ttf in Resources */,
 				257495CD25311FED00D386A2 /* Preview Assets.xcassets in Resources */,
 				25B0532925737BC100173E94 /* AirbnbCerealLight.ttf in Resources */,
@@ -547,11 +590,14 @@
 				BEE0096D25773309003F46CB /* PaymentObj.swift in Sources */,
 				BE25AD8625720A270069DF5F /* PayConfirmationView.swift in Sources */,
 				BE180EDB255B6FC800F9D2B4 /* User.swift in Sources */,
+				6C6C294525E619D70016355F /* DoughTutorialModel.swift in Sources */,
+				6C6C296025E620290016355F /* DoughMainWalkthroughViewController.swift in Sources */,
 				90E51A682570C8A50029DF5E /* WelcomeView.swift in Sources */,
 				901366D92557B154002D4E5D /* AddExpenseView.swift in Sources */,
 				251CE01C25513453002913DE /* ObjectClassName.swift in Sources */,
 				90E51A742570D0250029DF5E /* DBStackView.swift in Sources */,
 				901366D52557B071002D4E5D /* AddExpenseViewController.swift in Sources */,
+				6C6C296925E6248F0016355F /* UIViewController.swift in Sources */,
 				BEE009702577357F003F46CB /* PaymentViewModel.swift in Sources */,
 				BE03B3E325699CF100B9A4D0 /* AddGroupViewController.swift in Sources */,
 				257495C625311FEA00D386A2 /* SceneDelegate.swift in Sources */,
@@ -570,6 +616,7 @@
 				90B940022570DF8200DC5F27 /* GroupPoints.swift in Sources */,
 				BEBEB84625493E510029BAB3 /* ActivityTableViewCell.swift in Sources */,
 				257495E2253120B800D386A2 /* SampleView.swift in Sources */,
+				6C6C297225E624C10016355F /* UIColor.swift in Sources */,
 				BEE938A525C4CE56002BD9DD /* GroupExpenseObj.swift in Sources */,
 				BE25AD8C25722BF30069DF5F /* DebtObj.swift in Sources */,
 				BE25AD83257207EA0069DF5F /* SettleDebtView.swift in Sources */,
@@ -581,14 +628,17 @@
 				BE03B3E925699D8400B9A4D0 /* AddGroupCollectionViewCell.swift in Sources */,
 				2596C9272551330A00DAA64F /* GroupsCollectionViewCell.swift in Sources */,
 				2582473B2546623600F2EAAD /* TutorialView.swift in Sources */,
+				6C6C295F25E620290016355F /* CarlosViewController.swift in Sources */,
 				25DB65EB2551357400F79B58 /* Friend.swift in Sources */,
 				BE25AD80257207D50069DF5F /* SettleDebtViewController.swift in Sources */,
+				6C6C296225E620290016355F /* DoughWalkthroughViewController.swift in Sources */,
 				257DB49525316B7000D1DABB /* LoginViewModel.swift in Sources */,
 				25DB65E8255134F100F79B58 /* GroupsViewModel.swift in Sources */,
 				BE180ED4255B6B3500F9D2B4 /* UserPoints.swift in Sources */,
 				258247382546622400F2EAAD /* TutorialViewController.swift in Sources */,
 				25B0532C25737BCE00173E94 /* AppFont.swift in Sources */,
 				BEBEB84325493E460029BAB3 /* SummaryTableViewCell.swift in Sources */,
+				6C6C296F25E624BC0016355F /* UIImage.swift in Sources */,
 				258247322546614300F2EAAD /* GroupsViewController.swift in Sources */,
 				BEF13921257706840083F92D /* AppColour.swift in Sources */,
 			);
@@ -736,7 +786,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 35ZK849627;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -761,7 +811,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dough-bros-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 35ZK849627;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "dough-bros-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
