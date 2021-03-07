@@ -97,7 +97,6 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         print("edit button presesed")
     }
     
-    //edit group name
     private func groupNameLabelTapped() {
             groupName.isHidden = true
             groupNameField.isHidden = false
@@ -110,9 +109,9 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
             groupName.isHidden = false
             //groupName.text = groupNameField.text
         
-        GroupEndpoints.setGroupName(groupID: groupObj?.group_id, groupName: groupNameField.text)
+        GroupEndpoints.setGroupName(groupID: groupObj!.group_id, groupName: groupNameField.text!)
             //refresh view?
-            groupDetailsView.groupDetailsTableView.reloadData()
+            //groupDetailsView.groupName.reloadData()
     }
     
     @objc private func addExpenseTapped() {
