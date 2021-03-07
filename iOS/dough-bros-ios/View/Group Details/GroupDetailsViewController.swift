@@ -101,7 +101,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
     private func groupNameLabelTapped() {
             groupName.isHidden = true
             groupNameField.isHidden = false
-            groupNameField.text = groupNameLabel.text
+            groupNameField.text = groupName.text
         }
 
     private func textFieldShouldReturn(nameText: UITextField) {
@@ -111,6 +111,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
             //groupName.text = groupNameField.text
         
         GroupEndpoints.setGroupName(groupID: groupObj?.group_id, groupName: groupNameField.text)
+            //refresh view?
             groupDetailsView.groupDetailsTableView.reloadData()
     }
     

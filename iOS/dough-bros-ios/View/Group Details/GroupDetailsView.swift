@@ -220,6 +220,13 @@ class GroupDetailsView: UIView {
             groupName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor, constant: 10)
         ])
+        
+        // setupNameField()
+        contentView.addSubview(groupNameField)
+        NSLayoutConstraint.activate([
+            groupName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor, constant: 10)
+        ])
 
         // setupAddExpenses()
         contentView.addSubview(addExpenseButton)
