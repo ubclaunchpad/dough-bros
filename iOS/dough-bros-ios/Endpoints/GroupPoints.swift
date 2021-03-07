@@ -189,7 +189,7 @@ struct GroupEndpoints {
     }
 
     static func setGroupName(groupID: Int, groupName: String) {
-        print("Accepting Membership!!")
+        print("Setting Group Name!!")
         let semaphore = DispatchSemaphore (value: 0)
 
         var request = URLRequest(url: URL(string: endpointURL + "group/setGroupName/" + String(groupID) + "/" + groupName)!,timeoutInterval: Double.infinity)

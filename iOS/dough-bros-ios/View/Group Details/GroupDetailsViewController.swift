@@ -9,13 +9,17 @@ import UIKit
 import Firebase
 import Combine
 
-class GroupDetailsViewController: UIViewController {
+class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
     
     var groupObj: GroupObj?
     private var paymentViewModel = PaymentViewModel()
     private var cancellableSet: Set<AnyCancellable> = []
     private var isOwner = false
     private var groupMembers = [User]()
+//    private var groupName =
+    
+    @IBOutlet weak var groupNameLabel: UILabel!
+    @IBOutlet weak var groupNameField: UITextField!
 
     private var groupDetailsView: GroupDetailsView {
         return view as! GroupDetailsView
@@ -29,7 +33,7 @@ class GroupDetailsViewController: UIViewController {
         super.loadView()
         view = GroupDetailsView()
     }
-     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         groupDetailsView.summaryView.delegate = self
@@ -62,6 +66,14 @@ class GroupDetailsViewController: UIViewController {
         groupDetailsView.settleDebtButtonMiddle.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
         
         self.groupMembers = GroupEndpoints.getUsersInGroup(groupID: groupObj!.group_id)
+        
+        groupNameField.delegate = self
+        groupNameField.isHidden = true
+        groupName.isUserInteractionEnabled = true
+        let aSelector : Selector = "groupNameLabelTapped"
+        let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
+        tapGesture.numberOfTapsRequired = 1
+        groupName.addGestureRecognizer(tapGesture)
 
     }
     
@@ -85,6 +97,49 @@ class GroupDetailsViewController: UIViewController {
     @objc private func editButtonTapped() {
         print("edit button presesed")
     }
+    
+    //edit group name
+    private func groupNameLabelTapped() {
+            groupName.isHidden = true
+            groupNameField.isHidden = false
+            groupNameField.text = groupNameLabel.text
+        }
+
+    private func textFieldShouldReturn(nameText: UITextField) {
+            nameText.resignFirstResponder()
+            groupNameField.isHidden = true
+            groupName.isHidden = false
+            //groupName.text = groupNameField.text
+        
+        GroupEndpoints.setGroupName(groupID: groupObj?.group_id, groupName: groupNameField.text)
+            groupDetailsView.groupDetailsTableView.reloadData()
+    }
+    
+//    private func setupTextField() {
+//        groupDetailsView.groupNameField.delegate = self
+//        groupDetailsView.groupNameField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+//    }
+//
+//    @objc func textFieldDidChange(textField: UITextField) {
+//        print("Text changed: " + textField.text!)
+//
+//        textField.resignFirstResponder()
+//        groupNameField.isHidden = true
+//        groupNameLabel.isHidden = false
+//        groupNameLabel.text = groupNameField.text
+//
+//        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload(_:)), object: textField)
+//                    perform(#selector(self.reload(_:)), with: textField, afterDelay: 0.75)
+//    }
+//
+//    @objc func reload(_ textField: UITextField) {
+//        guard let name = textField.text, name.trimmingCharacters(in: .whitespaces) != "" else {
+//            print("empty group name")
+//            return
+//        }
+//        GroupEndpoints.setGroupName(groupID: groupObj.group_id, groupName: name)
+//        groupDetailsView.groupDetailsTableView.reloadData()
+//    }
     
     @objc private func addExpenseTapped() {
         print("add expense tapped")

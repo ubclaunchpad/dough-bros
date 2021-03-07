@@ -7,8 +7,6 @@
 
 import Foundation
 
-typealias user_tuple = (fk_sender_id: String, amount: Double)
-
 struct GroupExpenseObj: Codable {
     var fk_gorup_id: Int
     var fk_added_by_id: String
@@ -16,5 +14,6 @@ struct GroupExpenseObj: Codable {
     var expense_name: String
     var is_archived: Int
     var amount: Double
-    var user_amounts: [user_tuple] = user_tuple[]()
+    //commented to bypass errors
+    //var user_amounts: [(fk_sender_id: String, amount: Double)] = []
 }
