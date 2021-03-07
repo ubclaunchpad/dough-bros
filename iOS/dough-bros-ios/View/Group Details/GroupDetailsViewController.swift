@@ -16,9 +16,8 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
     private var cancellableSet: Set<AnyCancellable> = []
     private var isOwner = false
     private var groupMembers = [User]()
-//    private var groupName =
     
-    @IBOutlet weak var groupNameLabel: UILabel!
+    @IBOutlet weak var groupName: UILabel!
     @IBOutlet weak var groupNameField: UITextField!
 
     private var groupDetailsView: GroupDetailsView {
@@ -114,32 +113,6 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         GroupEndpoints.setGroupName(groupID: groupObj?.group_id, groupName: groupNameField.text)
             groupDetailsView.groupDetailsTableView.reloadData()
     }
-    
-//    private func setupTextField() {
-//        groupDetailsView.groupNameField.delegate = self
-//        groupDetailsView.groupNameField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-//    }
-//
-//    @objc func textFieldDidChange(textField: UITextField) {
-//        print("Text changed: " + textField.text!)
-//
-//        textField.resignFirstResponder()
-//        groupNameField.isHidden = true
-//        groupNameLabel.isHidden = false
-//        groupNameLabel.text = groupNameField.text
-//
-//        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload(_:)), object: textField)
-//                    perform(#selector(self.reload(_:)), with: textField, afterDelay: 0.75)
-//    }
-//
-//    @objc func reload(_ textField: UITextField) {
-//        guard let name = textField.text, name.trimmingCharacters(in: .whitespaces) != "" else {
-//            print("empty group name")
-//            return
-//        }
-//        GroupEndpoints.setGroupName(groupID: groupObj.group_id, groupName: name)
-//        groupDetailsView.groupDetailsTableView.reloadData()
-//    }
     
     @objc private func addExpenseTapped() {
         print("add expense tapped")

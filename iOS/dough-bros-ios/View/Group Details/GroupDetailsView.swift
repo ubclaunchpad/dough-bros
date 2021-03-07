@@ -59,7 +59,7 @@ class GroupDetailsView: UIView {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textColor = .black
-        name.text = //??
+        name.text = groupObj.name
         name.font = UIFont.customFont(ofSize: 20, weight: .bold)
         return name
     }()
