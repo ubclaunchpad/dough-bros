@@ -55,7 +55,9 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
 //            let data = try? Data(contentsOf: url!)
 //            groupDetailsView.groupImage.image = UIImage(data: data!)
 //        }
-        groupDetailsView.groupName.text = groupObj?.group_name == "" ? "Untitled Group" : groupObj?.group_name
+        let groupName = String((groupObj?.group_name.removingPercentEncoding)!)
+        
+        groupDetailsView.groupName.text = groupObj?.group_name == "" ? "Untitled Group" : groupName
         groupDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)
@@ -102,7 +104,8 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
             print("group name empty")
             return
         }
-        
+        print(groupObj!.group_id)
+        print("group name: " + name)
         GroupEndpoints.setGroupName(groupID: groupObj!.group_id, groupName: name)
         //groupDetailsView.groupName.reloadData()
     }

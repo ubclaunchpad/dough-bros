@@ -61,7 +61,8 @@ class GroupDetailsView: UIView {
         label.placeholder = "Enter Group Name"
         label.textColor = .black
         label.font = UIFont.customFont(ofSize: 20, weight: .bold)
-        label.backgroundColor = UIColor(hex: 0xFFFFFF)  //F2F2F2
+        label.textAlignment = .center
+        label.backgroundColor = UIColor(hex: 0xF2F2F2)  //FFFFFF
         label.addCorners(20)
         label.setLeftPaddingPoints(15)
         label.setRightPaddingPoints(15)

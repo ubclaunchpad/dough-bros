@@ -191,8 +191,11 @@ struct GroupEndpoints {
     static func setGroupName(groupID: Int, groupName: String) {
         print("Setting Group Name!!")
         let semaphore = DispatchSemaphore (value: 0)
-
-        var request = URLRequest(url: URL(string: endpointURL + "group/setGroupName/" + String(groupID) + "/" + groupName)!,timeoutInterval: Double.infinity)
+        let urlString = endpointURL + "group/setGroupName/" + String(groupID) + "/" + groupName
+        let validUrlString = String(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        
+        print(validUrlString)
+        var request = URLRequest(url: URL(string: validUrlString)!,timeoutInterval: Double.infinity)
         request.httpMethod = "PUT"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
