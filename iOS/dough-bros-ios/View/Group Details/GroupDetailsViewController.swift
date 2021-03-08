@@ -16,9 +16,6 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
     private var cancellableSet: Set<AnyCancellable> = []
     private var isOwner = false
     private var groupMembers = [User]()
-    
-    @IBOutlet weak var groupName: UILabel!
-    @IBOutlet weak var groupNameField: UITextField!
 
     private var groupDetailsView: GroupDetailsView {
         return view as! GroupDetailsView
@@ -51,6 +48,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         }
         
         setupViewModel()
+        setupTextField()
         
 //        if (groupObj != nil && groupObj?.image_uri != "") {
 //            let url = URL(string: groupObj!.image_uri)
@@ -65,15 +63,6 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         groupDetailsView.settleDebtButtonMiddle.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
         
         self.groupMembers = GroupEndpoints.getUsersInGroup(groupID: groupObj!.group_id)
-        
-        groupNameField.delegate = self
-        groupNameField.isHidden = true
-        groupName.isUserInteractionEnabled = true
-        let aSelector : Selector = "groupNameLabelTapped"
-        let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
-        tapGesture.numberOfTapsRequired = 1
-        groupName.addGestureRecognizer(tapGesture)
-
     }
     
     private func setupViewModel() {
@@ -97,21 +86,25 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         print("edit button presesed")
     }
     
-    private func groupNameLabelTapped() {
-            groupName.isHidden = true
-            groupNameField.isHidden = false
-            groupNameField.text = groupName.text
+    private func setupTextField() {
+        groupDetailsView.groupName.delegate = self
+        groupDetailsView.groupName.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(textField: UITextField) {
+        print("Text changed: " + textField.text!)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload(_:)), object: textField)
+                    perform(#selector(self.reload(_:)), with: textField, afterDelay: 0.75)
+    }
+            
+    @objc func reload(_ textField: UITextField) {
+        guard let name = textField.text, name.trimmingCharacters(in: .whitespaces) != "" else {
+            print("group name empty")
+            return
         }
-
-    private func textFieldShouldReturn(nameText: UITextField) {
-            nameText.resignFirstResponder()
-            groupNameField.isHidden = true
-            groupName.isHidden = false
-            //groupName.text = groupNameField.text
         
-        GroupEndpoints.setGroupName(groupID: groupObj!.group_id, groupName: groupNameField.text!)
-            //refresh view?
-            //groupDetailsView.groupName.reloadData()
+        GroupEndpoints.setGroupName(groupID: groupObj!.group_id, groupName: name)
+        //groupDetailsView.groupName.reloadData()
     }
     
     @objc private func addExpenseTapped() {

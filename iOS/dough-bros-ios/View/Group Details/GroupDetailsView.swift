@@ -55,23 +55,13 @@ class GroupDetailsView: UIView {
         return imageView
     }()
     
-    private(set) var groupName: UILabel = {
-        let name = UILabel()
-        name.translatesAutoresizingMaskIntoConstraints = false
-        name.textColor = .black
-        //set name in controller?
-        //name.text = groupObj.name
-        name.font = UIFont.customFont(ofSize: 20, weight: .bold)
-        return name
-    }()
-    
-    private(set) var groupNameField: UITextField = {
+    private(set) var groupName: UITextField = {
         let label = UITextField()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.placeholder = "Enter Group Name"
         label.textColor = .black
         label.font = UIFont.customFont(ofSize: 20, weight: .bold)
-        label.backgroundColor = UIColor(hex: 0xF2F2F2)
+        label.backgroundColor = UIColor(hex: 0xFFFFFF)  //F2F2F2
         label.addCorners(20)
         label.setLeftPaddingPoints(15)
         label.setRightPaddingPoints(15)
@@ -217,13 +207,6 @@ class GroupDetailsView: UIView {
 
         // setupName()
         contentView.addSubview(groupName)
-        NSLayoutConstraint.activate([
-            groupName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor, constant: 10)
-        ])
-        
-        // setupNameField()
-        contentView.addSubview(groupNameField)
         NSLayoutConstraint.activate([
             groupName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             groupName.topAnchor.constraint(equalTo: groupImage.bottomAnchor, constant: 10)
