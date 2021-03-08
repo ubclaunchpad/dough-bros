@@ -99,7 +99,7 @@ struct UserEndpoints {
         var userList = [User]()
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: endpointURL + "user/findUserByPatternMatching" + search)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "user/findUserByPatternMatching/" + search)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in

@@ -16,4 +16,13 @@ struct GroupExpenseObj: Codable {
     var amount: Double
     //commented to bypass errors
     //var user_amounts: [(fk_sender_id: String, amount: Double)] = []
+    
+    /// try this
+    //var user_amounts: [UserAmountObj]
+    
+}
+
+struct UserAmountObj: Codable {
+    var fk_sender_id: String
+    var amount: Double
 }
