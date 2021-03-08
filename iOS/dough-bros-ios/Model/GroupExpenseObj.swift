@@ -7,6 +7,12 @@
 
 import Foundation
 
-struct GroupExpenseObj: Codable {
-    
+struct GroupExpenseObj: Codable, Hashable {
+    var expense_id: Int
+    var group_id: Int
+    var addedBy: String
+    var currency_id: Int
+    var is_archived: Bool
+    var expense_name: String
+    var amount: Double
 }
