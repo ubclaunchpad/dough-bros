@@ -83,7 +83,7 @@ User.findUserByPatternMatching = (search: string, result: any) => {
       result(err, null);
     } else {
       console.log(res);
-      result(null, res);
+      result(null, res[0]);
     }
   });
 };
