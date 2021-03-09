@@ -16,7 +16,7 @@ struct PaymentObj: Codable {
     var fk_currency_id: Int
     var is_paid: Int
     var is_settled: Int
-    var amount: Int
+    var amount: Double
     var first_name: String
     var last_name: String
 }

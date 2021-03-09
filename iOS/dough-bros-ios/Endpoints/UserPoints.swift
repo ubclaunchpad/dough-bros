@@ -93,4 +93,34 @@ struct UserEndpoints {
         semaphore.wait()
         return user
     }
+    
+    static func findUserByPatternMatching(search: String) -> [User] {
+        print("Getting List of Users!!")
+        var userList = [User]()
+        let semaphore = DispatchSemaphore (value: 0)
+
+        var request = URLRequest(url: URL(string: endpointURL + "user/findUserByPatternMatching/" + search)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print(String(describing: error))
+                semaphore.signal()
+                return
+            }
+            do {
+                userList = try JSONDecoder().decode([User].self, from: data)
+                // print(userList)
+            } catch let error {
+                print(error)
+            }
+            print(String(data: data, encoding: .utf8)!)
+            semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+
+        return userList
+    }
 }

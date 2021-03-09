@@ -68,4 +68,12 @@ router.put('/acceptGroupMembership/:groupID/:userID', (req, res) => {
     });
 });
 
+router.put('/setGroupName/:groupID/:groupName', (req, res) => {
+  groupServer.setGroupName(req.params.groupID, req.params.groupName).then((group: any) => {
+      res.json(group);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
 module.exports = router
