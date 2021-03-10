@@ -70,7 +70,9 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllGroupUsers` (IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `group_membership` WHERE `fk_group_id` = `group_id`;
+SELECT * FROM `user` as u
+JOIN (SELECT * FROM `group_membership` WHERE `fk_group_id` = `group_id`) as mb
+ON mb.fk_user_id=u.firebase_uid;
 
 END$$
 

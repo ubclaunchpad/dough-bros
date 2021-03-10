@@ -114,6 +114,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         print("add expense tapped")
         let addExpenseVC = AddExpenseViewController()
         addExpenseVC.groupMembers = self.groupMembers
+        addExpenseVC.groupObj = self.groupObj
         present(addExpenseVC, animated: true)
     }
     

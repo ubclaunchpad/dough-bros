@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Firebase
 
 class AddExpenseViewController: UIViewController {
     
+    var groupObj: GroupObj?
     var groupMembers: [User]?
     
     var selectedPeople: Set<User> = []
@@ -62,7 +64,14 @@ class AddExpenseViewController: UIViewController {
     }
     
     @objc func completedExpense() {
-        //TODO: API Call
+        let g = GroupExpenseObj(expense_id: 0, group_id: Int(self.groupObj!.group_id), addedBy: Auth.auth().currentUser!.uid, currency_id: 1, is_archived: false, expense_name: "My Expense", amount: totalSum)
+        let expenseID = GroupExpenseEndpoints.createGroupExpense(groupExpense: g)
+        for friend in selectedPeople {
+            guard let index = groupMembers!.firstIndex(of: friend) else { continue }
+            print(friend)
+            print(owedAmounts[index])
+            PaymentEndpoints.createPayment(payment: PaymentObj(payment_id: 0, fk_sender_id: friend.firebase_uid, fk_receiver_id: Auth.auth().currentUser!.uid, fk_creator_id: Auth.auth().currentUser!.uid, fk_parent_expense_id: expenseID, fk_currency_id: 1, is_paid: 0, is_settled: 0, amount: Int(owedAmounts[index]), first_name: friend.first_name, last_name: friend.last_name))
+        }
         
         dismiss(animated: true, completion: nil)
     }
