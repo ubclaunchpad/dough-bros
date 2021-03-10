@@ -80,4 +80,15 @@ module.exports = class GroupService {
       });
     });
   }
+
+  setGroupName(groupID: number, groupName: string) {
+    return new Promise((resolve, reject) => {
+      Group.setGroupName(groupID, groupName, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
 };

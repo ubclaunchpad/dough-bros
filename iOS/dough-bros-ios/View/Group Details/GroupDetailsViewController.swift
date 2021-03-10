@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import Combine
 
-class GroupDetailsViewController: UIViewController {
+class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
     
     var groupObj: GroupObj?
     private var paymentViewModel = PaymentViewModel()
@@ -29,7 +29,7 @@ class GroupDetailsViewController: UIViewController {
         super.loadView()
         view = GroupDetailsView()
     }
-     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         groupDetailsView.summaryView.delegate = self
@@ -48,13 +48,16 @@ class GroupDetailsViewController: UIViewController {
         }
         
         setupViewModel()
+        setupTextField()
         
 //        if (groupObj != nil && groupObj?.image_uri != "") {
 //            let url = URL(string: groupObj!.image_uri)
 //            let data = try? Data(contentsOf: url!)
 //            groupDetailsView.groupImage.image = UIImage(data: data!)
 //        }
-        groupDetailsView.groupName.text = groupObj?.group_name == "" ? "Untitled Group" : groupObj?.group_name
+        let groupName = String((groupObj?.group_name.removingPercentEncoding)!)
+        
+        groupDetailsView.groupName.text = groupObj?.group_name == "" ? "Untitled Group" : groupName
         groupDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)
@@ -62,7 +65,6 @@ class GroupDetailsViewController: UIViewController {
         groupDetailsView.settleDebtButtonMiddle.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
         
         self.groupMembers = GroupEndpoints.getUsersInGroup(groupID: groupObj!.group_id)
-
     }
     
     private func setupViewModel() {
@@ -84,6 +86,28 @@ class GroupDetailsViewController: UIViewController {
     
     @objc private func editButtonTapped() {
         print("edit button presesed")
+    }
+    
+    private func setupTextField() {
+        groupDetailsView.groupName.delegate = self
+        groupDetailsView.groupName.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(textField: UITextField) {
+        print("Text changed: " + textField.text!)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload(_:)), object: textField)
+                    perform(#selector(self.reload(_:)), with: textField, afterDelay: 0.75)
+    }
+            
+    @objc func reload(_ textField: UITextField) {
+        guard let name = textField.text, name.trimmingCharacters(in: .whitespaces) != "" else {
+            print("group name empty")
+            return
+        }
+        print(groupObj!.group_id)
+        print("group name: " + name)
+        GroupEndpoints.setGroupName(groupID: groupObj!.group_id, groupName: name)
+        //groupDetailsView.groupName.reloadData()
     }
     
     @objc private func addExpenseTapped() {

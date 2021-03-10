@@ -55,13 +55,18 @@ class GroupDetailsView: UIView {
         return imageView
     }()
     
-    private(set) var groupName: UILabel = {
-        let name = UILabel()
-        name.translatesAutoresizingMaskIntoConstraints = false
-        name.textColor = .black
-        name.text = "West Coast Trip 2021"
-        name.font = UIFont.customFont(ofSize: 20, weight: .bold)
-        return name
+    private(set) var groupName: UITextField = {
+        let label = UITextField()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.placeholder = "Enter Group Name"
+        label.textColor = .black
+        label.font = UIFont.customFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .center
+        label.backgroundColor = UIColor(hex: 0xF2F2F2)  //FFFFFF
+        label.addCorners(20)
+        label.setLeftPaddingPoints(15)
+        label.setRightPaddingPoints(15)
+        return label
     }()
     
     private var summaryLabel: UILabel = {
