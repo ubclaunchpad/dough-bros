@@ -169,11 +169,11 @@ extension GroupDetailsViewController: UITableViewDataSource, UITableViewDelegate
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
             if (isOwner) {
                 cell.userName.text = paymentViewModel.activity[indexPath.row].first_name + " paid you $" + String(paymentViewModel.activity[indexPath.row].amount)
-            } else if (paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
+            } else if (paymentViewModel.activity[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
                 // TODO Replace with creator name
                 cell.userName.text = paymentViewModel.activity[indexPath.row].first_name + " paid $" + String(paymentViewModel.activity[indexPath.row].amount)
             } else {
-                cell.userName.text = "You paid $" + String(paymentViewModel.payments[indexPath.row].amount)
+                cell.userName.text = "You paid $" + String(paymentViewModel.activity[indexPath.row].amount)
             }
             
             return cell
