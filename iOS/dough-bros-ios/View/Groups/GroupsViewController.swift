@@ -53,6 +53,8 @@ final class GroupsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         groupsViewModel.fetchData()
+        groupsView.groupsTableView.reloadData()
+        groupsView.friendsCollectionView.reloadData()
     }
     
     // MARK: - Setup -
