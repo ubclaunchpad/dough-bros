@@ -90,6 +90,57 @@ router.get('/settled/:parentExpenseID', (req, res) => {
     });
 });
 
+router.get('/:groupID/pending/:userID', (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: 'Content can not be empty!',
+    });
+  }
+
+  paymentServer
+    .getAllPendingPaymentsToAndFromUserInGroup(req.params.userID, req.params.groupID)
+    .then((payment: any) => {
+      res.json(payment);
+    })
+    .catch((err: any) => {
+      res.json(err);
+    });
+});
+
+router.get('/settled/group/:groupID', (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: 'Content can not be empty!',
+    });
+  }
+
+  paymentServer
+    .getAllSettledPaymentsInGroup(req.params.groupID)
+    .then((payment: any) => {
+      res.json(payment);
+    })
+    .catch((err: any) => {
+      res.json(err);
+    });
+});
+
+router.get('/pending/group/:groupID', (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: 'Content can not be empty!',
+    });
+  }
+
+  paymentServer
+    .getAllPendingPaymentsInGroup(req.params.groupID)
+    .then((payment: any) => {
+      res.json(payment);
+    })
+    .catch((err: any) => {
+      res.json(err);
+    });
+});
+
 router.get('/:groupID/received/:receiverID', (req, res) => {
   if (!req.body) {
     res.status(400).send({

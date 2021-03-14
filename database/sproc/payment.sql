@@ -6,9 +6,17 @@ USE `doughBros_db`;
 DROP procedure IF EXISTS `createPayment`;
 DROP procedure IF EXISTS `getAllPaymentsToUserInGroup`;
 DROP procedure IF EXISTS `getAllPaymentsFromUserInGroup`;
+DROP procedure IF EXISTS `getAllSettledPaymentsToUserInGroup`;
 DROP procedure IF EXISTS `payPayment`;
 DROP procedure IF EXISTS `settlePayment`;
 DROP procedure IF EXISTS `deletePayment`;
+DROP procedure IF EXISTS `getAllPaymentsByGroupExpense`;
+DROP procedure IF EXISTS `getAllPendingPaymentsByGroupExpense`;
+DROP procedure IF EXISTS `getAllSettledPaymentsByGroupExpense`;
+DROP procedure IF EXISTS `getAllPaidPaymentsByGroupExpense`;
+DROP procedure IF EXISTS `getAllPendingPaymentsInGroup`;
+DROP procedure IF EXISTS `getAllPendingPaymentsToAndFromUserInGroup`;
+DROP procedure IF EXISTS `getAllSettledPaymentsInGroup`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -39,6 +47,43 @@ CREATE PROCEDURE `getAllPendingPaymentsByGroupExpense` (IN `parent_expense_id` I
 BEGIN
 
 SELECT * FROM `payment` WHERE (`fk_parent_expense_id` = `parent_expense_id` AND `is_paid` = 0 AND `is_settled` = 0);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllPendingPaymentsToAndFromUserInGroup` (IN `user_uid`, `group_id` INT(8))
+BEGIN
+
+SELECT * FROM `payment` WHERE (`fk_group_id` = `group_id`
+	AND (`fk_receiver_id` = `user_uid` OR `fk_sender_id` = `user_uid`)
+	AND `is_paid` = 0
+	AND `is_settled` = 0
+	);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllSettledPaymentsInGroup` (IN `group_id` INT(8))
+BEGIN
+
+SELECT * FROM `payment` WHERE (`fk_group_id` = `group_id` AND `is_settled` = 1);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllPendingPaymentsInGroup` (IN `group_id` INT(8))
+BEGIN
+
+SELECT * FROM `payment` WHERE (`fk_group_id` = `group_id` AND `is_paid` = 0 AND `is_settled` = 0);
 
 END$$
 

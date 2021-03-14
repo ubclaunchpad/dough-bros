@@ -174,6 +174,64 @@ Payment.getAllPaymentsFromUserInGroup = (
   );
 };
 
+Payment.getAllPendingPaymentsToAndFromUserInGroup = (
+  userID: string,
+  groupID: number,
+  result: any
+) => {
+  sql.query(
+    'CALL getAllPendingPaymentsToAndFromUserInGroup(?, ?)',
+    [userID, groupID],
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+Payment.getAllSettledPaymentsInGroup = (
+  groupID: number,
+  result: any
+) => {
+  sql.query(
+    'CALL getAllSettledPaymentsInGroup(?)',
+    groupID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+Payment.getAllPendingPaymentsInGroup = (
+  groupID: number,
+  result: any
+) => {
+  sql.query(
+    'CALL getAllPendingPaymentsInGroup(?)',
+    groupID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
 Payment.payPayment = (paymentID: number, result: any) => {
   sql.query('CALL payPayment(?)', paymentID, (err: any, res: any) => {
     if (err) {

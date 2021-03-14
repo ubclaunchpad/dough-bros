@@ -53,6 +53,47 @@ module.exports = class PaymentService {
     });
   }
 
+  getAllPendingPaymentsToAndFromUserInGroup(userID: string, groupID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllPendingPaymentsToAndFromUserInGroup(
+        userID,
+        groupID,
+        (err: any, res: any) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        }
+      );
+    });
+  }
+  getAllSettledPaymentsInGroup(groupID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllSettledPaymentsInGroup(
+        groupID,
+        (err: any, res: any) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        }
+      );
+    });
+  }
+  getAllPendingPaymentsInGroup(groupID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.getAllPendingPaymentsInGroup(
+        groupID,
+        (err: any, res: any) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        }
+      );
+    });
+  }
+
   getAllPaidPaymentsByGroupExpense(parentExpenseID: number) {
     return new Promise((resolve, reject) => {
       Payment.getAllPaidPaymentsByGroupExpense(
