@@ -8,6 +8,7 @@ DROP procedure IF EXISTS `getAllPaymentsToUserInGroup`;
 DROP procedure IF EXISTS `getAllPaymentsFromUserInGroup`;
 DROP procedure IF EXISTS `payPayment`;
 DROP procedure IF EXISTS `settlePayment`;
+DROP procedure IF EXISTS `deletePayment`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -130,6 +131,17 @@ BEGIN
 
 UPDATE `payment` as p
 SET p.is_settled = 1 WHERE p.payment_id = `payment_id`;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `deletePayment` (IN `payment_id` INT(8))
+BEGIN
+
+DELETE FROM `payment` WHERE `payment_id` = `payment_id`;
 
 END$$
 
