@@ -54,15 +54,15 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `getAllPendingPaymentsToAndFromUserInGroup` (IN `user_uid`, `group_id` INT(8))
+CREATE PROCEDURE `getAllPendingPaymentsToAndFromUserInGroup` (IN `user_uid` VARCHAR(255), `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE (`fk_group_id` = `group_id`
-	AND (`fk_receiver_id` = `user_uid` OR `fk_sender_id` = `user_uid`)
+SELECT * FROM `payment` WHERE ((`fk_sender_id` = `user_uid` OR `fk_receiver_id` = `user_uid`)
+	AND `fk_parent_expense_id` = (
+		SELECT `expense_id` FROM `group_expense` WHERE `fk_group_id` = `group_id`)
 	AND `is_paid` = 0
 	AND `is_settled` = 0
 	);
-
 END$$
 
 DELIMITER ;
@@ -72,8 +72,11 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllSettledPaymentsInGroup` (IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE (`fk_group_id` = `group_id` AND `is_settled` = 1);
-
+SELECT * FROM `payment` WHERE (`fk_parent_expense_id` = (
+		SELECT `expense_id` FROM `group_expense`
+		WHERE `fk_group_id` = `group_id`)
+	AND `is_settled` = 1
+	);
 END$$
 
 DELIMITER ;
@@ -83,8 +86,13 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllPendingPaymentsInGroup` (IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE (`fk_group_id` = `group_id` AND `is_paid` = 0 AND `is_settled` = 0);
-
+SELECT * FROM `payment` WHERE (`fk_parent_expense_id` = (
+		SELECT `expense_id` FROM `group_expense`
+		WHERE `fk_group_id` = `group_id`)
+	AND `is_paid` = 0
+	AND `is_settled` = 0
+	);
+	
 END$$
 
 DELIMITER ;
