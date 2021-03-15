@@ -77,7 +77,8 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         }.store(in: &cancellableSet)
         
         paymentViewModel.fetchData(groupID: groupObj!.group_id)
-        paymentViewModel.fetchSettledData(creatorID: groupObj!.creator_id, groupID: groupObj!.group_id)
+        paymentViewModel.fetchPendingData(groupID: groupObj!.group_id)
+        paymentViewModel.fetchSettledData(groupID: groupObj!.group_id)
     }
     
     @objc private func backButtonTapped() {
@@ -123,11 +124,14 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         settleDebtVC.groupObj = groupObj
         settleDebtVC.isOwner = isOwner
         
-        if (isOwner) {
+        /*if (isOwner) {
             settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0})
         } else {
             settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0 && $0.fk_sender_id == Auth.auth().currentUser?.uid})
-        }
+        }*/
+        
+        settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0 && ($0.fk_sender_id == Auth.auth().currentUser?.uid || $0.fk_receiver_id == Auth.auth().currentUser?.uid)})
+        
         navigationController?.pushViewController(settleDebtVC, animated: true)
     }
 }
@@ -146,14 +150,9 @@ extension GroupDetailsViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (tableView == groupDetailsView.summaryView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
-            if (paymentViewModel.payments[indexPath.row].is_settled == 1) {
-                cell.userName.textColor = UIColor.gray
-                if (isOwner || paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
-                    cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " is all settled"
-                } else {
-                    cell.userName.text = "You're all settled!"
-                }
-            } else {
+            
+            // display list of pending payments of entire group
+            if (paymentViewModel.payments[indexPath.row].is_settled == 0) {
                 if (isOwner) {
                     cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " owes you $" + String(paymentViewModel.payments[indexPath.row].amount)
                 } else if (paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
@@ -162,6 +161,17 @@ extension GroupDetailsViewController: UITableViewDataSource, UITableViewDelegate
                 } else {
                     cell.userName.text = "You owe $" + String(paymentViewModel.payments[indexPath.row].amount)
                 }
+            }
+            /*else if (paymentViewModel.payments[indexPath.row].is_settled == 1) {
+                cell.userName.textColor = UIColor.gray
+                if (isOwner || paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
+                    cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " is all settled"
+                } else {
+                    cell.userName.text = "You're all settled!"
+                }
+            }*/
+            else {
+                cell.userName.text = "The group is all settled!"
             }
             
             return cell
