@@ -70,7 +70,7 @@ class AddExpenseViewController: UIViewController {
             guard let index = groupMembers!.firstIndex(of: friend) else { continue }
             print(friend)
             print(owedAmounts[index])
-            PaymentEndpoints.createPayment(payment: PaymentObj(payment_id: 0, fk_sender_id: friend.firebase_uid, fk_receiver_id: Auth.auth().currentUser!.uid, fk_creator_id: Auth.auth().currentUser!.uid, fk_parent_expense_id: expenseID, fk_currency_id: 1, is_paid: 0, is_settled: 0, amount: Int(owedAmounts[index]), first_name: friend.first_name, last_name: friend.last_name))
+            PaymentEndpoints.createPayment(payment: PaymentObj(payment_id: 0, fk_sender_id: friend.firebase_uid, fk_receiver_id: Auth.auth().currentUser!.uid, fk_creator_id: Auth.auth().currentUser!.uid, fk_parent_expense_id: expenseID, fk_currency_id: 1, is_paid: 0, is_settled: 0, amount: Double(Int(owedAmounts[index])), first_name: friend.first_name, last_name: friend.last_name))
         }
         
         dismiss(animated: true, completion: nil)

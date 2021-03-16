@@ -7,19 +7,24 @@
 
 import UIKit
 import Firebase
+import FirebaseUI
 import Combine
+import Photos
+import AVFoundation
 
-class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
+class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     var groupObj: GroupObj?
     private var paymentViewModel = PaymentViewModel()
     private var cancellableSet: Set<AnyCancellable> = []
     private var isOwner = false
     private var groupMembers = [User]()
-
+    
     private var groupDetailsView: GroupDetailsView {
         return view as! GroupDetailsView
     }
+    
+    let storage = Storage.storage()
     
     // MARK: - View Life Cycle -
     deinit {
@@ -29,7 +34,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         super.loadView()
         view = GroupDetailsView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         groupDetailsView.summaryView.delegate = self
@@ -50,14 +55,23 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         setupViewModel()
         setupTextField()
         
-//        if (groupObj != nil && groupObj?.image_uri != "") {
-//            let url = URL(string: groupObj!.image_uri)
-//            let data = try? Data(contentsOf: url!)
-//            groupDetailsView.groupImage.image = UIImage(data: data!)
-//        }
+        // Get Image
+        let storageRef = storage.reference().child("GroupPicture").child(String(groupObj!.group_id) + ".jpg")
+        groupDetailsView.groupImage.sd_setImage(with: storageRef)
+
+        
+        //        if (groupObj != nil && groupObj?.image_uri != "") {
+        //            let url = URL(string: groupObj!.image_uri)
+        //            let data = try? Data(contentsOf: url!)
+        //            groupDetailsView.groupImage.image = UIImage(data: data!)
+        //        }
         let groupName = String((groupObj?.group_name.removingPercentEncoding)!)
         
         groupDetailsView.groupName.text = groupObj?.group_name == "" ? "Untitled Group" : groupName
+        
+        let changePic = UITapGestureRecognizer(target: self, action: #selector(groupImageTapped))
+        groupDetailsView.groupImage.isUserInteractionEnabled = true
+        groupDetailsView.groupImage.addGestureRecognizer(changePic)
         groupDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         groupDetailsView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         groupDetailsView.addExpenseButton.addTarget(self, action: #selector(addExpenseTapped), for: .touchUpInside)
@@ -80,6 +94,142 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         paymentViewModel.fetchSettledData(creatorID: groupObj!.creator_id, groupID: groupObj!.group_id)
     }
     
+    @objc private func groupImageTapped() {
+        if Auth.auth().currentUser != nil {
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert: UIAlertAction!) -> Void in self.camera()}))
+            
+            actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (alert: UIAlertAction!) -> Void in self.library()}))
+            
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.present(actionSheet, animated: true, completion: nil)
+        }
+    }
+    
+    func camera() {
+        let cameraStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        switch cameraStatus {
+        case .authorized:
+            print("Access is granted by user")
+            let image = UIImagePickerController()
+            image.delegate = self
+            
+            image.sourceType = UIImagePickerController.SourceType.camera
+            
+            image.allowsEditing = false
+            
+            self.present(image, animated: true)
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: ({
+                (newStatus) in
+                print("status is \(newStatus)")
+                if (.authorized ==  AVCaptureDevice.authorizationStatus(for: AVMediaType.video)) {
+                    DispatchQueue.main.async {
+                        let image = UIImagePickerController()
+                        image.delegate = self
+                        
+                        image.sourceType = UIImagePickerController.SourceType.camera
+                        
+                        image.allowsEditing = false
+                        
+                        self.present(image, animated: true)
+                    }
+                }
+            }))
+            print("It is not determined until now")
+        case .restricted:
+            print("User do not have access to photo album.")
+        case .denied:
+            let alertController = UIAlertController(title: "Permission Denied", message: "Please allow Camera access in your privacy settings!", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            print("User has denied the permission.")
+        @unknown default:
+            fatalError()
+        }
+        
+    }
+    
+    func library() {
+        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+        switch photoAuthorizationStatus {
+        case .authorized:
+            print("Access is granted by user")
+            let image = UIImagePickerController()
+            image.delegate = self
+            
+            image.sourceType = UIImagePickerController.SourceType.photoLibrary
+            
+            image.allowsEditing = false
+            
+            self.present(image, animated: true)
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({
+                (newStatus) in
+                print("status is \(newStatus)")
+                if newStatus ==  PHAuthorizationStatus.authorized {
+                    DispatchQueue.main.async {
+                        let image = UIImagePickerController()
+                        image.delegate = self
+                        
+                        image.sourceType = UIImagePickerController.SourceType.photoLibrary
+                        
+                        image.allowsEditing = false
+                        
+                        self.present(image, animated: true)
+                    }
+                }
+            })
+            print("It is not determined until now")
+        case .restricted:
+            print("User do not have access to photo album.")
+        case .denied:
+            let alertController = UIAlertController(title: "Permission Denied", message: "Please allow Photos access in your privacy settings!", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            print("User has denied the permission.")
+        case .limited:
+            print("Limited")
+        @unknown default:
+            fatalError()
+        }
+        
+    }
+    
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage
+        {
+            if Auth.auth().currentUser != nil {
+                groupDetailsView.groupImage.image = image
+                
+                let storageRef = storage.reference().child("GroupPicture").child(String(groupObj!.group_id) + ".jpg")
+                
+                let metadataCT = StorageMetadata()
+                metadataCT.contentType = "image/jpeg"
+                
+                if let uploadData =
+                    image.jpegData(compressionQuality: 0.8) {
+                    storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
+                        if error != nil {
+                            print("error")
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            print("something went wrong with pictures")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -96,9 +246,9 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
     @objc func textFieldDidChange(textField: UITextField) {
         print("Text changed: " + textField.text!)
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload(_:)), object: textField)
-                    perform(#selector(self.reload(_:)), with: textField, afterDelay: 0.75)
+        perform(#selector(self.reload(_:)), with: textField, afterDelay: 0.75)
     }
-            
+    
     @objc func reload(_ textField: UITextField) {
         guard let name = textField.text, name.trimmingCharacters(in: .whitespaces) != "" else {
             print("group name empty")

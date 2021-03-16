@@ -8,8 +8,11 @@
 import UIKit
 import AlanYanHelpers
 import Firebase
+import FirebaseUI
 
 class GroupTableViewCell: UITableViewCell {
+    
+    let storage = Storage.storage()
     
     var group: GroupObj? {
         didSet {
@@ -79,9 +82,15 @@ class GroupTableViewCell: UITableViewCell {
 //            let data = try? Data(contentsOf: url!)
 //            groupProfilePictureView.image = UIImage(data: data!)
 //        }
+        
+        
+        // Get Image
+        let storageRef = storage.reference().child("GroupPicture").child(String(group.group_id) + ".jpg")
+        groupProfilePictureView.sd_setImage(with: storageRef)
         groupProfilePictureView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         groupProfilePictureView.tintColor = .white
-        groupProfilePictureView.contentMode = .center
+        groupProfilePictureView.contentMode = .scaleAspectFill
+        
         nameLabel.text = group.group_name == "" ? "Untitled Group" : group.group_name
         amountLabel.text = "$\(group.amount)"
         oweLabel.text = Auth.auth().currentUser?.uid != group.creator_id ? "You Owe" : ""
