@@ -62,3 +62,16 @@ SELECT * FROM `user` WHERE `email_addr` = `email`;
 END$$
 
 DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `findOwner` (IN `group` INT(8))
+BEGIN
+
+SELECT * FROM `user` as u
+JOIN (SELECT * FROM `group` WHERE `group_id`=`group`) as g
+on g.fk_creator_id=u.firebase_uid;
+
+END$$
+
+DELIMITER ;

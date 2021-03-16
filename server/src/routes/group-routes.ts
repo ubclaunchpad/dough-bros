@@ -1,9 +1,14 @@
 import { Router } from "express";
+import { sendMessageToUser } from "../notification/FCM";
 
 const router = Router();
 
 const GroupService = require("../controllers/group-service");
 const groupServer = new GroupService();
+
+const UserService = require("../controllers/user-service");
+const userServer = new UserService();
+
 
 router.post('/createGroup', (req, res) => {
   if (!req.body) {
@@ -28,6 +33,7 @@ router.post('/addUserToGroup', (req,res) => {
     }
 
   groupServer.addUserToGroup(req).then((membership: any) => {
+      sendMessageToUser(req.body.fcm, 'You have been added to an expense group!')
       res.json(membership);
   }).catch((err: any) => {
       res.json(err);
@@ -62,6 +68,9 @@ router.get('/getAllGroupUsers/:groupID', (req, res) => {
 
 router.put('/acceptGroupMembership/:groupID/:userID', (req, res) => {
     groupServer.acceptGroupMembership(req.params.groupID, req.params.userID).then((membership: any) => {
+        userServer.findOwner(req.params.groupID).then((user: any) => {
+          sendMessageToUser(user.fcm_token, 'A user has joined your group!')
+        })
         res.json(membership);
     }).catch((err: any) => {
         res.json(err);

@@ -61,6 +61,21 @@ User.findUsersByEmail = (email: string, result: any) => {
   );
 };
 
+User.findOwner = (groupID: string, result: any) => {
+  sql.query(
+    "CALL findOwner(?)",
+    groupID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res[0]);
+      }
+    }
+  );
+};
+
 User.findUsers = (result: any) => {
   sql.query("SELECT * FROM user", (err: any, res: any) => {
     if (err) {

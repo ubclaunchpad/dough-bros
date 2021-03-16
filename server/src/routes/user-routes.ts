@@ -45,6 +45,15 @@ router.get('/getUserByEmail/:email', (req, res) => {
   });
 });
 
+// Get User by GroupID
+router.get('/getOwnerByGroupID/:groupID', (req, res) => {
+  userServer.findOwner(req.params.groupID).then((users: any) => {
+      res.json(users);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
 // Get All Users
 router.get('/getAllUsers', (_, res) => {
   userServer

@@ -275,11 +275,11 @@ struct PaymentEndpoints {
         semaphore.wait()
     }
     
-    static func settlePayment(paymentID: Int) {
+    static func settlePayment(paymentID: Int, receiverID: String) {
         print("Settling Payment!!")
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: endpointURL + "payment/settlePayment/" + String(paymentID))!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "payment/settlePayment/" + String(paymentID) + "/" + receiverID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "PUT"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
