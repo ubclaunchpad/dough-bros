@@ -12,8 +12,8 @@ import Firebase
 class PaymentViewModel {
     private(set) var previousState: State?
     @Published private(set) var state: State = .idle
-    @Published private(set) var payments: [PaymentObj] = []
-    @Published private(set) var activity: [PaymentObj] = []
+    @Published private(set) var payments: [PaymentBothNamesObj] = []
+    @Published private(set) var activity: [PaymentBothNamesObj] = []
     
     /// The view controller should call this whenever data needs to be fetched from our API
     // group pending payments
@@ -22,24 +22,6 @@ class PaymentViewModel {
         setState(to: .loading)
         
         payments = PaymentEndpoints.getGroupPendingPayments(groupID: groupID)
-        //payments = PaymentEndpoints.getGroupPending(userID: Auth.auth().currentUser!.uid, groupID: groupID)
-        setState(to: .idle)
-    }
-    
-    // pending payments to/from user
-    func fetchPendingData(groupID: Int) {
-        // SOME NETWORK call
-        setState(to: .loading)
-        
-        activity = PaymentEndpoints.getPaymentsToAndFromUserFromGroup(userID: Auth.auth().currentUser!.uid, groupID: groupID)
-        setState(to: .idle)
-    }
-    
-    // group settled payments
-    func fetchSettledData(groupID: Int) {
-        // SOME NETWORK call
-        setState(to: .loading)
-        
         activity = PaymentEndpoints.getGroupSettledPayments(groupID: groupID)
         setState(to: .idle)
     }
@@ -55,3 +37,22 @@ class PaymentViewModel {
         case error(error: Error?, errorMessage: String)
     }
 }
+
+/// Deprecated endpoints
+/// keeping in case we need to roll back
+//extension PaymentViewModel {
+//    func harinsFetchData(groupID: Int) {
+//        // SOME NETWORK call
+//        setState(to: .loading)
+//
+//        payments = PaymentEndpoints.getPaymentsToUserFromGroup(userID: Auth.auth().currentUser!.uid, groupID: groupID)
+//        setState(to: .idle)
+//    }
+//    func harinsFetchSettledData(groupID: Int) {
+//        // SOME NETWORK call
+//        setState(to: .loading)
+//
+//        activity = PaymentEndpoints.getSettledPaymentsToUserFromGroup(userID: creatorID, groupID: groupID)
+//        setState(to: .idle)
+//    }
+//}

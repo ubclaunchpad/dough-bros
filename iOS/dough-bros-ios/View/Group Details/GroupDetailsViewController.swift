@@ -77,8 +77,6 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         }.store(in: &cancellableSet)
         
         paymentViewModel.fetchData(groupID: groupObj!.group_id)
-        paymentViewModel.fetchPendingData(groupID: groupObj!.group_id)
-        paymentViewModel.fetchSettledData(groupID: groupObj!.group_id)
     }
     
     @objc private func backButtonTapped() {
@@ -124,12 +122,6 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate {
         settleDebtVC.groupObj = groupObj
         settleDebtVC.isOwner = isOwner
         
-        /*if (isOwner) {
-            settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0})
-        } else {
-            settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0 && $0.fk_sender_id == Auth.auth().currentUser?.uid})
-        }*/
-        
         settleDebtVC.debtList = paymentViewModel.payments.filter({$0.is_settled == 0 && ($0.fk_sender_id == Auth.auth().currentUser?.uid || $0.fk_receiver_id == Auth.auth().currentUser?.uid)})
         
         navigationController?.pushViewController(settleDebtVC, animated: true)
@@ -151,39 +143,32 @@ extension GroupDetailsViewController: UITableViewDataSource, UITableViewDelegate
         if (tableView == groupDetailsView.summaryView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
             
-            // display list of pending payments of entire group
-            if (paymentViewModel.payments[indexPath.row].is_settled == 0) {
-                if (isOwner) {
-                    cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " owes you $" + String(paymentViewModel.payments[indexPath.row].amount)
-                } else if (paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
-                    // TODO Replace with creator name
-                    cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " owes $" + String(paymentViewModel.payments[indexPath.row].amount)
-                } else {
-                    cell.userName.text = "You owe $" + String(paymentViewModel.payments[indexPath.row].amount)
-                }
-            }
-            /*else if (paymentViewModel.payments[indexPath.row].is_settled == 1) {
-                cell.userName.textColor = UIColor.gray
-                if (isOwner || paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
-                    cell.userName.text = paymentViewModel.payments[indexPath.row].first_name + " is all settled"
-                } else {
-                    cell.userName.text = "You're all settled!"
-                }
-            }*/
-            else {
-                cell.userName.text = "The group is all settled!"
+            let payment = paymentViewModel.payments[indexPath.row]
+            if (payment.fk_sender_id == Auth.auth().currentUser?.uid) {
+                // Text for: You are sending
+                cell.userName.text = "You owe \(payment.first_name_receiver) $\(payment.amount)"
+            } else if (payment.fk_receiver_id == Auth.auth().currentUser?.uid) {
+                // Text for: You are receiving
+                cell.userName.text = "\(payment.first_name_sender) owes you $\(payment.amount)"
+            } else {
+                // Text for: You are not involved
+                cell.userName.text = "\(payment.first_name_sender) owes \(payment.first_name_receiver) $\(payment.amount)"
             }
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
-            if (isOwner) {
-                cell.userName.text = paymentViewModel.activity[indexPath.row].first_name + " paid you $" + String(paymentViewModel.activity[indexPath.row].amount)
-            } else if (paymentViewModel.payments[indexPath.row].fk_sender_id != Auth.auth().currentUser?.uid) {
-                // TODO Replace with creator name
-                cell.userName.text = paymentViewModel.activity[indexPath.row].first_name + " paid $" + String(paymentViewModel.activity[indexPath.row].amount)
+            let activity = paymentViewModel.activity[indexPath.row]
+            
+            if (activity.fk_sender_id == Auth.auth().currentUser?.uid) {
+                // Text for: You sent
+                cell.userName.text = "You paid \(activity.first_name_receiver) $\(activity.amount)"
+            } else if (activity.fk_receiver_id == Auth.auth().currentUser?.uid) {
+                // Text for: You received
+                cell.userName.text = "\(activity.first_name_sender) paid you $\(activity.amount)"
             } else {
-                cell.userName.text = "You paid $" + String(paymentViewModel.payments[indexPath.row].amount)
+                // Text for: You are not involved
+                cell.userName.text = "\(activity.first_name_sender) paid \(activity.first_name_receiver) $\(activity.amount)"
             }
             
             return cell
