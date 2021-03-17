@@ -51,7 +51,7 @@ Payment.getAllPaymentsByGroupExpense = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -70,7 +70,7 @@ Payment.getAllPendingPaymentsByGroupExpense = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -89,7 +89,7 @@ Payment.getAllPaidPaymentsByGroupExpense = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -108,7 +108,7 @@ Payment.getAllSettledPaymentsByGroupExpense = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -168,7 +168,7 @@ Payment.getAllPaymentsFromUserInGroup = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -188,7 +188,7 @@ Payment.getAllPendingPaymentsToAndFromUserInGroup = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -207,7 +207,7 @@ Payment.getAllSettledPaymentsInGroup = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -226,7 +226,7 @@ Payment.getAllPendingPaymentsInGroup = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );

@@ -58,7 +58,7 @@ CREATE PROCEDURE `getAllPendingPaymentsToAndFromUserInGroup` (IN `user_uid` VARC
 BEGIN
 
 SELECT * FROM `payment` WHERE ((`fk_sender_id` = `user_uid` OR `fk_receiver_id` = `user_uid`)
-	AND `fk_parent_expense_id` = (
+	AND `fk_parent_expense_id` IN (
 		SELECT `expense_id` FROM `group_expense` WHERE `fk_group_id` = `group_id`)
 	AND `is_paid` = 0
 	AND `is_settled` = 0
@@ -72,7 +72,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllSettledPaymentsInGroup` (IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE (`fk_parent_expense_id` = (
+SELECT * FROM `payment` WHERE (`fk_parent_expense_id` IN (
 		SELECT `expense_id` FROM `group_expense`
 		WHERE `fk_group_id` = `group_id`)
 	AND `is_settled` = 1
@@ -86,7 +86,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllPendingPaymentsInGroup` (IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE (`fk_parent_expense_id` = (
+SELECT * FROM `payment` WHERE (`fk_parent_expense_id` IN (
 		SELECT `expense_id` FROM `group_expense`
 		WHERE `fk_group_id` = `group_id`)
 	AND `is_paid` = 0
