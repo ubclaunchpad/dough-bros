@@ -9,6 +9,10 @@ import UIKit
 import Combine
 import Firebase
 
+protocol CarlosTutorialDelegate {
+    func dismissTutorial()
+}
+
 final class GroupsViewController: UIViewController {
     
     private var groupsViewModel = GroupsViewModel()
@@ -17,6 +21,8 @@ final class GroupsViewController: UIViewController {
     private var groupsView: GroupsView {
         return view as! GroupsView
     }
+    
+    var showTutorial: Bool = false
     
     // MARK: - View Life Cycle -
     deinit {
@@ -35,10 +41,20 @@ final class GroupsViewController: UIViewController {
         setupSearchBar()
         setupAddGroupButton()
         setupViewModel()
+        
+        if showTutorial {
+            let tutorial = CarlosViewController()
+            tutorial.tutorialDelegate = self
+            showTutorial = false
+            
+            self.present(tutorial, animated: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         groupsViewModel.fetchData()
+        groupsView.groupsTableView.reloadData()
+        groupsView.friendsCollectionView.reloadData()
     }
     
     // MARK: - Setup -
@@ -149,5 +165,11 @@ extension GroupsViewController: UISearchBarDelegate {
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+}
+
+extension GroupsViewController: CarlosTutorialDelegate {
+    func dismissTutorial() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -132,7 +132,10 @@ class SignUpViewController: UIViewController, LoginButtonDelegate {
             }
             
             self.getToken(uid: result.user.uid)
-            self.navigationController?.pushViewController(GroupsViewController(), animated: true)
+            
+            let groupVC = GroupsViewController()
+            groupVC.showTutorial = true
+            self.navigationController?.pushViewController(groupVC, animated: true)
         }
     }
     
