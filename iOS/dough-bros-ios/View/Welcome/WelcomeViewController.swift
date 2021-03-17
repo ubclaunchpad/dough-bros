@@ -78,7 +78,9 @@ class WelcomeViewController: UIViewController, LoginButtonDelegate {
                 print("error is \(err.localizedDescription)")
                 strongSelf.welcomeView.errorLabel.text = err.localizedDescription
             } else {
-                self?.navigationController?.pushViewController(GroupsViewController(), animated: true)
+                let groupVC = GroupsViewController()
+                groupVC.showTutorial = true
+                self?.navigationController?.pushViewController(groupVC, animated: true)
             }
           print("authResult: \(authResult)")
         strongSelf.welcomeView.UID.text = authResult?.user.uid
