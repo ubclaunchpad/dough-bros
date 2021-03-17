@@ -72,11 +72,22 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllSettledPaymentsInGroup` (IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE (`fk_parent_expense_id` IN (
-		SELECT `expense_id` FROM `group_expense`
-		WHERE `fk_group_id` = `group_id`)
-	AND `is_settled` = 1
-	);
+SELECT p.*,
+us.first_name AS first_name_sender,
+us.last_name AS last_name_sender, 
+ur.first_name AS first_name_receiver, 
+ur.last_name AS last_name_receiver
+FROM `payment` AS p
+JOIN `user` AS us ON us.firebase_uid = p.fk_sender_id
+JOIN `user` AS ur ON ur.firebase_uid = p.fk_receiver_id
+WHERE (p.fk_parent_expense_id IN 
+	(
+	SELECT `expense_id` FROM `group_expense`
+	WHERE `fk_group_id` = `group_id`
+	)
+	AND p.is_settled = 1
+);
+
 END$$
 
 DELIMITER ;
@@ -86,12 +97,22 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getAllPendingPaymentsInGroup` (IN `group_id` INT(8))
 BEGIN
 
-SELECT * FROM `payment` WHERE (`fk_parent_expense_id` IN (
-		SELECT `expense_id` FROM `group_expense`
-		WHERE `fk_group_id` = `group_id`)
-	AND `is_paid` = 0
-	AND `is_settled` = 0
-	);
+SELECT p.*,
+us.first_name AS first_name_sender,
+us.last_name AS last_name_sender, 
+ur.first_name AS first_name_receiver, 
+ur.last_name AS last_name_receiver
+FROM `payment` AS p
+JOIN `user` AS us ON us.firebase_uid = p.fk_sender_id
+JOIN `user` AS ur ON ur.firebase_uid = p.fk_receiver_id
+WHERE (p.fk_parent_expense_id IN 
+	(
+	SELECT `expense_id` FROM `group_expense`
+	WHERE `fk_group_id` = `group_id`
+	)
+	AND p.is_paid = 0
+	AND p.is_settled = 0
+);
 	
 END$$
 
