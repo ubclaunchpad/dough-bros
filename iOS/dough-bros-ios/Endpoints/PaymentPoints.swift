@@ -68,6 +68,37 @@ struct PaymentEndpoints {
         return paymentList
     }
     
+    static func getPaymentsToAndFromUserFromGroup(userID: String, groupID: Int) -> [PaymentObj] {
+        print("Getting Payments to and from User from Group!!")
+        var paymentList = [PaymentObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payment/" + String(groupID) + "pending/" + userID)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                paymentList = try JSONDecoder().decode([PaymentObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return paymentList
+    }
+    
     static func getPendingPayments(parentExpenseID: Int) -> [PaymentObj] {
         print("Getting Pending Payments!!")
         var paymentList = [PaymentObj]()
@@ -294,5 +325,70 @@ struct PaymentEndpoints {
 
         task.resume()
         semaphore.wait()
+    }
+}
+
+/// Endpoints using PaymentBothNamesObj instead of PaymentObj
+extension PaymentEndpoints {
+    static func getGroupSettledPayments(groupID: Int) -> [PaymentBothNamesObj] {
+        print("Getting Group Pending Payments!!")
+        var paymentList = [PaymentBothNamesObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payment/settled/group/" + String(groupID))!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                paymentList = try JSONDecoder().decode([PaymentBothNamesObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return paymentList
+    }
+    
+    static func getGroupPendingPayments(groupID: Int) -> [PaymentBothNamesObj] {
+        print("Getting Group Pending Payments!!")
+        var paymentList = [PaymentBothNamesObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+        
+        var request = URLRequest(url: URL(string: endpointURL + "payment/pending/group/" + String(groupID))!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+            // print(String(data: data, encoding: .utf8)!)
+            do {
+                paymentList = try JSONDecoder().decode([PaymentBothNamesObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return paymentList
     }
 }

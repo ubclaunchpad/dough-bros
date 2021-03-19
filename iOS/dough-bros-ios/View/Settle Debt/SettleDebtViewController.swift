@@ -6,16 +6,17 @@
 //
 
 import UIKit
+import Firebase
 import Combine
 import Firebase
 import FirebaseUI
 
-public var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
+//public var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
 
 class SettleDebtViewController: UIViewController {
 
     var groupObj:GroupObj?
-    var debtList:[PaymentObj]?
+    var debtList:[PaymentBothNamesObj]?
     var isOwner:Bool?
     
     let storage = Storage.storage()
@@ -62,10 +63,16 @@ extension SettleDebtViewController: UITableViewDelegate, UITableViewDataSource {
     // Setup Tableview cells for either summary or activity
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
-        if (isOwner!) {
-            cell.userName.text = (debtList?[indexPath.row].first_name ?? "") + " owes you $" + String(debtList?[indexPath.row].amount ?? 0)
+        
+        guard let debt = debtList?[indexPath.row] else { return cell }
+        
+        if (debt.fk_sender_id == Auth.auth().currentUser?.uid) {
+            cell.userName.text = "You owe \(debt.first_name_receiver) $\(debt.amount)"
+        } else if (debt.fk_receiver_id == Auth.auth().currentUser?.uid) {
+            cell.userName.text = "\(debt.first_name_sender) owes you $\(debt.amount)"
         } else {
-            cell.userName.text = "You owe $" + String(debtList?[indexPath.row].amount ?? 0)
+            // should not get here, but just in case
+            cell.userName.text = "\(debt.first_name_sender) owes \(debt.first_name_receiver) $\(debt.amount)"
         }
         
         return cell

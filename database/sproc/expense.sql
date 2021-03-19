@@ -7,6 +7,7 @@ DROP procedure IF EXISTS `createGroupExpense`;
 DROP procedure IF EXISTS `getGroupExpense`;
 DROP procedure IF EXISTS `getAllGroupExpenses`;
 DROP procedure IF EXISTS `archiveGroupExpense`;
+DROP procedure IF EXISTS `deleteGroupExpense`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -50,6 +51,17 @@ BEGIN
 
 UPDATE `group_expense`
 SET `is_archived` = 1 WHERE `expense_id` = `expense_id`;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `deleteGroupExpense` (IN `expense_id` INT(8))
+BEGIN
+
+DELETE FROM `group_expense` WHERE `expense_id` = `expense_id`;
 
 END$$
 

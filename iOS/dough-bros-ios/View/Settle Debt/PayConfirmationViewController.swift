@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Firebase
 
 class PayConfirmationViewController: UIViewController {
     
     var debtList: [Any]?
-    var paymentObj: PaymentObj?
+    var paymentObj: PaymentBothNamesObj?
     var isOwner: Bool?
     
     var selectedPeople: Set<Friend> = []
@@ -27,13 +28,20 @@ class PayConfirmationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: Put Debt List Into List
-        if (isOwner!) {
-            payConfirmationView.descriptionLabel.text = (paymentObj?.first_name ?? "A Friend") + " paid you"
-            payConfirmationView.debtAmount.text = "$" + (String(paymentObj?.amount ?? 0))
+        guard let debt = paymentObj else { return }
+        
+        if (debt.fk_sender_id == Auth.auth().currentUser?.uid) {
+            payConfirmationView.descriptionLabel.text = "You paid \(debt.first_name_receiver)"
+            payConfirmationView.debtAmount.text = "$\(debt.amount)"
+        } else if (debt.fk_receiver_id == Auth.auth().currentUser?.uid) {
+            payConfirmationView.descriptionLabel.text = "\(debt.first_name_sender) paid you"
+            payConfirmationView.debtAmount.text = "$\(debt.amount)"
         } else {
-            payConfirmationView.descriptionLabel.text = "You paid"
-            payConfirmationView.debtAmount.text = "$" + (String(paymentObj?.amount ?? 0))
+            // should not get here, but just in case
+            payConfirmationView.descriptionLabel.text = "\(debt.first_name_sender) paid \(debt.first_name_receiver)"
+            payConfirmationView.debtAmount.text = "$\(debt.amount)"
         }
+
         payConfirmationView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         payConfirmationView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
