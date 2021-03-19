@@ -35,6 +35,10 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
         view = GroupDetailsView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        loadImage()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         groupDetailsView.summaryView.delegate = self
@@ -56,9 +60,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
         setupTextField()
         
         // Get Image
-        let storageRef = storage.reference().child("GroupPicture").child(String(groupObj!.group_id) + ".jpg")
-        groupDetailsView.groupImage.sd_setImage(with: storageRef)
-
+        loadImage()
         
         //        if (groupObj != nil && groupObj?.image_uri != "") {
         //            let url = URL(string: groupObj!.image_uri)
@@ -79,6 +81,15 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
         groupDetailsView.settleDebtButtonMiddle.addTarget(self, action: #selector(settleDebtTapped), for: .touchUpInside)
         
         self.groupMembers = GroupEndpoints.getUsersInGroup(groupID: groupObj!.group_id)
+    }
+    
+    private func loadImage() {
+        guard let group = groupObj else {
+            return
+        }
+        
+        let storageRef = storage.reference().child("GroupPicture").child(String(group.group_id) + ".jpg")
+        groupDetailsView.groupImage.sd_setImage(with: storageRef)
     }
     
     private func setupViewModel() {
@@ -203,21 +214,56 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
         if let image = info[.originalImage] as? UIImage
         {
             if Auth.auth().currentUser != nil {
-                groupDetailsView.groupImage.image = image
                 
                 let storageRef = storage.reference().child("GroupPicture").child(String(groupObj!.group_id) + ".jpg")
-                
-                let metadataCT = StorageMetadata()
-                metadataCT.contentType = "image/jpeg"
-                
-                if let uploadData =
-                    image.jpegData(compressionQuality: 0.8) {
-                    storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
-                        if error != nil {
-                            print("error")
+                let key = "gs://\(storageRef.bucket)/\(storageRef.fullPath)"
+                SDImageCache.shared.containsImage(forKey: key, cacheType: .all, completion: { contains in
+                    if (contains == .none) {
+                        print("nothing in cache")
+                        self.groupDetailsView.groupImage.image = image
+                        
+                        let metadataCT = StorageMetadata()
+                        metadataCT.contentType = "image/jpeg"
+                        
+                        if let uploadData = image.jpegData(compressionQuality: 0.8) {
+                            print("uploading shit")
+                            storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
+                                if error != nil {
+                                    print("error")
+                                }
+//                                print("got here")
+//                                SDImageCache.shared.store(image, forKey: key, completion: {
+//                                    print("loading image")
+//                                    self.loadImage()
+//                                })
+//                                self.groupDetailsView.groupImage.image = image
+                                
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+//                                    self.loadImage()
+//                                })
+                            }
+                            
+                            
                         }
+                    } else {
+                        print("something in cache")
+                        SDImageCache.shared.removeImage(forKey: key, cacheType: .all, completion: {
+                            let metadataCT = StorageMetadata()
+                            metadataCT.contentType = "image/jpeg"
+                            
+                            if let uploadData = image.jpegData(compressionQuality: 0.8) {
+                                storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
+                                    if error != nil {
+                                        print("error")
+                                    }
+                                    self.loadImage()
+                                }
+                            }
+                        })
                     }
-                }
+                })
+                
+
             }
         }
         else

@@ -70,7 +70,7 @@ class GroupTableViewCell: UITableViewCell {
         oweLabel.setSuperview(wrapperView).addBottom(anchor: amountLabel.topAnchor).addTrailing(anchor: amountLabel.trailingAnchor)
     }
     
-    private func setupModel() {
+    public func setupModel() {
         guard let group = group else {
             return
         }
@@ -85,8 +85,7 @@ class GroupTableViewCell: UITableViewCell {
         
         
         // Get Image
-        let storageRef = storage.reference().child("GroupPicture").child(String(group.group_id) + ".jpg")
-        groupProfilePictureView.sd_setImage(with: storageRef)
+        loadImage()
         groupProfilePictureView.backgroundColor = UIColor(hex: Styles.init().colourList.randomElement()!)
         groupProfilePictureView.tintColor = .white
         groupProfilePictureView.contentMode = .scaleAspectFill
@@ -94,5 +93,14 @@ class GroupTableViewCell: UITableViewCell {
         nameLabel.text = group.group_name == "" ? "Untitled Group" : group.group_name
         amountLabel.text = "$\(group.amount)"
         oweLabel.text = Auth.auth().currentUser?.uid != group.creator_id ? "You Owe" : ""
+    }
+    
+    public func loadImage() {
+        guard let group = group else {
+            return
+        }
+        
+        let storageRef = storage.reference().child("GroupPicture").child(String(group.group_id) + ".jpg")
+        groupProfilePictureView.sd_setImage(with: storageRef)
     }
 }

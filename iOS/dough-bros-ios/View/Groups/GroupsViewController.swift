@@ -55,6 +55,11 @@ final class GroupsViewController: UIViewController {
         groupsViewModel.fetchData()
         groupsView.groupsTableView.reloadData()
         groupsView.friendsCollectionView.reloadData()
+        
+//        for cell in groupsView.groupsTableView.visibleCells {
+//            guard let cell = cell as? GroupTableViewCell else { return }
+//            cell.loadImage()
+//        }
     }
     
     // MARK: - Setup -
