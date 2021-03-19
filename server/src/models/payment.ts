@@ -51,7 +51,7 @@ Payment.getAllPaymentsByGroupExpense = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -70,7 +70,7 @@ Payment.getAllPendingPaymentsByGroupExpense = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -89,7 +89,7 @@ Payment.getAllPaidPaymentsByGroupExpense = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -108,7 +108,7 @@ Payment.getAllSettledPaymentsByGroupExpense = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
       }
     }
   );
@@ -168,7 +168,65 @@ Payment.getAllPaymentsFromUserInGroup = (
         result(err, null);
       } else {
         console.log(res);
-        result(null, res);
+        result(null, res[0]);
+      }
+    }
+  );
+};
+
+Payment.getAllPendingPaymentsToAndFromUserInGroup = (
+  userID: string,
+  groupID: number,
+  result: any
+) => {
+  sql.query(
+    'CALL getAllPendingPaymentsToAndFromUserInGroup(?, ?)',
+    [userID, groupID],
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res[0]);
+      }
+    }
+  );
+};
+
+Payment.getAllSettledPaymentsInGroup = (
+  groupID: number,
+  result: any
+) => {
+  sql.query(
+    'CALL getAllSettledPaymentsInGroup(?)',
+    groupID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res[0]);
+      }
+    }
+  );
+};
+
+Payment.getAllPendingPaymentsInGroup = (
+  groupID: number,
+  result: any
+) => {
+  sql.query(
+    'CALL getAllPendingPaymentsInGroup(?)',
+    groupID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res[0]);
       }
     }
   );

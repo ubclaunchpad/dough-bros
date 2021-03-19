@@ -142,12 +142,13 @@ class SettleDebtView: UIView {
             summaryLabel.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 30),
             summaryLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9)
         ])
+        let numsRowVisible = 4
         contentView.addSubview(summaryView)
         NSLayoutConstraint.activate([
             summaryView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             summaryView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 15),
             summaryView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
-            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(summaryStuff.count)),
+            summaryView.heightAnchor.constraint(equalToConstant: summaryView.rowHeight * CGFloat(numsRowVisible)),
             summaryView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             summaryView.leftAnchor.constraint(equalTo: summaryLabel.leftAnchor)
         ])

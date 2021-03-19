@@ -124,3 +124,13 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `deleteGroup` (IN `group_id` INT(8))
+BEGIN
+
+DELETE FROM `group` WHERE `group_id` = `group_id`;
+
+END$$
+
+DELIMITER ;

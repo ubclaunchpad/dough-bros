@@ -6,8 +6,17 @@ USE `doughBros_db`;
 DROP procedure IF EXISTS `createPayment`;
 DROP procedure IF EXISTS `getAllPaymentsToUserInGroup`;
 DROP procedure IF EXISTS `getAllPaymentsFromUserInGroup`;
+DROP procedure IF EXISTS `getAllSettledPaymentsToUserInGroup`;
 DROP procedure IF EXISTS `payPayment`;
 DROP procedure IF EXISTS `settlePayment`;
+DROP procedure IF EXISTS `deletePayment`;
+DROP procedure IF EXISTS `getAllPaymentsByGroupExpense`;
+DROP procedure IF EXISTS `getAllPendingPaymentsByGroupExpense`;
+DROP procedure IF EXISTS `getAllSettledPaymentsByGroupExpense`;
+DROP procedure IF EXISTS `getAllPaidPaymentsByGroupExpense`;
+DROP procedure IF EXISTS `getAllPendingPaymentsInGroup`;
+DROP procedure IF EXISTS `getAllPendingPaymentsToAndFromUserInGroup`;
+DROP procedure IF EXISTS `getAllSettledPaymentsInGroup`;
 
 DELIMITER $$
 USE `doughBros_db`$$
@@ -39,6 +48,72 @@ BEGIN
 
 SELECT * FROM `payment` WHERE (`fk_parent_expense_id` = `parent_expense_id` AND `is_paid` = 0 AND `is_settled` = 0);
 
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllPendingPaymentsToAndFromUserInGroup` (IN `user_uid` VARCHAR(255), `group_id` INT(8))
+BEGIN
+
+SELECT * FROM `payment` WHERE ((`fk_sender_id` = `user_uid` OR `fk_receiver_id` = `user_uid`)
+	AND `fk_parent_expense_id` IN (
+		SELECT `expense_id` FROM `group_expense` WHERE `fk_group_id` = `group_id`)
+	AND `is_paid` = 0
+	AND `is_settled` = 0
+	);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllSettledPaymentsInGroup` (IN `group_id` INT(8))
+BEGIN
+
+SELECT p.*,
+us.first_name AS first_name_sender,
+us.last_name AS last_name_sender, 
+ur.first_name AS first_name_receiver, 
+ur.last_name AS last_name_receiver
+FROM `payment` AS p
+JOIN `user` AS us ON us.firebase_uid = p.fk_sender_id
+JOIN `user` AS ur ON ur.firebase_uid = p.fk_receiver_id
+WHERE (p.fk_parent_expense_id IN 
+	(
+	SELECT `expense_id` FROM `group_expense`
+	WHERE `fk_group_id` = `group_id`
+	)
+	AND p.is_settled = 1
+);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `getAllPendingPaymentsInGroup` (IN `group_id` INT(8))
+BEGIN
+
+SELECT p.*,
+us.first_name AS first_name_sender,
+us.last_name AS last_name_sender, 
+ur.first_name AS first_name_receiver, 
+ur.last_name AS last_name_receiver
+FROM `payment` AS p
+JOIN `user` AS us ON us.firebase_uid = p.fk_sender_id
+JOIN `user` AS ur ON ur.firebase_uid = p.fk_receiver_id
+WHERE (p.fk_parent_expense_id IN 
+	(
+	SELECT `expense_id` FROM `group_expense`
+	WHERE `fk_group_id` = `group_id`
+	)
+	AND p.is_paid = 0
+	AND p.is_settled = 0
+);
+	
 END$$
 
 DELIMITER ;
@@ -130,6 +205,17 @@ BEGIN
 
 UPDATE `payment` as p
 SET p.is_settled = 1 WHERE p.payment_id = `payment_id`;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
+CREATE PROCEDURE `deletePayment` (IN `payment_id` INT(8))
+BEGIN
+
+DELETE FROM `payment` WHERE `payment_id` = `payment_id`;
 
 END$$
 
