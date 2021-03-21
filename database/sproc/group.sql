@@ -94,7 +94,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `removeAllUsersFromGroup` (IN `group_id` INT(8))
 BEGIN
 
-DELETE * FROM `group_membership` WHERE `fk_group_id` = `group_id`;
+DELETE FROM `group_membership` WHERE `fk_group_id` = `group_id`;
 
 END$$
 
@@ -140,7 +140,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `deleteGroup` (IN `group_id` INT(8))
 BEGIN
 
-DELETE * FROM `group` WHERE `group_id` = `group_id`;
+DELETE FROM `group` WHERE `group_id` = `group_id`;
 
 END$$
 

@@ -40,7 +40,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `getGroupExpenseByPaymentId` (IN `payment_id` INT(8))
 BEGIN
 
-SELECT * FROM `group_expense` WHERE (`expense_id` = (
+SELECT FROM `group_expense` WHERE (`expense_id` = (
 	SELECT `fk_parent_expense_id` FROM `payment` WHERE `payment_id` = `payment_id`)
 	);
 
@@ -75,7 +75,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `deleteGroupExpenseById` (IN `group_expense_id` INT(8))
 BEGIN
 
-DELETE * FROM `group_expense` WHERE `expense_id` = `group_expense_id`;
+DELETE FROM `group_expense` WHERE `expense_id` = `group_expense_id`;
 
 END$$
 

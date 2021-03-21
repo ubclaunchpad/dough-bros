@@ -215,7 +215,7 @@ USE `doughBros_db`$$
 CREATE PROCEDURE `deletePayment` (IN `group_expense_id` INT(8))
 BEGIN
 
-DELETE * FROM `payment` WHERE `fk_parent_expense_id` = `group_expense_id`;
+DELETE FROM `payment` WHERE `fk_parent_expense_id` = `group_expense_id`;
 
 END$$
 
