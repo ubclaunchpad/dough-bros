@@ -104,12 +104,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>For group profile pictures</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>For group profile pictures</string>
+	<key>NSCameraUsageDescription</key>
+	<string>For group profile pictures</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
 </dict>
 </plist>

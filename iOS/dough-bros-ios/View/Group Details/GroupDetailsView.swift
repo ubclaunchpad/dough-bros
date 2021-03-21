@@ -51,7 +51,7 @@ class GroupDetailsView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .center
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     

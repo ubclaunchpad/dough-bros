@@ -55,7 +55,7 @@ class PayConfirmationViewController: UIViewController {
     }
     
     @objc private func nextButtonTapped() {
-        PaymentEndpoints.settlePayment(paymentID: paymentObj!.payment_id)
+        PaymentEndpoints.settlePayment(paymentID: paymentObj!.payment_id, receiverID: paymentObj!.fk_receiver_id)
         if let delegate = self.payConfirmationDelegate {
             delegate.finishPayConfirmation()
         }
