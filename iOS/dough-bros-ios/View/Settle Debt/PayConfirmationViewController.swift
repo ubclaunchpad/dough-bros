@@ -16,6 +16,8 @@ class PayConfirmationViewController: UIViewController {
     
     var selectedPeople: Set<Friend> = []
     
+    var payConfirmationDelegate: PayConfirmationDelegate?
+        
     private var payConfirmationView: PayConfirmationView {
         return view as! PayConfirmationView
     }
@@ -46,13 +48,17 @@ class PayConfirmationViewController: UIViewController {
         payConfirmationView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+    @objc func backButtonTapped() {
+        if let delegate = self.payConfirmationDelegate {
+            delegate.dismissPayConfirmation()
+        }
     }
     
     @objc private func nextButtonTapped() {
         PaymentEndpoints.settlePayment(paymentID: paymentObj!.payment_id)
-        navigationController?.popToRootViewController(animated: true)
+        if let delegate = self.payConfirmationDelegate {
+            delegate.finishPayConfirmation()
+        }
     }
     
 }
