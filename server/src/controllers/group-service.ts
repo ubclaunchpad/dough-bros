@@ -1,4 +1,6 @@
 import { Group } from '../models/group';
+import { GroupExpense } from '../models/group-expense';
+import { Payment } from '../models/payment';
 
 module.exports = class GroupService {
   constructor() {}
@@ -88,6 +90,44 @@ module.exports = class GroupService {
           reject(err);
         }
         resolve(res);
+      });
+    });
+  }
+
+  deleteGroup(groupID: number) {
+    return new Promise((resolve, reject) => {
+      // get list of group expenses by group id
+      GroupExpense.getGroupExpenseByGroupId(groupID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    }).then((group_expense_list: any) => {
+      return new Promise((resolve, reject) => {
+        // for each group expense id, delete all payments
+        for (var group_expense of group_expense_list){
+          GroupExpense.deleteGroupExpenseById(group_expense.expense_id, (err: any, res: any) => {
+            if (err) {
+              reject(err);
+            }
+            resolve(res);
+          });
+        }
+        // delete group members from group
+        Group.removeAllUsersFromGroup(groupID, (err: any, res: any) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        });
+        // delete group
+        Group.deleteGroup(groupID, (err: any, res: any) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        });
       });
     });
   }

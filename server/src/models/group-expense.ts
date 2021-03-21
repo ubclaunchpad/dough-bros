@@ -51,6 +51,38 @@ GroupExpense.getGroupExpenseById = (groupExpenseID: number, result: any) => {
   );
 };
 
+GroupExpense.archiveGroupExpense = (groupExpenseID: number, result: any) => {
+  sql.query(
+    'CALL deleteGroupExpense(?)',
+    groupExpenseID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+GroupExpense.getGroupExpenseByPaymentId = (paymentID: number, result: any) => {
+  sql.query(
+    'CALL getGroupExpenseByPaymentId(?)',
+    paymentID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res[0]);
+      }
+    }
+  );
+}
+
 GroupExpense.getGroupExpenseByGroupId = (groupID: number, result: any) => {
   sql.query(
     'CALL getAllGroupExpenses(?)',
@@ -67,9 +99,9 @@ GroupExpense.getGroupExpenseByGroupId = (groupID: number, result: any) => {
   );
 }
 
-GroupExpense.archiveGroupExpense = (groupExpenseID: number, result: any) => {
+GroupExpense.deleteGroupExpenseById = (groupExpenseID: number, result: any) => {
   sql.query(
-    'CALL archiveGroupExpense(?)',
+    'CALL deleteGroupExpenseById(?)',
     groupExpenseID,
     (err: any, res: any) => {
       if (err) {

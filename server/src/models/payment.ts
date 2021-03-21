@@ -255,3 +255,16 @@ Payment.settlePayment = (paymentID: number, result: any) => {
     }
   });
 };
+
+Payment.deletePayment = (groupExpenseID: number, result: any) => {
+  sql.query('CALL deletePayment(?)', groupExpenseID, (err: any, res: any) => {
+    if (err) {
+      console.log('error: ', err);
+      result(err, null);
+    } else {
+      console.log(res);
+      result(null, res);
+    }
+  });
+};
+
