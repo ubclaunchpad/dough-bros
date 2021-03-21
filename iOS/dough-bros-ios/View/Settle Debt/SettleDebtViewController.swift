@@ -8,6 +8,8 @@
 import UIKit
 import Firebase
 import Combine
+import Firebase
+import FirebaseUI
 
 //public var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
 
@@ -16,6 +18,8 @@ class SettleDebtViewController: UIViewController {
     var groupObj:GroupObj?
     var debtList:[PaymentBothNamesObj]?
     var isOwner:Bool?
+    
+    let storage = Storage.storage()
 
     private var settleDebtView: SettleDebtView {
         return view as! SettleDebtView
@@ -36,6 +40,10 @@ class SettleDebtViewController: UIViewController {
 //            let data = try? Data(contentsOf: url!)
 //            settleDebtView.groupImage.image = UIImage(data: data!)
 //        }
+        let storageRef = storage.reference().child("GroupPicture").child(String(groupObj!.group_id) + ".jpg")
+        settleDebtView.groupImage.sd_setImage(with: storageRef)
+        settleDebtView.groupImage.contentMode = .scaleAspectFill
+        
         settleDebtView.groupName.text = groupObj?.group_name == "" ? "Untitled Group" : groupObj?.group_name
         settleDebtView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }

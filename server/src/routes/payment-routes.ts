@@ -1,9 +1,14 @@
 import { Router } from 'express';
+import { sendMessageToUser } from '../notification/FCM';
 
 const router = Router();
 
 const PaymentService = require('../controllers/payment-service');
 const paymentServer = new PaymentService();
+
+const UserService = require("../controllers/user-service");
+const userServer = new UserService();
+
 
 router.post('/createPayment', (req, res) => {
   if (!req.body) {
@@ -15,6 +20,9 @@ router.post('/createPayment', (req, res) => {
   paymentServer
     .createPayment(req)
     .then((payment: any) => {
+      userServer.findUserByUID(req.body.fk_sender_id).then((user: any) => {
+        sendMessageToUser(user.fcm_token, 'A payment is due from you!')
+      })
       res.json(payment);
     })
     .catch((err: any) => {
@@ -166,7 +174,7 @@ router.get('/:groupID/settled/:receiverID', (req, res) => {
   }
 
   paymentServer
-    .getAllSettledPaymentsToUserInGroup(req.params.receiverID, req.params.groupID)
+    .getAllSettledPaymentsToUserInGroup(req.params.senderID, req.params.groupID)
     .then((payment: any) => {
       res.json(payment);
     })
@@ -203,10 +211,13 @@ router.put('/payPayment/:paymentID', (req, res) => {
     });
 });
 
-router.put('/settlePayment/:paymentID', (req, res) => {
+router.put('/settlePayment/:paymentID/:receiverID', (req, res) => {
   paymentServer
     .settlePayment(req.params.paymentID)
     .then((payment: any) => {
+      userServer.findUserByUID(req.params.receiverID).then((user: any) => {
+        sendMessageToUser(user.fcm_token, 'A payment is paid to you!')
+      })
       res.json(payment);
     })
     .catch((err: any) => {

@@ -9,5 +9,8 @@ target 'dough-bros-ios' do
     pod 'FBSDKLoginKit'
     pod 'Firebase/Auth'
     pod 'Firebase/Messaging'
+    pod 'Firebase/Storage'
+    pod 'FirebaseUI/Storage'
+    pod 'Firebase/Messaging'
     
 end

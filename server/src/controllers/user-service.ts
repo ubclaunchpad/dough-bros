@@ -49,6 +49,18 @@ module.exports = class UserService {
     });
   }
 
+  // Find Owner
+  findOwner(groupID: string) {
+    return new Promise((resolve, reject) => {
+      User.findOwner(groupID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
   // List Users
   findAllUsers() {
     return new Promise((resolve, reject) => {

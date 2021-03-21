@@ -20,3 +20,4 @@ server/build/
 
 # other
 npm-debug.log
+server/src/notification/serviceAccountKey.json
