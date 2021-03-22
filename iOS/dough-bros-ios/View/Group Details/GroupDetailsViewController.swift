@@ -295,6 +295,9 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
     
     @objc private func editButtonTapped() {
         print("edit button presesed")
+        let addMemberVC = MembersViewController()
+        addMemberVC.groupObj = self.groupObj
+        navigationController?.pushViewController(addMemberVC, animated: true)
     }
     
     private func setupTextField() {
