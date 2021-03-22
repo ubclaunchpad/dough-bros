@@ -76,14 +76,6 @@ router.put('/setGroupName/:groupID/:groupName', (req, res) => {
   });
 });
 
-router.delete('/removeAllUsersFromGroup/:groupID', (req, res) => {
-  groupServer.removeAllUsersFromGroup(req.params.groupID).then((group: any) => {
-      res.json(group);
-  }).catch((err: any) => {
-      res.json(err);
-  });
-});
-
 router.delete('/deleteGroup/:groupID', (req, res) => {
   groupServer.deleteGroup(req.params.groupID).then((group: any) => {
       res.json(group);

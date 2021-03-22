@@ -39,9 +39,10 @@ USE `doughBros_db`$$
 
 CREATE PROCEDURE `getGroupExpenseByPaymentId` (IN `child_payment_id` INT(8))
 BEGIN
-SELECT * FROM `group_expense` WHERE `expense_id` IN (
+
+SELECT FROM `group_expense` WHERE `expense_id` IN (
 	SELECT `fk_parent_expense_id` FROM `payment` WHERE `payment_id` = `child_payment_id`
-    );
+	);
 
 END$$
 
