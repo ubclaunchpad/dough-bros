@@ -37,12 +37,11 @@ DELIMITER ;
 DELIMITER $$
 USE `doughBros_db`$$
 
-CREATE PROCEDURE `getGroupExpenseByPaymentId` (IN `payment_id` INT(8))
+CREATE PROCEDURE `getGroupExpenseByPaymentId` (IN `child_payment_id` INT(8))
 BEGIN
-
-SELECT FROM `group_expense` WHERE (`expense_id` = (
-	SELECT `fk_parent_expense_id` FROM `payment` WHERE `payment_id` = `payment_id`)
-	);
+SELECT * FROM `group_expense` WHERE `expense_id` IN (
+	SELECT `fk_parent_expense_id` FROM `payment` WHERE `payment_id` = `child_payment_id`
+    );
 
 END$$
 

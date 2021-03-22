@@ -1,6 +1,5 @@
 import { Group } from '../models/group';
 import { GroupExpense } from '../models/group-expense';
-import { Payment } from '../models/payment';
 
 module.exports = class GroupService {
   constructor() {}
