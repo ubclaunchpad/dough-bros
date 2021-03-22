@@ -36,6 +36,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupViewModel()
         loadImage()
     }
     
@@ -101,7 +102,20 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
             self?.groupDetailsView.activityView.reloadData()
         }.store(in: &cancellableSet)
         
+        configureSettleDebtButton()
         paymentViewModel.fetchData(groupID: groupObj!.group_id)
+    }
+    
+    private func configureSettleDebtButton() {
+        if (paymentViewModel.payments.count == 0) {
+            print("no payments yet")
+            print(paymentViewModel.payments)
+            groupDetailsView.settleDebtButton.backgroundColor = .gray
+            groupDetailsView.settleDebtButton.isEnabled = false
+        } else {
+            groupDetailsView.settleDebtButton.backgroundColor = UIColor(hex: 0xF8A096)
+            groupDetailsView.settleDebtButton.isEnabled = true
+        }
     }
     
     @objc private func groupImageTapped() {
