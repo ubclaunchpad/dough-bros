@@ -130,6 +130,23 @@ extension GroupsViewController: UITableViewDataSource, UITableViewDelegate {
         detailedGroupsVC.groupObj = groupsViewModel.groups[indexPath.row]
         navigationController?.pushViewController(detailedGroupsVC, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            var groupObj = groupsViewModel.groups
+            let groupToDelete = groupsViewModel.groups[indexPath.row]
+            groupObj.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+//            groupsViewModel.$groups.receive(on: DispatchQueue.main).sink { [weak self] _ in
+//                self?.cancellableSet.remove(groupToDelete)
+//            }
+        }
+    }
 }
 
 extension GroupsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
