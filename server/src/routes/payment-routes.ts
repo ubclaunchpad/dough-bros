@@ -215,14 +215,26 @@ router.put('/settlePayment/:paymentID/:receiverID', (req, res) => {
   paymentServer
     .settlePayment(req.params.paymentID)
     .then((payment: any) => {
-      userServer.findUserByUID(req.params.receiverID).then((user: any) => {
-        if (user != null) {
-          sendMessageToUser(
-            user.fcm_token,
-            `${user.first_name} settled a payment with you!`
-          );
+      userServer.findUserByUID(req.params.receiverID, (err: any, res: any) => {
+        if (err) {
+          console.log(err);
+          return;
         }
+        let user = res[0];
+        sendMessageToUser(
+          user.fcm_token,
+          `${user.first_name} settled a payment with you!`
+        );
       });
+
+      // userServer.findUserByUID(req.params.receiverID).then((user: any) => {
+      //   if (user != null) {
+      //     sendMessageToUser(
+      //       user.fcm_token,
+      //       `${user.first_name} settled a payment with you!`
+      //     );
+      //   }
+      // });
       res.json(payment);
     })
     .catch((err: any) => {
