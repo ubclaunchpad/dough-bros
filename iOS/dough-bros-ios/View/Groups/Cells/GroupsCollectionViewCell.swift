@@ -14,7 +14,7 @@ class GroupsCollectionViewCell: UICollectionViewCell {
             setupModel()
         }
     }
-    private let profilePictureView = ContentFitImageView()
+    var profilePictureView = ContentFitImageView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -32,7 +32,8 @@ class GroupsCollectionViewCell: UICollectionViewCell {
     private func setupModel() {
         guard let friend = friend else { return }
         
-        profilePictureView.image = UIImage(named: friend.group_name) ?? UIImage(systemName: "person.crop.circle.fill")
+        profilePictureView.contentMode = .scaleAspectFill
+        profilePictureView.image = UIImage(systemName: "person.crop.circle.fill")
         profilePictureView.tintColor = .white
     }
 }

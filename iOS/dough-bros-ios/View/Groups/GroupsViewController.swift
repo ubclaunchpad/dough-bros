@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import Firebase
+import FirebaseUI
 
 protocol CarlosTutorialDelegate {
     func dismissTutorial()
@@ -23,6 +24,8 @@ final class GroupsViewController: UIViewController {
     }
     
     var showTutorial: Bool = false
+    
+    let storage = Storage.storage()
     
     // MARK: - View Life Cycle -
     deinit {
@@ -149,6 +152,9 @@ extension GroupsViewController: UICollectionViewDataSource, UICollectionViewDele
         
         friendsCell.friend = groupsViewModel.friends[indexPath.item]
         
+        let storageRef = storage.reference().child("GroupPicture").child(String(groupsViewModel.friends[indexPath.item].group_id) + ".jpg")
+        friendsCell.profilePictureView.sd_setImage(with: storageRef, placeholderImage: UIImage(systemName: "person.crop.circle.fill"))
+        
         return friendsCell
     }
     
@@ -162,6 +168,8 @@ extension GroupsViewController: UICollectionViewDataSource, UICollectionViewDele
         let accept = UIAlertAction(title: "Accept", style: .default, handler: { [self] _ in
             GroupEndpoints.acceptGroupMembership(groupID: groupsViewModel.friends[indexPath.row].group_id, userID: Auth.auth().currentUser!.uid)
             groupsViewModel.fetchData()
+            groupsView.groupsTableView.reloadData()
+            groupsView.friendsCollectionView.reloadData()
         })
         
         myAlert.addAction(accept)
