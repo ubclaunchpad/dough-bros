@@ -13,6 +13,11 @@ import FirebaseUI
 
 //public var summaryStuff = ["Alex owes you $100", "Bob owes you $300", "Charlie has settled his payment", "Daniel owes you $4000"]
 
+protocol PayConfirmationDelegate {
+    func dismissPayConfirmation()
+    func finishPayConfirmation()
+}
+
 class SettleDebtViewController: UIViewController {
 
     var groupObj:GroupObj?
@@ -63,6 +68,7 @@ extension SettleDebtViewController: UITableViewDelegate, UITableViewDataSource {
     // Setup Tableview cells for either summary or activity
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
+        cell.selectionStyle = .none
         
         guard let debt = debtList?[indexPath.row] else { return cell }
         
@@ -84,6 +90,17 @@ extension SettleDebtViewController: UITableViewDelegate, UITableViewDataSource {
         payConfirmVC.paymentObj = debtList?[indexPath.row]
         payConfirmVC.isOwner = isOwner
         
-        navigationController?.pushViewController(payConfirmVC, animated: true)
+        payConfirmVC.payConfirmationDelegate = self
+        self.present(payConfirmVC, animated: true)
+    }
+}
+
+extension SettleDebtViewController: PayConfirmationDelegate {
+    func dismissPayConfirmation() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    func finishPayConfirmation() {
+        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 }

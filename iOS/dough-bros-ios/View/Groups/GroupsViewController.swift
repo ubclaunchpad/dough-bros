@@ -55,11 +55,6 @@ final class GroupsViewController: UIViewController {
         groupsViewModel.fetchData()
         groupsView.groupsTableView.reloadData()
         groupsView.friendsCollectionView.reloadData()
-        
-//        for cell in groupsView.groupsTableView.visibleCells {
-//            guard let cell = cell as? GroupTableViewCell else { return }
-//            cell.loadImage()
-//        }
     }
     
     // MARK: - Setup -
@@ -130,6 +125,18 @@ extension GroupsViewController: UITableViewDataSource, UITableViewDelegate {
         detailedGroupsVC.groupObj = groupsViewModel.groups[indexPath.row]
         navigationController?.pushViewController(detailedGroupsVC, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            groupsViewModel.deleteFromGroups(index: indexPath.row)
+            /// TODO: call delete endpoint!
+            tableView.reloadData()
+        }
+    }
 }
 
 extension GroupsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -146,19 +153,19 @@ extension GroupsViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let groupObj = groupsViewModel.groups[indexPath.row]
+        let groupName = groupsViewModel.groups[indexPath.row].group_name == "" ? "Untitled Group" : groupsViewModel.groups[indexPath.row].group_name
         
-        let myAlert = UIAlertController(title: "Accept Group Invite?", message: "", preferredStyle: .alert)
+        let myAlert = UIAlertController(title: "Group Invitation!", message: "You've been invited to '\(groupName)'", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Decline", style: .destructive, handler: { _ in
             print("cancel")
         })
         let accept = UIAlertAction(title: "Accept", style: .default, handler: { [self] _ in
-            GroupEndpoints.acceptGroupMembership(groupID: groupsViewModel.groups[indexPath.row].group_id, userID: Auth.auth().currentUser!.uid)
+            GroupEndpoints.acceptGroupMembership(groupID: groupsViewModel.friends[indexPath.row].group_id, userID: Auth.auth().currentUser!.uid)
             groupsViewModel.fetchData()
         })
         
-        myAlert.addAction(cancel)
         myAlert.addAction(accept)
+        myAlert.addAction(cancel)
         
         self.present(myAlert, animated: true, completion: nil)
     }

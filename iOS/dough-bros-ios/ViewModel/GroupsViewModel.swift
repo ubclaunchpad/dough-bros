@@ -10,7 +10,7 @@ import Combine
 import Firebase
 
 class GroupsViewModel {
-    private var allGroups: [GroupObj] = []
+//    private var allGroups: [GroupObj] = []
     private var searchText: String = "" {
         didSet {
             searchFor(substring: searchText)
@@ -27,18 +27,18 @@ class GroupsViewModel {
         // SOME NETWORK call
         setState(to: .loading)
         
-        allGroups = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
+        groups = GroupEndpoints.getGroups(userID: Auth.auth().currentUser!.uid)
         friends = GroupEndpoints.getPendingGroups(userID: Auth.auth().currentUser!.uid)
         
-        //simulates a long network call
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-            //mock groups
-//            allGroups = GroupObj.createMockGroups()
-            searchFor(substring: searchText)
-//            friends = [Friend(name: "Bob"), Friend(name: "Alan"), Friend(name: "Wren"), Friend(name: "Avery"), Friend(name: "Stephanie"), Friend(name: "Harin"), Friend(name: "Carlos")]
-            
-            setState(to: .idle)
-        }
+        setState(to: .idle)
+    }
+    
+    public func deleteFromGroups(index: Int) {
+        groups.remove(at: index)
+    }
+    
+    public func deleteFromFriends(index: Int) {
+        friends.remove(at: index)
     }
     
     func setState(to newState: State) {
@@ -47,7 +47,7 @@ class GroupsViewModel {
     }
     
     func searchFor(substring: String) {
-        guard !substring.isEmpty else { groups = allGroups; return }
+        guard !substring.isEmpty else { return }
         groups = groups.filter({$0.group_name.uppercased().contains(substring.uppercased())})
     }
     

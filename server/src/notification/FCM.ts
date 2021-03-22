@@ -8,7 +8,7 @@ admin.initializeApp({
 });
 
 export function sendMessageToUser(deviceID: any, message: any) {
-    console.log("sending!");
+    console.log('sending!');
 
     var messageBody = {
         notification: {
@@ -17,10 +17,10 @@ export function sendMessageToUser(deviceID: any, message: any) {
         },
     }
     
-    admin.messaging().sendToDevice(deviceID, messageBody).then(() => {
-        console.log("Success");
-    }).catch((e: any) => {
-        console.log("Error")
-        console.log(e);
-    })
+    try {
+        admin.messaging().sendToDevice(deviceID, messageBody);
+    } catch (err) {
+        console.log('Messaging Error:');
+        console.log(err);
+    }
 }
