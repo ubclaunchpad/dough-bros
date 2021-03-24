@@ -91,6 +91,19 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
+CREATE PROCEDURE `removeAllUsersFromGroup` (IN `group_id` INT(8))
+BEGIN
+							      
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM `group_membership` WHERE `fk_group_id` = `group_id`;
+SET SQL_SAFE_UPDATES = 1;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+USE `doughBros_db`$$
 CREATE PROCEDURE `acceptGroupMembership` (IN `group_id` INT(8), IN `user_id` VARCHAR(255))
 BEGIN
 

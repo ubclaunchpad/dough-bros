@@ -45,8 +45,24 @@ router.get('/getGroupExpenseByGroupId/:groupID', (req, res) => {
   });
 });
 
+router.get('/getGroupExpenseByPaymentId/:paymentID', (req, res) => {
+  groupExpenseServer.getGroupExpenseByPaymentId(req.params.paymentID).then((expense: any) => {
+      res.json(expense);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
 router.put('/archiveGroupExpense/:groupExpenseID', (req,res) => {
   groupExpenseServer.archiveGroupExpense(req.params.groupExpenseID).then((expense: any) => {
+      res.json(expense);
+  }).catch((err: any) => {
+      res.json(err);
+  });
+});
+
+router.delete('/deleteGroupExpense/:groupExpenseID', (req, res) => {
+  groupExpenseServer.deleteGroupExpense(req.params.groupExpenseID).then((expense: any) => {
       res.json(expense);
   }).catch((err: any) => {
       res.json(err);

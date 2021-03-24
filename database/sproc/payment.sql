@@ -212,10 +212,10 @@ DELIMITER ;
 
 DELIMITER $$
 USE `doughBros_db`$$
-CREATE PROCEDURE `deletePayment` (IN `payment_id` INT(8))
+CREATE PROCEDURE `deletePayment` (IN `group_expense_id` INT(8))
 BEGIN
 
-DELETE FROM `payment` WHERE `payment_id` = `payment_id`;
+DELETE FROM `payment` WHERE `fk_parent_expense_id` = `group_expense_id`;
 
 END$$
 

@@ -127,3 +127,33 @@ Group.setGroupName = (
     }
   );
 };
+
+Group.deleteGroup = (groupID: number, result: any) => {
+  sql.query(
+    "CALL deleteGroup(?)",
+    groupID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res[0]);
+      }
+    }
+  );
+};
+
+Group.removeAllUsersFromGroup = (groupID: number, result: any) => {
+  sql.query(
+    "CALL removeAllUsersFromGroup(?)",
+    groupID,
+    (err: any, res: any) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res[0]);
+      }
+    }
+  );
+};

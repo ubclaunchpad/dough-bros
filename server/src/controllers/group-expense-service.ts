@@ -92,9 +92,38 @@ module.exports = class GroupExpenseService {
     });
   }
 
+  getGroupExpenseByPaymentId(paymentID: number) {
+    return new Promise((resolve, reject) => {
+      GroupExpense.getGroupExpenseByPaymentId(paymentID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
   archiveGroupExpense(groupExpenseID: number) {
     return new Promise((resolve, reject) => {
       GroupExpense.archiveGroupExpense(groupExpenseID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+    });
+  }
+
+  deleteGroupExpense(groupExpenseID: number) {
+    return new Promise((resolve, reject) => {
+      Payment.deletePayment(groupExpenseID, (err: any, res: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      });
+
+      GroupExpense.deleteGroupExpenseById(groupExpenseID, (err: any, res: any) => {
         if (err) {
           reject(err);
         }
