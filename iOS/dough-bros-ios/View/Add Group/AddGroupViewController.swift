@@ -12,6 +12,8 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
     
     var group = [User]()
     var userResults = [User]()
+    var groupExists = false
+    var existingGroupObj: GroupObj?
     
     var selectedPeople: Set<Friend> = []
     
@@ -31,7 +33,7 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
         setupTextField()
         addGroupView.backButton.addTarget(self, action: #selector(tappedBack), for: .touchUpInside)
         addGroupView.nextButton.addTarget(self, action: #selector(tappedNext), for: .touchUpInside)
-
+        
     }
     
     // setup
@@ -53,9 +55,9 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
     @objc func textFieldDidChange(textField: UITextField) {
         print("Text changed: " + textField.text!)
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload(_:)), object: textField)
-                    perform(#selector(self.reload(_:)), with: textField, afterDelay: 0.75)
+        perform(#selector(self.reload(_:)), with: textField, afterDelay: 0.75)
     }
-            
+    
     @objc func reload(_ textField: UITextField) {
         guard let query = textField.text, query.trimmingCharacters(in: .whitespaces) != "" else {
             print("nothing to search")
@@ -75,22 +77,28 @@ class AddGroupViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
         print("next tapped")
         
-        // group_id is not actually used by createGroup, so dummy value of 0 used here
-        let groupObj = GroupObj(group_id: 0, group_name: "", creator_id: (Auth.auth().currentUser?.uid)!, image_uri: "", amount: 0.0)
-        let newGroupID = GroupEndpoints.createGroup(group: groupObj)
-        
-        for user in group {
-            GroupEndpoints.addUserToGroup(user: user, groupID: newGroupID, addedBy: (Auth.auth().currentUser?.uid)!)
+        if (!groupExists) {
+            // group_id is not actually used by createGroup, so dummy value of 0 used here
+            let groupObj = GroupObj(group_id: 0, group_name: "", creator_id: (Auth.auth().currentUser?.uid)!, image_uri: "", amount: 0.0)
+            let newGroupID = GroupEndpoints.createGroup(group: groupObj)
+            
+            for user in group {
+                GroupEndpoints.addUserToGroup(user: user, groupID: newGroupID, addedBy: (Auth.auth().currentUser?.uid)!)
+            }
+        } else {
+            for user in group {
+                GroupEndpoints.addUserToGroup(user: user, groupID: existingGroupObj!.group_id, addedBy: (Auth.auth().currentUser?.uid)!)
+            }
         }
         
-//        let detailedGroupsVC = GroupDetailsViewController()
-//        /// TODO: fetch GroupObj by newGroupID, and set detailedGroupsVC.groupObc
+        //        let detailedGroupsVC = GroupDetailsViewController()
+        //        /// TODO: fetch GroupObj by newGroupID, and set detailedGroupsVC.groupObc
         
         navigationController?.popViewController(animated: true)
-//        navigationController?.pushViewController(detailedGroupsVC, animated: true)
+        //        navigationController?.pushViewController(detailedGroupsVC, animated: true)
     }
-
-
+    
+    
 }
 
 extension AddGroupViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -105,7 +113,7 @@ extension AddGroupViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
+        
         let friendsCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddGroupCollectionViewCell.className, for: indexPath) as! AddGroupCollectionViewCell
         
         friendsCell.user = group[indexPath.row]
