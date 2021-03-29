@@ -23,6 +23,14 @@ class SignUpView: UIView, UITextFieldDelegate {
         return label
     }()
     
+    private var logoImage: UIImageView = {
+        let image = UIImage(named: "Logo")
+        let imageView =  UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
+    
     private var signInLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -135,6 +143,14 @@ class SignUpView: UIView, UITextFieldDelegate {
         NSLayoutConstraint.activate([
             welcomeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             welcomeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 150),
+        ])
+        
+        addSubview(logoImage)
+        NSLayoutConstraint.activate([
+            logoImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            logoImage.topAnchor.constraint(equalTo: topAnchor, constant: 150),
+            logoImage.widthAnchor.constraint(equalToConstant: 90),
+            logoImage.heightAnchor.constraint(equalToConstant: 90)
         ])
         
         addSubview(loginStack)
