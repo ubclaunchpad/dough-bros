@@ -84,7 +84,7 @@ class GroupDetailsView: UIView {
         summary.register(SummaryTableViewCell.self, forCellReuseIdentifier: "summaryCell")
         summary.rowHeight = 70
         summary.estimatedRowHeight = 70
-        summary.isScrollEnabled = false
+        summary.isScrollEnabled = true
         summary.separatorColor = .clear
         summary.allowsSelection = false
         return summary
@@ -105,7 +105,7 @@ class GroupDetailsView: UIView {
         activity.register(ActivityTableViewCell.self, forCellReuseIdentifier: "activityCell")
         activity.rowHeight = 70
         activity.estimatedRowHeight = 70
-        activity.isScrollEnabled = false
+        activity.isScrollEnabled = true
         activity.separatorColor = .clear
         activity.allowsSelection = false
         return activity
