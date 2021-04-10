@@ -9,10 +9,10 @@ import Foundation
 
 class CarlosViewController: UIViewController, DoughWalkthroughViewControllerDelegate {
     let walkthroughs = [
-        DoughTutorialModel(title: "Quick Overview", subtitle: "Quickly visualize important business metrics. The overview in the home tab shows the most important metrics to monitor how your business is doing in real time.", icon: "analytics-icon", color: "#fffee3"),
-        DoughTutorialModel(title: "Analytics", subtitle: "Dive deep into charts to extract valuable insights and come up with data driven product initiatives, to boost the success of your business.", icon: "bars-icon", color: "#d4f6fd"),
-        DoughTutorialModel(title: "Dashboard Feeds", subtitle: "View your sales feed, orders, customers, products and employees.", icon: "activity-feed-icon", color: "#cbffc9"),
-        DoughTutorialModel(title: "Get Notified", subtitle: "Receive notifications when critical situations occur to stay on top of everything important.", icon: "bell-icon", color: "#fde3f9")
+        DoughTutorialModel(title: "Home Page", subtitle: "filters/recent users/ outstanding payments ", icon: "tutorial-home", color: "#fffee3"),
+        DoughTutorialModel(title: "Create Group", subtitle: "search for someone thats not your friend (by name or email)", icon: "turorial-addFriend", color: "#d4f6fd"),
+        DoughTutorialModel(title: "Add Expense", subtitle: "Vdont allow to change the total amount for custom mode??", icon: "tutorial-addExpense", color: "#cbffc9"),
+        DoughTutorialModel(title: "Settle Debt", subtitle: "Groupe Details / Settle Debts", icon: "tutorial-debt", color: "#fde3f9")
     ]
     
     var tutorialDelegate: CarlosTutorialDelegate?

@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DoughMainWalkthroughViewController" customModule="WalkthroughOnboarding" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DoughMainWalkthroughViewController" customModule="dough_bros_ios" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="t6a-rE-WeO" id="rYi-Ci-nug"/>
                 <outlet property="imageContainerView" destination="iBB-wU-Tzs" id="d6w-49-mcW"/>
@@ -27,37 +27,33 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBB-wU-Tzs" userLabel="Image Container View">
-                            <rect key="frame" x="137.5" y="200" width="100" height="100"/>
+                            <rect key="frame" x="56.5" y="100" width="262.5" height="400"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NRA-v9-Ctm">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="DVg-Ik-xM8"/>
-                                        <constraint firstAttribute="width" constant="100" id="u60-iy-Hjr"/>
-                                    </constraints>
+                                    <rect key="frame" x="0.0" y="0.0" width="262.5" height="400"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="NRA-v9-Ctm" firstAttribute="centerX" secondItem="iBB-wU-Tzs" secondAttribute="centerX" id="6Le-Oz-a5U"/>
-                                <constraint firstItem="NRA-v9-Ctm" firstAttribute="centerY" secondItem="iBB-wU-Tzs" secondAttribute="centerY" id="K6B-1U-GQF"/>
-                                <constraint firstAttribute="width" constant="100" id="YzF-gN-n8w"/>
-                                <constraint firstAttribute="height" constant="100" id="thC-4g-cZj"/>
+                                <constraint firstItem="NRA-v9-Ctm" firstAttribute="centerX" secondItem="iBB-wU-Tzs" secondAttribute="centerX" id="22h-SN-pKS"/>
+                                <constraint firstItem="NRA-v9-Ctm" firstAttribute="centerY" secondItem="iBB-wU-Tzs" secondAttribute="centerY" id="G8D-uL-4Xu"/>
+                                <constraint firstItem="NRA-v9-Ctm" firstAttribute="width" secondItem="iBB-wU-Tzs" secondAttribute="width" id="XzQ-Cj-zSV"/>
+                                <constraint firstItem="NRA-v9-Ctm" firstAttribute="height" secondItem="iBB-wU-Tzs" secondAttribute="height" id="tUJ-nN-9FX"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRL-uJ-wL1" userLabel="Title Label">
-                            <rect key="frame" x="167" y="370" width="41.5" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRL-uJ-wL1" userLabel="Title Label">
+                            <rect key="frame" x="20" y="520" width="335" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDu-W2-TQj" userLabel="Subtitle Label">
-                            <rect key="frame" x="167" y="420.5" width="41.5" height="51"/>
+                            <rect key="frame" x="20" y="550.5" width="345" height="51"/>
                             <attributedString key="attributedText">
                                 <fragment content="Label">
                                     <attributes>
                                         <font key="NSFont" metaFont="system" size="17"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="2.5" tighteningFactorForTruncation="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="2.5" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
                             </attributedString>
@@ -66,16 +62,17 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="yRL-uJ-wL1" firstAttribute="top" secondItem="iBB-wU-Tzs" secondAttribute="bottom" constant="20" id="5r8-Ex-BMO"/>
                         <constraint firstItem="yRL-uJ-wL1" firstAttribute="centerX" secondItem="t6a-rE-WeO" secondAttribute="centerX" id="DN8-8I-DWK"/>
-                        <constraint firstItem="yRL-uJ-wL1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="t6a-rE-WeO" secondAttribute="leading" constant="35" id="EZV-u7-UB0"/>
-                        <constraint firstItem="yRL-uJ-wL1" firstAttribute="top" secondItem="iBB-wU-Tzs" secondAttribute="bottom" constant="70" id="EhQ-SF-YAR"/>
-                        <constraint firstItem="XDu-W2-TQj" firstAttribute="top" secondItem="yRL-uJ-wL1" secondAttribute="bottom" constant="30" id="GaY-zA-HO2"/>
+                        <constraint firstItem="yRL-uJ-wL1" firstAttribute="leading" secondItem="t6a-rE-WeO" secondAttribute="leading" constant="20" id="EZV-u7-UB0"/>
+                        <constraint firstItem="XDu-W2-TQj" firstAttribute="top" secondItem="yRL-uJ-wL1" secondAttribute="bottom" constant="10" id="GaY-zA-HO2"/>
                         <constraint firstItem="iBB-wU-Tzs" firstAttribute="centerX" secondItem="t6a-rE-WeO" secondAttribute="centerX" id="Hae-Ii-Wfx"/>
-                        <constraint firstItem="XDu-W2-TQj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="t6a-rE-WeO" secondAttribute="leading" constant="35" id="NHJ-Jp-md1"/>
-                        <constraint firstItem="iBB-wU-Tzs" firstAttribute="top" secondItem="t6a-rE-WeO" secondAttribute="top" constant="200" id="Nd1-Ym-R0u"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XDu-W2-TQj" secondAttribute="trailing" constant="35" id="RS5-Bh-qRK"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yRL-uJ-wL1" secondAttribute="trailing" constant="35" id="c0Z-BG-aZW"/>
-                        <constraint firstItem="XDu-W2-TQj" firstAttribute="centerX" secondItem="t6a-rE-WeO" secondAttribute="centerX" id="sHs-ra-osA"/>
+                        <constraint firstAttribute="trailing" secondItem="yRL-uJ-wL1" secondAttribute="trailing" constant="20" id="Hlf-Qt-B24"/>
+                        <constraint firstItem="XDu-W2-TQj" firstAttribute="leading" secondItem="t6a-rE-WeO" secondAttribute="leading" constant="20" id="NHJ-Jp-md1"/>
+                        <constraint firstItem="iBB-wU-Tzs" firstAttribute="top" secondItem="t6a-rE-WeO" secondAttribute="top" constant="100" id="Nd1-Ym-R0u"/>
+                        <constraint firstAttribute="trailing" secondItem="XDu-W2-TQj" secondAttribute="trailing" constant="10" id="RS5-Bh-qRK"/>
+                        <constraint firstItem="iBB-wU-Tzs" firstAttribute="width" secondItem="t6a-rE-WeO" secondAttribute="width" multiplier="0.7" id="xOD-3W-QWG"/>
+                        <constraint firstItem="iBB-wU-Tzs" firstAttribute="height" secondItem="t6a-rE-WeO" secondAttribute="height" multiplier="0.6" id="zde-95-9dP"/>
                     </constraints>
                 </view>
             </subviews>
@@ -87,7 +84,7 @@
                 <constraint firstItem="t6a-rE-WeO" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="RLZ-L3-6JD"/>
                 <constraint firstItem="t6a-rE-WeO" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="q4z-7C-Ktu"/>
             </constraints>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <point key="canvasLocation" x="32.799999999999997" y="52.623688155922046"/>
         </view>
     </objects>
 </document>
