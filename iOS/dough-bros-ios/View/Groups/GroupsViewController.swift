@@ -135,8 +135,9 @@ extension GroupsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
+            let groupID = groupsViewModel.groups[indexPath.row].group_id
+            GroupEndpoints.deleteGroup(groupID: groupID)
             groupsViewModel.deleteFromGroups(index: indexPath.row)
-            /// TODO: call delete endpoint!
             tableView.reloadData()
         }
     }

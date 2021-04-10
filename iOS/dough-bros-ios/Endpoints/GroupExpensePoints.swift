@@ -52,7 +52,7 @@ struct GroupExpenseEndpoints {
         var groupList = [GroupExpenseObj]()
         let semaphore = DispatchSemaphore (value: 0)
 
-        var request = URLRequest(url: URL(string: endpointURL + "group_expense//getGroupExpenseByGroupId/" + groupID)!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: endpointURL + "group_expense/getGroupExpenseByGroupId/" + groupID)!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -64,6 +64,36 @@ struct GroupExpenseEndpoints {
           // print(String(data: data, encoding: .utf8)!)
             do {
                 groupList = try JSONDecoder().decode([GroupExpenseObj].self, from: data)
+                // print(groupList)
+            } catch let error {
+                print(error)
+            }
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+        
+        return groupList
+    }
+    
+    static func getParentGroupExpenseByPaymentId(paymentId: String) -> [ParentGroupExpenseObj] {
+        print("Getting Parent Group Expense!!")
+        var groupList = [ParentGroupExpenseObj]()
+        let semaphore = DispatchSemaphore (value: 0)
+
+        var request = URLRequest(url: URL(string: endpointURL + "group_expense/getGroupExpenseByPaymentId/" + paymentId)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+          // print(String(data: data, encoding: .utf8)!)
+            do {
+                groupList = try JSONDecoder().decode([ParentGroupExpenseObj].self, from: data)
                 // print(groupList)
             } catch let error {
                 print(error)

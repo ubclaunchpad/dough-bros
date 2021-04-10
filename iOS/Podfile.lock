@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - FBSDKCoreKit (8.1.0):
     - FBSDKCoreKit/Basics (= 8.1.0)
     - FBSDKCoreKit/Core (= 8.1.0)
@@ -88,6 +91,7 @@ PODS:
   - SDWebImage/Core (5.10.4)
 
 DEPENDENCIES:
+  - Charts
   - FBSDKLoginKit
   - Firebase/Auth
   - Firebase/Messaging
@@ -96,6 +100,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Charts
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -115,6 +120,7 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   FBSDKCoreKit: b3ca27e124dae67122d3bb47c8f96800b39986a6
   FBSDKLoginKit: a3a92ba9380759cd0c1aa8319465fb5f2857c602
   Firebase: 50be68416f50eb4eb2ecb0e78acab9a051ef95df
@@ -133,6 +139,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
 
-PODFILE CHECKSUM: e7092306d3a1e93dd821a848886eab67fcd70fd7
+PODFILE CHECKSUM: 0f1067721a3c698afd9347a547e07b960d669d4e
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.9.0

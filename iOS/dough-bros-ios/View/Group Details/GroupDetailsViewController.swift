@@ -12,7 +12,14 @@ import Combine
 import Photos
 import AVFoundation
 
-class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+protocol DismissDelegate {
+    func afterDismiss()
+}
+
+class GroupDetailsViewController: UIViewController, DismissDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func afterDismiss() {
+        setupViewModel()
+    }
     
     var groupObj: GroupObj?
     private var paymentViewModel = PaymentViewModel()
@@ -37,7 +44,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
     
     override func viewWillAppear(_ animated: Bool) {
         setupViewModel()
-        loadImage()
+//        loadImage()
     }
     
     override func viewDidLoad() {
@@ -228,54 +235,68 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
         if let image = info[.originalImage] as? UIImage
         {
             if Auth.auth().currentUser != nil {
-                
                 let storageRef = storage.reference().child("GroupPicture").child(String(groupObj!.group_id) + ".jpg")
                 let key = "gs://\(storageRef.bucket)/\(storageRef.fullPath)"
-                SDImageCache.shared.containsImage(forKey: key, cacheType: .all, completion: { contains in
-                    if (contains == .none) {
-                        print("nothing in cache")
-                        self.groupDetailsView.groupImage.image = image
-                        
-                        let metadataCT = StorageMetadata()
-                        metadataCT.contentType = "image/jpeg"
-                        
-                        if let uploadData = image.jpegData(compressionQuality: 0.8) {
-                            print("uploading shit")
-                            storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
-                                if error != nil {
-                                    print("error")
-                                }
-//                                print("got here")
-//                                SDImageCache.shared.store(image, forKey: key, completion: {
-//                                    print("loading image")
-//                                    self.loadImage()
-//                                })
-//                                self.groupDetailsView.groupImage.image = image
-                                
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-//                                    self.loadImage()
-//                                })
-                            }
-                            
-                            
+                
+                if let uploadData = image.jpegData(compressionQuality: 0.8) {
+                    print("uploading shit")
+                    let metadataCT = StorageMetadata()
+                    metadataCT.contentType = "image/jpeg"
+                    
+                    storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
+                        if error != nil {
+                            print("error")
                         }
-                    } else {
-                        print("something in cache")
-                        SDImageCache.shared.removeImage(forKey: key, cacheType: .all, completion: {
-                            let metadataCT = StorageMetadata()
-                            metadataCT.contentType = "image/jpeg"
-                            
-                            if let uploadData = image.jpegData(compressionQuality: 0.8) {
-                                storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
-                                    if error != nil {
-                                        print("error")
-                                    }
-                                    self.loadImage()
-                                }
-                            }
-                        })
+                        
+                        SDImageCache.shared.clearMemory()
+                        self.loadImage()
+                        
+//                        SDImageCache.shared.clear(with: .all, completion: {
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+//                                print("got here")
+//                                self.groupDetailsView.groupImage.sd_setImage(with: storageRef)
+//                            })
+//                        })
                     }
-                })
+                }
+                
+//                SDImageCache.shared.containsImage(forKey: key, cacheType: .all, completion: { contains in
+//                    if (contains == .none) {
+//                        print("nothing in cache")
+//                        self.groupDetailsView.groupImage.image = image
+//
+//                        let metadataCT = StorageMetadata()
+//                        metadataCT.contentType = "image/jpeg"
+//
+//                        if let uploadData = image.jpegData(compressionQuality: 0.8) {
+//                            print("uploading shit")
+//                            storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
+//                                if error != nil {
+//                                    print("error")
+//                                }
+//
+//                                self.loadImage()
+//                            }
+//
+//
+//                        }
+//                    } else {
+//                        print("something in cache")
+//                        SDImageCache.shared.removeImage(forKey: key, cacheType: .all, completion: {
+//                            let metadataCT = StorageMetadata()
+//                            metadataCT.contentType = "image/jpeg"
+//
+//                            if let uploadData = image.jpegData(compressionQuality: 0.8) {
+//                                storageRef.putData(uploadData, metadata: metadataCT) { (metadata, error) in
+//                                    if error != nil {
+//                                        print("error")
+//                                    }
+//                                    self.loadImage()
+//                                }
+//                            }
+//                        })
+//                    }
+//                })
                 
 
             }
@@ -327,6 +348,7 @@ class GroupDetailsViewController: UIViewController, UITextFieldDelegate, UIImage
         let addExpenseVC = AddExpenseViewController()
         addExpenseVC.groupMembers = self.groupMembers
         addExpenseVC.groupObj = self.groupObj
+        addExpenseVC.afterDismiss = self
         present(addExpenseVC, animated: true)
     }
     
@@ -357,16 +379,7 @@ extension GroupDetailsViewController: UITableViewDataSource, UITableViewDelegate
             let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as! SummaryTableViewCell
             
             let payment = paymentViewModel.payments[indexPath.row]
-            if (payment.fk_sender_id == Auth.auth().currentUser?.uid) {
-                // Text for: You are sending
-                cell.userName.text = "You owe \(payment.first_name_receiver) $\(payment.amount)"
-            } else if (payment.fk_receiver_id == Auth.auth().currentUser?.uid) {
-                // Text for: You are receiving
-                cell.userName.text = "\(payment.first_name_sender) owes you $\(payment.amount)"
-            } else {
-                // Text for: You are not involved
-                cell.userName.text = "\(payment.first_name_sender) owes \(payment.first_name_receiver) $\(payment.amount)"
-            }
+            cell.userName.text = generateOwesTitleFromPayment(payment)
             
             return cell
         } else {
@@ -386,5 +399,27 @@ extension GroupDetailsViewController: UITableViewDataSource, UITableViewDelegate
             
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // only allow select for summaryViews
+        if (tableView == groupDetailsView.summaryView) {
+            let vc = ParentExpenseViewController()
+            vc.paymentObj = paymentViewModel.payments[indexPath.row]
+            self.present(vc, animated: true)
+        }
+    }
+}
+
+func generateOwesTitleFromPayment(_ payment: PaymentBothNamesObj) -> String {
+    if (payment.fk_sender_id == Auth.auth().currentUser?.uid) {
+        // Text for: You are sending
+        return "You owe \(payment.first_name_receiver) $\(payment.amount)"
+    } else if (payment.fk_receiver_id == Auth.auth().currentUser?.uid) {
+        // Text for: You are receiving
+        return "\(payment.first_name_sender) owes you $\(payment.amount)"
+    } else {
+        // Text for: You are not involved
+        return "\(payment.first_name_sender) owes \(payment.first_name_receiver) $\(payment.amount)"
     }
 }
