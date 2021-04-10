@@ -12,5 +12,6 @@ target 'dough-bros-ios' do
     pod 'Firebase/Storage'
     pod 'FirebaseUI/Storage'
     pod 'Firebase/Messaging'
+    pod 'Charts'
     
 end
