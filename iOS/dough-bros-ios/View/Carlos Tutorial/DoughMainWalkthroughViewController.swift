@@ -29,10 +29,9 @@ class DoughMainWalkthroughViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    imageView.image = UIImage.localImage(model.icon, template: true)
-    imageView.contentMode = .scaleAspectFill
+    imageView.image = UIImage.localImage(model.icon)
+    imageView.contentMode = .scaleToFill
     imageView.clipsToBounds = true
-    imageView.tintColor = .black
     imageContainerView.backgroundColor = .clear
     
     titleLabel.text = model.title
