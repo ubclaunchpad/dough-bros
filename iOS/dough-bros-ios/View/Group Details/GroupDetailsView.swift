@@ -86,7 +86,7 @@ class GroupDetailsView: UIView {
         summary.estimatedRowHeight = 70
         summary.isScrollEnabled = true
         summary.separatorColor = .clear
-        summary.allowsSelection = false
+        summary.allowsSelection = true
         return summary
     }()
     

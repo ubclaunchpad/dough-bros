@@ -211,6 +211,30 @@ struct GroupEndpoints {
         task.resume()
         semaphore.wait()
     }
+    
+    static func deleteGroup(groupID: Int) {
+        print("Deleting Group!!")
+        let semaphore = DispatchSemaphore (value: 0)
+        let urlString = endpointURL + "group/deleteGroup/" + String(groupID)
+        let validUrlString = String(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        
+        print(validUrlString)
+        var request = URLRequest(url: URL(string: validUrlString)!,timeoutInterval: Double.infinity)
+        request.httpMethod = "DELETE"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            semaphore.signal()
+            return
+          }
+          print(String(data: data, encoding: .utf8)!)
+          semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+    }
 
 }
 

@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 
 class AddExpenseViewController: UIViewController {
+    var afterDismiss: DismissDelegate?
     
     var groupObj: GroupObj?
     var groupMembers: [User]?
@@ -64,7 +65,9 @@ class AddExpenseViewController: UIViewController {
     }
     
     @objc func completedExpense() {
-        let g = GroupExpenseObj(expense_id: 0, group_id: Int(self.groupObj!.group_id), addedBy: Auth.auth().currentUser!.uid, currency_id: 1, is_archived: false, expense_name: "My Expense", amount: totalSum)
+        let description = addExpenseView.expenseDescription.text ?? "No description"
+        
+        let g = GroupExpenseObj(expense_id: 0, group_id: Int(self.groupObj!.group_id), addedBy: Auth.auth().currentUser!.uid, currency_id: 1, is_archived: false, expense_name: description, amount: totalSum)
         let expenseID = GroupExpenseEndpoints.createGroupExpense(groupExpense: g)
         for friend in selectedPeople {
             guard let index = groupMembers!.firstIndex(of: friend) else { continue }
@@ -74,7 +77,9 @@ class AddExpenseViewController: UIViewController {
             PaymentEndpoints.createPayment(payment: PaymentObj(payment_id: 0, fk_sender_id: friend.firebase_uid, fk_receiver_id: Auth.auth().currentUser!.uid, fk_creator_id: Auth.auth().currentUser!.uid, fk_parent_expense_id: expenseID, fk_currency_id: 1, is_paid: 0, is_settled: 0, amount: Double(Int(owedAmounts[index])), first_name: friend.first_name, last_name: friend.last_name))
         }
         
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            self.afterDismiss?.afterDismiss()
+        })
     }
     @objc func handleKeyboardWillShow(notification: Notification) {
         addExpenseView.addExpenseCollectionView.contentInset.bottom = 300
